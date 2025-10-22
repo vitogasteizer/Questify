@@ -1,0 +1,13 @@
+{
+  "name": "logistica-quiz",
+  "version": "1.0.0",
+  "description": "Test Interactivo de Logística",
+  "private": true,
+  "homepage": "https://<GITHUB_USERNAME>.github.io/<REPOSITORY_NAME>",
+  "scripts": {
+    "deploy": "gh-pages -d ."
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  }
+}
