@@ -71,7 +71,8 @@ const bookmarksList = document.getElementById('bookmarks-list');
 const bookmarkQuizButtonContainer = document.getElementById('bookmark-quiz-button-container');
 
 // Settings elements
-const settingsBtn = document.getElementById('settings-btn');
+const appHeader = document.getElementById('app-header');
+const menuBtn = document.getElementById('menu-btn');
 const settingsModal = document.getElementById('settings-modal');
 const settingsGreeting = document.getElementById('settings-greeting');
 const closeSettingsBtn = document.getElementById('close-settings-btn');
@@ -196,7 +197,7 @@ const translations = {
         bookmarks_title: "Preguntas Guardadas",
         search_placeholder: "Buscar por tema o pregunta...",
         start_quiz_button: "Iniciar Test",
-        settings_button_aria: "Abrir configuración",
+        menu_button_aria: "Abrir menú",
         search_results_title: "Resultados de la Búsqueda",
         no_results_message: "No se encontraron resultados. Intenta con otra búsqueda.",
         start_bookmarked_quiz_button: "Iniciar Test de Preguntas Guardadas ({{count}})",
@@ -220,7 +221,7 @@ const translations = {
         start_new_quiz_button: "Empezar Nuevo Test",
         review_section_title: "Preguntas para repasar:",
         correct_answer_label: "Respuesta correcta:",
-        settings_modal_title: "Configuración",
+        settings_modal_title: "Menú",
         close_settings_aria: "Cerrar configuración",
         questions_count_label: "Número de preguntas:",
         timer_label: "Temporizador",
@@ -306,7 +307,7 @@ const translations = {
         bookmarks_title: "შენახული კითხვები",
         search_placeholder: "მოძებნეთ თემის ან კითხვის მიხედვით...",
         start_quiz_button: "ტესტის დაწყება",
-        settings_button_aria: "პარამეტრების გახსნა",
+        menu_button_aria: "მენიუს გახსნა",
         search_results_title: "ძიების შედეგები",
         no_results_message: "შედეგები არ მოიძებნა. სცადეთ სხვა საძიებო სიტყვით.",
         start_bookmarked_quiz_button: "შენახული კითხვების ტესტის დაწყება ({{count}})",
@@ -330,7 +331,7 @@ const translations = {
         start_new_quiz_button: "ახალი ტესტის დაწყება",
         review_section_title: "გასამეორებელი კითხვები:",
         correct_answer_label: "სწორი პასუხი:",
-        settings_modal_title: "პარამეტრები",
+        settings_modal_title: "მენიუ",
         close_settings_aria: "პარამეტრების დახურვა",
         questions_count_label: "კითხვების რაოდენობა:",
         timer_label: "ტაიმერი",
@@ -707,6 +708,12 @@ const showScreen = (screen) => {
     flashcardResultsScreen.classList.add('hidden');
     savedScreen.classList.add('hidden');
     screen.classList.remove('hidden');
+
+    if (screen === nameScreen) {
+        appHeader.classList.add('hidden');
+    } else {
+        appHeader.classList.remove('hidden');
+    }
 
     if (screen === startScreen) {
         renderCategories();
@@ -1578,7 +1585,7 @@ const init = () => {
     });
 
     // Settings Modal
-    settingsBtn.addEventListener('click', () => {
+    menuBtn.addEventListener('click', () => {
         languageSelect.value = settings.language;
         const lang = settings.language;
         settingsGreeting.textContent = translations[lang].settings_greeting.replace('{{username}}', username);
