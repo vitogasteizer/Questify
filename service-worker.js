@@ -1,4 +1,5 @@
 
+
 const CACHE_NAME = 'logistica-quiz-cache-v9';
 const urlsToCache = [
   './',
@@ -62,34 +63,39 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  // Stale-while-revalidate strategy:
+  // Respond from cache immediately for speed, then update the cache in the background.
+  if (event.request.method !== 'GET') {
+    return;
+  }
+  
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response; // Serve from cache
-        }
-        
-        // Not in cache, fetch from network and cache it
-        return fetch(event.request).then(
-          networkResponse => {
-            if (!networkResponse || networkResponse.status !== 200 || event.request.method !== 'GET') {
-              return networkResponse;
-            }
-            
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.match(event.request).then(cachedResponse => {
+        // Fetch from the network in the background to update the cache for next time.
+        const fetchPromise = fetch(event.request).then(networkResponse => {
+          // Check if we received a valid response.
+          if (networkResponse && networkResponse.status === 200) {
+            // We need to clone the response because it's a stream and can only be consumed once.
             const responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                // We don't cache tailwindcss on the fly due to opaque response issues
-                if (!event.request.url.includes('tailwindcss')) {
-                     cache.put(event.request, responseToCache);
-                }
-              });
-            
-            return networkResponse;
+            // We don't cache tailwindcss on the fly due to opaque response issues with CDN.
+            // It will be served from the initial cache.
+            if (!event.request.url.includes('tailwindcss')) {
+              cache.put(event.request, responseToCache);
+            }
           }
-        ).catch(error => {
-            console.error('Fetch failed; app is likely offline and resource is not cached.', error);
+          return networkResponse;
+        }).catch(error => {
+          // Network fetch failed, which is expected when offline.
+          // The cached response (if available) is already being returned.
+          console.log('Network request for', event.request.url, 'failed:', error);
         });
-      })
+
+        // Return the cached response immediately if it exists,
+        // otherwise wait for the network response. This makes the app
+        // load fast and work offline.
+        return cachedResponse || fetchPromise;
+      });
+    })
   );
 });
