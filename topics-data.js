@@ -6,6 +6,7 @@ import { questions as preparacionPedidos2Questions } from './temas/tema3/test.js
 import { flashcards as preparacionPedidos2Flashcards } from './temas/tema3/flashcards.js';
 import { flashcards as operadorCarretillaFlashcards } from './temas/tema4/flashcards.js';
 import { questions as operadorCarretillaQuestions } from './temas/tema4/test.js';
+import { topicImageUrls } from './temas/image-links.js';
 
 export const categories = [
     { id: 'logistica', nameKey: 'category_logistica', colorClass: 'bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200 hover:border-blue-400', activeColorClass: 'bg-blue-600 text-white border-blue-700' },
@@ -22,7 +23,7 @@ export const allTopics = [
       name: 'Test de Logística',
       description: `Preguntas sobre la gestión y operativa de almacenes. (${logisticaQuestions.length} preguntas)`,
       questions: logisticaQuestions,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: topicImageUrls.logistica
     },
     {
       id: 'preparacion-pedidos',
@@ -30,7 +31,7 @@ export const allTopics = [
       name: 'Preparación de Pedidos',
       description: `Preguntas sobre el proceso de picking y empaquetado. (${preparacionPedidosQuestions.length} preguntas)`,
       questions: preparacionPedidosQuestions,
-      imageUrl: 'https://i.postimg.cc/Y0z4Q2Y7/order-picking.png'
+      imageUrl: topicImageUrls['preparacion-pedidos']
     },
     {
       id: 'preparacion-pedidos-2',
@@ -39,7 +40,7 @@ export const allTopics = [
       description: `Preguntas sobre manutención, picking, inventario y prevención de riesgos. (${preparacionPedidos2Questions.length} preguntas)`,
       questions: preparacionPedidos2Questions,
       flashcards: preparacionPedidos2Flashcards,
-      imageUrl: 'https://i.postimg.cc/8cMvrK5B/inventory-management.png'
+      imageUrl: topicImageUrls['preparacion-pedidos-2']
     },
     {
       id: 'operador-carretilla',
@@ -48,6 +49,6 @@ export const allTopics = [
       description: `Preguntas y flashcards sobre la operación segura y características de las carretillas elevadoras. (${operadorCarretillaQuestions.length} preguntas, ${operadorCarretillaFlashcards.length} flashcards)`,
       questions: operadorCarretillaQuestions,
       flashcards: operadorCarretillaFlashcards,
-      imageUrl: 'https://i.postimg.cc/PqBY3v2g/forklift-operator.png'
+      imageUrl: topicImageUrls['operador-carretilla']
     }
 ];

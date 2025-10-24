@@ -293,6 +293,7 @@ const translations = {
         category_historia: "Historia",
         category_georgian: "Georgiano",
         no_topics_in_category: "No hay temas en esta categoría todavía.",
+        app_creator_credit: "Aplicación creada por <strong>Avtandil Machitadze</strong>.",
     },
     ka: {
         welcome_title: "კეთილი იყოს თქვენი მობრძანება!",
@@ -402,6 +403,7 @@ const translations = {
         category_historia: "ისტორია",
         category_georgian: "ქართული",
         no_topics_in_category: "ამ კატეგორიაში თემები ჯერ არ არის.",
+        app_creator_credit: "აპლიკაცია შექმნილია <strong>ავთანდილ მაჩიტაძის</strong> მიერ.",
     }
 };
 
@@ -1697,6 +1699,39 @@ const init = () => {
             renderTopicsOnStartScreen(); // Filter and render topics
         }
     });
+
+    // Drag to scroll for category container
+    const slider = document.querySelector('#category-cards-container');
+    if (slider) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // scroll-fast multiplier
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    }
     
     // Service Worker
     if ('serviceWorker' in navigator) {

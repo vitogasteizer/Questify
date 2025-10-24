@@ -1,11 +1,12 @@
 
 
-const CACHE_NAME = 'logistica-quiz-cache-v9';
+const CACHE_NAME = 'logistica-quiz-cache-v10';
 const urlsToCache = [
   './',
   './index.html',
   './index.js',
   './topics-data.js',
+  './temas/image-links.js',
   './temas/tema1/test.js',
   './temas/tema2/test.js',
   './temas/tema3/test.js',
