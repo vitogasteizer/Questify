@@ -1,10 +1,17 @@
 
 
-const CACHE_NAME = 'logistica-quiz-cache-v10';
+const CACHE_NAME = 'logistica-quiz-cache-v12';
 const urlsToCache = [
   './',
   './index.html',
   './index.js',
+  './modules/state.js',
+  './modules/ui-manager.js',
+  './modules/settings.js',
+  './modules/search.js',
+  './modules/quiz-handler.js',
+  './modules/flashcard-handler.js',
+  './modules/learning-module.js',
   './topics-data.js',
   './temas/image-links.js',
   './temas/tema1/test.js',
@@ -13,6 +20,7 @@ const urlsToCache = [
   './temas/tema3/flashcards.js',
   './temas/tema4/flashcards.js',
   './temas/tema4/test.js',
+  './temas/tema4/learn.js',
   './manifest.json',
   'https://cdn.tailwindcss.com',
   'https://i.postimg.cc/tJDL7vz5/Quiz-by-avma.png',
@@ -20,6 +28,7 @@ const urlsToCache = [
   'https://i.postimg.cc/Y0z4Q2Y7/order-picking.png',
   'https://i.postimg.cc/8cMvrK5B/inventory-management.png',
   'https://i.postimg.cc/PqBY3v2g/forklift-operator.png',
+  'https://i.postimg.cc/sxpjfMLq/tema4.jpg',
   'https://i.postimg.cc/vH2JdYhn/Almacenaje-m-vil.jpg',
   'https://i.postimg.cc/c4kpNxhn/Sistema-Cantilever.jpg',
   'https://i.postimg.cc/J4YfWrx1/Sistema-autom-ticos.jpg',

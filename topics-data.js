@@ -49,6 +49,7 @@ export const allTopics = [
       description: `Preguntas y flashcards sobre la operación segura y características de las carretillas elevadoras. (${operadorCarretillaQuestions.length} preguntas, ${operadorCarretillaFlashcards.length} flashcards)`,
       questions: operadorCarretillaQuestions,
       flashcards: operadorCarretillaFlashcards,
-      imageUrl: topicImageUrls['operador-carretilla']
+      imageUrl: topicImageUrls['operador-carretilla'],
+      hasLearning: true
     }
 ];
