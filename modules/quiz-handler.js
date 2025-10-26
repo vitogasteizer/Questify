@@ -200,27 +200,38 @@ const selectQuestionsForQuiz = (topicId, allTopicQuestions, numQuestions, questi
     if (topicId) {
         const progress = state.getQuizProgress()[topicId] || { seenQuestions: [], incorrectlyAnswered: [] };
         const incorrectIndices = new Set(progress.incorrectlyAnswered);
-        const seenIndices = new Set(progress.seenQuestions);
+        const sessionSeenIndices = state.getSessionSeenQuestions();
 
+        // Pool 1: Incorrectly answered questions (highest priority).
         const incorrectPool = allTopicQuestions.filter(q => incorrectIndices.has(q.originalIndex));
-        const unseenPool = allTopicQuestions.filter(q => !seenIndices.has(q.originalIndex));
         
-        // The primary pool of questions is incorrect + unseen
-        let primaryPool = [...incorrectPool, ...unseenPool];
+        // Pool 2: Questions not seen in this session and not marked as incorrect.
+        const unseenInSessionPool = allTopicQuestions.filter(q => 
+            !sessionSeenIndices.has(q.originalIndex) && 
+            !incorrectIndices.has(q.originalIndex)
+        );
+
+        // Combine high-priority pools
+        let primaryPool = [...incorrectPool, ...unseenInSessionPool];
         
-        // Remove duplicates that might arise from edge cases
+        // Remove duplicates (e.g., a question could be in incorrectPool and also not seen this session)
         primaryPool = Array.from(new Map(primaryPool.map(item => [item.originalIndex, item])).values());
         
-        // If the primary pool is large enough, we use it
         if (primaryPool.length >= numQuestions) {
             questionsToChooseFrom = primaryPool;
         } else {
-            // Not enough, so we need to add seen/correct questions as fallback
-            const seenCorrectPool = allTopicQuestions.filter(q => seenIndices.has(q.originalIndex) && !incorrectIndices.has(q.originalIndex));
-            questionsToChooseFrom = [...primaryPool, ...seenCorrectPool];
+            // Fallback: add questions that were answered correctly this session to fill the gap
+            const sessionSeenCorrectlyPool = allTopicQuestions.filter(q => 
+                sessionSeenIndices.has(q.originalIndex) && 
+                !incorrectIndices.has(q.originalIndex)
+            );
+            
+            questionsToChooseFrom = [...primaryPool, ...sessionSeenCorrectlyPool];
         }
+
     } else {
-        // Non-topic quiz (bookmarks, search), use all questions provided
+        // For non-topic quizzes (e.g., bookmarks, search results), we don't apply session logic.
+        // We just use the questions provided.
         questionsToChooseFrom = [...allTopicQuestions];
     }
     
@@ -407,6 +418,12 @@ const finishQuiz = () => {
         time: timeTaken,
         questionCount: currentQuestions.length
     });
+
+    const correctlyAnsweredIndices = state.getSelectedAnswers()
+        .filter(a => a.isCorrect)
+        .map(a => state.getCurrentQuestions()[a.questionIndex].originalIndex)
+        .filter(index => typeof index !== 'undefined');
+    state.addQuestionsToSessionSeen(correctlyAnsweredIndices);
 
     updateQuizProgress();
 

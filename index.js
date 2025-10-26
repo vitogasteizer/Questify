@@ -124,6 +124,9 @@ const handleSoundToggle = () => {
 };
 
 const init = () => {
+    // Reset session-specific state on each new load
+    state.resetSessionSeenQuestions();
+
     // Load preferences
     settings.loadSettings();
     ui.applyTranslations(settings.getSettings().language);

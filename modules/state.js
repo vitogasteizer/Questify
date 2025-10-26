@@ -44,6 +44,15 @@ let wakeLock = null;
 export const getWakeLock = () => wakeLock;
 export const setWakeLock = (lock) => { wakeLock = lock; };
 
+let sessionSeenQuestions = new Set();
+export const getSessionSeenQuestions = () => sessionSeenQuestions;
+export const addQuestionsToSessionSeen = (questionIndices) => {
+    questionIndices.forEach(index => sessionSeenQuestions.add(index));
+};
+export const resetSessionSeenQuestions = () => {
+    sessionSeenQuestions = new Set();
+};
+
 let bookmarkedQuestions = new Set();
 export const getBookmarkedQuestions = () => bookmarkedQuestions;
 export const setBookmarkedQuestions = (bookmarks) => { bookmarkedQuestions = bookmarks; };
