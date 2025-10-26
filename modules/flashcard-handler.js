@@ -131,7 +131,7 @@ const showFlashcardResults = () => {
     const total = state.getCurrentFlashcards().length;
     const stats = state.getFlashcardSessionStats();
     const knownCount = stats.known.length;
-    const unknownCount = total - knownCount;
+    const unknownCount = stats.unknown.length;
     const lang = settings.getSettings().language;
     
     // Update statistics

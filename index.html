@@ -271,41 +271,92 @@
                     </button>
                     <h2 class="text-3xl font-bold text-gray-900 text-center w-full" data-i18n-key="statistics_title">Estadísticas</h2>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[70vh] overflow-y-auto p-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[70vh] overflow-y-auto p-2">
                     <!-- Stat Card: Time Spent -->
-                    <div class="bg-blue-50 p-6 rounded-xl shadow">
-                        <h3 class="font-bold text-lg text-blue-800" data-i18n-key="stat_time_spent_title">Tiempo en la App</h3>
-                        <p id="stat-time-spent" class="text-4xl font-extrabold text-blue-600 mt-2">0h 0m</p>
-                    </div>
-                    <!-- Stat Card: Avg Test Time -->
-                    <div class="bg-green-50 p-6 rounded-xl shadow">
-                        <h3 class="font-bold text-lg text-green-800" data-i18n-key="stat_avg_test_time_title">Tiempo Promedio (10 Q)</h3>
-                        <p id="stat-avg-test-time" class="text-4xl font-extrabold text-green-600 mt-2">0s</p>
-                    </div>
-                    <!-- Stat Card: Total Tests -->
-                     <div class="bg-indigo-50 p-6 rounded-xl shadow">
-                        <h3 class="font-bold text-lg text-indigo-800" data-i18n-key="stat_total_tests_title">Tests Completados</h3>
-                        <p id="stat-total-tests" class="text-4xl font-extrabold text-indigo-600 mt-2">0</p>
-                    </div>
-                    <!-- Stat Card: Test Accuracy -->
-                    <div class="bg-red-50 p-6 rounded-xl shadow col-span-1 md:col-span-2 lg:col-span-1">
-                        <h3 class="font-bold text-lg text-red-800" data-i18n-key="stat_test_accuracy_title">Precisión en Tests</h3>
-                        <div class="mt-2 space-y-1">
-                            <p class="text-2xl font-bold text-red-600"><span data-i18n-key="stat_correct">Correctas:</span> <span id="stat-correct-answers">0</span></p>
-                            <p class="text-2xl font-bold text-gray-600"><span data-i18n-key="stat_incorrect">Incorrectas:</span> <span id="stat-incorrect-answers">0</span></p>
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300">
+                        <div class="bg-blue-500 p-3 rounded-full text-white shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-blue-800" data-i18n-key="stat_time_spent_title">Tiempo en la App</h3>
+                            <p id="stat-time-spent" class="text-3xl font-bold text-blue-600">0h 0m</p>
                         </div>
                     </div>
-                     <!-- Stat Card: Total Flashcards -->
-                    <div class="bg-yellow-50 p-6 rounded-xl shadow">
-                        <h3 class="font-bold text-lg text-yellow-800" data-i18n-key="stat_total_flashcards_title">Flashcards Vistos</h3>
-                        <p id="stat-total-flashcards" class="text-4xl font-extrabold text-yellow-600 mt-2">0</p>
+
+                    <!-- Stat Card: Tests Completed -->
+                    <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300">
+                        <div class="bg-teal-500 p-3 rounded-full text-white shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-teal-800" data-i18n-key="stat_total_tests_title">Tests Completados</h3>
+                            <p id="stat-total-tests" class="text-3xl font-bold text-teal-600">0</p>
+                        </div>
                     </div>
+
+                     <!-- Stat Card: Avg Test Time -->
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300">
+                        <div class="bg-purple-500 p-3 rounded-full text-white shadow-md">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-purple-800" data-i18n-key="stat_avg_test_time_title">Tiempo Promedio (10 Q)</h3>
+                            <p id="stat-avg-test-time" class="text-3xl font-bold text-purple-600">0s</p>
+                        </div>
+                    </div>
+                   
+                    <!-- Stat Card: Total Flashcards -->
+                    <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300">
+                        <div class="bg-yellow-500 p-3 rounded-full text-white shadow-md">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2H5a2 2 0 00-2 2v2m14 0h-2" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-yellow-800" data-i18n-key="stat_total_flashcards_title">Flashcards Vistos</h3>
+                            <p id="stat-total-flashcards" class="text-3xl font-bold text-yellow-600">0</p>
+                        </div>
+                    </div>
+
+                    <!-- Stat Card: Test Accuracy -->
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-2xl shadow-lg md:col-span-2 transform hover:scale-105 transition-transform duration-300">
+                         <div class="flex items-center space-x-4 mb-3">
+                            <div class="bg-green-500 p-3 rounded-full text-white shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg text-green-800" data-i18n-key="stat_test_accuracy_title">Precisión en Tests</h3>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                             <div class="flex justify-between items-center text-sm">
+                                <p class="font-medium text-green-700"><span data-i18n-key="stat_correct">Correctas</span>: <span id="stat-correct-answers" class="font-bold">0</span></p>
+                                <p class="font-medium text-red-700"><span data-i18n-key="stat_incorrect">Incorrectas</span>: <span id="stat-incorrect-answers" class="font-bold">0</span></p>
+                            </div>
+                            <div class="w-full bg-green-200 rounded-full h-2.5">
+                                <div id="accuracy-bar" class="bg-green-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p class="text-right text-2xl font-bold text-green-600" id="accuracy-percentage">0%</p>
+                        </div>
+                    </div>
+                    
                     <!-- Stat Card: Flashcard Knowledge -->
-                    <div class="bg-purple-50 p-6 rounded-xl shadow">
-                        <h3 class="font-bold text-lg text-purple-800" data-i18n-key="stat_flashcard_knowledge_title">Conocimiento (Flashcards)</h3>
-                         <div class="mt-2 space-y-1">
-                            <p class="text-2xl font-bold text-purple-600"><span data-i18n-key="stat_known">Sabidas:</span> <span id="stat-known-flashcards">0</span></p>
-                            <p class="text-2xl font-bold text-gray-600"><span data-i18n-key="stat_unknown">No Sabidas:</span> <span id="stat-unknown-flashcards">0</span></p>
+                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-5 rounded-2xl shadow-lg md:col-span-2 transform hover:scale-105 transition-transform duration-300">
+                         <div class="flex items-center space-x-4 mb-3">
+                            <div class="bg-red-500 p-3 rounded-full text-white shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg text-red-800" data-i18n-key="stat_flashcard_knowledge_title">Conocimiento (Flashcards)</h3>
+                            </div>
+                        </div>
+                         <div class="space-y-2">
+                             <div class="flex justify-between items-center text-sm">
+                                <p class="font-medium text-green-700"><span data-i18n-key="stat_known">Sabidas</span>: <span id="stat-known-flashcards" class="font-bold">0</span></p>
+                                <p class="font-medium text-red-700"><span data-i18n-key="stat_unknown">No Sabidas</span>: <span id="stat-unknown-flashcards" class="font-bold">0</span></p>
+                            </div>
+                            <div class="w-full bg-red-200 rounded-full h-2.5">
+                                <div id="knowledge-bar" class="bg-red-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p class="text-right text-2xl font-bold text-red-600" id="knowledge-percentage">0%</p>
                         </div>
                     </div>
                 </div>

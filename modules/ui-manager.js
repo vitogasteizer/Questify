@@ -389,17 +389,25 @@ export const showStatisticsScreen = () => {
 
     // Total Tests
     document.getElementById('stat-total-tests').textContent = stats.testsCompleted;
-
-    // Test Accuracy
-    document.getElementById('stat-correct-answers').textContent = stats.totalCorrectAnswers;
-    document.getElementById('stat-incorrect-answers').textContent = stats.totalIncorrectAnswers;
     
     // Total Flashcards
     document.getElementById('stat-total-flashcards').textContent = stats.totalFlashcardsSeen;
 
+    // Test Accuracy
+    document.getElementById('stat-correct-answers').textContent = stats.totalCorrectAnswers;
+    document.getElementById('stat-incorrect-answers').textContent = stats.totalIncorrectAnswers;
+    const totalAnswers = stats.totalCorrectAnswers + stats.totalIncorrectAnswers;
+    const accuracyPercentage = totalAnswers > 0 ? Math.round((stats.totalCorrectAnswers / totalAnswers) * 100) : 0;
+    document.getElementById('accuracy-bar').style.width = `${accuracyPercentage}%`;
+    document.getElementById('accuracy-percentage').textContent = `${accuracyPercentage}%`;
+
     // Flashcard Knowledge
     document.getElementById('stat-known-flashcards').textContent = stats.totalKnownFlashcards;
     document.getElementById('stat-unknown-flashcards').textContent = stats.totalUnknownFlashcards;
+    const totalFlashcardsAssessed = stats.totalKnownFlashcards + stats.totalUnknownFlashcards;
+    const knowledgePercentage = totalFlashcardsAssessed > 0 ? Math.round((stats.totalKnownFlashcards / totalFlashcardsAssessed) * 100) : 0;
+    document.getElementById('knowledge-bar').style.width = `${knowledgePercentage}%`;
+    document.getElementById('knowledge-percentage').textContent = `${knowledgePercentage}%`;
 
     showScreen(statisticsScreen);
 };
