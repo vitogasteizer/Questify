@@ -1,6 +1,7 @@
 import * as state from './state.js';
 import * as ui from './ui-manager.js';
 import * as settings from './settings.js';
+import * as statistics from './statistics-handler.js';
 
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -130,18 +131,25 @@ const showFlashcardResults = () => {
     const total = state.getCurrentFlashcards().length;
     const stats = state.getFlashcardSessionStats();
     const knownCount = stats.known.length;
-    const unknownCount = stats.unknown.length;
+    const unknownCount = total - knownCount;
     const lang = settings.getSettings().language;
     
+    // Update statistics
+    statistics.addFlashcardSessionResult({
+        seen: total,
+        known: knownCount,
+        unknown: unknownCount
+    });
+
     ui.flashcardResultsMessage.textContent = settings.translations[lang].flashcard_results_message
         .replace('{{known}}', knownCount)
         .replace('{{total}}', total);
     
     ui.flashcardResultsButtons.innerHTML = '';
 
-    if (unknownCount > 0) {
+    if (unknownCount > 0 && stats.unknown.length > 0) {
         const reviewBtn = document.createElement('button');
-        reviewBtn.textContent = settings.translations[lang].flashcard_review_unknown_button.replace('{{count}}', unknownCount);
+        reviewBtn.textContent = settings.translations[lang].flashcard_review_unknown_button.replace('{{count}}', stats.unknown.length);
         reviewBtn.className = "w-full md:w-auto px-6 py-3 text-lg font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md hover:shadow-lg";
         reviewBtn.onclick = () => {
             const cardsToReview = [...stats.unknown];

@@ -6,6 +6,7 @@ import * as search from './modules/search.js';
 import * as quiz from './modules/quiz-handler.js';
 import * as flashcard from './modules/flashcard-handler.js';
 import * as learning from './modules/learning-module.js';
+import * as statistics from './modules/statistics-handler.js';
 
 const learningModules = {
     'operador-carretilla': learning.operadorCarretillaLearning
@@ -44,6 +45,7 @@ const handleNameSubmit = () => {
     ui.welcomeMessage.textContent = settings.translations[lang].welcome_user_message.replace('{{username}}', state.getUsername());
     document.title = `${state.getUsername()} - ${settings.translations[lang].main_app_title}`;
     settings.initAudio(); // Initialize audio context on first user interaction
+    statistics.startTimeTracking();
     ui.showScreen(ui.startScreen);
 };
 
@@ -127,7 +129,9 @@ const init = () => {
     ui.applyTranslations(settings.getSettings().language);
     settings.loadSoundPreference();
     quiz.loadBookmarks();
+    quiz.loadQuizProgress();
     flashcard.loadFlashcardBookmarks();
+    statistics.init();
 
     // Check for existing user
     const storedUsername = localStorage.getItem(state.USERNAME_STORAGE_KEY);
@@ -136,6 +140,7 @@ const init = () => {
         const lang = settings.getSettings().language;
         ui.welcomeMessage.textContent = settings.translations[lang].welcome_user_message.replace('{{username}}', state.getUsername());
         document.title = `${state.getUsername()} - ${settings.translations[lang].main_app_title}`;
+        statistics.startTimeTracking();
         ui.showScreen(ui.startScreen);
     } else {
         ui.showScreen(ui.nameScreen);
@@ -149,6 +154,10 @@ const init = () => {
     ui.nameInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') handleNameSubmit(); });
     
     // Main Navigation
+    ui.homeLinkHeader.addEventListener('click', (e) => {
+        e.preventDefault();
+        ui.goHome();
+    });
     ui.backToHomeBtn.addEventListener('click', ui.goHome);
     ui.backToHomeFromFlashcardBtn.addEventListener('click', flashcard.closeFlashcards);
     ui.backToHomeFromLearningBtn.addEventListener('click', ui.goHome);
@@ -159,6 +168,13 @@ const init = () => {
     ui.showSavedQuestionsBtn.addEventListener('click', quiz.showSavedQuestions);
     ui.showSavedFlashcardsBtn.addEventListener('click', flashcard.showSavedFlashcards);
     ui.backFromSavedBtn.addEventListener('click', ui.handleBackFromSaved);
+
+    // Statistics Screen
+    ui.showStatisticsBtn.addEventListener('click', ui.showStatisticsScreen);
+    ui.backFromStatisticsBtn.addEventListener('click', () => {
+        ui.showScreen(ui.startScreen);
+        openSettingsModal();
+    });
 
     // Settings Modal
     ui.menuBtn.addEventListener('click', openSettingsModal);
@@ -224,6 +240,11 @@ const init = () => {
                 });
         });
     }
+
+    // Save stats on page leave
+    window.addEventListener('beforeunload', () => {
+        statistics.saveStatistics();
+    });
 };
 
 init();

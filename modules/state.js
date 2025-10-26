@@ -119,11 +119,21 @@ let flashcardSessionStats = {
 export const getFlashcardSessionStats = () => flashcardSessionStats;
 export const setFlashcardSessionStats = (stats) => { flashcardSessionStats = stats; };
 
+let lastQuizConfig = null;
+export const getLastQuizConfig = () => lastQuizConfig;
+export const setLastQuizConfig = (config) => { lastQuizConfig = config; };
+
 
 export const USERNAME_STORAGE_KEY = 'logisticsQuizUsername';
 export const BOOKMARKS_STORAGE_KEY = 'logisticsQuizBookmarks';
+export const QUIZ_PROGRESS_STORAGE_KEY = 'logisticsQuizProgress';
+export const STATISTICS_STORAGE_KEY = 'logisticsQuizStatistics';
 export const bookmarkIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>`;
 export const bookmarkedIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500" viewBox="0 0 20 20" fill="currentColor"><path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" /></svg>`;
 
 export let allQuestionsWithIndex = [];
 export let allFlashcardsWithIndex = [];
+
+let quizProgress = {};
+export const getQuizProgress = () => quizProgress;
+export const setQuizProgress = (progress) => { quizProgress = progress; };

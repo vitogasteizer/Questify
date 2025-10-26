@@ -1,6 +1,6 @@
 
 
-const CACHE_NAME = 'logistica-quiz-cache-v12';
+const CACHE_NAME = 'logistica-quiz-cache-v13';
 const urlsToCache = [
   './',
   './index.html',
@@ -12,6 +12,7 @@ const urlsToCache = [
   './modules/quiz-handler.js',
   './modules/flashcard-handler.js',
   './modules/learning-module.js',
+  './modules/statistics-handler.js',
   './topics-data.js',
   './temas/image-links.js',
   './temas/tema1/test.js',

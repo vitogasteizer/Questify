@@ -1,6 +1,7 @@
 import * as state from './state.js';
 import * as ui from './ui-manager.js';
 import * as settings from './settings.js';
+import * as statistics from './statistics-handler.js';
 
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -15,6 +16,65 @@ const formatTime = (totalSeconds) => {
     const seconds = totalSeconds % 60;
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
+
+// --- Progress Tracking ---
+export const loadQuizProgress = () => {
+    const storedProgress = localStorage.getItem(state.QUIZ_PROGRESS_STORAGE_KEY);
+    if (storedProgress) {
+        try {
+            state.setQuizProgress(JSON.parse(storedProgress));
+        } catch (e) {
+            console.error('Failed to parse quiz progress from localStorage', e);
+            state.setQuizProgress({});
+        }
+    }
+};
+
+const saveQuizProgress = () => {
+    localStorage.setItem(state.QUIZ_PROGRESS_STORAGE_KEY, JSON.stringify(state.getQuizProgress()));
+};
+
+const updateQuizProgress = () => {
+    const topicId = state.getCurrentTopicForQuiz()?.id;
+    // Only track progress for quizzes started from a specific topic
+    if (!topicId) return;
+
+    const progress = state.getQuizProgress();
+    if (!progress[topicId]) {
+        progress[topicId] = { seenQuestions: [], incorrectlyAnswered: [] };
+    }
+
+    const topicProgress = progress[topicId];
+    // Use Sets for efficient duplicate handling
+    const seenSet = new Set(topicProgress.seenQuestions);
+    const incorrectSet = new Set(topicProgress.incorrectlyAnswered);
+
+    const answers = state.getSelectedAnswers();
+    const questions = state.getCurrentQuestions();
+
+    answers.forEach(answer => {
+        const question = questions[answer.questionIndex];
+        // Ensure question and originalIndex exist
+        if (question && typeof question.originalIndex !== 'undefined') {
+            seenSet.add(question.originalIndex);
+            if (answer.isCorrect) {
+                // If answered correctly, remove from incorrect list
+                incorrectSet.delete(question.originalIndex);
+            } else {
+                // If incorrect, add to incorrect list
+                incorrectSet.add(question.originalIndex);
+            }
+        }
+    });
+
+    // Convert Sets back to arrays for JSON serialization
+    topicProgress.seenQuestions = Array.from(seenSet);
+    topicProgress.incorrectlyAnswered = Array.from(incorrectSet);
+    
+    state.setQuizProgress(progress);
+    saveQuizProgress();
+};
+
 
 // Wake Lock API
 const requestWakeLock = async () => {
@@ -133,6 +193,44 @@ export const handleBookmarkToggle = () => {
 
 
 // Quiz Logic
+
+const selectQuestionsForQuiz = (topicId, allTopicQuestions, numQuestions, questionOrder) => {
+    let questionsToChooseFrom;
+
+    if (topicId) {
+        const progress = state.getQuizProgress()[topicId] || { seenQuestions: [], incorrectlyAnswered: [] };
+        const incorrectIndices = new Set(progress.incorrectlyAnswered);
+        const seenIndices = new Set(progress.seenQuestions);
+
+        const incorrectPool = allTopicQuestions.filter(q => incorrectIndices.has(q.originalIndex));
+        const unseenPool = allTopicQuestions.filter(q => !seenIndices.has(q.originalIndex));
+        
+        // The primary pool of questions is incorrect + unseen
+        let primaryPool = [...incorrectPool, ...unseenPool];
+        
+        // Remove duplicates that might arise from edge cases
+        primaryPool = Array.from(new Map(primaryPool.map(item => [item.originalIndex, item])).values());
+        
+        // If the primary pool is large enough, we use it
+        if (primaryPool.length >= numQuestions) {
+            questionsToChooseFrom = primaryPool;
+        } else {
+            // Not enough, so we need to add seen/correct questions as fallback
+            const seenCorrectPool = allTopicQuestions.filter(q => seenIndices.has(q.originalIndex) && !incorrectIndices.has(q.originalIndex));
+            questionsToChooseFrom = [...primaryPool, ...seenCorrectPool];
+        }
+    } else {
+        // Non-topic quiz (bookmarks, search), use all questions provided
+        questionsToChooseFrom = [...allTopicQuestions];
+    }
+    
+    if (questionOrder === 'random') {
+        shuffleArray(questionsToChooseFrom);
+    }
+    
+    return questionsToChooseFrom.slice(0, numQuestions);
+};
+
 export const showQuizOptionsScreen = (topic, questions) => {
     state.setCurrentTopicForQuiz(topic);
     state.setCurrentQuestionPool(questions);
@@ -174,6 +272,26 @@ const startQuiz = (isTimerEnabled, durationInSeconds) => {
     ui.updateSoundToggleUI();
     loadQuestion();
     requestWakeLock();
+};
+
+const restartQuiz = () => {
+    const config = state.getLastQuizConfig();
+    if (!config) {
+        // Fallback to go home if no config is saved
+        ui.goHome();
+        return;
+    }
+    
+    const selectedQuestions = selectQuestionsForQuiz(
+        config.topicId,
+        config.questionPool,
+        config.numQuestions,
+        config.questionOrder
+    );
+    state.setCurrentQuestions(selectedQuestions);
+
+
+    startQuiz(config.isTimerEnabled, config.timerDuration * 60);
 };
 
 
@@ -280,17 +398,28 @@ const finishQuiz = () => {
     const endTime = Date.now();
     const timeTaken = Math.floor((endTime - state.getStartTime()) / 1000);
     const lang = settings.getSettings().language;
+    const currentQuestions = state.getCurrentQuestions();
     
+    // Update statistics
+    statistics.addTestResult({
+        correct: state.getScore(),
+        incorrect: currentQuestions.length - state.getScore(),
+        time: timeTaken,
+        questionCount: currentQuestions.length
+    });
+
+    updateQuizProgress();
+
     ui.resultsMessage.textContent = settings.translations[lang].results_message_completed.replace('{{username}}', state.getUsername());
     ui.resultsTitle.textContent = settings.translations[lang].results_title_completed;
     
-    const percentage = Math.round((state.getScore() / state.getCurrentQuestions().length) * 100);
+    const percentage = Math.round((state.getScore() / currentQuestions.length) * 100);
     if (percentage === 100) {
         ui.resultsTitle.textContent = settings.translations[lang].results_title_perfect;
         ui.resultsMessage.textContent = settings.translations[lang].results_message_perfect.replace('{{username}}', state.getUsername());
     }
     
-    ui.scoreDisplay.textContent = `${state.getScore()}/${state.getCurrentQuestions().length}`;
+    ui.scoreDisplay.textContent = `${state.getScore()}/${currentQuestions.length}`;
     ui.scorePercentage.textContent = `${percentage}%`;
     ui.finalTimeEl.textContent = `${settings.translations[lang].total_time_label} ${formatTime(timeTaken)}`;
     
@@ -323,7 +452,7 @@ const renderResultsButtons = () => {
     const newQuizButton = document.createElement('button');
     newQuizButton.textContent = settings.translations[lang].start_new_quiz_button;
     newQuizButton.className = 'w-full md:w-auto px-6 py-3 text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md hover:shadow-lg';
-    newQuizButton.onclick = ui.goHome;
+    newQuizButton.onclick = restartQuiz;
     ui.resultsButtons.appendChild(newQuizButton);
 };
 
@@ -396,15 +525,25 @@ export const initQuizOptionsListeners = () => {
         const isTimerEnabled = document.getElementById('quiz-timer-on-radio').checked;
         const timerDuration = parseInt(document.getElementById('quiz-timer-duration-input').value, 10);
         const questionOrder = document.querySelector('input[name="quiz-question-order"]:checked').value;
+        const topicId = state.getCurrentTopicForQuiz()?.id;
         
-        let questionsToStart = [...state.getCurrentQuestionPool()];
+        state.setLastQuizConfig({
+            topicId: topicId,
+            numQuestions,
+            isTimerEnabled,
+            timerDuration,
+            questionOrder,
+            questionPool: state.getCurrentQuestionPool()
+        });
 
-        if (questionOrder === 'random') {
-            shuffleArray(questionsToStart);
-        }
-
-        state.setCurrentQuestions(questionsToStart.slice(0, numQuestions));
-
+        const selectedQuestions = selectQuestionsForQuiz(
+            topicId,
+            state.getCurrentQuestionPool(),
+            numQuestions,
+            questionOrder
+        );
+        state.setCurrentQuestions(selectedQuestions);
+        
         startQuiz(isTimerEnabled, timerDuration * 60);
     });
 }

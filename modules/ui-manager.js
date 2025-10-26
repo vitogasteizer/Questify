@@ -1,8 +1,9 @@
 import { allTopics, categories } from '../topics-data.js';
 import * as state from './state.js';
-import { translations, isSoundEnabled, soundOnIconSVG, soundOffIconSVG, getSettings } from './settings.js';
+import { translations, isSoundEnabled, soundOnIconSVG, soundOffIconSVG, getSettings, playNavigationSound } from './settings.js';
 import { renderBookmarksSection } from './quiz-handler.js';
 import { renderBookmarkedFlashcardsSection } from './flashcard-handler.js';
+import { getStatistics } from './statistics-handler.js';
 
 // DOM Elements
 export const nameScreen = document.getElementById('name-screen');
@@ -43,6 +44,7 @@ export const bookmarksContainer = document.getElementById('bookmarks-container')
 export const bookmarksList = document.getElementById('bookmarks-list');
 export const bookmarkQuizButtonContainer = document.getElementById('bookmark-quiz-button-container');
 export const appHeader = document.getElementById('app-header');
+export const homeLinkHeader = document.getElementById('home-link-header');
 export const menuBtn = document.getElementById('menu-btn');
 export const settingsModal = document.getElementById('settings-modal');
 export const settingsGreeting = document.getElementById('settings-greeting');
@@ -106,6 +108,9 @@ export const savedScreenHeaderTitle = document.getElementById('saved-screen-head
 export const savedCategorySelection = document.getElementById('saved-category-selection');
 export const showSavedQuestionsBtn = document.getElementById('show-saved-questions-btn');
 export const showSavedFlashcardsBtn = document.getElementById('show-saved-flashcards-btn');
+export const statisticsScreen = document.getElementById('statistics-screen');
+export const showStatisticsBtn = document.getElementById('show-statistics-btn');
+export const backFromStatisticsBtn = document.getElementById('back-from-statistics-btn');
 
 
 export function showScreen(screen) {
@@ -119,6 +124,7 @@ export function showScreen(screen) {
     flashcardResultsScreen.classList.add('hidden');
     savedScreen.classList.add('hidden');
     learningScreen.classList.add('hidden');
+    statisticsScreen.classList.add('hidden');
     screen.classList.remove('hidden');
 
     const appContainer = document.getElementById('app');
@@ -140,6 +146,7 @@ export function showScreen(screen) {
 };
 
 export function goHome() {
+    playNavigationSound();
     clearInterval(state.getTimerInterval());
     showScreen(startScreen);
     if (state.getWakeLock()) {
@@ -361,4 +368,38 @@ export const handleBackFromSaved = () => {
     } else { // state is 'categories'
         goHome();
     }
+};
+
+export const showStatisticsScreen = () => {
+    settingsModal.classList.add('hidden');
+    import('./settings.js').then(settings => settings.playNavigationSound());
+    const stats = getStatistics();
+
+    // Time spent
+    const hours = Math.floor(stats.timeSpentInSeconds / 3600);
+    const minutes = Math.floor((stats.timeSpentInSeconds % 3600) / 60);
+    document.getElementById('stat-time-spent').textContent = `${hours}h ${minutes}m`;
+
+    // Avg Test Time
+    const totalTime = stats.testHistory.reduce((acc, test) => acc + test.time, 0);
+    const totalQuestions = stats.testHistory.reduce((acc, test) => acc + test.questionCount, 0);
+    const avgTimePerQuestion = totalQuestions > 0 ? totalTime / totalQuestions : 0;
+    const avgTimeFor10Questions = Math.round(avgTimePerQuestion * 10);
+    document.getElementById('stat-avg-test-time').textContent = `${avgTimeFor10Questions}s`;
+
+    // Total Tests
+    document.getElementById('stat-total-tests').textContent = stats.testsCompleted;
+
+    // Test Accuracy
+    document.getElementById('stat-correct-answers').textContent = stats.totalCorrectAnswers;
+    document.getElementById('stat-incorrect-answers').textContent = stats.totalIncorrectAnswers;
+    
+    // Total Flashcards
+    document.getElementById('stat-total-flashcards').textContent = stats.totalFlashcardsSeen;
+
+    // Flashcard Knowledge
+    document.getElementById('stat-known-flashcards').textContent = stats.totalKnownFlashcards;
+    document.getElementById('stat-unknown-flashcards').textContent = stats.totalUnknownFlashcards;
+
+    showScreen(statisticsScreen);
 };
