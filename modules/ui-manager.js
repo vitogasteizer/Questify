@@ -22,6 +22,7 @@ export const timerEl = document.getElementById('timer');
 export const questionImageContainer = document.getElementById('question-image-container');
 export const questionTextEl = document.getElementById('question-text');
 export const optionsContainer = document.getElementById('options-container');
+export const explanationContainer = document.getElementById('explanation-container');
 export const nextButtonContainer = document.getElementById('next-button-container');
 export const resultsTitle = document.getElementById('results-title');
 export const resultsMessage = document.getElementById('results-message');

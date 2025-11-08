@@ -305,10 +305,158 @@ const restartQuiz = () => {
     startQuiz(config.isTimerEnabled, config.timerDuration * 60);
 };
 
+const showExplanation = (isCorrect, explanation, correctAnswerText = null) => {
+    ui.explanationContainer.innerHTML = '';
+    if (!explanation) return;
+
+    const feedbackDiv = document.createElement('div');
+    feedbackDiv.className = `p-4 rounded-lg text-md font-medium ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+    
+    let feedbackHTML = `<p>${explanation}</p>`;
+    if (!isCorrect && correctAnswerText) {
+        const lang = settings.getSettings().language;
+        const currentQuestion = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
+        const isMultiBlank = currentQuestion.type === 'fill-in-the-blank' && currentQuestion.questionText.split('______').length - 1 > 1;
+
+        let correctAnswers;
+        if (Array.isArray(correctAnswerText)) {
+            correctAnswers = isMultiBlank ? correctAnswerText.join(', ') : correctAnswerText.join(' / ');
+        } else {
+            correctAnswers = correctAnswerText;
+        }
+        
+        feedbackHTML = `<p class="mb-2"><strong>${settings.translations[lang].correct_answer_label}</strong> ${correctAnswers}</p><p>${explanation}</p>`;
+    }
+    
+    feedbackDiv.innerHTML = feedbackHTML;
+    ui.explanationContainer.appendChild(feedbackDiv);
+};
+
+const showNextButton = () => {
+    const lang = settings.getSettings().language;
+    const nextButton = document.createElement('button');
+    if (state.getCurrentQuestionIndex() === state.getCurrentQuestions().length - 1) {
+        nextButton.textContent = settings.translations[lang].finish_quiz_button;
+    } else {
+        nextButton.textContent = settings.translations[lang].next_question_button;
+    }
+    
+    nextButton.className = 'px-8 py-3 text-xl font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md';
+    nextButton.onclick = () => {
+        settings.playNavigationSound();
+        state.incrementCurrentQuestionIndex();
+        loadQuestion();
+    };
+    ui.nextButtonContainer.innerHTML = '';
+    ui.nextButtonContainer.appendChild(nextButton);
+};
+
+const handleFillInBlankSubmit = () => {
+    const input = document.getElementById('fill-in-blank-input');
+    if (!input) return;
+
+    const userAnswer = input.value.trim().toLowerCase();
+    const question = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
+    
+    let isCorrect;
+    const isMultiBlank = question.questionText.split('______').length - 1 > 1;
+
+    if (isMultiBlank && Array.isArray(question.correctAnswer)) {
+        // This is a multi-blank question, expecting comma-separated answers
+        const userAnswers = userAnswer.split(',').map(s => s.trim());
+        const correctAnswers = question.correctAnswer.map(s => s.toLowerCase());
+        isCorrect = userAnswers.length === correctAnswers.length && userAnswers.every((val, index) => val === correctAnswers[index]);
+    } else {
+        // This is a single-blank question
+        const correctAnswers = (Array.isArray(question.correctAnswer) 
+            ? question.correctAnswer
+            : [question.correctAnswer]).map(s => String(s).toLowerCase());
+        isCorrect = correctAnswers.includes(userAnswer);
+    }
+
+    // Disable input and button
+    input.disabled = true;
+    const submitBtn = ui.optionsContainer.querySelector('button');
+    if(submitBtn) submitBtn.disabled = true;
+    
+    // Visual feedback
+    input.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+    if (isCorrect) {
+        state.incrementScore();
+        settings.playCorrectSound();
+    } else {
+        settings.playIncorrectSound();
+    }
+
+    state.addSelectedAnswer({
+        questionIndex: state.getCurrentQuestionIndex(),
+        selectedIndex: -1, // N/A for fill-in-the-blank
+        userAnswer: input.value.trim(),
+        isCorrect: isCorrect
+    });
+    
+    showExplanation(isCorrect, question.explanation, isCorrect ? null : question.correctAnswer);
+    showNextButton();
+};
+
+const moveWordTile = (tile) => {
+    const answerArea = document.getElementById('order-words-answer-area');
+    const wordBank = document.getElementById('order-words-word-bank');
+    
+    settings.playNavigationSound();
+
+    if (tile.parentElement.id === 'order-words-word-bank') {
+        // Move from bank to answer area
+        answerArea.appendChild(tile);
+    } else {
+        // Move from answer area back to bank
+        wordBank.appendChild(tile);
+    }
+};
+
+const handleOrderWordsSubmit = () => {
+    const answerArea = document.getElementById('order-words-answer-area');
+    const question = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
+
+    const userAnswer = Array.from(answerArea.children)
+        .map(tile => tile.dataset.word)
+        .join(' ');
+
+    const isCorrect = userAnswer === question.correctAnswer;
+    
+    // Disable interactions
+    const tiles = document.querySelectorAll('.word-tile');
+    tiles.forEach(tile => tile.onclick = null);
+    const submitBtn = ui.optionsContainer.querySelector('button');
+    if(submitBtn) submitBtn.disabled = true;
+
+    // Visual feedback
+    answerArea.classList.add(isCorrect ? 'correct' : 'incorrect');
+    answerArea.style.borderStyle = 'solid';
+
+    if (isCorrect) {
+        state.incrementScore();
+        settings.playCorrectSound();
+    } else {
+        settings.playIncorrectSound();
+    }
+
+    state.addSelectedAnswer({
+        questionIndex: state.getCurrentQuestionIndex(),
+        selectedIndex: -1, // N/A
+        userAnswer: userAnswer,
+        isCorrect: isCorrect
+    });
+    
+    showExplanation(isCorrect, question.explanation, isCorrect ? null : question.correctAnswer);
+    showNextButton();
+};
 
 const loadQuestion = () => {
     ui.optionsContainer.innerHTML = '';
     ui.questionImageContainer.innerHTML = '';
+    ui.explanationContainer.innerHTML = '';
     ui.nextButtonContainer.innerHTML = '';
 
     if (state.getCurrentQuestionIndex() >= state.getCurrentQuestions().length) {
@@ -319,7 +467,7 @@ const loadQuestion = () => {
     const question = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
     const lang = settings.getSettings().language;
     
-    ui.questionTextEl.textContent = question.questionText;
+    ui.questionTextEl.innerHTML = question.questionText;
 
     if (question.imageUrl) {
         const img = document.createElement('img');
@@ -345,17 +493,78 @@ const loadQuestion = () => {
         ui.bookmarkBtn.setAttribute('aria-label', settings.translations[lang].bookmark_question_aria);
     }
 
-    const shuffledOptions = shuffleArray([...question.options.keys()]);
+    if (question.type === 'fill-in-the-blank') {
+        const inputContainer = document.createElement('div');
+        inputContainer.className = 'col-span-1 md:col-span-2 flex flex-col items-center';
+        
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Escribe tu respuesta...';
+        input.className = 'w-full max-w-sm px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500';
+        input.id = 'fill-in-blank-input';
+        
+        const submitBtn = document.createElement('button');
+        submitBtn.textContent = 'Comprobar';
+        submitBtn.className = 'mt-4 px-8 py-2 text-lg font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md';
+        submitBtn.onclick = () => handleFillInBlankSubmit();
+        
+        inputContainer.appendChild(input);
+        inputContainer.appendChild(submitBtn);
+        ui.optionsContainer.appendChild(inputContainer);
+        
+        input.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                handleFillInBlankSubmit();
+            }
+        });
+        input.focus();
 
-    shuffledOptions.forEach(optionIndex => {
-        const option = question.options[optionIndex];
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.className = 'w-full text-left p-4 border-2 border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-400 transition-colors duration-200';
-        button.dataset.index = optionIndex;
-        button.onclick = () => selectAnswer(button);
-        ui.optionsContainer.appendChild(button);
-    });
+    } else if (question.type === 'order-words') {
+        const orderWordsContainer = document.createElement('div');
+        orderWordsContainer.className = 'col-span-1 md:col-span-2 flex flex-col items-center gap-4';
+
+        const answerArea = document.createElement('div');
+        answerArea.id = 'order-words-answer-area';
+        answerArea.className = 'answer-area w-full';
+
+        const wordBank = document.createElement('div');
+        wordBank.id = 'order-words-word-bank';
+        wordBank.className = 'word-bank w-full';
+
+        const submitBtn = document.createElement('button');
+        submitBtn.textContent = 'Comprobar';
+        submitBtn.className = 'mt-4 px-8 py-2 text-lg font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md';
+        submitBtn.onclick = () => handleOrderWordsSubmit();
+
+        const shuffledWords = shuffleArray([...question.words]);
+
+        shuffledWords.forEach((word, index) => {
+            const tile = document.createElement('div');
+            tile.textContent = word;
+            tile.className = 'word-tile';
+            tile.dataset.word = word;
+            tile.dataset.originalIndex = index;
+            tile.onclick = () => moveWordTile(tile);
+            wordBank.appendChild(tile);
+        });
+
+        orderWordsContainer.appendChild(answerArea);
+        orderWordsContainer.appendChild(wordBank);
+        orderWordsContainer.appendChild(submitBtn);
+        ui.optionsContainer.appendChild(orderWordsContainer);
+
+    } else { // 'multiple-choice' or legacy
+        const shuffledOptions = shuffleArray([...question.options.keys()]);
+        shuffledOptions.forEach(optionIndex => {
+            const option = question.options[optionIndex];
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.className = 'w-full text-left p-4 border-2 border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-400 transition-colors duration-200';
+            button.dataset.index = optionIndex;
+            button.onclick = () => selectAnswer(button);
+            ui.optionsContainer.appendChild(button);
+        });
+    }
 };
 
 const selectAnswer = (button) => {
@@ -387,21 +596,8 @@ const selectAnswer = (button) => {
         isCorrect: isCorrect
     });
     
-    const lang = settings.getSettings().language;
-    const nextButton = document.createElement('button');
-    if(state.getCurrentQuestionIndex() === state.getCurrentQuestions().length - 1) {
-        nextButton.textContent = settings.translations[lang].finish_quiz_button;
-    } else {
-        nextButton.textContent = settings.translations[lang].next_question_button;
-    }
-    
-    nextButton.className = 'px-8 py-3 text-xl font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md';
-    nextButton.onclick = () => {
-        settings.playNavigationSound();
-        state.incrementCurrentQuestionIndex();
-        loadQuestion();
-    };
-    ui.nextButtonContainer.appendChild(nextButton);
+    showExplanation(isCorrect, question.explanation, isCorrect ? null : question.options[question.correctAnswerIndex]);
+    showNextButton();
 };
 
 const finishQuiz = () => {
@@ -483,10 +679,26 @@ const renderReviewSection = () => {
         incorrectAnswers.forEach(answer => {
             const question = state.getCurrentQuestions()[answer.questionIndex];
             const li = document.createElement('li');
+            
+            let correctAnswerText;
+            const isMultiBlank = question.type === 'fill-in-the-blank' && question.questionText.split('______').length - 1 > 1;
+
+            if (question.type === 'fill-in-the-blank') {
+                if (Array.isArray(question.correctAnswer)) {
+                    correctAnswerText = isMultiBlank ? question.correctAnswer.join(', ') : question.correctAnswer.join(' / ');
+                } else {
+                    correctAnswerText = question.correctAnswer;
+                }
+            } else if (question.type === 'order-words') {
+                correctAnswerText = question.correctAnswer;
+            } else {
+                correctAnswerText = question.options[question.correctAnswerIndex];
+            }
+
             li.className = 'p-3 border-b border-gray-200';
             li.innerHTML = `
                 <p class="font-semibold text-gray-800">${question.questionText}</p>
-                <p class="text-sm mt-1 text-red-600">${settings.translations[lang].correct_answer_label} ${question.options[question.correctAnswerIndex]}</p>
+                <p class="text-sm mt-1 text-red-600">${settings.translations[lang].correct_answer_label} ${correctAnswerText}</p>
             `;
             ui.incorrectList.appendChild(li);
         });

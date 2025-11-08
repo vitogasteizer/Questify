@@ -23,10 +23,17 @@
         #category-cards-container::-webkit-scrollbar { display: none; }
         #category-cards-container { -ms-overflow-style: none; scrollbar-width: none; cursor: grab; cursor: -webkit-grab; user-select: none; }
         #category-cards-container.active { cursor: grabbing; cursor: -webkit-grabbing; }
+        /* New styles for order-words questions */
+        .word-bank, .answer-area { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; border-radius: 8px; min-height: 50px; }
+        .word-bank { background-color: #f3f4f6; border: 1px solid #e5e7eb; }
+        .answer-area { background-color: #ffffff; border: 2px dashed #d1d5db; }
+        .word-tile { padding: 8px 16px; background-color: #ffffff; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; transition: background-color 0.2s, transform 0.2s; user-select: none; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .word-tile:hover { background-color: #eff6ff; border-color: #93c5fd; }
+        .word-tile.placed { background-color: #e5e7eb; color: #4b5563; }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
-    <header id="app-header" class="hidden fixed top-0 left-0 right-0 w-full bg-white shadow-md p-2 flex justify-between items-center z-20">
+    <header id="app-header" class="hidden fixed top-0 left-0 right-0 w-full p-2 flex justify-between items-center z-20">
         <a href="#" id="home-link-header" class="transition-transform transform hover:scale-105" data-i18n-key="back_to_home_title" title="Volver al Inicio">
             <h1 class="text-xl font-bold text-blue-600">Questify</h1>
         </a>
@@ -139,6 +146,7 @@
                 <div id="question-image-container" class="mb-4"></div>
                 <h3 id="question-text" class="text-xl md:text-2xl font-bold mb-6 text-gray-900"></h3>
                 <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div id="explanation-container" class="mt-4"></div>
             </div>
             <div id="next-button-container" class="mt-6 text-center"></div>
         </div>

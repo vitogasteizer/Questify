@@ -6,6 +6,13 @@ import { questions as preparacionPedidos2Questions } from './temas/tema3/test.js
 import { flashcards as preparacionPedidos2Flashcards } from './temas/tema3/flashcards.js';
 import { flashcards as operadorCarretillaFlashcards } from './temas/tema4/flashcards.js';
 import { questions as operadorCarretillaQuestions } from './temas/tema4/test.js';
+import { questions as porParaQuestions } from './temas/tema5/test.js';
+import { questions as serEstarQuestions } from './temas/tema6/test.js';
+import { questions as muyMuchoQuestions } from './temas/tema7/test.js';
+import { flashcards as muyMuchoFlashcards } from './temas/tema7/flashcards.js';
+import { questions as queQuienQuestions } from './temas/tema8/test.js';
+import { questions as interrogativosQuestions } from './temas/tema9/test.js';
+import { flashcards as interrogativosFlashcards } from './temas/tema9/flashcards.js';
 import { topicImageUrls } from './temas/image-links.js';
 
 export const categories = [
@@ -51,5 +58,47 @@ export const allTopics = [
       flashcards: operadorCarretillaFlashcards,
       imageUrl: topicImageUrls['operador-carretilla'],
       hasLearning: true
+    },
+    {
+      id: 'por-vs-para',
+      categoryId: 'espanol',
+      name: 'Uso de "Por" y "Para"',
+      description: `Aprende la diferencia entre "por" y "para" con ejercicios prácticos. (${porParaQuestions.length} preguntas)`,
+      questions: porParaQuestions,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    },
+    {
+      id: 'ser-vs-estar',
+      categoryId: 'espanol',
+      name: 'Uso de "Ser" y "Estar"',
+      description: `Aprende cuándo usar "ser" y "estar" con ejercicios prácticos. (${serEstarQuestions.length} preguntas)`,
+      questions: serEstarQuestions,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    },
+    {
+      id: 'muy-vs-mucho',
+      categoryId: 'espanol',
+      name: 'Uso de "Muy" y "Mucho"',
+      description: `Aprende la diferencia entre "muy" y "mucho" con ejercicios prácticos. (${muyMuchoQuestions.length} preguntas, ${muyMuchoFlashcards.length} flashcards)`,
+      questions: muyMuchoQuestions,
+      flashcards: muyMuchoFlashcards,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    },
+    {
+      id: 'que-vs-quien',
+      categoryId: 'espanol',
+      name: 'Interrogativos "¿Qué?" y "¿Quién?"',
+      description: `Practica la formulación de preguntas con "¿qué?" y "¿quién?". (${queQuienQuestions.length} preguntas)`,
+      questions: queQuienQuestions,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    },
+    {
+      id: 'interrogativos-espanoles',
+      categoryId: 'espanol',
+      name: 'Palabras Interrogativas',
+      description: `Aprende y practica las palabras para hacer preguntas en español. (${interrogativosQuestions.length} preguntas, ${interrogativosFlashcards.length} flashcards)`,
+      questions: interrogativosQuestions,
+      flashcards: interrogativosFlashcards,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
     }
 ];

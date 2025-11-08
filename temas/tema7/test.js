@@ -1,0 +1,35 @@
+export const questions = [
+    // Fill-in-the-blank
+    { type: 'fill-in-the-blank', questionText: "La madre de Jorge está ______ enferma.", correctAnswer: "muy", explanation: "muy-ს მივყევთ ზედსართავი სახელს (enferma). იგი ყოველთვის უცვლელია." },
+    { type: 'fill-in-the-blank', questionText: "No podemos comprar ese coche; es ______ caro.", correctAnswer: "muy", explanation: "muy-ს მივყევთ ზედსართავი სახელს (caro)." },
+    { type: 'fill-in-the-blank', questionText: "A ellas les gusta ______ bailar.", correctAnswer: "mucho", explanation: "mucho-ს ვიყენებთ ზმნას (bailar) რაოდენობის/ინტენსივობის აღსანიშნავად. აქ იგი მოქმედებს როგორც ზმნიზედა." },
+    { type: 'fill-in-the-blank', questionText: "A ______ niños no les gusta comer verduras.", correctAnswer: "muchos", explanation: "muchos-ს ვიყენებთ არსებითი სახელთან (niños), რომელიც მრავლობითი რიცხვშია და მამრობითი სახისაა. იგი თანხოვნობს არსებით სახელთან." },
+    { type: 'fill-in-the-blank', questionText: "¿Son ricos? Sí, creo que tienen ______ dinero.", correctAnswer: "mucho", explanation: "mucho-ს ვიყენებთ არსებითი სახელთან (dinero), რომელიც ერთობითი რიცხვშია და მამრობითი სახისაა." },
+    { type: 'fill-in-the-blank', questionText: "Los españoles consumen ______ aceite de oliva.", correctAnswer: "mucho", explanation: "mucho-ს ვიყენებთ არსებითი სახელთან (aceite), რომელიც ერთობითი რიცხვშია და მამრობითი სახისაა." },
+    { type: 'fill-in-the-blank', questionText: "Viven ______ cerca el uno del otro.", correctAnswer: "muy", explanation: "muy-ს მივყევთ ზმნიზედს (cerca)." },
+    { type: 'fill-in-the-blank', questionText: "¿Conoces la casa de Rosa? Sí, es ______ bonita.", correctAnswer: "muy", explanation: "muy-ს მივყევთ ზედსართავი სახელს (bonita)." },
+    { type: 'fill-in-the-blank', questionText: "Este chico tiene ______ libros en su casa.", correctAnswer: "muchos", explanation: "muchos-ს ვიყენებთ არსებითი სახელთან (libros), რომელიც მრავლობითი რიცხვშია და მამრობითი სახისაა." },
+    { type: 'fill-in-the-blank', questionText: "Mi prima es ______ mayor que yo, pero parece ______ joven.", correctAnswer: ["mucho", "muy"], explanation: "პირველ ხარვეზში mayor არის შედარებითი ხარისხი (ძალიან-ის ნაცვლად ბევრად), ამიტომ ვიყენებთ mucho. მეორე ხარვეზში muy-ს მივყევთ ზედსართავ სახელს (joven)." },
+    { type: 'fill-in-the-blank', questionText: "¿Sabes si ellos salen ______ de noche?", correctAnswer: "mucho", explanation: "mucho-ს ვიყენებთ ზმნას (salen) რაოდენობის/ინტენსივობის აღსანიშნავად." },
+    { type: 'fill-in-the-blank', questionText: "Hoy día, la gente busca coches que no gastan ______ gasolina.", correctAnswer: "mucha", explanation: "mucha-ს ვიყენებთ არსებითი სახელთან (gasolina), რომელიც ერთობითი რიცხვშია და მდედრობითი სახისაა." },
+    { type: 'fill-in-the-blank', questionText: "Estamos ______ cansados porque hemos trabajado.", correctAnswer: "muy", explanation: "muy-ს მივყევთ ზედსართავი სახელს (cansados)." },
+    { type: 'fill-in-the-blank', questionText: "Mi perro come ______ carne.", correctAnswer: "mucha", explanation: "mucha-ს ვიყენებთ არსებითი სახელთან (carne), რომელიც ერთობითი რიცხვშია და მდედრობითი სახისაა." },
+    { type: 'fill-in-the-blank', questionText: "Lola llama ______ veces al móvil de su novio para charlar un rato.", correctAnswer: "muchas", explanation: "muchas-ს ვიყენებთ არსებითი სახელთან (veces), რომელიც მრავლობითი რიცხვშია და მდედრობითი სახისაა." },
+    { type: 'fill-in-the-blank', questionText: "Es ______ útil saber ______ idiomas.", correctAnswer: ["muy", "muchos"], explanation: "პირველ ხარვეზში muy-ს მივყევთ ზედსართავი სახელს (útil). მეორე ხარვეზში muchos-ს ვიყენებთ არსებითი სახელთან (idiomas), რომელიც მრავლობითი რიცხვშია და მამრობითი სახისაა." },
+    { type: 'fill-in-the-blank', questionText: "Vivimos ______ lejos de la ciudad.", correctAnswer: "muy", explanation: "muy-ს მივყევთ ზმნიზედს (lejos)." },
+    { type: 'fill-in-the-blank', questionText: "Hoy hemos andado ______.", correctAnswer: "mucho", explanation: "mucho-ს ვიყენებთ ზმნას (hemos andado) რაოდენობის/ინტენსივობის აღსანიშნავად." },
+    { type: 'fill-in-the-blank', questionText: "Hemos visitado ______ países.", correctAnswer: "muchos", explanation: "muchos-ს ვიყენებთ არსებითი სახელთან (países), რომელიც მრავლობითი რიცხვშია და მამრობითი სახისაა." },
+    { type: 'fill-in-the-blank', questionText: "______ gente no lo sabía.", correctAnswer: "Mucha", explanation: "Mucha-ს ვიყენებთ არსებითი სახელთან (gente), რომელიც ერთობითი რიცხვშია და მდედრობითი სახისაა (და მიუხედავად იმისა, რომ მრავალ მნიშვნელობას ატარებს, გრამატიკულად მდედრობითი და ერთობითია)." },
+
+    // Multiple-choice
+    { type: 'multiple-choice', questionText: "Mi hermano estudia ______ para los exámenes.", options: ["muy", "mucho", "muchos"], correctAnswerIndex: 1, explanation: "ზმნას (estudia) ვანიჭებთ ინტენსივობას." },
+    { type: 'multiple-choice', questionText: "Esas flores son ______ bonitas.", options: ["muy", "mucho", "muchas"], correctAnswerIndex: 0, explanation: "muy-ს მივყევთ ზედსართავ სახელს (bonitas)." },
+    { type: 'multiple-choice', questionText: "Tengo ______ amigos en ese país.", options: ["muy", "mucho", "muchos"], correctAnswerIndex: 2, explanation: "muchos თანხოვნობს მამრობითი, მრავლობითი სახის არსებით სახელთან (amigos)." },
+    { type: 'multiple-choice', questionText: "La película no fue ______ interesante.", options: ["muy", "mucho", "mucha"], correctAnswerIndex: 0, explanation: "muy-ს მივყევთ ზედსართავ სახელს (interesante)." },
+    { type: 'multiple-choice', questionText: "¿Bebes café? Sí, pero no ______.", options: ["muy", "mucho", "mucha"], correctAnswerIndex: 1, explanation: "mucho-ს ვიყენებთ ზმნას (bebes) უარყოფით პასუხში რაოდენობის აღსანიშნავად." },
+    { type: 'multiple-choice', questionText: "Este café está ______ caliente.", options: ["muy", "mucho"], correctAnswerIndex: 0, explanation: "`caliente` არის ზედსართავი სახელი." },
+    { type: 'multiple-choice', questionText: "No tengo ______ tiempo.", options: ["muy", "mucho"], correctAnswerIndex: 1, explanation: "`tiempo` არის არსებითი სახელი." },
+    { type: 'multiple-choice', questionText: "Me gusta ______ ese cuadro.", options: ["muy", "mucho"], correctAnswerIndex: 1, explanation: "`gusta` არის ზმნა." },
+    { type: 'multiple-choice', questionText: "Ellos tienen ______ amigos.", options: ["muchos", "muy"], correctAnswerIndex: 0, explanation: "`amigos` არის მამრობითი, მრავლობითი არსებითი სახელი." },
+    { type: 'multiple-choice', questionText: "La película fue ______ aburrida.", options: ["mucho", "muy"], correctAnswerIndex: 1, explanation: "`aburrida` არის ზედსართავი სახელი." }
+];
