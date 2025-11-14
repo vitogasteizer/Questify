@@ -466,6 +466,22 @@ const loadQuestion = () => {
 
     const question = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
     const lang = settings.getSettings().language;
+
+    const questionType = question.type || 'multiple-choice';
+    let instructionKey = 'instruction_multiple_choice';
+    if (questionType === 'fill-in-the-blank') {
+        instructionKey = 'instruction_fill_in_the_blank';
+    } else if (questionType === 'order-words') {
+        instructionKey = 'instruction_order_words';
+    }
+    
+    const instructionText = settings.translations[lang][instructionKey];
+    if (instructionText) {
+        ui.questionInstruction.textContent = instructionText;
+        ui.questionInstruction.classList.remove('hidden');
+    } else {
+        ui.questionInstruction.classList.add('hidden');
+    }
     
     ui.questionTextEl.innerHTML = question.questionText;
 

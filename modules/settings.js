@@ -147,6 +147,9 @@ export const translations = {
         stat_flashcard_knowledge_title: "Conocimiento (Flashcards)",
         stat_known: "Sabidas:",
         stat_unknown: "No Sabidas:",
+        instruction_multiple_choice: "Elige la opción correcta:",
+        instruction_fill_in_the_blank: "Completa la frase:",
+        instruction_order_words: "Ordena las palabras para formar una frase correcta:",
     },
     ka: {
         welcome_title: "კეთილი იყოს თქვენი მობრძანება!",
@@ -279,6 +282,9 @@ export const translations = {
         stat_flashcard_knowledge_title: "ცოდნა (ფლეშბარათები)",
         stat_known: "ვიცი:",
         stat_unknown: "არ ვიცი:",
+        instruction_multiple_choice: "აირჩიეთ სწორი ვარიანტი:",
+        instruction_fill_in_the_blank: "შეავსეთ წინადადება:",
+        instruction_order_words: "დაალაგეთ სიტყვები სწორი თანმიმდევრობით:",
     }
 };
 

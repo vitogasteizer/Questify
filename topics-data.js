@@ -13,6 +13,11 @@ import { flashcards as muyMuchoFlashcards } from './temas/tema7/flashcards.js';
 import { questions as queQuienQuestions } from './temas/tema8/test.js';
 import { questions as interrogativosQuestions } from './temas/tema9/test.js';
 import { flashcards as interrogativosFlashcards } from './temas/tema9/flashcards.js';
+import { questions as hayAhiAyQuestions } from './temas/tema10/test.js';
+import { questions as comparativosQuestions } from './temas/tema11/test.js';
+import { questions as cuantificadoresQuestions } from './temas/tema12/test.js';
+import { questions as demostrativosQuestions } from './temas/tema13/test.js';
+import { questions as tenerQueQuestions } from './temas/tema14/test.js';
 import { topicImageUrls } from './temas/image-links.js';
 
 export const categories = [
@@ -23,7 +28,7 @@ export const categories = [
     { id: 'georgian', nameKey: 'category_georgian', colorClass: 'bg-purple-100 text-purple-800 border-purple-200 hover:bg-purple-200 hover:border-purple-400', activeColorClass: 'bg-purple-600 text-white border-purple-700' },
 ];
 
-export const allTopics = [
+const individualTopics = [
     {
       id: 'logistica',
       categoryId: 'logistica',
@@ -100,5 +105,80 @@ export const allTopics = [
       questions: interrogativosQuestions,
       flashcards: interrogativosFlashcards,
       imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    },
+    {
+      id: 'hay-ahi-ay',
+      categoryId: 'espanol',
+      name: 'Uso de "Hay", "Ahí" y "Ay"',
+      description: `Domina la diferencia entre estas tres palabras homófonas. (${hayAhiAyQuestions.length} preguntas)`,
+      questions: hayAhiAyQuestions,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    },
+    {
+      id: 'comparativos',
+      categoryId: 'espanol',
+      name: 'Comparativos',
+      description: `Practica las estructuras comparativas como "más que" y "tan como". (${comparativosQuestions.length} preguntas)`,
+      questions: comparativosQuestions,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    },
+    {
+      id: 'cuantificadores',
+      categoryId: 'espanol',
+      name: 'Cuantificadores',
+      description: `Aprende a usar cuantificadores como "mucho", "poco", "demasiado" y "nada". (${cuantificadoresQuestions.length} preguntas)`,
+      questions: cuantificadoresQuestions,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    },
+    {
+      id: 'demostrativos',
+      categoryId: 'espanol',
+      name: 'Demostrativos',
+      description: `Ejercicios para usar correctamente "este", "ese", "aquel" y sus variantes. (${demostrativosQuestions.length} preguntas)`,
+      questions: demostrativosQuestions,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    },
+    {
+      id: 'tener-que',
+      categoryId: 'espanol',
+      name: 'Tener que + Infinitivo',
+      description: `Practica la expresión de obligación con la estructura "tener que". (${tenerQueQuestions.length} preguntas)`,
+      questions: tenerQueQuestions,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
     }
 ];
+
+const finalTopics = [];
+
+const categoryImageMap = {
+    logistica: topicImageUrls.logistica,
+    espanol: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+};
+
+categories.forEach(category => {
+    const topicsForCategory = individualTopics.filter(t => t.categoryId === category.id);
+
+    if (topicsForCategory.length > 0) {
+        const combinedQuestions = topicsForCategory.flatMap(topic => topic.questions || []);
+
+        if (combinedQuestions.length > 0) {
+            const categoryName = category.nameKey.replace('category_', '');
+            const capitalizedCategoryName = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+            
+            const combinedTopic = {
+                id: `${category.id}-combinado`,
+                categoryId: category.id,
+                name: `Test Combinado de ${capitalizedCategoryName}`,
+                description: `Preguntas aleatorias de todos los temas de ${capitalizedCategoryName}. (${combinedQuestions.length} preguntas)`,
+                questions: combinedQuestions,
+                imageUrl: categoryImageMap[category.id] || topicsForCategory[0].imageUrl,
+                isCombined: true
+            };
+            finalTopics.push(combinedTopic);
+        }
+    }
+    
+    finalTopics.push(...topicsForCategory);
+});
+
+export const allTopics = finalTopics;

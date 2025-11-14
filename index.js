@@ -50,11 +50,23 @@ const handleNameSubmit = () => {
 };
 
 const handleTopicAction = (e) => {
-    const button = e.target.closest('.topic-action-btn');
-    if (!button) return;
+    const actionButton = e.target.closest('.topic-action-btn');
+    const combinedCard = e.target.closest('.combined-test-card');
 
-    const topicId = button.dataset.topicId;
-    const action = button.dataset.action;
+    let topicId, action;
+
+    if (actionButton) {
+        topicId = actionButton.dataset.topicId;
+        action = actionButton.dataset.action;
+    } else if (combinedCard) {
+        topicId = combinedCard.dataset.topicId;
+        action = combinedCard.dataset.action;
+    } else {
+        return; // Click was not on an actionable item
+    }
+
+    if (!topicId || !action) return;
+
     const topic = allTopics.find(t => t.id === topicId);
     
     if (!topic) return;
@@ -64,8 +76,8 @@ const handleTopicAction = (e) => {
 
     switch (action) {
         case 'test':
-            const fullQuestionsForQuiz = state.allQuestionsWithIndex.filter(q => q.topicId === topic.id);
-            quiz.showQuizOptionsScreen(topic, fullQuestionsForQuiz);
+            const questionsForTopic = allTopics.find(t => t.id === topicId)?.questions || [];
+            quiz.showQuizOptionsScreen(topic, questionsForTopic);
             break;
         case 'learn':
             const learningData = learningModules[topic.id];
@@ -161,9 +173,6 @@ const init = () => {
         e.preventDefault();
         ui.goHome();
     });
-    ui.backToHomeBtn.addEventListener('click', ui.goHome);
-    ui.backToHomeFromFlashcardBtn.addEventListener('click', flashcard.closeFlashcards);
-    ui.backToHomeFromLearningBtn.addEventListener('click', ui.goHome);
     document.getElementById('topics-accordion-container').addEventListener('click', handleTopicAction);
     
     // Saved Screen
@@ -218,6 +227,9 @@ const init = () => {
     // Search and Filtering
     ui.searchInput.addEventListener('input', (e) => search.search(e.target.value));
     ui.searchFilterSelect.addEventListener('change', search.handleSearchFilterChange);
+
+    // Header scroll effect
+    window.addEventListener('scroll', ui.updateHeaderBackground);
 
     // Category selection and dragging
     ui.categoryCardsContainer.addEventListener('click', (e) => {

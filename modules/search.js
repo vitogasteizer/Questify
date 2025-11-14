@@ -8,15 +8,22 @@ import { showFlashcardOptionsScreen } from './flashcard-handler.js';
 export const search = (query) => {
     query = query.toLowerCase().trim();
     if (query === '') {
-        ui.searchResultsContainer.classList.add('hidden');
-        ui.startScreenDefaultContent.classList.remove('hidden');
-        ui.topicQuizButtonContainer.innerHTML = ''; // Clear buttons when search is cleared
-        ui.topicQuizButtonContainer.className = 'mt-4 text-center';
+        if (!ui.searchResultsContainer.classList.contains('hidden')) {
+            ui.searchResultsContainer.classList.add('hidden');
+            ui.startScreenDefaultContent.classList.remove('hidden');
+            ui.topicQuizButtonContainer.innerHTML = '';
+            ui.topicQuizButtonContainer.className = 'mt-4 text-center';
+            ui.updateHeaderBackground();
+        }
         return;
     }
 
-    ui.startScreenDefaultContent.classList.add('hidden');
-    ui.searchResultsContainer.classList.remove('hidden');
+    if (ui.searchResultsContainer.classList.contains('hidden')) {
+        ui.startScreenDefaultContent.classList.add('hidden');
+        ui.searchResultsContainer.classList.remove('hidden');
+        ui.updateHeaderBackground();
+    }
+    
     ui.searchResultsList.innerHTML = '';
     ui.topicQuizButtonContainer.innerHTML = '';
     

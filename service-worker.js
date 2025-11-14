@@ -1,6 +1,6 @@
 
 
-const CACHE_NAME = 'logistica-quiz-cache-v17';
+const CACHE_NAME = 'logistica-quiz-cache-v18';
 const urlsToCache = [
   './',
   './index.html',
@@ -29,6 +29,11 @@ const urlsToCache = [
   './temas/tema8/test.js',
   './temas/tema9/test.js',
   './temas/tema9/flashcards.js',
+  './temas/tema10/test.js',
+  './temas/tema11/test.js',
+  './temas/tema12/test.js',
+  './temas/tema13/test.js',
+  './temas/tema14/test.js',
   './manifest.json',
   'https://cdn.tailwindcss.com',
   'https://i.postimg.cc/tJDL7vz5/Quiz-by-avma.png',
