@@ -467,23 +467,23 @@ const loadQuestion = () => {
     const question = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
     const lang = settings.getSettings().language;
 
-    const questionType = question.type || 'multiple-choice';
-    let instructionKey = 'instruction_multiple_choice';
-    if (questionType === 'fill-in-the-blank') {
-        instructionKey = 'instruction_fill_in_the_blank';
-    } else if (questionType === 'order-words') {
-        instructionKey = 'instruction_order_words';
-    }
-    
-    const instructionText = settings.translations[lang][instructionKey];
-    if (instructionText) {
-        ui.questionInstruction.textContent = instructionText;
+    // Split instruction from question text to style them differently
+    const parts = question.questionText.split(':');
+    const hasInstruction = parts.length > 1 && parts[1].trim() !== '';
+
+    if (hasInstruction) {
+        const instruction = parts[0].trim();
+        const mainQuestion = parts.slice(1).join(':').trim();
+
+        ui.questionInstruction.textContent = instruction + ':';
         ui.questionInstruction.classList.remove('hidden');
+        ui.questionTextEl.innerHTML = mainQuestion;
     } else {
+        // No separable instruction found, display the whole text as the main question.
+        ui.questionInstruction.textContent = '';
         ui.questionInstruction.classList.add('hidden');
+        ui.questionTextEl.innerHTML = question.questionText;
     }
-    
-    ui.questionTextEl.innerHTML = question.questionText;
 
     if (question.imageUrl) {
         const img = document.createElement('img');

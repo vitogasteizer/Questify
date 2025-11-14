@@ -34,5 +34,35 @@ export const questions = [
         options: ["algo", "nada", "mucho"],
         correctAnswerIndex: 0,
         explanation: "'Algo' se usa para referirse a una cosa o cantidad indefinida."
+    },
+    {
+        questionText: "No tengo ______ amigas en esta ciudad.",
+        options: ["muchas", "muy", "algo"],
+        correctAnswerIndex: 0,
+        explanation: "'Muchas' concuerda con el sustantivo femenino plural 'amigas'."
+    },
+    {
+        questionText: "Hay ______ comida en la nevera.",
+        options: ["poca", "pocos", "muy"],
+        correctAnswerIndex: 0,
+        explanation: "'Poca' concuerda con el sustantivo femenino singular 'comida'."
+    },
+    {
+        questionText: "He dormido ______ esta noche. No estoy cansado.",
+        options: ["bastante", "pocos", "nada"],
+        correctAnswerIndex: 0,
+        explanation: "'Bastante' actúa como adverbio para indicar una cantidad suficiente."
+    },
+    {
+        questionText: "Necesitamos ______ sillas para los invitados.",
+        options: ["más", "mucho", "algo"],
+        correctAnswerIndex: 0,
+        explanation: "'Más' es un cuantificador que indica una cantidad adicional."
+    },
+    {
+        questionText: "En invierno, nieva ______ en las montañas.",
+        options: ["muy", "mucho", "pocos"],
+        correctAnswerIndex: 1,
+        explanation: "'Mucho' actúa como adverbio modificando al verbo 'nieva'."
     }
 ];
