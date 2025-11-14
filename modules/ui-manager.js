@@ -269,16 +269,9 @@ export const renderTopicsOnStartScreen = () => {
     container.innerHTML = '';
     const lang = getSettings().language;
 
-    let topicsToRender;
-    const currentCategoryId = state.getCurrentCategoryId();
-
-    if (currentCategoryId === 'all') {
-        // Filter out all combined tests from the "All" view
-        topicsToRender = allTopics.filter(topic => !topic.isCombined);
-    } else {
-        // For a specific category, show all its topics (combined and individual)
-        topicsToRender = allTopics.filter(topic => topic.categoryId === currentCategoryId);
-    }
+    const topicsToRender = state.getCurrentCategoryId() === 'all' 
+        ? allTopics 
+        : allTopics.filter(topic => topic.categoryId === state.getCurrentCategoryId());
     
     if (topicsToRender.length === 0) {
         container.innerHTML = `<p class="text-center text-gray-500 mt-8">${translations[lang].no_topics_in_category}</p>`;
@@ -286,39 +279,33 @@ export const renderTopicsOnStartScreen = () => {
     }
 
     topicsToRender.forEach(topic => {
+        const topicId = `topic-accordion-${topic.id}`;
+        const topicWrapper = document.createElement('div');
+        topicWrapper.className = 'border rounded-lg shadow-sm'; // Common classes
+
+        const topicHeader = document.createElement('button');
+        topicHeader.className = 'w-full p-4 text-center md:text-left font-bold transition-colors flex flex-col md:flex-row items-center rounded-lg';
+        topicHeader.setAttribute('aria-expanded', 'false');
+        topicHeader.setAttribute('aria-controls', `${topicId}-content`);
+
         if (topic.isCombined) {
-            // Render the special, non-accordion card
-            const topicWrapper = document.createElement('div');
-            topicWrapper.className = 'combined-test-card border rounded-lg shadow-sm bg-gradient-to-br from-blue-500 to-purple-600 text-white border-transparent cursor-pointer transition-transform transform hover:scale-[1.02]';
-            topicWrapper.dataset.topicId = topic.id;
-            topicWrapper.dataset.action = 'test'; // Hardcode action to 'test'
-            
-            topicWrapper.innerHTML = `
-                <div class="p-4 text-center md:text-left flex flex-col md:flex-row items-center">
-                     <div class="w-full h-32 md:w-24 md:h-24 mb-4 md:mb-0 md:mr-6 flex-shrink-0 bg-white/20 rounded-lg overflow-hidden flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 20 20" fill="currentColor">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                    </div>
-                    <div class="flex-grow">
-                        <h3 class="text-xl text-white font-bold">${topic.name}</h3>
-                        <p class="text-sm text-blue-100 font-normal mt-1">${topic.description}</p>
-                    </div>
+            topicWrapper.classList.add('bg-gradient-to-br', 'from-blue-500', 'to-purple-600', 'text-white', 'border-transparent');
+            topicHeader.classList.add('hover:bg-white/10');
+            topicHeader.innerHTML = `
+                <div class="w-full h-32 md:w-24 md:h-24 mb-4 md:mb-0 md:mr-6 flex-shrink-0 bg-white/20 rounded-lg overflow-hidden flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
                 </div>
+                <div class="flex-grow">
+                    <h3 class="text-xl text-white">${topic.name}</h3>
+                    <p class="text-sm text-blue-100 font-normal mt-1">${topic.description}</p>
+                </div>
+                <svg class="w-6 h-6 text-white transform transition-transform mt-4 md:mt-0 ml-auto flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             `;
-            container.appendChild(topicWrapper);
-    
         } else {
-            // Render the normal accordion card
-            const topicId = `topic-accordion-${topic.id}`;
-            const topicWrapper = document.createElement('div');
-            topicWrapper.className = 'border rounded-lg shadow-sm bg-white border-gray-200';
-    
-            const topicHeader = document.createElement('button');
-            topicHeader.className = 'w-full p-4 text-center md:text-left font-bold transition-colors flex flex-col md:flex-row items-center rounded-lg hover:bg-gray-50';
-            topicHeader.setAttribute('aria-expanded', 'false');
-            topicHeader.setAttribute('aria-controls', `${topicId}-content`);
-    
+            topicWrapper.classList.add('bg-white', 'border-gray-200');
+            topicHeader.classList.add('hover:bg-gray-50');
             topicHeader.innerHTML = `
                 <div class="w-full h-32 md:w-24 md:h-24 mb-4 md:mb-0 md:mr-6 flex-shrink-0 bg-gray-200 rounded-lg overflow-hidden">
                     <img src="${topic.imageUrl}" alt="${topic.name}" class="w-full h-full object-cover">
@@ -329,36 +316,42 @@ export const renderTopicsOnStartScreen = () => {
                 </div>
                 <svg class="w-6 h-6 transform transition-transform mt-4 md:mt-0 ml-auto flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             `;
-            
-            const topicContent = document.createElement('div');
-            topicContent.id = `${topicId}-content`;
-            topicContent.className = 'hidden p-4 border-t rounded-b-lg bg-gray-50 border-gray-200';
-    
-            topicContent.innerHTML = `
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <button class="topic-action-btn learn-btn w-full sm:w-auto px-6 py-3 text-md font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md ${!topic.hasLearning ? 'hidden' : ''}" data-i18n-key="learn_topic" data-topic-id="${topic.id}" data-action="learn">
-                        ${translations[lang].learn_topic}
-                    </button>
-                    <button class="topic-action-btn flashcard-btn w-full sm:w-auto px-6 py-3 text-md font-semibold text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 transition-transform transform hover:scale-105 shadow-md ${(!topic.flashcards || topic.flashcards.length === 0) ? 'hidden' : ''}" data-topic-id="${topic.id}" data-action="flashcards">
-                        ${translations[lang].flashcards}
-                    </button>
-                    <button class="topic-action-btn test-btn w-full sm:w-auto px-6 py-3 text-md font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md" data-topic-id="${topic.id}" data-action="test">
-                        ${translations[lang].testing}
-                    </button>
-                </div>
-            `;
-            
-            topicWrapper.appendChild(topicHeader);
-            topicWrapper.appendChild(topicContent);
-            container.appendChild(topicWrapper);
-    
-            topicHeader.addEventListener('click', () => {
-                const isExpanded = topicHeader.getAttribute('aria-expanded') === 'true';
-                topicHeader.setAttribute('aria-expanded', !isExpanded);
-                topicContent.classList.toggle('hidden');
-                topicHeader.querySelector('svg').classList.toggle('rotate-180');
-            });
         }
+        
+        const topicContent = document.createElement('div');
+        topicContent.id = `${topicId}-content`;
+        topicContent.className = 'hidden p-4 border-t rounded-b-lg';
+        
+        if (topic.isCombined) {
+            topicContent.classList.add('bg-white/10', 'border-white/20');
+        } else {
+            topicContent.classList.add('bg-gray-50', 'border-gray-200');
+        }
+
+        topicContent.innerHTML = `
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button class="topic-action-btn learn-btn w-full sm:w-auto px-6 py-3 text-md font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md ${!topic.hasLearning ? 'hidden' : ''}" data-i18n-key="learn_topic" data-topic-id="${topic.id}" data-action="learn">
+                    ${translations[lang].learn_topic}
+                </button>
+                <button class="topic-action-btn flashcard-btn w-full sm:w-auto px-6 py-3 text-md font-semibold text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 transition-transform transform hover:scale-105 shadow-md ${(!topic.flashcards || topic.flashcards.length === 0) ? 'hidden' : ''}" data-topic-id="${topic.id}" data-action="flashcards">
+                    ${translations[lang].flashcards}
+                </button>
+                <button class="topic-action-btn test-btn w-full sm:w-auto px-6 py-3 text-md font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md" data-topic-id="${topic.id}" data-action="test">
+                    ${translations[lang].testing}
+                </button>
+            </div>
+        `;
+        
+        topicWrapper.appendChild(topicHeader);
+        topicWrapper.appendChild(topicContent);
+        container.appendChild(topicWrapper);
+
+        topicHeader.addEventListener('click', () => {
+            const isExpanded = topicHeader.getAttribute('aria-expanded') === 'true';
+            topicHeader.setAttribute('aria-expanded', !isExpanded);
+            topicContent.classList.toggle('hidden');
+            topicHeader.querySelector('svg').classList.toggle('rotate-180');
+        });
     });
 };
 
