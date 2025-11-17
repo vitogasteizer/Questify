@@ -44,7 +44,6 @@ const handleStartFlashcards = () => {
 };
 
 const startFlashcards = (flashcards) => {
-    settings.playNavigationSound();
     state.setCurrentFlashcards(flashcards);
     state.setCurrentFlashcardIndex(0);
     state.setFlashcardSessionStats({ known: [], unknown: [] });
@@ -168,7 +167,6 @@ const showFlashcardResults = () => {
 };
 
 export const closeFlashcards = () => {
-    settings.playNavigationSound();
     ui.showScreen(ui.startScreen);
     state.setCurrentFlashcards([]);
     state.setCurrentFlashcardIndex(0);
@@ -262,7 +260,6 @@ export const renderBookmarkedFlashcardsSection = () => {
 };
 
 export const showSavedFlashcards = () => {
-    settings.playNavigationSound();
     state.setSavedScreenState('flashcards');
 
     ui.savedCategorySelection.classList.add('hidden');

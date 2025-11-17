@@ -60,7 +60,6 @@ const handleTopicAction = (e) => {
     if (!topic) return;
 
     settings.initAudio();
-    settings.playNavigationSound();
 
     switch (action) {
         case 'test':
@@ -215,7 +214,6 @@ const init = () => {
         if (target) {
             const categoryId = target.dataset.categoryId;
             state.setCurrentCategoryId(categoryId);
-            settings.playNavigationSound();
             ui.showTopicsForCategory(categoryId);
         }
     });

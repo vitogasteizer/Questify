@@ -260,7 +260,6 @@ export const showQuizOptionsScreen = (topic, questions) => {
 };
 
 const startQuiz = (isTimerEnabled, durationInSeconds) => {
-    settings.playNavigationSound();
     state.setCurrentQuestionIndex(0);
     state.setScore(0);
     state.setSelectedAnswers([]);
@@ -750,7 +749,6 @@ const updateStopwatch = () => {
 };
 
 export const showSavedQuestions = () => {
-    settings.playNavigationSound();
     state.setSavedScreenState('questions');
 
     ui.savedCategorySelection.classList.add('hidden');
@@ -776,7 +774,6 @@ export const initQuizOptionsListeners = () => {
         document.getElementById('quiz-timer-duration-input').disabled = e.target.checked;
     });
     ui.startQuizFromOptionsBtn.addEventListener('click', () => {
-        settings.playNavigationSound();
         const numQuestions = parseInt(ui.quizQuestionsCountSlider.value, 10);
         const isTimerEnabled = document.getElementById('quiz-timer-on-radio').checked;
         const timerDuration = parseInt(document.getElementById('quiz-timer-duration-input').value, 10);

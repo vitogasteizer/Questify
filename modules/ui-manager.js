@@ -183,7 +183,6 @@ export const showTopicsForCategory = (categoryId) => {
         ${translations[lang].back_to_categories}
     `;
     backButton.onclick = () => {
-        playNavigationSound();
         showCategoryView();
     };
     wrapper.appendChild(backButton);
@@ -254,7 +253,6 @@ export function showScreen(screen) {
 };
 
 export function goHome() {
-    playNavigationSound();
     clearInterval(state.getTimerInterval());
     showScreen(startScreen);
     if (state.getWakeLock()) {
@@ -434,7 +432,6 @@ export const renderTopicsOnStartScreen = (container) => {
 
 export const showSavedScreen = () => {
     closeSideMenu();
-    import('./settings.js').then(settings => settings.playNavigationSound());
     state.setSavedScreenState('categories');
     
     savedCategorySelection.classList.remove('hidden');
@@ -450,7 +447,6 @@ export const showSavedScreen = () => {
 };
 
 export const handleBackFromSaved = () => {
-    import('./settings.js').then(settings => settings.playNavigationSound());
     if (state.getSavedScreenState() === 'questions' || state.getSavedScreenState() === 'flashcards') {
         state.setSavedScreenState('categories');
         bookmarksContainer.classList.add('hidden');
@@ -469,7 +465,6 @@ export const handleBackFromSaved = () => {
 
 export const showStatisticsScreen = () => {
     closeSideMenu();
-    import('./settings.js').then(settings => settings.playNavigationSound());
     const stats = getStatistics();
 
     // Time spent
