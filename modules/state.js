@@ -132,6 +132,10 @@ let lastQuizConfig = null;
 export const getLastQuizConfig = () => lastQuizConfig;
 export const setLastQuizConfig = (config) => { lastQuizConfig = config; };
 
+let stagedLanguage = 'es';
+export const getStagedLanguage = () => stagedLanguage;
+export const setStagedLanguage = (lang) => { stagedLanguage = lang; };
+
 
 export const USERNAME_STORAGE_KEY = 'logisticsQuizUsername';
 export const BOOKMARKS_STORAGE_KEY = 'logisticsQuizBookmarks';

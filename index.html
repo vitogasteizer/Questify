@@ -7,14 +7,15 @@
     <script src="https://cdn.tailwindcss.com/"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@400;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#2563eb"/>
-    <link rel="apple-touch-icon" href="https://i.postimg.cc/Vk8B86qF/Questify_App_Icon.png">
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/Vk8B86qF/Questify_App_Icon.png">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/x13GT25N/Questifylogo.png">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/x13GT25N/Questifylogo.png">
     <style>
         body { background-color: #F7FAFF; }
-        .font-poppins { font-family: 'Poppins', sans-serif; }
+        body.white-bg { background-color: #FFFFFF; }
+        .font-dongle { font-family: 'Dongle', sans-serif; line-height: 0.9; }
         .hidden { display: none; }
         .disabled { cursor: not-allowed; opacity: 0.7; }
         .rotate-180 { transform: rotate(180deg); }
@@ -93,13 +94,38 @@
         #menu-backdrop.is-open {
             display: block;
         }
+
+        /* Language Button Styles */
+        .lang-btn {
+            border: 1px solid #d1d5db; /* gray-300 */
+            background-color: #f9fafb; /* gray-50 */
+            color: #374151; /* gray-700 */
+        }
+        .lang-btn.active {
+            background-color: #3b82f6; /* blue-600 */
+            color: #ffffff; /* white */
+            border-color: #2563eb; /* blue-700 */
+        }
+        .lang-btn:not(.active):hover {
+            background-color: #e5e7eb; /* gray-200 */
+        }
+        
+        /* Responsive font size for Georgian title */
+        html[lang="ka"] #start-screen h1 {
+            font-size: 3.75rem; /* Equivalent to text-6xl */
+        }
+        @media (min-width: 768px) {
+            html[lang="ka"] #start-screen h1 {
+                font-size: 4.5rem; /* Equivalent to text-7xl */
+            }
+        }
     </style>
 </head>
 <body class="text-gray-800 font-sans">
     <header id="app-header" class="hidden fixed top-0 left-0 right-0 w-full z-20 transition-all duration-300 ease-in-out">
         <div class="w-full max-w-2xl mx-auto px-4 py-2 flex justify-between items-center">
             <a href="#" id="home-link-header" class="transition-transform transform hover:scale-105" data-i18n-key="back_to_home_title" title="Volver al Inicio">
-                <img src="https://i.postimg.cc/K8D7v2fg/Questify_Logo_Web.png" alt="Questify Logo" class="h-7 w-auto">
+                <img src="https://i.postimg.cc/K8D7v2fg/Questify_Logo_Web.png" alt="Questify Logo" class="h-6 w-auto">
             </a>
             <button id="menu-btn" class="p-2 text-slate-600 hover:text-blue-600 rounded-lg transition-transform transform hover:scale-105" data-i18n-key="menu_button_aria" aria-label="Abrir menú">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -113,7 +139,7 @@
         
         <!-- Name Input Screen -->
         <div id="name-screen" class="w-full max-w-md mx-auto text-center flex-1 flex flex-col justify-center px-4">
-            <h1 class="text-3xl font-bold text-gray-900 mb-4" data-i18n-key="welcome_title">¡Bienvenido!</h1>
+            <h1 class="font-dongle text-6xl font-bold text-gray-900 mb-4" data-i18n-key="welcome_title">¡Bienvenido!</h1>
             <p class="text-gray-600 mb-6" data-i18n-key="welcome_subtitle">Por favor, introduce tu nombre para empezar.</p>
             <div class="space-y-4">
                 <input type="text" id="name-input" data-i18n-key="name_placeholder" placeholder="Escribe tu nombre aquí..." class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
@@ -125,7 +151,7 @@
 
         <!-- Start Screen -->
         <div id="start-screen" class="hidden w-full max-w-2xl mx-auto text-center px-4">
-            <h1 class="font-poppins text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+            <h1 class="font-dongle text-7xl md:text-8xl font-bold text-gray-900 mb-4">
                 <span data-i18n-key="main_title" class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400">Tests Interactivos</span>
             </h1>
             <p id="welcome-message" class="text-gray-600 mt-2" data-i18n-key="main_subtitle_prefix">Pon a prueba tus conocimientos</p>
@@ -165,7 +191,7 @@
 
              <!-- Search Results -->
             <div id="search-results-container" class="hidden mt-8 text-left">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4" data-i18n-key="search_results_title">Resultados de la Búsqueda</h3>
+                <h3 class="font-dongle text-5xl font-bold text-gray-800 mb-4" data-i18n-key="search_results_title">Resultados de la Búsqueda</h3>
                 <div id="search-results-list" class="space-y-3 max-h-80 overflow-y-auto p-4 bg-white border border-gray-200 rounded-lg"></div>
                 <div id="topic-quiz-button-container" class="mt-4 text-center"></div>
                 <p id="no-results-message" class="hidden text-center text-gray-500 mt-4" data-i18n-key="no_results_message">No se encontraron preguntas. Intenta con otra búsqueda.</p>
@@ -200,7 +226,7 @@
             <div>
                 <p id="question-instruction" class="text-base text-gray-500 italic mb-2"></p>
                 <div id="question-image-container" class="mb-4"></div>
-                <h3 id="question-text" class="text-xl md:text-2xl font-bold mb-2 text-gray-900"></h3>
+                <h3 id="question-text" class="font-dongle text-4xl md:text-5xl font-bold mb-4 text-gray-900"></h3>
                 <p id="choose-answer-subtitle" class="hidden text-gray-500 mb-6" data-i18n-key="choose_correct_answer"></p>
                 <div id="options-container" class="grid grid-cols-1 gap-4"></div>
                 <div id="explanation-container" class="mt-4"></div>
@@ -209,7 +235,7 @@
 
         <!-- Results Screen -->
         <div id="results-screen" class="hidden w-full max-w-2xl text-center bg-white p-8 rounded-2xl shadow-lg">
-            <h2 id="results-title" class="text-3xl font-bold text-gray-900 mb-2"></h2>
+            <h2 id="results-title" class="font-dongle text-6xl font-bold text-gray-900 mb-2"></h2>
             <p id="results-message" class="text-lg text-gray-600 mb-6"></p>
             
             <p id="final-time" class="text-lg text-gray-500 mb-2"></p>
@@ -220,7 +246,7 @@
             <div id="results-buttons" class="space-y-4 md:space-y-0 md:space-x-4 md:flex justify-center"></div>
 
             <div id="review-section" class="hidden mt-8 text-left max-h-60 overflow-y-auto p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                <h4 id="review-section-title" class="text-lg font-semibold mb-2 text-gray-700" data-i18n-key="review_section_title">Preguntas para repasar:</h4>
+                <h4 id="review-section-title" class="font-dongle text-4xl font-bold mb-2 text-gray-700" data-i18n-key="review_section_title">Preguntas para repasar:</h4>
                 <ul id="incorrect-questions-list"></ul>
             </div>
         </div>
@@ -228,7 +254,7 @@
         <!-- Learning Module Screen -->
         <div id="learning-screen" class="hidden w-full max-w-2xl mx-auto px-4 flex flex-col flex-1">
             <div class="flex justify-between items-center mb-6 flex-shrink-0">
-                <h2 id="learning-topic-title" class="text-2xl md:text-3xl font-bold text-gray-900"></h2>
+                <h2 id="learning-topic-title" class="font-dongle text-5xl md:text-6xl font-bold text-gray-900"></h2>
             </div>
             
             <!-- Summary View -->
@@ -239,7 +265,7 @@
             <!-- Scenario View -->
             <div id="learning-scenario-view" class="hidden">
                  <p id="scenario-progress-text" class="text-gray-600 font-semibold text-sm mb-4 text-center"></p>
-                <h3 id="scenario-title" class="text-xl md:text-2xl font-bold mb-2 text-gray-800"></h3>
+                <h3 id="scenario-title" class="font-dongle text-4xl md:text-5xl font-bold mb-2 text-gray-800"></h3>
                 <p id="scenario-situation" class="text-lg text-gray-700 mb-6"></p>
                 <div id="scenario-choices-container" class="grid grid-cols-1 gap-4"></div>
                 <div id="scenario-feedback-container" class="hidden mt-6 p-4 rounded-lg">
@@ -249,7 +275,7 @@
 
             <!-- Completion View -->
             <div id="learning-completion-view" class="hidden text-center">
-                <h2 id="learning-completion-title" data-i18n-key="learning_completion_title" class="text-3xl font-bold text-gray-900 mb-4">¡Escenarios completados!</h2>
+                <h2 id="learning-completion-title" data-i18n-key="learning_completion_title" class="font-dongle text-6xl font-bold text-gray-900 mb-4">¡Escenarios completados!</h2>
                 <p id="learning-completion-message" data-i18n-key="learning_completion_message" class="text-lg text-gray-600 mb-8">Has repasado los conceptos clave de este tema. ¡Buen trabajo!</p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                      <button id="retry-scenarios-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors" data-i18n-key="retry_scenarios_button">
@@ -266,7 +292,7 @@
         <div id="menu-backdrop" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out"></div>
         <div id="side-menu" class="fixed top-0 right-0 h-full bg-white shadow-2xl z-50 w-11/12 max-w-sm p-6 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col" role="dialog" aria-modal="true" aria-labelledby="side-menu-title">
             <div class="flex justify-between items-center mb-6">
-                <h2 id="side-menu-title" class="text-3xl font-bold text-gray-900" data-i18n-key="settings_modal_title">Menú</h2>
+                <h2 id="side-menu-title" class="font-dongle text-6xl font-bold text-gray-900" data-i18n-key="settings_modal_title">Menú</h2>
                 <button id="close-settings-btn" class="p-2 rounded-full hover:bg-gray-200 transition text-gray-500 hover:text-gray-800" data-i18n-key="close_settings_aria" aria-label="Cerrar menú">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -295,11 +321,11 @@
                 </div>
                 <!-- Language Selection -->
                 <div>
-                    <label for="language-select" class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="language_label">Idioma</label>
-                    <select id="language-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                        <option value="es">Español</option>
-                        <option value="ka">ქართული</option>
-                    </select>
+                    <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="language_label">Idioma</label>
+                    <div id="language-switcher" class="grid grid-cols-2 gap-2">
+                        <button data-lang="es" class="lang-btn w-full px-4 py-3 text-md font-semibold rounded-lg transition-colors shadow-sm">Español</button>
+                        <button data-lang="ka" class="lang-btn w-full px-4 py-3 text-md font-semibold rounded-lg transition-colors shadow-sm">ქართული</button>
+                    </div>
                     <p class="text-sm text-gray-500 mt-1" data-i18n-key="language_desc">Selecciona el idioma de la aplicación.</p>
                 </div>
             </div>
@@ -322,11 +348,11 @@
                           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m7 7H3" />
                         </svg>
                     </button>
-                    <h2 class="text-3xl font-bold text-gray-900 text-center w-full" data-i18n-key="statistics_title">Estadísticas</h2>
+                    <h2 class="font-dongle text-6xl font-bold text-gray-900 text-center w-full" data-i18n-key="statistics_title">Estadísticas</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-2">
                     <!-- Stat Card: Time Spent -->
-                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
                         <div class="bg-blue-500 p-3 rounded-full text-white shadow-md">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         </div>
@@ -337,7 +363,7 @@
                     </div>
 
                     <!-- Stat Card: Tests Completed -->
-                    <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300">
+                    <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
                         <div class="bg-teal-500 p-3 rounded-full text-white shadow-md">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
                         </div>
@@ -348,7 +374,7 @@
                     </div>
 
                      <!-- Stat Card: Avg Test Time -->
-                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300">
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
                         <div class="bg-purple-500 p-3 rounded-full text-white shadow-md">
                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         </div>
@@ -359,7 +385,7 @@
                     </div>
                    
                     <!-- Stat Card: Total Flashcards -->
-                    <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300">
+                    <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
                         <div class="bg-yellow-500 p-3 rounded-full text-white shadow-md">
                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2H5a2 2 0 00-2 2v2m14 0h-2" /></svg>
                         </div>
@@ -370,7 +396,7 @@
                     </div>
 
                     <!-- Stat Card: Test Accuracy -->
-                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-2xl shadow-lg md:col-span-2 transform hover:scale-105 transition-transform duration-300">
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-2xl shadow-lg md:col-span-2 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
                          <div class="flex items-center space-x-4 mb-3">
                             <div class="bg-green-500 p-3 rounded-full text-white shadow-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -392,7 +418,7 @@
                     </div>
                     
                     <!-- Stat Card: Flashcard Knowledge -->
-                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-5 rounded-2xl shadow-lg md:col-span-2 transform hover:scale-105 transition-transform duration-300">
+                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-5 rounded-2xl shadow-lg md:col-span-2 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
                          <div class="flex items-center space-x-4 mb-3">
                             <div class="bg-red-500 p-3 rounded-full text-white shadow-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
@@ -417,103 +443,117 @@
         </div>
 
         <!-- Quiz Options Screen -->
-        <div id="quiz-options-screen" class="hidden w-full max-w-2xl mx-auto text-center px-4 pb-24">
-            <h2 class="text-3xl font-bold text-gray-900 mb-2" data-i18n-key="quiz_options_title">Configurar Test</h2>
-            <p class="text-lg text-gray-600 mb-6"><span data-i18n-key="quiz_topic_title_prefix">Tema:</span> <span id="quiz-topic-title" class="font-semibold"></span></p>
+        <div id="quiz-options-screen" class="hidden w-full max-w-2xl mx-auto px-4">
+            <div class="w-full bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                <div class="text-center">
+                    <h2 class="font-dongle text-6xl font-bold text-gray-900 mb-2" data-i18n-key="quiz_options_title">Configurar Test</h2>
+                    <p class="text-lg text-gray-600"><span data-i18n-key="quiz_topic_title_prefix">Tema:</span> <span id="quiz-topic-title" class="font-semibold"></span></p>
+                </div>
 
-            <div class="space-y-6 text-left">
-                <!-- Number of Questions -->
-                <div>
-                    <label for="quiz-questions-count-slider" class="block text-lg font-semibold text-gray-700 mb-2"><span data-i18n-key="questions_count_label">Número de preguntas:</span> <span id="quiz-questions-count-value" class="font-bold text-blue-600"></span></label>
-                    <input type="range" id="quiz-questions-count-slider" min="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-                </div>
-                
-                <!-- Timer Settings -->
-                <div>
-                    <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="timer_label">Temporizador</label>
-                    <div class="flex items-center space-x-4 bg-white p-3 rounded-lg flex-wrap gap-2 shadow-sm border border-gray-200">
-                        <div class="flex items-center">
-                            <input id="quiz-timer-on-radio" name="quiz-timer-toggle" type="radio" checked class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                            <label for="quiz-timer-on-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="timer_on_label">Activado</label>
+                <div class="mt-8 space-y-6 text-left">
+                    <!-- Number of Questions -->
+                    <div>
+                        <label for="quiz-questions-count-slider" class="block text-lg font-semibold text-gray-700 mb-2"><span data-i18n-key="questions_count_label">Número de preguntas:</span> <span id="quiz-questions-count-value" class="font-bold text-blue-600"></span></label>
+                        <input type="range" id="quiz-questions-count-slider" min="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    </div>
+                    
+                    <!-- Timer Settings -->
+                    <div>
+                        <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="timer_label">Temporizador</label>
+                        <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg flex-wrap gap-2">
+                            <div class="flex items-center">
+                                <input id="quiz-timer-on-radio" name="quiz-timer-toggle" type="radio" checked class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <label for="quiz-timer-on-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="timer_on_label">Activado</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="quiz-timer-off-radio" name="quiz-timer-toggle" type="radio" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <label for="quiz-timer-off-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="timer_off_label">Desactivado</label>
+                            </div>
+                            <div class="flex items-center ml-auto">
+                                <input type="number" id="quiz-timer-duration-input" value="15" min="1" max="60" class="w-24 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-center">
+                                <span class="ml-2 text-md text-gray-700" data-i18n-key="minutes_label">minutos</span>
+                            </div>
                         </div>
-                        <div class="flex items-center">
-                            <input id="quiz-timer-off-radio" name="quiz-timer-toggle" type="radio" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                            <label for="quiz-timer-off-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="timer_off_label">Desactivado</label>
-                        </div>
-                        <div class="flex items-center ml-auto">
-                            <input type="number" id="quiz-timer-duration-input" value="15" min="1" max="60" class="w-24 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-center">
-                            <span class="ml-2 text-md text-gray-700" data-i18n-key="minutes_label">minutos</span>
+                    </div>
+                    
+                    <!-- Question Order -->
+                    <div>
+                        <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="question_order_label">Orden de las preguntas</label>
+                        <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg">
+                             <div class="flex items-center">
+                                <input id="quiz-order-random-radio" name="quiz-question-order" type="radio" checked value="random" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <label for="quiz-order-random-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="order_random_label">Aleatorio</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="quiz-order-sequential-radio" name="quiz-question-order" type="radio" value="sequential" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <label for="quiz-order-sequential-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="order_sequential_label">Secuencial</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Question Order -->
-                <div>
-                    <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="question_order_label">Orden de las preguntas</label>
-                    <div class="flex items-center space-x-4 bg-white p-3 rounded-lg shadow-sm border border-gray-200">
-                         <div class="flex items-center">
-                            <input id="quiz-order-random-radio" name="quiz-question-order" type="radio" checked value="random" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                            <label for="quiz-order-random-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="order_random_label">Aleatorio</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="quiz-order-sequential-radio" name="quiz-question-order" type="radio" value="sequential" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                            <label for="quiz-order-sequential-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="order_sequential_label">Secuencial</label>
-                        </div>
-                    </div>
+                 <div class="mt-8 flex flex-col sm:flex-row-reverse justify-center items-center gap-4">
+                     <button id="start-quiz-from-options-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="start_quiz_button">
+                        Iniciar Test
+                    </button>
+                    <button id="back-to-start-from-quiz-options-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_button">
+                        Volver
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- Flashcard Options Screen -->
-        <div id="flashcard-options-screen" class="hidden w-full max-w-2xl mx-auto text-center bg-white p-8 rounded-2xl shadow-lg">
-            <h2 class="text-3xl font-bold text-gray-900 mb-2" data-i18n-key="flashcard_options_title">Configurar Flashcards</h2>
-            <p class="text-lg text-gray-600 mb-6"><span data-i18n-key="flashcard_topic_title_prefix">Tema:</span> <span id="flashcard-topic-title" class="font-semibold"></span></p>
+        <div id="flashcard-options-screen" class="hidden w-full max-w-2xl mx-auto px-4">
+            <div class="w-full bg-white p-6 sm:p-8 rounded-2xl shadow-lg text-center">
+                <h2 class="font-dongle text-6xl font-bold text-gray-900 mb-2" data-i18n-key="flashcard_options_title">Configurar Flashcards</h2>
+                <p class="text-lg text-gray-600 mb-6"><span data-i18n-key="flashcard_topic_title_prefix">Tema:</span> <span id="flashcard-topic-title" class="font-semibold"></span></p>
 
-            <div class="space-y-6 text-left">
-                <!-- Number of Flashcards -->
-                <div>
-                    <label for="flashcards-count-slider" class="block text-lg font-semibold text-gray-700 mb-2"><span data-i18n-key="flashcards_count_label">Número de flashcards:</span> <span id="flashcards-count-value" class="font-bold text-blue-600"></span></label>
-                    <input type="range" id="flashcards-count-slider" min="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-                </div>
-                
-                <!-- Flashcard Order -->
-                <div>
-                    <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="flashcard_order_label">Orden de las flashcards</label>
-                    <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg">
-                         <div class="flex items-center">
-                            <input id="flashcard-order-random-radio" name="flashcard-order" type="radio" value="random" checked class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                            <label for="flashcard-order-random-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="order_random_label">Aleatorio</label>
+                <div class="mt-8 space-y-6 text-left">
+                    <!-- Number of Flashcards -->
+                    <div>
+                        <label for="flashcards-count-slider" class="block text-lg font-semibold text-gray-700 mb-2"><span data-i18n-key="flashcards_count_label">Número de flashcards:</span> <span id="flashcards-count-value" class="font-bold text-blue-600"></span></label>
+                        <input type="range" id="flashcards-count-slider" min="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    </div>
+                    
+                    <!-- Flashcard Order -->
+                    <div>
+                        <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="flashcard_order_label">Orden de las flashcards</label>
+                        <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg">
+                             <div class="flex items-center">
+                                <input id="flashcard-order-random-radio" name="flashcard-order" type="radio" value="random" checked class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <label for="flashcard-order-random-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="order_random_label">Aleatorio</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="flashcard-order-sequential-radio" name="flashcard-order" type="radio" value="sequential" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <label for="flashcard-order-sequential-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="order_sequential_label">Secuencial</label>
+                            </div>
                         </div>
-                        <div class="flex items-center">
-                            <input id="flashcard-order-sequential-radio" name="flashcard-order" type="radio" value="sequential" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                            <label for="flashcard-order-sequential-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="order_sequential_label">Secuencial</label>
+                    </div>
+
+                    <!-- Starting Side -->
+                     <div>
+                        <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="flashcard_start_side_label">Empezar por</label>
+                        <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg">
+                             <div class="flex items-center">
+                                <input id="flashcard-start-front-radio" name="flashcard-start-side" type="radio" value="front" checked class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <label for="flashcard-start-front-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="flashcard_start_front">Cara frontal (Pregunta)</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="flashcard-start-back-radio" name="flashcard-start-side" type="radio" value="back" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <label for="flashcard-start-back-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="flashcard_start_back">Cara trasera (Respuesta)</label>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Starting Side -->
-                 <div>
-                    <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="flashcard_start_side_label">Empezar por</label>
-                    <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg">
-                         <div class="flex items-center">
-                            <input id="flashcard-start-front-radio" name="flashcard-start-side" type="radio" value="front" checked class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                            <label for="flashcard-start-front-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="flashcard_start_front">Cara frontal (Pregunta)</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="flashcard-start-back-radio" name="flashcard-start-side" type="radio" value="back" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                            <label for="flashcard-start-back-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="flashcard_start_back">Cara trasera (Respuesta)</label>
-                        </div>
-                    </div>
+                <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button id="back-to-start-from-flashcards-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_button">
+                        Volver
+                    </button>
+                    <button id="start-flashcards-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="start_flashcards_button">
+                        Iniciar Flashcards
+                    </button>
                 </div>
-            </div>
-
-            <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
-                <button id="back-to-start-from-flashcards-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_button">
-                    Volver
-                </button>
-                <button id="start-flashcards-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="start_flashcards_button">
-                    Iniciar Flashcards
-                </button>
             </div>
         </div>
 
@@ -532,10 +572,10 @@
             <div class="relative w-full h-96 perspective-1000">
                 <div id="flashcard-container" class="relative w-full h-full transform-style-preserve-3d transition-transform duration-500 cursor-pointer">
                     <div id="flashcard-front" class="absolute w-full h-full backface-hidden flex items-center justify-center p-8 text-center bg-gray-50 border border-gray-200 rounded-2xl shadow-sm">
-                        <p id="flashcard-front-text" class="text-2xl font-bold text-gray-800"></p>
+                        <p id="flashcard-front-text" class="font-dongle text-5xl font-bold text-gray-800"></p>
                     </div>
                     <div id="flashcard-back" class="absolute w-full h-full backface-hidden bg-blue-50 flex items-start justify-start p-8 text-left rotate-y-180 border border-blue-200 rounded-2xl shadow-sm overflow-y-auto">
-                        <p id="flashcard-back-text" class="text-lg text-gray-700"></p>
+                        <p id="flashcard-back-text" class="font-dongle text-4xl text-gray-700"></p>
                     </div>
                     
                     <!-- Prev Button Overlay -->
@@ -558,7 +598,7 @@
 
         <!-- Flashcard Results Screen -->
         <div id="flashcard-results-screen" class="hidden w-full max-w-2xl text-center bg-white p-8 rounded-2xl shadow-lg">
-            <h2 class="text-3xl font-bold text-gray-900 mb-2" data-i18n-key="flashcard_results_title">Sesión Completada</h2>
+            <h2 class="font-dongle text-6xl font-bold text-gray-900 mb-2" data-i18n-key="flashcard_results_title">Sesión Completada</h2>
             <p id="flashcard-results-message" class="text-lg text-gray-600 mb-8"></p>
             <div id="flashcard-results-buttons" class="space-y-4 md:space-y-0 md:space-x-4 md:flex justify-center">
                 <!-- Buttons will be inserted here by JS -->
@@ -574,7 +614,7 @@
                           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m7 7H3" />
                         </svg>
                     </button>
-                    <h2 id="saved-screen-header-title" class="text-3xl font-bold text-gray-900 text-center w-full" data-i18n-key="saved_screen_title">Guardados</h2>
+                    <h2 id="saved-screen-header-title" class="font-dongle text-6xl font-bold text-gray-900 text-center w-full" data-i18n-key="saved_screen_title">Guardados</h2>
                 </div>
                 
                 <!-- Category Selection -->
@@ -622,17 +662,6 @@
             </button>
         </div>
         <div id="scenario-next-btn-container" class="max-w-3xl mx-auto text-center"></div>
-    </div>
-
-    <div id="quiz-options-footer" class="hidden fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-sm border-t border-gray-200 z-10">
-        <div class="max-w-3xl mx-auto flex flex-col sm:flex-row-reverse justify-center items-center gap-4">
-             <button id="start-quiz-from-options-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="start_quiz_button">
-                Iniciar Test
-            </button>
-            <button id="back-to-start-from-quiz-options-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_button">
-                Volver
-            </button>
-        </div>
     </div>
 
     <script type="module" src="./index.js"></script>

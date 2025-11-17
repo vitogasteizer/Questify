@@ -87,7 +87,7 @@ const handleTopicAction = (e) => {
 
 const handleSaveSettings = () => {
     const originalLang = settings.getSettings().language;
-    const newLang = ui.languageSelect.value;
+    const newLang = state.getStagedLanguage();
     
     settings.setLanguage(newLang);
     settings.saveSettings();
@@ -171,6 +171,21 @@ const init = () => {
     ui.menuBackdrop.addEventListener('click', ui.closeSideMenu);
     ui.saveSettingsBtn.addEventListener('click', handleSaveSettings);
     
+    // Language Switcher
+    ui.languageSwitcher.addEventListener('click', (e) => {
+        const button = e.target.closest('.lang-btn');
+        if (!button) return;
+
+        const newLang = button.dataset.lang;
+        state.setStagedLanguage(newLang);
+
+        // Update UI
+        ui.languageSwitcher.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        button.classList.add('active');
+    });
+
     // Quiz Options
     quiz.initQuizOptionsListeners();
     ui.backToStartFromQuizOptionsBtn.addEventListener('click', ui.goHome);

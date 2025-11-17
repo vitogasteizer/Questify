@@ -54,9 +54,8 @@ export const settingsGreeting = document.getElementById('settings-greeting');
 export const closeSettingsBtn = document.getElementById('close-settings-btn');
 export const cancelSettingsBtn = document.getElementById('cancel-settings-btn');
 export const saveSettingsBtn = document.getElementById('save-settings-btn');
-export const languageSelect = document.getElementById('language-select');
+export const languageSwitcher = document.getElementById('language-switcher');
 export const quizOptionsScreen = document.getElementById('quiz-options-screen');
-export const quizOptionsFooter = document.getElementById('quiz-options-footer');
 export const quizTopicTitle = document.getElementById('quiz-topic-title');
 export const quizQuestionsCountSlider = document.getElementById('quiz-questions-count-slider');
 export const quizQuestionsCountValue = document.getElementById('quiz-questions-count-value');
@@ -120,9 +119,14 @@ export const summaryNextBtnContainer = document.getElementById('summary-next-btn
 export const openSideMenu = () => {
     sideMenu.classList.add('is-open');
     menuBackdrop.classList.add('is-open');
-    languageSelect.value = getSettings().language;
-    const lang = getSettings().language;
-    settingsGreeting.textContent = translations[lang].settings_greeting.replace('{{username}}', state.getUsername());
+    
+    const currentLang = getSettings().language;
+    state.setStagedLanguage(currentLang);
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+    });
+
+    settingsGreeting.textContent = translations[currentLang].settings_greeting.replace('{{username}}', state.getUsername());
 };
 
 export const closeSideMenu = () => {
@@ -214,11 +218,17 @@ export function showScreen(screen) {
     nextButtonContainer.classList.add('hidden');
     flashcardFooter.classList.add('hidden');
     learningFooter.classList.add('hidden');
-    quizOptionsFooter.classList.add('hidden');
     if (summaryNextBtnContainer) summaryNextBtnContainer.classList.add('hidden');
     if (scenarioNextBtnContainer) scenarioNextBtnContainer.classList.add('hidden');
     
     screen.classList.remove('hidden');
+
+    // Handle body background color
+    if (screen === quizScreen || screen === flashcardScreen) {
+        document.body.classList.add('white-bg');
+    } else {
+        document.body.classList.remove('white-bg');
+    }
 
     const appContainer = document.getElementById('app');
 
@@ -239,8 +249,6 @@ export function showScreen(screen) {
         flashcardFooter.classList.remove('hidden');
     } else if (screen === learningScreen) {
         learningFooter.classList.remove('hidden');
-    } else if (screen === quizOptionsScreen) {
-        quizOptionsFooter.classList.remove('hidden');
     }
 
 
@@ -455,8 +463,8 @@ export const handleBackFromSaved = () => {
         
         const lang = getSettings().language;
         savedScreenHeaderTitle.textContent = translations[lang].saved_screen_title;
-        backFromSavedBtn.setAttribute('aria-label', translations[lang].back_to_home_title);
-        backFromSavedBtn.setAttribute('title', translations[lang].back_to_home_title);
+        backFromSavedBtn.setAttribute('aria-label', translations[lang].back_button);
+        backFromSavedBtn.setAttribute('title', translations[lang].back_button);
 
     } else { // state is 'categories'
         goHome();
