@@ -1,9 +1,9 @@
 {
-  "name": "logistica-quiz",
+  "name": "questify-app",
   "version": "1.0.0",
-  "description": "Test Interactivo de Logística",
+  "description": "Pon a prueba tus conocimientos con este test interactivo.",
   "private": true,
-  "homepage": "https://<GITHUB_USERNAME>.github.io/<REPOSITORY_NAME>",
+  "homepage": "https://vitogasteizer.github.io/Questify/",
   "scripts": {
     "deploy": "gh-pages -d ."
   },

@@ -1,7 +1,7 @@
 
 {
   "name": "Tests Interactivos",
-  "short_name": "avma Quiz",
+  "short_name": "Questify By Avtandil Machitadze",
   "description": "Pon a prueba tus conocimientos con este test interactivo.",
   "start_url": ".",
   "display": "standalone",
@@ -9,13 +9,13 @@
   "theme_color": "#2563eb",
   "icons": [
     {
-      "src": "https://i.postimg.cc/x13GT25N/Questifylogo.png",
+      "src": "https://i.postimg.cc/Vk8B86qF/Questify_App_Icon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://i.postimg.cc/x13GT25N/Questifylogo.png",
+      "src": "https://i.postimg.cc/Vk8B86qF/Questify_App_Icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
