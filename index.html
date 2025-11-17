@@ -4,25 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test Interactivo</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/"></script>
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#2563eb"/>
     <link rel="apple-touch-icon" href="https://i.postimg.cc/tJDL7vz5/Quiz-by-avma.png">
     <link rel="icon" type="image/png" href="https://i.postimg.cc/tJDL7vz5/Quiz-by-avma.png">
     <style>
+        body { background-color: #F7FAFF; }
         .hidden { display: none; }
-        .correct { background-color: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
-        .incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
-        .disabled { cursor: not-allowed; }
+        .disabled { cursor: not-allowed; opacity: 0.7; }
         .rotate-180 { transform: rotate(180deg); }
         .perspective-1000 { perspective: 1000px; }
         .transform-style-preserve-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
         #flashcard-container.is-flipped { transform: rotateY(180deg); }
-        #category-cards-container::-webkit-scrollbar { display: none; }
-        #category-cards-container { -ms-overflow-style: none; scrollbar-width: none; cursor: grab; cursor: -webkit-grab; user-select: none; }
-        #category-cards-container.active { cursor: grabbing; cursor: -webkit-grabbing; }
         /* New styles for order-words questions */
         .word-bank, .answer-area { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; border-radius: 8px; min-height: 50px; }
         .word-bank { background-color: #f3f4f6; border: 1px solid #e5e7eb; }
@@ -30,9 +26,72 @@
         .word-tile { padding: 8px 16px; background-color: #ffffff; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; transition: background-color 0.2s, transform 0.2s; user-select: none; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .word-tile:hover { background-color: #eff6ff; border-color: #93c5fd; }
         .word-tile.placed { background-color: #e5e7eb; color: #4b5563; }
+        
+        /* Updated Quiz Styles */
+        .option-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            background-color: #f9fafb; /* Lighter grey for options */
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+        .option-btn:not(:disabled):hover {
+            border-color: #93c5fd;
+            background-color: #eff6ff;
+        }
+        .correct { 
+            border-color: #34d399 !important; 
+            background-color: #f0fdf4 !important;
+            color: #065f46 !important;
+        }
+        .incorrect { 
+            border-color: #f87171 !important; 
+            background-color: #fef2f2 !important;
+            color: #991b1b !important;
+        }
+        .answer-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+        .icon-correct { background-color: #10b981; }
+        .icon-incorrect { background-color: #ef4444; }
+
+        .explanation-box {
+            background-color: #f3f4f6; 
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        .explanation-title {
+            color: #3b82f6; 
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Side Menu Styles */
+        #side-menu.is-open {
+            transform: translateX(0);
+        }
+        #menu-backdrop.is-open {
+            display: block;
+        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
+<body class="text-gray-800 font-sans">
     <header id="app-header" class="hidden fixed top-0 left-0 right-0 w-full p-2 flex justify-between items-center z-20 transition-all duration-300 ease-in-out">
         <a href="#" id="home-link-header" class="transition-transform transform hover:scale-105" data-i18n-key="back_to_home_title" title="Volver al Inicio">
             <h1 class="text-xl font-bold text-blue-600">Questify</h1>
@@ -44,10 +103,10 @@
         </button>
     </header>
 
-    <div id="app" class="min-h-screen flex flex-col items-center justify-center p-4">
+    <div id="app" class="min-h-screen flex flex-col">
         
         <!-- Name Input Screen -->
-        <div id="name-screen" class="w-full max-w-md mx-auto text-center bg-white p-8 rounded-2xl shadow-lg">
+        <div id="name-screen" class="w-full max-w-md mx-auto text-center flex-1 flex flex-col justify-center px-4">
             <h1 class="text-3xl font-bold text-gray-900 mb-4" data-i18n-key="welcome_title">¡Bienvenido!</h1>
             <p class="text-gray-600 mb-6" data-i18n-key="welcome_subtitle">Por favor, introduce tu nombre para empezar.</p>
             <div class="space-y-4">
@@ -59,7 +118,7 @@
         </div>
 
         <!-- Start Screen -->
-        <div id="start-screen" class="hidden w-full max-w-4xl mx-auto text-center">
+        <div id="start-screen" class="hidden w-full max-w-4xl mx-auto text-center px-4">
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
                 <span data-i18n-key="main_title" class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400">Tests Interactivos</span>
             </h1>
@@ -90,14 +149,12 @@
             </div>
 
             <!-- Category Cards Container -->
-            <div id="category-cards-container" class="w-full max-w-2xl mx-auto mt-6 flex justify-start items-center space-x-3 overflow-x-auto p-4">
+            <div id="category-cards-container" class="w-full max-w-2xl mx-auto mt-8 grid grid-cols-2 gap-4">
                 <!-- Categories will be dynamically inserted here -->
             </div>
             
-            <div id="start-screen-default-content" class="mt-6">
-                <div id="topics-accordion-container" class="w-full max-w-2xl mx-auto space-y-4 mb-8">
-                    <!-- Topics will be dynamically inserted here -->
-                </div>
+            <div id="topics-view-container" class="hidden mt-6 text-left">
+                <!-- Back button and topics will be inserted here -->
             </div>
 
              <!-- Search Results -->
@@ -110,7 +167,7 @@
         </div>
 
         <!-- Quiz Screen -->
-        <div id="quiz-screen" class="hidden w-full max-w-3xl bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+        <div id="quiz-screen" class="hidden w-full max-w-3xl mx-auto px-4 pb-24">
             <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
                 <p id="progress-text" class="text-gray-600 font-semibold text-sm">Pregunta 1 / 20</p>
                 
@@ -137,11 +194,11 @@
             <div>
                 <p id="question-instruction" class="text-base text-gray-500 italic mb-2"></p>
                 <div id="question-image-container" class="mb-4"></div>
-                <h3 id="question-text" class="text-xl md:text-2xl font-bold mb-6 text-gray-900"></h3>
-                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <h3 id="question-text" class="text-xl md:text-2xl font-bold mb-2 text-gray-900"></h3>
+                <p id="choose-answer-subtitle" class="hidden text-gray-500 mb-6" data-i18n-key="choose_correct_answer"></p>
+                <div id="options-container" class="grid grid-cols-1 gap-4"></div>
                 <div id="explanation-container" class="mt-4"></div>
             </div>
-            <div id="next-button-container" class="mt-6 text-center"></div>
         </div>
 
         <!-- Results Screen -->
@@ -163,19 +220,14 @@
         </div>
 
         <!-- Learning Module Screen -->
-        <div id="learning-screen" class="hidden w-full max-w-3xl bg-white p-6 md:p-8 rounded-2xl shadow-lg">
-            <div class="flex justify-between items-center mb-6">
+        <div id="learning-screen" class="hidden w-full max-w-3xl mx-auto px-4 flex flex-col flex-1">
+            <div class="flex justify-between items-center mb-6 flex-shrink-0">
                 <h2 id="learning-topic-title" class="text-2xl md:text-3xl font-bold text-gray-900"></h2>
             </div>
             
             <!-- Summary View -->
-            <div id="learning-summary-view">
-                <div id="learning-summary-content" class="space-y-6 text-left max-h-[60vh] overflow-y-auto pr-4"></div>
-                <div class="mt-8 text-center">
-                    <button id="start-scenarios-btn" data-i18n-key="start_scenarios_button" class="px-8 py-3 text-xl font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md">
-                        Continuar al Escenario Práctico
-                    </button>
-                </div>
+            <div id="learning-summary-view" class="flex-1 overflow-y-auto pr-2">
+                <div id="learning-summary-content" class="space-y-6 text-left"></div>
             </div>
 
             <!-- Scenario View -->
@@ -187,7 +239,6 @@
                 <div id="scenario-feedback-container" class="hidden mt-6 p-4 rounded-lg">
                     <p id="scenario-feedback-text" class="text-md font-medium"></p>
                 </div>
-                <div id="scenario-next-btn-container" class="mt-6 text-center"></div>
             </div>
 
             <!-- Completion View -->
@@ -205,60 +256,60 @@
             </div>
         </div>
 
-        <!-- Settings Modal -->
-        <div id="settings-modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 p-4">
-            <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg mx-4 transform transition-all" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 id="settings-modal-title" class="text-3xl font-bold text-gray-900" data-i18n-key="settings_modal_title">Configuración</h2>
-                    <button id="close-settings-btn" class="p-2 rounded-full hover:bg-gray-200 transition text-gray-500 hover:text-gray-800" data-i18n-key="close_settings_aria" aria-label="Cerrar configuración">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+        <!-- Side Menu -->
+        <div id="menu-backdrop" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out"></div>
+        <div id="side-menu" class="fixed top-0 right-0 h-full bg-white shadow-2xl z-50 w-11/12 max-w-sm p-6 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col" role="dialog" aria-modal="true" aria-labelledby="side-menu-title">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="side-menu-title" class="text-3xl font-bold text-gray-900" data-i18n-key="settings_modal_title">Menú</h2>
+                <button id="close-settings-btn" class="p-2 rounded-full hover:bg-gray-200 transition text-gray-500 hover:text-gray-800" data-i18n-key="close_settings_aria" aria-label="Cerrar menú">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <p id="settings-greeting" class="text-lg text-gray-600 mb-6"></p>
+
+            <div class="space-y-6 flex-grow overflow-y-auto">
+                <!-- Statistics -->
+                <div>
+                    <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="statistics_label">Estadísticas</label>
+                    <button id="show-statistics-btn" class="w-full px-4 py-3 text-md font-semibold text-white bg-teal-600 rounded-lg hover:bg-teal-700 transition-colors shadow-md" data-i18n-key="statistics_button">
+                        Ver Estadísticas
                     </button>
+                    <p class="text-sm text-gray-500 mt-1" data-i18n-key="statistics_desc">Revisa tu progreso y rendimiento.</p>
                 </div>
-                
-                <p id="settings-greeting" class="text-lg text-gray-600 mb-6"></p>
-
-                <div class="space-y-6">
-                    <!-- Statistics -->
-                    <div>
-                        <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="statistics_label">Estadísticas</label>
-                        <button id="show-statistics-btn" class="w-full px-4 py-3 text-md font-semibold text-white bg-teal-600 rounded-lg hover:bg-teal-700 transition-colors shadow-md" data-i18n-key="statistics_button">
-                            Ver Estadísticas
-                        </button>
-                        <p class="text-sm text-gray-500 mt-1" data-i18n-key="statistics_desc">Revisa tu progreso y rendimiento.</p>
-                    </div>
-                    <!-- Saved Items -->
-                    <div>
-                        <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="saved_items_label">Contenido Guardado</label>
-                        <button id="show-saved-btn" class="w-full px-4 py-3 text-md font-semibold text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors shadow-md" data-i18n-key="saved_button">
-                            Ver Guardados
-                        </button>
-                        <p class="text-sm text-gray-500 mt-1" data-i18n-key="saved_items_desc">Accede a tus preguntas y flashcards guardadas.</p>
-                    </div>
-                    <!-- Language Selection -->
-                    <div>
-                        <label for="language-select" class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="language_label">Idioma</label>
-                        <select id="language-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                            <option value="es">Español</option>
-                            <option value="ka">ქართული</option>
-                        </select>
-                        <p class="text-sm text-gray-500 mt-1" data-i18n-key="language_desc">Selecciona el idioma de la aplicación.</p>
-                    </div>
+                <!-- Saved Items -->
+                <div>
+                    <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="saved_items_label">Contenido Guardado</label>
+                    <button id="show-saved-btn" class="w-full px-4 py-3 text-md font-semibold text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors shadow-md" data-i18n-key="saved_button">
+                        Ver Guardados
+                    </button>
+                    <p class="text-sm text-gray-500 mt-1" data-i18n-key="saved_items_desc">Accede a tus preguntas y flashcards guardadas.</p>
                 </div>
-                
-                <div class="mt-8 flex justify-end space-x-4">
-                    <button id="cancel-settings-btn" class="px-6 py-2 text-md font-semibold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="cancel_button">Cancelar</button>
-                    <button id="save-settings-btn" class="px-6 py-2 text-md font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-md" data-i18n-key="save_changes_button">Guardar Cambios</button>
+                <!-- Language Selection -->
+                <div>
+                    <label for="language-select" class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="language_label">Idioma</label>
+                    <select id="language-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        <option value="es">Español</option>
+                        <option value="ka">ქართული</option>
+                    </select>
+                    <p class="text-sm text-gray-500 mt-1" data-i18n-key="language_desc">Selecciona el idioma de la aplicación.</p>
                 </div>
-
+            </div>
+            
+            <div class="mt-8 pt-4 border-t border-gray-200">
+                <div class="flex flex-col space-y-3">
+                    <button id="save-settings-btn" class="w-full px-6 py-3 text-md font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-md" data-i18n-key="save_changes_button">Guardar Cambios</button>
+                    <button id="cancel-settings-btn" class="w-full px-6 py-3 text-md font-semibold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="cancel_button">Cancelar</button>
+                </div>
                 <p data-i18n-key="app_creator_credit" class="text-center text-sm text-gray-500 mt-6"></p>
             </div>
         </div>
         
-        <!-- Statistics Modal -->
+        <!-- Statistics Screen -->
         <div id="statistics-screen" class="hidden w-full max-w-4xl mx-auto p-4">
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg w-full">
+            <div class="w-full">
                  <div class="flex items-center mb-6 relative">
                     <button id="back-from-statistics-btn" class="p-2 rounded-lg hover:bg-blue-50 transition-colors absolute left-0" data-i18n-key="back_button" title="Volver">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -267,7 +318,7 @@
                     </button>
                     <h2 class="text-3xl font-bold text-gray-900 text-center w-full" data-i18n-key="statistics_title">Estadísticas</h2>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[70vh] overflow-y-auto p-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-2">
                     <!-- Stat Card: Time Spent -->
                     <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300">
                         <div class="bg-blue-500 p-3 rounded-full text-white shadow-md">
@@ -360,7 +411,7 @@
         </div>
 
         <!-- Quiz Options Screen -->
-        <div id="quiz-options-screen" class="hidden w-full max-w-xl mx-auto text-center bg-white p-8 rounded-2xl shadow-lg">
+        <div id="quiz-options-screen" class="hidden w-full max-w-3xl mx-auto text-center px-4 pb-24">
             <h2 class="text-3xl font-bold text-gray-900 mb-2" data-i18n-key="quiz_options_title">Configurar Test</h2>
             <p class="text-lg text-gray-600 mb-6"><span data-i18n-key="quiz_topic_title_prefix">Tema:</span> <span id="quiz-topic-title" class="font-semibold"></span></p>
 
@@ -374,7 +425,7 @@
                 <!-- Timer Settings -->
                 <div>
                     <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="timer_label">Temporizador</label>
-                    <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg flex-wrap gap-2">
+                    <div class="flex items-center space-x-4 bg-white p-3 rounded-lg flex-wrap gap-2 shadow-sm border border-gray-200">
                         <div class="flex items-center">
                             <input id="quiz-timer-on-radio" name="quiz-timer-toggle" type="radio" checked class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                             <label for="quiz-timer-on-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="timer_on_label">Activado</label>
@@ -393,7 +444,7 @@
                 <!-- Question Order -->
                 <div>
                     <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="question_order_label">Orden de las preguntas</label>
-                    <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg">
+                    <div class="flex items-center space-x-4 bg-white p-3 rounded-lg shadow-sm border border-gray-200">
                          <div class="flex items-center">
                             <input id="quiz-order-random-radio" name="quiz-question-order" type="radio" checked value="random" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                             <label for="quiz-order-random-radio" class="ml-2 block text-md text-gray-900" data-i18n-key="order_random_label">Aleatorio</label>
@@ -404,15 +455,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
-                <button id="back-to-start-from-quiz-options-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_button">
-                    Volver
-                </button>
-                <button id="start-quiz-from-options-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="start_quiz_button">
-                    Iniciar Test
-                </button>
             </div>
         </div>
 
@@ -469,60 +511,44 @@
             </div>
         </div>
 
-
         <!-- Flashcard Viewer Screen -->
-        <div id="flashcard-screen" class="hidden w-full max-w-3xl">
-            <div class="bg-white rounded-2xl shadow-lg">
-                <!-- Header -->
-                <div class="flex justify-between items-center flex-wrap gap-2 p-6 md:p-8 border-b border-gray-200">
-                    <p id="flashcard-progress-text" class="text-gray-600 font-semibold text-sm"></p>
+        <div id="flashcard-screen" class="hidden w-full max-w-3xl mx-auto px-4 pb-24">
+            <!-- Header -->
+            <div class="flex justify-between items-center flex-wrap gap-2 mb-6">
+                <p id="flashcard-progress-text" class="text-gray-600 font-semibold text-sm"></p>
+                <div class="flex items-center gap-4">
+                    <button id="flashcard-sound-toggle-btn" class="p-2 rounded-full hover:bg-gray-200 transition" aria-label="Activar/desactivar sonidos"></button>
+                    <button id="flashcard-bookmark-btn" class="p-2 rounded-full hover:bg-yellow-100 transition" aria-label="Guardar flashcard"></button>
+                </div>
+            </div>
+
+            <!-- Flashcard Body -->
+            <div class="relative w-full h-96 perspective-1000">
+                <div id="flashcard-container" class="relative w-full h-full transform-style-preserve-3d transition-transform duration-500 cursor-pointer">
+                    <div id="flashcard-front" class="absolute w-full h-full backface-hidden flex items-center justify-center p-8 text-center bg-gray-50 border border-gray-200 rounded-2xl shadow-sm">
+                        <p id="flashcard-front-text" class="text-2xl font-bold text-gray-800"></p>
+                    </div>
+                    <div id="flashcard-back" class="absolute w-full h-full backface-hidden bg-blue-50 flex items-start justify-start p-8 text-left rotate-y-180 border border-blue-200 rounded-2xl shadow-sm overflow-y-auto">
+                        <p id="flashcard-back-text" class="text-lg text-gray-700"></p>
+                    </div>
                     
-                    <div class="flex items-center gap-4">
-                        <button id="flashcard-sound-toggle-btn" class="p-2 rounded-full hover:bg-gray-200 transition" aria-label="Activar/desactivar sonidos">
-                            <!-- SVG icon will be inserted here -->
-                        </button>
-                        <button id="flashcard-bookmark-btn" class="p-2 rounded-full hover:bg-yellow-100 transition" aria-label="Guardar flashcard">
-                            <!-- SVG will be dynamically inserted here -->
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Flashcard Body -->
-                <div class="relative w-full h-80 perspective-1000">
-                    <div id="flashcard-container" class="relative w-full h-full transform-style-preserve-3d transition-transform duration-500 cursor-pointer">
-                        <div id="flashcard-front" class="absolute w-full h-full backface-hidden flex items-center justify-center p-8 text-center">
-                            <p id="flashcard-front-text" class="text-2xl font-bold text-gray-800"></p>
-                        </div>
-                        <div id="flashcard-back" class="absolute w-full h-full backface-hidden bg-blue-50 flex items-start justify-start p-8 text-left rotate-y-180 overflow-y-auto">
-                            <p id="flashcard-back-text" class="text-lg text-gray-700"></p>
-                        </div>
-                        
-                        <!-- Prev Button Overlay -->
-                        <button id="prev-flashcard-btn" class="group absolute top-0 left-0 h-full w-1/5 z-20 flex items-center justify-start pl-4 disabled:hidden" disabled data-i18n-key="flashcard_prev_aria" aria-label="Anterior">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-300 group-hover:text-gray-600 transition-colors opacity-0 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                
-                        <!-- Next Button Overlay -->
-                        <button id="next-flashcard-btn" class="group absolute top-0 right-0 h-full w-1/5 z-20 flex items-center justify-end pr-4 disabled:hidden" data-i18n-key="flashcard_next_aria" aria-label="Siguiente">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-300 group-hover:text-gray-600 transition-colors opacity-0 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Assessment Footer -->
-                <div class="w-full flex justify-center items-center gap-4 h-16 p-6 md:p-8 border-t border-gray-200">
-                    <div id="flashcard-assessment-container" class="hidden flex justify-center items-center gap-4">
-                        <button id="flashcard-unknown-btn" class="px-6 py-3 text-lg font-bold text-white bg-red-500 rounded-lg hover:bg-red-600 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="flashcard_unknown_btn">No lo sé</button>
-                        <button id="flashcard-known-btn" class="px-6 py-3 text-lg font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="flashcard_known_btn">Lo sé</button>
-                    </div>
-                    <p id="flashcard-flip-hint" class="text-gray-500 text-sm text-center" data-i18n-key="flashcard_click_to_flip">Haz clic en el centro o desliza arriba para girar. Usa las flechas laterales para navegar.</p>
+                    <!-- Prev Button Overlay -->
+                    <button id="prev-flashcard-btn" class="group absolute top-0 left-0 h-full w-1/5 z-20 flex items-center justify-start pl-4 disabled:hidden" disabled data-i18n-key="flashcard_prev_aria" aria-label="Anterior">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-300 group-hover:text-gray-600 transition-colors opacity-0 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+            
+                    <!-- Next Button Overlay -->
+                    <button id="next-flashcard-btn" class="group absolute top-0 right-0 h-full w-1/5 z-20 flex items-center justify-end pr-4 disabled:hidden" data-i18n-key="flashcard_next_aria" aria-label="Siguiente">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-300 group-hover:text-gray-600 transition-colors opacity-0 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
+
 
         <!-- Flashcard Results Screen -->
         <div id="flashcard-results-screen" class="hidden w-full max-w-2xl text-center bg-white p-8 rounded-2xl shadow-lg">
@@ -535,7 +561,7 @@
 
         <!-- Saved Items Screen -->
         <div id="saved-screen" class="hidden w-full max-w-4xl mx-auto p-4">
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg w-full">
+            <div class="w-full">
                 <div class="flex items-center mb-6 relative">
                     <button id="back-from-saved-btn" class="p-2 rounded-lg hover:bg-blue-50 transition-colors absolute left-0" data-i18n-key="back_button" title="Volver">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -557,18 +583,50 @@
                 
                 <!-- Bookmarks Section -->
                 <div id="bookmarks-container" class="hidden mt-8 text-left max-w-2xl mx-auto">
-                    <div id="bookmarks-list" class="space-y-3 max-h-[60vh] overflow-y-auto p-4 bg-gray-50 border border-gray-200 rounded-lg"></div>
+                    <div id="bookmarks-list" class="space-y-3 p-4 bg-gray-50 border border-gray-200 rounded-lg"></div>
                     <div id="bookmark-quiz-button-container" class="mt-4 text-center"></div>
                 </div>
         
                 <!-- Bookmarked Flashcards Section -->
                 <div id="flashcard-bookmarks-container" class="hidden mt-8 text-left max-w-2xl mx-auto">
-                    <div id="flashcard-bookmarks-list" class="space-y-3 max-h-[60vh] overflow-y-auto p-4 bg-gray-50 border border-gray-200 rounded-lg"></div>
+                    <div id="flashcard-bookmarks-list" class="space-y-3 p-4 bg-gray-50 border border-gray-200 rounded-lg"></div>
                     <div id="flashcard-bookmark-quiz-button-container" class="mt-4 text-center"></div>
                 </div>
             </div>
         </div>
+    </div>
+    
+    <!-- Fixed Footers -->
+    <div id="next-button-container" class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-sm border-t border-gray-200 z-10"></div>
+    
+    <div id="flashcard-footer" class="hidden fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-sm border-t border-gray-200 z-10">
+        <div class="max-w-3xl mx-auto">
+            <div id="flashcard-assessment-container" class="hidden flex justify-center items-center gap-4">
+                <button id="flashcard-unknown-btn" class="px-6 py-3 text-lg font-bold text-white bg-red-500 rounded-lg hover:bg-red-600 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="flashcard_unknown_btn">No lo sé</button>
+                <button id="flashcard-known-btn" class="px-6 py-3 text-lg font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="flashcard_known_btn">Lo sé</button>
+            </div>
+            <p id="flashcard-flip-hint" class="text-gray-500 text-sm text-center" data-i18n-key="flashcard_click_to_flip">Haz clic en el centro o desliza arriba para girar. Usa las flechas laterales para navegar.</p>
+        </div>
+    </div>
+    
+    <div id="learning-footer" class="hidden fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-sm border-t border-gray-200 z-10">
+        <div id="summary-next-btn-container" class="max-w-3xl mx-auto text-center">
+            <button id="start-scenarios-btn" data-i18n-key="start_scenarios_button" class="px-8 py-3 text-xl font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md">
+                Continuar al Escenario Práctico
+            </button>
+        </div>
+        <div id="scenario-next-btn-container" class="max-w-3xl mx-auto text-center"></div>
+    </div>
 
+    <div id="quiz-options-footer" class="hidden fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-sm border-t border-gray-200 z-10">
+        <div class="max-w-3xl mx-auto flex flex-col sm:flex-row-reverse justify-center items-center gap-4">
+             <button id="start-quiz-from-options-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="start_quiz_button">
+                Iniciar Test
+            </button>
+            <button id="back-to-start-from-quiz-options-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_button">
+                Volver
+            </button>
+        </div>
     </div>
 
     <script type="module" src="./index.js"></script>

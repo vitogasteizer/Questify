@@ -95,10 +95,10 @@ const handleSaveSettings = () => {
     
     if (originalLang !== newLang) {
         ui.applyTranslations(newLang);
-        // If we are on the start screen, we need to re-render the topics and categories
+        // If we are on the start screen, reset to category view and re-render
         if (!ui.startScreen.classList.contains('hidden')) {
+            ui.showCategoryView();
             ui.renderCategories();
-            ui.renderTopicsOnStartScreen();
         }
          // Update title
          const currentUsername = state.getUsername();
@@ -108,19 +108,7 @@ const handleSaveSettings = () => {
         }
     }
     
-    ui.settingsModal.classList.add('hidden');
-};
-
-const openSettingsModal = () => {
-    ui.languageSelect.value = settings.getSettings().language;
-    const lang = settings.getSettings().language;
-    ui.settingsGreeting.textContent = settings.translations[lang].settings_greeting.replace('{{username}}', state.getUsername());
-    ui.settingsModal.classList.remove('hidden');
-};
-
-const handleSoundToggle = () => {
-    settings.toggleSound();
-    ui.updateSoundToggleUI();
+    ui.closeSideMenu();
 };
 
 const init = () => {
@@ -161,7 +149,8 @@ const init = () => {
         e.preventDefault();
         ui.goHome();
     });
-    document.getElementById('topics-accordion-container').addEventListener('click', handleTopicAction);
+    // This listener is now on a dynamically created container, so we delegate it to a static parent.
+    document.getElementById('topics-view-container').addEventListener('click', handleTopicAction);
     
     // Saved Screen
     ui.showSavedBtn.addEventListener('click', ui.showSavedScreen);
@@ -173,13 +162,14 @@ const init = () => {
     ui.showStatisticsBtn.addEventListener('click', ui.showStatisticsScreen);
     ui.backFromStatisticsBtn.addEventListener('click', () => {
         ui.showScreen(ui.startScreen);
-        openSettingsModal();
+        ui.openSideMenu();
     });
 
-    // Settings Modal
-    ui.menuBtn.addEventListener('click', openSettingsModal);
-    ui.closeSettingsBtn.addEventListener('click', () => ui.settingsModal.classList.add('hidden'));
-    ui.cancelSettingsBtn.addEventListener('click', () => ui.settingsModal.classList.add('hidden'));
+    // Side Menu
+    ui.menuBtn.addEventListener('click', ui.openSideMenu);
+    ui.closeSettingsBtn.addEventListener('click', ui.closeSideMenu);
+    ui.cancelSettingsBtn.addEventListener('click', ui.closeSideMenu);
+    ui.menuBackdrop.addEventListener('click', ui.closeSideMenu);
     ui.saveSettingsBtn.addEventListener('click', handleSaveSettings);
     
     // Quiz Options
@@ -199,11 +189,11 @@ const init = () => {
     ui.learningHomeBtn.addEventListener('click', ui.goHome);
 
     // In-Quiz Actions
-    ui.soundToggleBtn.addEventListener('click', handleSoundToggle);
+    ui.soundToggleBtn.addEventListener('click', settings.toggleSound);
     ui.bookmarkBtn.addEventListener('click', quiz.handleBookmarkToggle);
 
     // Flashcard Screen Actions
-    ui.flashcardSoundToggleBtn.addEventListener('click', handleSoundToggle);
+    ui.flashcardSoundToggleBtn.addEventListener('click', settings.toggleSound);
     ui.flashcardBookmarkBtn.addEventListener('click', flashcard.handleFlashcardBookmarkToggle);
     ui.flashcardContainer.addEventListener('click', flashcard.flipFlashcard);
     ui.prevFlashcardBtn.addEventListener('click', flashcard.handlePrevFlashcard);
@@ -219,17 +209,16 @@ const init = () => {
     // Header scroll effect
     window.addEventListener('scroll', ui.updateHeaderBackground);
 
-    // Category selection and dragging
+    // Category selection
     ui.categoryCardsContainer.addEventListener('click', (e) => {
-        const target = e.target.closest('.category-card');
-        if (target && target.dataset.categoryId !== state.getCurrentCategoryId()) {
-            state.setCurrentCategoryId(target.dataset.categoryId);
+        const target = e.target.closest('[data-category-id]');
+        if (target) {
+            const categoryId = target.dataset.categoryId;
+            state.setCurrentCategoryId(categoryId);
             settings.playNavigationSound();
-            ui.renderCategories(); 
-            ui.renderTopicsOnStartScreen();
+            ui.showTopicsForCategory(categoryId);
         }
     });
-    ui.initCategorySlider();
     
     // Service Worker
     if ('serviceWorker' in navigator) {

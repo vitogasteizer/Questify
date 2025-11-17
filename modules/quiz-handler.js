@@ -309,27 +309,18 @@ const showExplanation = (isCorrect, explanation, correctAnswerText = null) => {
     ui.explanationContainer.innerHTML = '';
     if (!explanation) return;
 
-    const feedbackDiv = document.createElement('div');
-    feedbackDiv.className = `p-4 rounded-lg text-md font-medium ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
-    
-    let feedbackHTML = `<p>${explanation}</p>`;
-    if (!isCorrect && correctAnswerText) {
-        const lang = settings.getSettings().language;
-        const currentQuestion = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
-        const isMultiBlank = currentQuestion.type === 'fill-in-the-blank' && currentQuestion.questionText.split('______').length - 1 > 1;
+    const lang = settings.getSettings().language;
 
-        let correctAnswers;
-        if (Array.isArray(correctAnswerText)) {
-            correctAnswers = isMultiBlank ? correctAnswerText.join(', ') : correctAnswerText.join(' / ');
-        } else {
-            correctAnswers = correctAnswerText;
-        }
-        
-        feedbackHTML = `<p class="mb-2"><strong>${settings.translations[lang].correct_answer_label}</strong> ${correctAnswers}</p><p>${explanation}</p>`;
-    }
+    const box = document.createElement('div');
+    box.className = 'explanation-box';
     
-    feedbackDiv.innerHTML = feedbackHTML;
-    ui.explanationContainer.appendChild(feedbackDiv);
+    let content = `
+        <h4 class="explanation-title">${settings.translations[lang].analysis_title}</h4>
+        <p>${explanation}</p>
+    `;
+
+    box.innerHTML = content;
+    ui.explanationContainer.appendChild(box);
 };
 
 const showNextButton = () => {
@@ -341,7 +332,7 @@ const showNextButton = () => {
         nextButton.textContent = settings.translations[lang].next_question_button;
     }
     
-    nextButton.className = 'px-8 py-3 text-xl font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md';
+    nextButton.className = 'w-full px-8 py-4 text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md';
     nextButton.onclick = () => {
         settings.playNavigationSound();
         state.incrementCurrentQuestionIndex();
@@ -458,6 +449,7 @@ const loadQuestion = () => {
     ui.questionImageContainer.innerHTML = '';
     ui.explanationContainer.innerHTML = '';
     ui.nextButtonContainer.innerHTML = '';
+    ui.chooseAnswerSubtitle.classList.add('hidden');
 
     if (state.getCurrentQuestionIndex() >= state.getCurrentQuestions().length) {
         finishQuiz();
@@ -570,14 +562,25 @@ const loadQuestion = () => {
         ui.optionsContainer.appendChild(orderWordsContainer);
 
     } else { // 'multiple-choice' or legacy
+        ui.chooseAnswerSubtitle.classList.remove('hidden');
         const shuffledOptions = shuffleArray([...question.options.keys()]);
         shuffledOptions.forEach(optionIndex => {
             const option = question.options[optionIndex];
             const button = document.createElement('button');
-            button.textContent = option;
-            button.className = 'w-full text-left p-4 border-2 border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-400 transition-colors duration-200';
+            button.className = 'option-btn';
             button.dataset.index = optionIndex;
             button.onclick = () => selectAnswer(button);
+            
+            const textSpan = document.createElement('span');
+            textSpan.className = 'flex-grow';
+            textSpan.textContent = option;
+            
+            const iconContainer = document.createElement('span');
+            iconContainer.className = 'answer-icon-container';
+    
+            button.appendChild(textSpan);
+            button.appendChild(iconContainer);
+    
             ui.optionsContainer.appendChild(button);
         });
     }
@@ -592,10 +595,18 @@ const selectAnswer = (button) => {
         btn.disabled = true;
         btn.classList.add('disabled');
         const btnIndex = parseInt(btn.dataset.index);
+        const iconContainer = btn.querySelector('.answer-icon-container');
+
         if (btnIndex === question.correctAnswerIndex) {
             btn.classList.add('correct');
+            if (iconContainer) {
+                iconContainer.innerHTML = `<span class="answer-icon icon-correct">✓</span>`;
+            }
         } else if (btnIndex === selectedIndex && !isCorrect) {
             btn.classList.add('incorrect');
+            if (iconContainer) {
+                iconContainer.innerHTML = `<span class="answer-icon icon-incorrect">✗</span>`;
+            }
         }
     });
 

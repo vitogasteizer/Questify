@@ -11,7 +11,7 @@ export const nameInput = document.getElementById('name-input');
 export const submitNameBtn = document.getElementById('submit-name-btn');
 export const welcomeMessage = document.getElementById('welcome-message');
 export const startScreen = document.getElementById('start-screen');
-export const startScreenDefaultContent = document.getElementById('start-screen-default-content');
+export const topicsViewContainer = document.getElementById('topics-view-container');
 export const quizScreen = document.getElementById('quiz-screen');
 export const resultsScreen = document.getElementById('results-screen');
 export const progressText = document.getElementById('progress-text');
@@ -21,6 +21,7 @@ export const timerEl = document.getElementById('timer');
 export const questionInstruction = document.getElementById('question-instruction');
 export const questionImageContainer = document.getElementById('question-image-container');
 export const questionTextEl = document.getElementById('question-text');
+export const chooseAnswerSubtitle = document.getElementById('choose-answer-subtitle');
 export const optionsContainer = document.getElementById('options-container');
 export const explanationContainer = document.getElementById('explanation-container');
 export const nextButtonContainer = document.getElementById('next-button-container');
@@ -47,13 +48,15 @@ export const bookmarkQuizButtonContainer = document.getElementById('bookmark-qui
 export const appHeader = document.getElementById('app-header');
 export const homeLinkHeader = document.getElementById('home-link-header');
 export const menuBtn = document.getElementById('menu-btn');
-export const settingsModal = document.getElementById('settings-modal');
+export const sideMenu = document.getElementById('side-menu');
+export const menuBackdrop = document.getElementById('menu-backdrop');
 export const settingsGreeting = document.getElementById('settings-greeting');
 export const closeSettingsBtn = document.getElementById('close-settings-btn');
 export const cancelSettingsBtn = document.getElementById('cancel-settings-btn');
 export const saveSettingsBtn = document.getElementById('save-settings-btn');
 export const languageSelect = document.getElementById('language-select');
 export const quizOptionsScreen = document.getElementById('quiz-options-screen');
+export const quizOptionsFooter = document.getElementById('quiz-options-footer');
 export const quizTopicTitle = document.getElementById('quiz-topic-title');
 export const quizQuestionsCountSlider = document.getElementById('quiz-questions-count-slider');
 export const quizQuestionsCountValue = document.getElementById('quiz-questions-count-value');
@@ -110,6 +113,23 @@ export const showSavedFlashcardsBtn = document.getElementById('show-saved-flashc
 export const statisticsScreen = document.getElementById('statistics-screen');
 export const showStatisticsBtn = document.getElementById('show-statistics-btn');
 export const backFromStatisticsBtn = document.getElementById('back-from-statistics-btn');
+export const flashcardFooter = document.getElementById('flashcard-footer');
+export const learningFooter = document.getElementById('learning-footer');
+export const summaryNextBtnContainer = document.getElementById('summary-next-btn-container');
+
+export const openSideMenu = () => {
+    sideMenu.classList.add('is-open');
+    menuBackdrop.classList.add('is-open');
+    languageSelect.value = getSettings().language;
+    const lang = getSettings().language;
+    settingsGreeting.textContent = translations[lang].settings_greeting.replace('{{username}}', state.getUsername());
+};
+
+export const closeSideMenu = () => {
+    sideMenu.classList.remove('is-open');
+    menuBackdrop.classList.remove('is-open');
+};
+
 
 export function updateHeaderBackground() {
     // List of screens that might have internal scrolling and need a solid header background.
@@ -138,6 +158,45 @@ export function updateHeaderBackground() {
     }
 }
 
+export const showCategoryView = () => {
+    categoryCardsContainer.classList.remove('hidden');
+    topicsViewContainer.classList.add('hidden');
+    topicsViewContainer.innerHTML = '';
+};
+
+export const showTopicsForCategory = (categoryId) => {
+    categoryCardsContainer.classList.add('hidden');
+    topicsViewContainer.classList.remove('hidden');
+    topicsViewContainer.innerHTML = ''; // Clear everything inside
+    
+    const wrapper = document.createElement('div');
+    wrapper.className = 'w-full max-w-2xl mx-auto';
+
+    const lang = getSettings().language;
+
+    const backButton = document.createElement('button');
+    backButton.className = 'mb-6 flex items-center text-blue-600 font-semibold hover:underline';
+    backButton.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        ${translations[lang].back_to_categories}
+    `;
+    backButton.onclick = () => {
+        playNavigationSound();
+        showCategoryView();
+    };
+    wrapper.appendChild(backButton);
+
+    const accordionContainer = document.createElement('div');
+    accordionContainer.id = 'topics-accordion-container';
+    accordionContainer.className = 'space-y-4 mb-8';
+    wrapper.appendChild(accordionContainer);
+
+    topicsViewContainer.appendChild(wrapper);
+
+    renderTopicsOnStartScreen(accordionContainer);
+};
 
 export function showScreen(screen) {
     nameScreen.classList.add('hidden');
@@ -151,6 +210,15 @@ export function showScreen(screen) {
     savedScreen.classList.add('hidden');
     learningScreen.classList.add('hidden');
     statisticsScreen.classList.add('hidden');
+
+    // Also hide footers by default
+    nextButtonContainer.classList.add('hidden');
+    flashcardFooter.classList.add('hidden');
+    learningFooter.classList.add('hidden');
+    quizOptionsFooter.classList.add('hidden');
+    if (summaryNextBtnContainer) summaryNextBtnContainer.classList.add('hidden');
+    if (scenarioNextBtnContainer) scenarioNextBtnContainer.classList.add('hidden');
+    
     screen.classList.remove('hidden');
 
     const appContainer = document.getElementById('app');
@@ -165,11 +233,23 @@ export function showScreen(screen) {
         appContainer.classList.add('pt-20');
     }
 
+    // Show specific footers if needed
+    if (screen === quizScreen) {
+        nextButtonContainer.classList.remove('hidden');
+    } else if (screen === flashcardScreen) {
+        flashcardFooter.classList.remove('hidden');
+    } else if (screen === learningScreen) {
+        learningFooter.classList.remove('hidden');
+    } else if (screen === quizOptionsScreen) {
+        quizOptionsFooter.classList.remove('hidden');
+    }
+
+
     updateHeaderBackground();
 
     if (screen === startScreen) {
+        showCategoryView();
         renderCategories();
-        renderTopicsOnStartScreen();
     }
 };
 
@@ -238,33 +318,30 @@ export const renderCategories = () => {
     categoryCardsContainer.innerHTML = '';
     const lang = getSettings().language;
 
-    const allCategoryOptions = [
-        { 
-            id: 'all', 
-            nameKey: 'category_all',
-            colorClass: 'bg-slate-100 text-slate-800 border-slate-200 hover:bg-slate-200 hover:border-slate-400', 
-            activeColorClass: 'bg-slate-600 text-white border-slate-700'
-        },
-        ...categories
-    ];
-    
-    allCategoryOptions.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.dataset.categoryId = cat.id;
-        btn.textContent = translations[lang][cat.nameKey];
-        btn.className = 'category-card flex-shrink-0 w-36 h-24 flex items-center justify-center p-2 text-center font-semibold rounded-xl shadow-md transition-all duration-200 transform hover:scale-105 cursor-pointer border-2';
-        
-        if (state.getCurrentCategoryId() === cat.id) {
-            btn.classList.add(...cat.activeColorClass.split(' '), 'scale-105');
-        } else {
-            btn.classList.add(...cat.colorClass.split(' '));
+    const categoryQuestionCounts = {};
+    allTopics.forEach(topic => {
+        if (topic.isCombined) {
+            categoryQuestionCounts[topic.categoryId] = topic.questions.length;
         }
-        categoryCardsContainer.appendChild(btn);
+    });
+
+    categories.forEach(cat => {
+        const questionCount = categoryQuestionCounts[cat.id] || 0;
+        
+        const card = document.createElement('button');
+        card.dataset.categoryId = cat.id;
+        card.className = `p-4 text-center font-semibold rounded-xl shadow-md transition-all duration-200 transform hover:scale-105 cursor-pointer border-2 flex flex-col justify-between items-center h-32 ${cat.colorClass}`;
+
+        card.innerHTML = `
+            <span class="text-lg">${translations[lang][cat.nameKey]}</span>
+            <span class="text-sm font-normal opacity-80 mt-2">${questionCount} ${translations[lang].questions_label}</span>
+        `;
+        
+        categoryCardsContainer.appendChild(card);
     });
 };
 
-export const renderTopicsOnStartScreen = () => {
-    const container = document.getElementById('topics-accordion-container');
+export const renderTopicsOnStartScreen = (container) => {
     if (!container) return;
     container.innerHTML = '';
     const lang = getSettings().language;
@@ -355,42 +432,8 @@ export const renderTopicsOnStartScreen = () => {
     });
 };
 
-export const initCategorySlider = () => {
-    const slider = categoryCardsContainer;
-    if (slider) {
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            slider.classList.add('active');
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-        });
-
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-            slider.classList.remove('active');
-        });
-
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-            slider.classList.remove('active');
-        });
-
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; // scroll-fast multiplier
-            slider.scrollLeft = scrollLeft - walk;
-        });
-    }
-};
-
 export const showSavedScreen = () => {
-    settingsModal.classList.add('hidden');
+    closeSideMenu();
     import('./settings.js').then(settings => settings.playNavigationSound());
     state.setSavedScreenState('categories');
     
@@ -425,7 +468,7 @@ export const handleBackFromSaved = () => {
 };
 
 export const showStatisticsScreen = () => {
-    settingsModal.classList.add('hidden');
+    closeSideMenu();
     import('./settings.js').then(settings => settings.playNavigationSound());
     const stats = getStatistics();
 

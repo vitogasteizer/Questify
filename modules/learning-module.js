@@ -11,6 +11,8 @@ export const startLearningSession = (topic, learningData) => {
     state.setCurrentScenarioIndex(0);
 
     ui.showScreen(ui.learningScreen);
+    ui.summaryNextBtnContainer.classList.remove('hidden');
+    ui.scenarioNextBtnContainer.classList.add('hidden');
 
     // Reset views
     ui.learningSummaryView.classList.remove('hidden');
@@ -26,6 +28,7 @@ const renderLearningSummary = () => {
     
     state.getCurrentLearningData().summary.forEach(section => {
         const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'bg-white p-5 rounded-xl shadow-sm mb-4';
         
         const title = document.createElement('h4');
         title.className = 'text-lg font-bold text-blue-700 mb-2';
@@ -49,6 +52,10 @@ export const showScenarioView = () => {
     ui.learningSummaryView.classList.add('hidden');
     ui.learningCompletionView.classList.add('hidden');
     ui.learningScenarioView.classList.remove('hidden');
+    
+    ui.learningFooter.classList.remove('hidden');
+    ui.summaryNextBtnContainer.classList.add('hidden');
+    ui.scenarioNextBtnContainer.classList.remove('hidden');
     renderScenario();
 };
 
@@ -66,8 +73,8 @@ const renderScenario = () => {
     ui.scenarioChoicesContainer.innerHTML = '';
     scenario.choices.forEach((choice, index) => {
         const button = document.createElement('button');
-        button.innerHTML = `<span class="font-bold mr-2">${String.fromCharCode(65 + index)})</span> ${choice.text}`;
-        button.className = 'w-full text-left p-4 border-2 border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-400 transition-colors duration-200';
+        button.innerHTML = `<span class="font-bold mr-2">${String.fromCharCode(65 + index)})</span> <span class="flex-grow">${choice.text}</span>`;
+        button.className = 'w-full text-left p-4 border border-gray-200 bg-white rounded-xl shadow-sm transition-all hover:border-blue-400 hover:bg-blue-50 flex items-center';
         button.dataset.correct = choice.isCorrect;
         button.onclick = () => handleScenarioChoice(button, scenario);
         ui.scenarioChoicesContainer.appendChild(button);
@@ -94,13 +101,13 @@ const handleScenarioChoice = (button, scenario) => {
     
     ui.scenarioFeedbackText.textContent = scenario.feedback;
     ui.scenarioFeedbackContainer.classList.remove('hidden');
-    ui.scenarioFeedbackContainer.className = `mt-6 p-4 rounded-lg ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+    ui.scenarioFeedbackContainer.className = `mt-6 p-4 rounded-lg explanation-box ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
 
     const lang = settings.getSettings().language;
     const isLastScenario = state.getCurrentScenarioIndex() === state.getCurrentLearningData().scenarios.length - 1;
     const nextButton = document.createElement('button');
     nextButton.textContent = isLastScenario ? settings.translations[lang].finish_scenarios_button : settings.translations[lang].next_scenario_button;
-    nextButton.className = 'px-8 py-3 text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md';
+    nextButton.className = 'w-full sm:w-auto px-8 py-3 text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md';
     nextButton.onclick = () => {
         if (isLastScenario) {
             showLearningCompletion();
@@ -116,4 +123,5 @@ const showLearningCompletion = () => {
     ui.learningSummaryView.classList.add('hidden');
     ui.learningScenarioView.classList.add('hidden');
     ui.learningCompletionView.classList.remove('hidden');
+    ui.learningFooter.classList.add('hidden');
 };

@@ -150,6 +150,10 @@ export const translations = {
         instruction_multiple_choice: "Elige la opción correcta:",
         instruction_fill_in_the_blank: "Completa la frase:",
         instruction_order_words: "Ordena las palabras para formar una frase correcta:",
+        choose_correct_answer: "Elige la respuesta correcta",
+        analysis_title: "Análisis",
+        questions_label: "preguntas",
+        back_to_categories: "Volver a Categorías",
     },
     ka: {
         welcome_title: "კეთილი იყოს თქვენი მობრძანება!",
@@ -285,6 +289,10 @@ export const translations = {
         instruction_multiple_choice: "აირჩიეთ სწორი ვარიანტი:",
         instruction_fill_in_the_blank: "შეავსეთ წინადადება:",
         instruction_order_words: "დაალაგეთ სიტყვები სწორი თანმიმდევრობით:",
+        choose_correct_answer: "აირჩიეთ სწორი პასუხი",
+        analysis_title: "ანალიზი",
+        questions_label: "კითხვა",
+        back_to_categories: "კატეგორიებში დაბრუნება",
     }
 };
 
