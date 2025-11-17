@@ -9,13 +9,13 @@
   "theme_color": "#2563eb",
   "icons": [
     {
-      "src": "https://i.postimg.cc/Vk8B86qF/Questify_App_Icon.png",
+      "src": "https://i.postimg.cc/G3vBv1T1/Questify_App_Icon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://i.postimg.cc/Vk8B86qF/Questify_App_Icon.png",
+      "src": "https://i.postimg.cc/G3vBv1T1/Questify_App_Icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

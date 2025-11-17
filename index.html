@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@400;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#2563eb"/>
-    <link rel="apple-touch-icon" href="https://i.postimg.cc/Vk8B86qF/Questify_App_Icon.png">
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/x13GT25N/Questifylogo.png">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/G3vBv1T1/Questify_App_Icon.png">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/3r2y2H07/Questify_Logo_Web.png">
     <style>
         body { background-color: #F7FAFF; }
         body.white-bg { background-color: #FFFFFF; }
@@ -112,12 +112,18 @@
         
         /* Responsive font size for Georgian title */
         html[lang="ka"] #start-screen h1 {
-            font-size: 3.75rem; /* Equivalent to text-6xl */
+            font-size: 2rem; /* Equivalent to text-6xl */
         }
         @media (min-width: 768px) {
             html[lang="ka"] #start-screen h1 {
-                font-size: 4.5rem; /* Equivalent to text-7xl */
+                font-size: 2rem; /* Equivalent to text-7xl */
             }
+        }
+        html[lang="ka"] #welcome-message {
+            font-size: 0.9rem; /* Smaller size for Georgian to prevent wrapping */
+        }
+        html[lang="ka"] #side-menu-title {
+            font-size: 1.5rem; /* text-5xl, was text-6xl (3.75rem) */
         }
     </style>
 </head>
@@ -125,7 +131,7 @@
     <header id="app-header" class="hidden fixed top-0 left-0 right-0 w-full z-20 transition-all duration-300 ease-in-out">
         <div class="w-full max-w-2xl mx-auto px-4 py-2 flex justify-between items-center">
             <a href="#" id="home-link-header" class="transition-transform transform hover:scale-105" data-i18n-key="back_to_home_title" title="Volver al Inicio">
-                <img src="https://i.postimg.cc/K8D7v2fg/Questify_Logo_Web.png" alt="Questify Logo" class="h-6 w-auto">
+                <img src="https://i.postimg.cc/3r2y2H07/Questify_Logo_Web.png" alt="Questify Logo" class="h-6 w-auto">
             </a>
             <button id="menu-btn" class="p-2 text-slate-600 hover:text-blue-600 rounded-lg transition-transform transform hover:scale-105" data-i18n-key="menu_button_aria" aria-label="Abrir menú">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
