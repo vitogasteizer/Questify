@@ -1,17 +1,83 @@
+
 export const questions = [
-    { type: 'fill-in-the-blank', questionText: "Completa las frases usando el comparativo adecuado: Mi casa es ______ grande ______ la tuya.", correctAnswer: ["más", "que"], explanation: "Se usa 'más... que' para una comparación de superioridad." },
-    { type: 'fill-in-the-blank', questionText: "Completa las frases usando el comparativo adecuado: Este libro es ______ interesante ______ el otro.", correctAnswer: ["tan", "como"], explanation: "Se usa 'tan... como' para una comparación de igualdad." },
-    { type: 'fill-in-the-blank', questionText: "Completa las frases usando el comparativo adecuado: Hoy hace ______ frío ______ ayer.", correctAnswer: ["más", "que"], explanation: "Se usa 'más... que' para indicar que hoy hace más frío." },
-    { type: 'fill-in-the-blank', questionText: "Completa las frases usando el comparativo adecuado: Pedro es ______ simpático ______ su hermano.", correctAnswer: ["menos", "que"], explanation: "Se usa 'menos... que' para una comparación de inferioridad." },
-    { type: 'fill-in-the-blank', questionText: "Completa las frases usando el comparativo adecuado: Tengo ______ dinero ______ tú.", correctAnswer: ["tanto", "como"], explanation: "Se usa 'tanto... como' para comparar cantidades iguales de un sustantivo." },
-    { type: 'fill-in-the-blank', questionText: "Completa las frases usando el comparativo adecuado: Este coche es ______ rápido ______ aquel.", correctAnswer: ["más", "que"], explanation: "Se usa 'más... que' para una comparación de superioridad." },
-    { type: 'fill-in-the-blank', questionText: "Completa las frases usando el comparativo adecuado: Ana es ______ alta ______ Marta.", correctAnswer: ["tan", "como"], explanation: "Se usa 'tan... como' para una comparación de igualdad en cualidad." },
-    { type: 'fill-in-the-blank', questionText: "Completa las frases usando el comparativo adecuado: Este ejercicio es ______ difícil ______ el anterior.", correctAnswer: ["más", "que"], explanation: "Se usa 'más... que' para una comparación de superioridad." },
-    { type: 'fill-in-the-blank', questionText: "Completa las frases usando el comparativo adecuado: Tu mochila es ______ pesada ______ la mía.", correctAnswer: ["menos", "que"], explanation: "Se usa 'menos... que' para una comparación de inferioridad." },
-    { type: 'fill-in-the-blank', questionText: "Completa las frases usando el comparativo adecuado: Trabajo ______ horas ______ mi compañero.", correctAnswer: ["tantas", "como"], explanation: "'Tantas' concuerda con el sustantivo femenino y plural 'horas'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la comparación: El café es ______ popular ______ el té.", correctAnswer: ["más", "que"], explanation: "Indica superioridad en popularidad." },
-    { type: 'fill-in-the-blank', questionText: "Completa la comparación: La playa es ______ que la montaña.", correctAnswer: "mejor", explanation: "'Mejor' es el comparativo irregular de 'bueno'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la comparación: Los perros son ______ independientes que los gatos.", correctAnswer: "menos", explanation: "Indica inferioridad en independencia." },
-    { type: 'fill-in-the-blank', questionText: "Completa la comparación: Internet es ______ informativo ______ la televisión.", correctAnswer: ["más", "que"], explanation: "Indica superioridad en cuanto a la información que ofrece." },
-    { type: 'fill-in-the-blank', questionText: "Completa la comparación: Este libro es ______ interesante ______ el que leí ayer.", correctAnswer: ["tan", "como"], explanation: "Indica igualdad en el nivel de interés." }
+    {
+        type: 'multiple-choice',
+        questionText: "Mi casa es _______ grande _______ la tuya.",
+        options: ["más... que", "menos... que", "tan... como", "tanto... como"],
+        correctAnswerIndex: 0,
+        explanation: "აღმატებითი შედარება (უფრო დიდი ვიდრე...).",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Este libro es _______ interesante _______ el otro.",
+        options: ["tan... como", "más... que", "menos... que", "tanto... como"],
+        correctAnswerIndex: 0,
+        explanation: "თანაბარი შედარება (ისეთივე საინტერესო, როგორც...).",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Hoy hace _______ frío _______ ayer.",
+        options: ["más... que", "tan... como", "menos... que", "tanto... como"],
+        correctAnswerIndex: 0,
+        explanation: "აღმატებითი შედარება (უფრო ცივა ვიდრე...).",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Pedro es _______ simpático _______ su hermano.",
+        options: ["menos... que", "más... que", "tan... como", "tanto... como"],
+        correctAnswerIndex: 0,
+        explanation: "ნაკლებობის შედარება (ნაკლებად სიმპატიური ვიდრე...).",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Tengo _______ dinero _______ tú.",
+        options: ["tanto... como", "tan... como", "más... que", "menos... que"],
+        correctAnswerIndex: 0,
+        explanation: "თანაბარი რაოდენობა (იმდენივე ფული, რამდენიც...). Tanto ეთანხმება არსებით სახელს.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Este coche es _______ rápido _______ aquel.",
+        options: ["más... que", "menos... que", "tan... como", "tanto... como"],
+        correctAnswerIndex: 0,
+        explanation: "აღმატებითი შედარება (უფრო სწრაფი ვიდრე...).",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Ana es _______ alta _______ Marta.",
+        options: ["tan... como", "más... que", "menos... que", "tanto... como"],
+        correctAnswerIndex: 0,
+        explanation: "თანაბარი თვისება (ისეთივე მაღალი, როგორც...).",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Este ejercicio es _______ difícil _______ el anterior.",
+        options: ["más... que", "menos... que", "tan... como", "tanto... como"],
+        correctAnswerIndex: 0,
+        explanation: "აღმატებითი შედარება (უფრო რთული ვიდრე...).",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Tu mochila es _______ pesada _______ la mía.",
+        options: ["menos... que", "más... que", "tan... como", "tanto... como"],
+        correctAnswerIndex: 0,
+        explanation: "ნაკლებობის შედარება (ნაკლებად მძიმე ვიდრე...).",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Trabajo _______ horas _______ mi compañero.",
+        options: ["tantas... como", "tanto... como", "más... que", "menos... que"],
+        correctAnswerIndex: 0,
+        explanation: "თანაბარი რაოდენობა. 'Horas' არის მდედრობითი და მრავლობითი, ამიტომ 'Tantas'.",
+        level: 'A2'
+    }
 ];

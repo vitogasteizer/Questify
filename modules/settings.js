@@ -1,3 +1,4 @@
+
 // Settings State
 const SETTINGS_STORAGE_KEY = 'logisticsQuizSettings';
 let settings = {
@@ -154,6 +155,20 @@ export const translations = {
         analysis_title: "Análisis",
         questions_label: "preguntas",
         back_to_categories: "Volver a Categorías",
+        assessment_card_title: "Nivel de Idioma",
+        assessment_card_desc: "Descubre tu nivel real (A1-C2) con nuestro test adaptativo.",
+        assessment_title: "LinguaFlow",
+        assessment_subtitle: "Descubre tu verdadero nivel con nuestro test adaptativo. Elige un idioma para empezar.",
+        start_assessment_btn: "Empezar Test &rarr;",
+        assessment_result_label: "Tu Nivel de Competencia",
+        assessment_score: "Puntuación",
+        assessment_accuracy: "Precisión",
+        assessment_time: "Tiempo",
+        assessment_improvements: "Áreas de mejora",
+        assessment_review_mistakes: "Repasar Errores",
+        assessment_take_again: "Realizar Test de Nuevo",
+        review_mistakes_title: "Repasar Errores",
+        close_button: "Cerrar"
     },
     ka: {
         welcome_title: "კეთილი იყოს თქვენი მობრძანება!",
@@ -293,6 +308,20 @@ export const translations = {
         analysis_title: "ანალიზი",
         questions_label: "კითხვა",
         back_to_categories: "კატეგორიებში დაბრუნება",
+        assessment_card_title: "ენის დონე",
+        assessment_card_desc: "გაიგეთ თქვენი რეალური დონე (A1-C2) ადაპტური ტესტით.",
+        assessment_title: "LinguaFlow",
+        assessment_subtitle: "შეამოწმეთ თქვენი ცოდნა ადაპტური ტესტით. დასაწყებად აირჩიეთ ენა.",
+        start_assessment_btn: "ტესტის დაწყება &rarr;",
+        assessment_result_label: "თქვენი კომპეტენციის დონე",
+        assessment_score: "ქულა",
+        assessment_accuracy: "სიზუსტე",
+        assessment_time: "დრო",
+        assessment_improvements: "გასაუმჯობესებელი სფეროები",
+        assessment_review_mistakes: "შეცდომების გადახედვა",
+        assessment_take_again: "ტესტის თავიდან გავლა",
+        review_mistakes_title: "შეცდომების გადახედვა",
+        close_button: "დახურვა"
     }
 };
 

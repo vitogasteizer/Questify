@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -87,6 +88,19 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Reading Text Box Style */
+        .reading-text-box {
+            background-color: #fffbeb; /* Amber-50 */
+            border-left: 4px solid #f59e0b; /* Amber-500 */
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            font-style: italic;
+            white-space: pre-line; /* Preserves line breaks from text */
+            color: #4b5563;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
         /* Side Menu Styles */
         #side-menu.is-open {
             transform: translateX(0);
@@ -110,20 +124,81 @@
             background-color: #e5e7eb; /* gray-200 */
         }
         
-        /* Responsive font size for Georgian title */
+        /* Assessment Styles */
+        .level-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+        
+        /* Language Levels Badges */
+        .level-badge-common { 
+            font-size: 0.75rem; 
+            padding: 0.1rem 0.5rem; 
+            border-radius: 0.3rem; 
+            margin-left: 0.5rem; 
+            color: white; 
+            vertical-align: middle; 
+            display: inline-block;
+            font-family: sans-serif;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+        }
+        .level-A1 { background-color: #10b981; } /* Green */
+        .level-A2 { background-color: #34d399; }
+        .level-B1 { background-color: #3b82f6; } /* Blue */
+        .level-B2 { background-color: #2563eb; }
+        .level-C1 { background-color: #8b5cf6; } /* Purple */
+        .level-C2 { background-color: #7c3aed; }
+        .level-Mix { background-color: #6b7280; } /* Gray for mixed/combined */
+
+
+        /* --- GEORGIAN FONT FIXES --- */
+        /* Override Dongle font for Georgian as it doesn't support KA chars well and falls back to huge system fonts */
+        html[lang="ka"] .font-dongle {
+            font-family: sans-serif, Arial !important;
+            line-height: 1.3 !important;
+            letter-spacing: normal;
+        }
+
+        /* Main Start Screen Title */
         html[lang="ka"] #start-screen h1 {
-            font-size: 2rem; /* Equivalent to text-6xl */
+            font-size: 2.5rem !important; /* Was ~6rem */
         }
-        @media (min-width: 768px) {
-            html[lang="ka"] #start-screen h1 {
-                font-size: 2rem; /* Equivalent to text-7xl */
-            }
+
+        /* Screen Titles (Settings, Results, Options, Assessment) */
+        html[lang="ka"] h2.font-dongle, 
+        html[lang="ka"] #learning-completion-title {
+            font-size: 1.5rem !important; /* Was ~3.75rem */
         }
-        html[lang="ka"] #welcome-message {
-            font-size: 0.9rem; /* Smaller size for Georgian to prevent wrapping */
+
+        /* Card Titles & Subheaders */
+        html[lang="ka"] h3.font-dongle {
+            font-size: 1.5rem !important; /* Was ~2.5rem */
         }
+
+        /* Flashcard Text */
+        html[lang="ka"] #flashcard-front-text,
+        html[lang="ka"] #flashcard-back-text {
+            font-size: 1.5rem !important; /* Was ~3rem */
+        }
+
+        /* Side Menu Title */
         html[lang="ka"] #side-menu-title {
-            font-size: 1.5rem; /* text-5xl, was text-6xl (3.75rem) */
+            font-size: 1.5rem !important;
+        }
+
+        /* General text adjustments */
+        html[lang="ka"] #welcome-message {
+            font-size: 1rem;
+        }
+        
+        /* Prevent huge text in search results title */
+        html[lang="ka"] #search-results-container h3 {
+            font-size: 1.3rem !important;
         }
     </style>
 </head>
@@ -186,13 +261,31 @@
                 </div>
             </div>
 
-            <!-- Category Cards Container -->
-            <div id="category-cards-container" class="w-full mx-auto mt-8 grid grid-cols-2 gap-4">
-                <!-- Categories will be dynamically inserted here -->
-            </div>
-            
-            <div id="topics-view-container" class="hidden mt-6 text-left">
-                <!-- Back button and topics will be inserted here -->
+            <!-- WRAPPER FOR DEFAULT CONTENT -->
+            <div id="start-screen-default-content">
+                <!-- Language Assessment Entry Card -->
+                <div class="mt-6 w-full">
+                    <button id="start-assessment-flow-btn" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-6 rounded-2xl shadow-lg transform transition-all hover:scale-[1.02] hover:shadow-xl flex items-center justify-between">
+                        <div class="text-left">
+                            <h3 class="font-dongle text-4xl font-bold leading-none mb-1" data-i18n-key="assessment_card_title">Nivel de Idioma</h3>
+                            <p class="text-indigo-100 text-sm" data-i18n-key="assessment_card_desc">Descubre tu nivel real (A1-C2) con nuestro test adaptativo.</p>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Category Cards Container -->
+                <div id="category-cards-container" class="w-full mx-auto mt-6 grid grid-cols-2 gap-4">
+                    <!-- Categories will be dynamically inserted here -->
+                </div>
+                
+                <div id="topics-view-container" class="hidden mt-6 text-left">
+                    <!-- Back button and topics will be inserted here -->
+                </div>
             </div>
 
              <!-- Search Results -->
@@ -204,9 +297,35 @@
             </div>
         </div>
 
-        <!-- Quiz Screen -->
+        <!-- Assessment Language Selection Screen -->
+        <div id="assessment-start-screen" class="hidden w-full max-w-2xl mx-auto text-center px-4 flex-1 flex flex-col justify-center">
+            <h1 class="font-dongle text-6xl font-bold text-gray-900 mb-2" data-i18n-key="assessment_title">LinguaFlow</h1>
+            <p class="text-gray-600 mb-8" data-i18n-key="assessment_subtitle">Descubre tu verdadero nivel con nuestro test adaptativo. Elige un idioma para empezar.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <button class="bg-white border border-gray-200 p-8 rounded-2xl shadow-md hover:shadow-xl hover:border-blue-300 transition-all group disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    <div class="text-4xl mb-2">GB</div>
+                    <h3 class="font-bold text-xl text-gray-800 mb-2">Test English</h3>
+                    <span class="inline-block bg-gray-100 text-gray-500 px-4 py-1 rounded-full text-sm font-medium group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">Coming Soon</span>
+                </button>
+
+                <button id="start-spanish-assessment-btn" class="bg-white border border-gray-200 p-8 rounded-2xl shadow-md hover:shadow-xl hover:border-blue-300 transition-all group">
+                    <div class="text-4xl mb-2">ES</div>
+                    <h3 class="font-bold text-xl text-gray-800 mb-2">Test Español</h3>
+                    <span class="inline-block bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-sm font-medium group-hover:bg-blue-600 group-hover:text-white transition-colors" data-i18n-key="start_assessment_btn">Empezar Test &rarr;</span>
+                </button>
+            </div>
+            
+            <button id="back-from-assessment-start-btn" class="mt-8 text-gray-500 hover:text-gray-800 font-medium transition-colors" data-i18n-key="back_button">Volver</button>
+        </div>
+
+        <!-- Quiz Screen (Used for both standard quizzes and assessment) -->
         <div id="quiz-screen" class="hidden w-full max-w-2xl mx-auto px-4 pb-24">
             <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+                <!-- Assessment Badge -->
+                <div id="assessment-level-badge" class="hidden bg-indigo-100 text-indigo-800 text-sm font-bold px-3 py-1 rounded-full border border-indigo-200">
+                    Level A1
+                </div>
                 <p id="progress-text" class="text-gray-600 font-semibold text-sm">Pregunta 1 / 20</p>
                 
                 <div class="flex items-center gap-4">
@@ -237,6 +356,81 @@
                 <div id="options-container" class="grid grid-cols-1 gap-4"></div>
                 <div id="explanation-container" class="mt-4"></div>
             </div>
+        </div>
+
+        <!-- Assessment Results Screen -->
+        <div id="assessment-results-screen" class="hidden w-full max-w-2xl mx-auto px-4 pb-8">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-center text-white">
+                    <p class="text-indigo-200 font-medium uppercase tracking-wider text-sm mb-2" data-i18n-key="assessment_result_label">Tu Nivel de Competencia</p>
+                    <h2 id="assessment-final-level" class="text-6xl font-bold mb-1">B1</h2>
+                    <p id="assessment-level-desc" class="text-xl text-indigo-100 font-medium">Intermediate</p>
+                </div>
+                
+                <!-- Metrics -->
+                <div class="p-6 grid grid-cols-3 gap-4 text-center border-b border-gray-100">
+                    <div>
+                        <p class="text-gray-400 text-xs uppercase font-bold tracking-wide" data-i18n-key="assessment_score">Puntuación</p>
+                        <p id="assessment-score-display" class="text-2xl font-bold text-indigo-600">0/0</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-xs uppercase font-bold tracking-wide" data-i18n-key="assessment_accuracy">Precisión</p>
+                        <p id="assessment-accuracy-display" class="text-2xl font-bold text-indigo-600">0%</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-xs uppercase font-bold tracking-wide" data-i18n-key="assessment_time">Tiempo</p>
+                        <p id="assessment-time-display" class="text-2xl font-bold text-indigo-600">0s</p>
+                    </div>
+                </div>
+
+                <!-- Improvements Section -->
+                <div class="p-6">
+                    <h4 class="font-bold text-gray-700 mb-4 flex items-center">
+                        <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                        <span data-i18n-key="assessment_improvements">Áreas de mejora</span>
+                    </h4>
+                    <div id="assessment-improvements-list" class="space-y-3 mb-8">
+                        <!-- Dynamic Content -->
+                    </div>
+
+                    <div class="space-y-3">
+                        <button id="assessment-review-btn" class="w-full bg-red-50 text-red-600 font-bold py-3 rounded-xl border border-red-100 hover:bg-red-100 transition-colors flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" /></svg>
+                            <span data-i18n-key="assessment_review_mistakes">Repasar Errores</span>
+                        </button>
+                        <button id="assessment-retry-btn" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition-colors shadow-md flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" /></svg>
+                            <span data-i18n-key="assessment_take_again">Realizar Test de Nuevo</span>
+                        </button>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <button id="assessment-home-btn" class="text-gray-500 hover:text-gray-800 font-medium text-sm transition-colors" data-i18n-key="back_to_home_short">Volver al Inicio</button>
+                    </div>
+                </div>
+            </div>
+            
+             <!-- Review Modal (Hidden by default) -->
+             <div id="assessment-review-modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-end sm:items-center justify-center p-4">
+                <div class="bg-white w-full max-w-2xl rounded-t-2xl sm:rounded-2xl max-h-[85vh] flex flex-col">
+                    <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-red-50 rounded-t-2xl">
+                        <h3 class="font-bold text-red-800 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
+                            <span data-i18n-key="review_mistakes_title">Repasar Errores</span>
+                        </h3>
+                        <button id="close-assessment-review-btn" class="text-gray-400 hover:text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                    </div>
+                    <div id="assessment-review-list" class="p-4 overflow-y-auto space-y-4 flex-grow">
+                        <!-- Review items injected here -->
+                    </div>
+                    <div class="p-4 border-t border-gray-100 bg-gray-50 rounded-b-2xl">
+                        <button id="close-assessment-review-btn-2" class="w-full bg-gray-800 text-white font-bold py-3 rounded-xl hover:bg-gray-700 transition-colors" data-i18n-key="close_button">Cerrar</button>
+                    </div>
+                </div>
+             </div>
         </div>
 
         <!-- Results Screen -->

@@ -1,3 +1,6 @@
+
+
+
 import { allTopics, categories } from '../topics-data.js';
 import * as state from './state.js';
 import { translations, isSoundEnabled, soundOnIconSVG, soundOffIconSVG, getSettings, playNavigationSound } from './settings.js';
@@ -41,6 +44,7 @@ export const searchResultsContainer = document.getElementById('search-results-co
 export const searchResultsList = document.getElementById('search-results-list');
 export const noResultsMessage = document.getElementById('no-results-message');
 export const topicQuizButtonContainer = document.getElementById('topic-quiz-button-container');
+export const startScreenDefaultContent = document.getElementById('start-screen-default-content');
 export const bookmarkBtn = document.getElementById('bookmark-btn');
 export const bookmarksContainer = document.getElementById('bookmarks-container');
 export const bookmarksList = document.getElementById('bookmarks-list');
@@ -116,6 +120,21 @@ export const flashcardFooter = document.getElementById('flashcard-footer');
 export const learningFooter = document.getElementById('learning-footer');
 export const summaryNextBtnContainer = document.getElementById('summary-next-btn-container');
 
+// Assessment Elements
+export const startAssessmentFlowBtn = document.getElementById('start-assessment-flow-btn');
+export const assessmentStartScreen = document.getElementById('assessment-start-screen');
+export const startSpanishAssessmentBtn = document.getElementById('start-spanish-assessment-btn');
+export const backFromAssessmentStartBtn = document.getElementById('back-from-assessment-start-btn');
+export const assessmentLevelBadge = document.getElementById('assessment-level-badge');
+export const assessmentResultsScreen = document.getElementById('assessment-results-screen');
+export const assessmentReviewBtn = document.getElementById('assessment-review-btn');
+export const assessmentRetryBtn = document.getElementById('assessment-retry-btn');
+export const assessmentHomeBtn = document.getElementById('assessment-home-btn');
+export const assessmentReviewModal = document.getElementById('assessment-review-modal');
+export const closeAssessmentReviewBtn = document.getElementById('close-assessment-review-btn');
+export const closeAssessmentReviewBtn2 = document.getElementById('close-assessment-review-btn-2');
+
+
 export const openSideMenu = () => {
     sideMenu.classList.add('is-open');
     menuBackdrop.classList.add('is-open');
@@ -141,7 +160,8 @@ export function updateHeaderBackground() {
         'statistics-screen',
         'saved-screen',
         'results-screen',
-        'learning-screen'
+        'learning-screen',
+        'assessment-results-screen'
     ];
 
     const currentVisibleScreen = document.querySelector('#app > div:not(.hidden)');
@@ -213,6 +233,8 @@ export function showScreen(screen) {
     savedScreen.classList.add('hidden');
     learningScreen.classList.add('hidden');
     statisticsScreen.classList.add('hidden');
+    assessmentStartScreen.classList.add('hidden');
+    assessmentResultsScreen.classList.add('hidden');
 
     // Also hide footers by default
     nextButtonContainer.classList.add('hidden');
@@ -220,6 +242,10 @@ export function showScreen(screen) {
     learningFooter.classList.add('hidden');
     if (summaryNextBtnContainer) summaryNextBtnContainer.classList.add('hidden');
     if (scenarioNextBtnContainer) scenarioNextBtnContainer.classList.add('hidden');
+    
+    // Hide Assessment Specifics on quiz screen default
+    if (assessmentLevelBadge) assessmentLevelBadge.classList.add('hidden');
+    if (bookmarkBtn) bookmarkBtn.classList.remove('hidden');
     
     screen.classList.remove('hidden');
 
@@ -262,6 +288,7 @@ export function showScreen(screen) {
 
 export function goHome() {
     clearInterval(state.getTimerInterval());
+    state.setIsAssessmentMode(false);
     showScreen(startScreen);
     if (state.getWakeLock()) {
         state.getWakeLock().release();
@@ -371,6 +398,9 @@ export const renderTopicsOnStartScreen = (container) => {
         topicHeader.setAttribute('aria-expanded', 'false');
         topicHeader.setAttribute('aria-controls', `${topicId}-content`);
 
+        // Level Badge Logic
+        const levelBadge = topic.level ? `<span class="level-badge-common level-${topic.level}">${topic.level}</span>` : '';
+
         if (topic.isCombined) {
             topicWrapper.classList.add('bg-gradient-to-br', 'from-blue-500', 'to-purple-600', 'text-white', 'border-transparent');
             topicHeader.classList.add('hover:bg-white/10');
@@ -381,7 +411,7 @@ export const renderTopicsOnStartScreen = (container) => {
                     </svg>
                 </div>
                 <div class="flex-grow">
-                    <h3 class="text-xl text-white">${topic.name}</h3>
+                    <h3 class="text-xl text-white flex items-center justify-center md:justify-start">${topic.name} ${levelBadge}</h3>
                     <p class="text-sm text-blue-100 font-normal mt-1">${topic.description}</p>
                 </div>
                 <svg class="w-6 h-6 text-white transform transition-transform mt-4 md:mt-0 ml-auto flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -394,7 +424,7 @@ export const renderTopicsOnStartScreen = (container) => {
                     <img src="${topic.imageUrl}" alt="${topic.name}" class="w-full h-full object-cover">
                 </div>
                 <div class="flex-grow">
-                    <h3 class="text-xl text-blue-600">${topic.name}</h3>
+                    <h3 class="text-xl text-blue-600 flex items-center justify-center md:justify-start">${topic.name} ${levelBadge}</h3>
                     <p class="text-sm text-gray-500 font-normal mt-1">${topic.description}</p>
                 </div>
                 <svg class="w-6 h-6 transform transition-transform mt-4 md:mt-0 ml-auto flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>

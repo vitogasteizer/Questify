@@ -1,33 +1,166 @@
 
 export const questions = [
-    // Parte 1: Completa con tener que + infinitivo
-    { type: 'fill-in-the-blank', questionText: "Conjuga 'tener que' y el verbo entre paréntesis: Yo ______ (hacer) la compra hoy.", correctAnswer: "tengo que hacer", explanation: "'Tengo' es la forma de 'tener' para 'yo'." },
-    { type: 'fill-in-the-blank', questionText: "Conjuga 'tener que' y el verbo entre paréntesis: Nosotros ______ (estudiar) para el examen de español.", correctAnswer: "tenemos que estudiar", explanation: "'Tenemos' es la forma de 'tener' para 'nosotros'." },
-    { type: 'fill-in-the-blank', questionText: "Conjuga 'tener que' y el verbo entre paréntesis: ¿Tú ______ (ir) al médico esta tarde?", correctAnswer: "tienes que ir", explanation: "'Tienes' es la forma de 'tener' para 'tú'." },
-    { type: 'fill-in-the-blank', questionText: "Conjuga 'tener que' y el verbo entre paréntesis: Mi hermano ______ (trabajar) el fin de semana.", correctAnswer: "tiene que trabajar", explanation: "'Tiene' es la forma de 'tener' para 'él/ella/usted'." },
-    { type: 'fill-in-the-blank', questionText: "Conjuga 'tener que' y el verbo entre paréntesis: Vosotros ______ (limpiar) la casa mañana.", correctAnswer: "tenéis que limpiar", explanation: "'Tenéis' es la forma de 'tener' para 'vosotros'." },
-    { type: 'fill-in-the-blank', questionText: "Conjuga 'tener que' y el verbo entre paréntesis: Ellos ______ (preparar) la cena.", correctAnswer: "tienen que preparar", explanation: "'Tienen' es la forma de 'tener' para 'ellos/ellas/ustedes'." },
-    { type: 'fill-in-the-blank', questionText: "Conjuga 'tener que' y el verbo entre paréntesis: Ana ______ (salir) temprano de casa.", correctAnswer: "tiene que salir", explanation: "'Tiene' es la forma de 'tener' para 'ella'." },
-    { type: 'fill-in-the-blank', questionText: "Conjuga 'tener que' y el verbo entre paréntesis: Nosotros no ______ (pagar) hoy, lo hacemos mañana.", correctAnswer: "tenemos que pagar", explanation: "'Tenemos' es la forma de 'tener' para 'nosotros'." },
-    { type: 'fill-in-the-blank', questionText: "Conjuga 'tener que' y el verbo entre paréntesis: Yo ______ (llamar) a mi madre todos los días.", correctAnswer: "tengo que llamar", explanation: "'Tengo' es la forma de 'tener' para 'yo'." },
-    { type: 'fill-in-the-blank', questionText: "Conjuga 'tener que' y el verbo entre paréntesis: ¿Usted ______ (venir) a clase mañana?", correctAnswer: "tiene que venir", explanation: "'Tiene' es la forma de 'tener' para 'usted'." },
+    // Parte 1: Completa con la forma correcta
+    {
+        type: 'multiple-choice',
+        questionText: "Yo _______ (hacer) la compra hoy.",
+        options: ["tengo que hacer", "tiene que hacer", "tenemos que hacer"],
+        correctAnswerIndex: 0,
+        explanation: "Yo -> tengo que.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Nosotros _______ (estudiar) para el examen de español.",
+        options: ["tenemos que estudiar", "tienen que estudiar", "tenéis que estudiar"],
+        correctAnswerIndex: 0,
+        explanation: "Nosotros -> tenemos que.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿Tú _______ (ir) al médico esta tarde?",
+        options: ["tienes que ir", "tengo que ir", "tiene que ir"],
+        correctAnswerIndex: 0,
+        explanation: "Tú -> tienes que.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Mi hermano _______ (trabajar) el fin de semana.",
+        options: ["tiene que trabajar", "tienen que trabajar", "tienes que trabajar"],
+        correctAnswerIndex: 0,
+        explanation: "Él (mi hermano) -> tiene que.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Vosotros _______ (limpiar) la casa mañana.",
+        options: ["tenéis que limpiar", "tenemos que limpiar", "tienen que limpiar"],
+        correctAnswerIndex: 0,
+        explanation: "Vosotros -> tenéis que.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Ellos _______ (preparar) la cena.",
+        options: ["tienen que preparar", "tenemos que preparar", "tiene que preparar"],
+        correctAnswerIndex: 0,
+        explanation: "Ellos -> tienen que.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Ana _______ (salir) temprano de casa.",
+        options: ["tiene que salir", "tienes que salir", "tengo que salir"],
+        correctAnswerIndex: 0,
+        explanation: "Ella (Ana) -> tiene que.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Nosotros no _______ (pagar) hoy, lo hacemos mañana.",
+        options: ["tenemos que pagar", "tienen que pagar", "tenéis que pagar"],
+        correctAnswerIndex: 0,
+        explanation: "Nosotros -> tenemos que.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Yo _______ (llamar) a mi madre todos los días.",
+        options: ["tengo que llamar", "tiene que llamar", "tienes que llamar"],
+        correctAnswerIndex: 0,
+        explanation: "Yo -> tengo que.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿Usted _______ (venir) a clase mañana?",
+        options: ["tiene que venir", "tienes que venir", "tienen que venir"],
+        correctAnswerIndex: 0,
+        explanation: "Usted -> tiene que.",
+        level: 'A2'
+    },
 
-    // Parte 2: Coloca las palabras en orden
-    { type: 'order-words', questionText: "Coloca las palabras en el orden adecuado para formar frases con tener que + Infinitivo.", words: ["Tengo", "que", "levantarme", "temprano", "mañana", "porque", "debo", "trabajar."], correctAnswer: "Tengo que levantarme temprano mañana porque debo trabajar.", explanation: "La estructura principal es 'Tengo que levantarme'." },
-    { type: 'order-words', questionText: "Coloca las palabras en el orden adecuado para formar frases con tener que + Infinitivo.", words: ["Tienes", "que", "estudiar", "un", "examen", "importante", "esta", "noche."], correctAnswer: "Tienes que estudiar un examen importante esta noche.", explanation: "La estructura principal es 'Tienes que estudiar'." },
-    { type: 'order-words', questionText: "Coloca las palabras en el orden adecuado para formar frases con tener que + Infinitivo.", words: ["Tenemos", "que", "limpiar", "la", "casa", "porque", "viene", "una", "visita."], correctAnswer: "Tenemos que limpiar la casa porque viene una visita.", explanation: "La estructura principal es 'Tenemos que limpiar'." },
-    { type: 'order-words', questionText: "Coloca las palabras en el orden adecuado para formar frases con tener que + Infinitivo.", words: ["Ellos", "tienen", "que", "preparar", "la", "cena", "porque", "son", "los", "invitados."], correctAnswer: "Ellos tienen que preparar la cena porque son los invitados.", explanation: "La estructura principal es 'Ellos tienen que preparar'." },
-    { type: 'order-words', questionText: "Coloca las palabras en el orden adecuado para formar frases con tener que + Infinitivo.", words: ["Laura", "tiene", "que", "salir", "pronto", "porque", "el", "autobús", "pasa."], correctAnswer: "Laura tiene que salir pronto porque el autobús pasa.", explanation: "La estructura principal es 'Laura tiene que salir'." },
-    { type: 'order-words', questionText: "Coloca las palabras en el orden adecuado para formar frases con tener que + Infinitivo.", words: ["Tenemos", "que", "ir", "al", "médico", "porque", "no", "estamos", "bien."], correctAnswer: "Tenemos que ir al médico porque no estamos bien.", explanation: "La estructura principal es 'Tenemos que ir'." },
-    { type: 'order-words', questionText: "Coloca las palabras en el orden adecuado para formar frases con tener que + Infinitivo.", words: ["Tienes", "que", "comprar", "algo", "para", "hacer", "la", "comida", "del", "domingo."], correctAnswer: "Tienes que comprar algo para hacer la comida del domingo.", explanation: "La estructura principal es 'Tienes que comprar'." },
-    { type: 'order-words', questionText: "Coloca las palabras en el orden adecuado para formar frases con tener que + Infinitivo.", words: ["Tengo", "que", "trabajar", "el", "día", "entero", "hoy", "porque", "hay", "mucho", "trabajo."], correctAnswer: "Tengo que trabajar el día entero hoy porque hay mucho trabajo.", explanation: "La estructura principal es 'Tengo que trabajar'." },
-    { type: 'order-words', questionText: "Coloca las palabras en el orden adecuado para formar frases con tener que + Infinitivo.", words: ["Tenemos", "que", "estudiar", "para", "el", "examen", "que", "tenemos", "el", "próximo", "lunes."], correctAnswer: "Tenemos que estudiar para el examen que tenemos el próximo lunes.", explanation: "La estructura principal es 'Tenemos que estudiar'." },
-    { type: 'order-words', questionText: "Coloca las palabras en el orden adecuado para formar frases con tener que + Infinitivo.", words: ["Tienes", "que", "descansar", "un", "poco", "porque", "estás", "muy", "cansado."], correctAnswer: "Tienes que descansar un poco porque estás muy cansado.", explanation: "La estructura de la frase es 'Tienes que descansar un poco' seguida de la razón 'porque estás muy cansado'." },
-
-    // Parte 3: Cambia las frases
-    { type: 'fill-in-the-blank', questionText: "Reformula la frase usando 'tener que': Necesito cocinar. -> Yo ______.", correctAnswer: "tengo que cocinar", explanation: "'Necesitar + infinitivo' es similar a 'Tener que + infinitivo'." },
-    { type: 'fill-in-the-blank', questionText: "Reformula la frase usando 'tener que': Es necesario limpiar la cocina. -> Nosotros ______.", correctAnswer: "tenemos que limpiar la cocina", explanation: "La frase impersonal 'Es necesario' se convierte en una obligación personal." },
-    { type: 'fill-in-the-blank', questionText: "Reformula la frase usando 'tener que': Ellos deben trabajar más. -> Ellos ______.", correctAnswer: "tienen que trabajar más", explanation: "'Deber + infinitivo' es otra forma de expresar obligación, muy similar a 'tener que'." },
-    { type: 'fill-in-the-blank', questionText: "Reformula la frase usando 'tener que': Tú necesitas ir al supermercado. -> Tú ______.", correctAnswer: "tienes que ir al supermercado", explanation: "Cambiamos 'necesitas' por 'tienes que'." },
-    { type: 'fill-in-the-blank', questionText: "Reformula la frase usando 'tener que': Nosotros debemos hacer los deberes. -> Nosotros ______.", correctAnswer: "tenemos que hacer los deberes", explanation: "Cambiamos 'debemos' por 'tenemos que'." }
+    // Parte 2: Ordenar palabras
+    {
+        type: 'order-words',
+        questionText: "Coloca las palabras en orden:",
+        words: ["Tengo", "que", "levantarme", "temprano", "mañana", "porque", "debo", "trabajar"],
+        correctAnswer: "Tengo que levantarme temprano mañana porque debo trabajar",
+        explanation: "Tengo que + infinitivo.",
+        level: 'A2'
+    },
+    {
+        type: 'order-words',
+        questionText: "Coloca las palabras en orden:",
+        words: ["Tienes", "que", "estudiar", "un", "examen", "importante", "esta", "noche"],
+        correctAnswer: "Tienes que estudiar un examen importante esta noche",
+        explanation: "Tienes que + infinitivo.",
+        level: 'A2'
+    },
+    {
+        type: 'order-words',
+        questionText: "Coloca las palabras en orden:",
+        words: ["Tenemos", "que", "limpiar", "la", "casa", "porque", "viene", "una", "visita"],
+        correctAnswer: "Tenemos que limpiar la casa porque viene una visita",
+        explanation: "Tenemos que + infinitivo.",
+        level: 'A2'
+    },
+    {
+        type: 'order-words',
+        questionText: "Coloca las palabras en orden:",
+        words: ["Ellos", "tienen", "que", "preparar", "la", "cena", "porque", "son", "los", "invitados"],
+        correctAnswer: "Ellos tienen que preparar la cena porque son los invitados",
+        explanation: "Tienen que + infinitivo.",
+        level: 'A2'
+    },
+    {
+        type: 'order-words',
+        questionText: "Coloca las palabras en orden:",
+        words: ["Laura", "tiene", "que", "salir", "pronto", "porque", "el", "autobús", "pasa"],
+        correctAnswer: "Laura tiene que salir pronto porque el autobús pasa",
+        explanation: "Tiene que + infinitivo.",
+        level: 'A2'
+    },
+    {
+        type: 'order-words',
+        questionText: "Coloca las palabras en orden:",
+        words: ["Tenemos", "que", "ir", "al", "médico", "porque", "no", "estamos", "bien"],
+        correctAnswer: "Tenemos que ir al médico porque no estamos bien",
+        explanation: "Tenemos que + infinitivo.",
+        level: 'A2'
+    },
+    {
+        type: 'order-words',
+        questionText: "Coloca las palabras en orden:",
+        words: ["Tienes", "que", "comprar", "algo", "para", "hacer", "la", "comida", "del", "domingo"],
+        correctAnswer: "Tienes que comprar algo para hacer la comida del domingo",
+        explanation: "Tienes que + infinitivo.",
+        level: 'A2'
+    },
+    {
+        type: 'order-words',
+        questionText: "Coloca las palabras en orden:",
+        words: ["Tengo", "que", "trabajar", "el", "día", "entero", "hoy", "porque", "hay", "mucho", "trabajo"],
+        correctAnswer: "Tengo que trabajar el día entero hoy porque hay mucho trabajo",
+        explanation: "Tengo que + infinitivo.",
+        level: 'A2'
+    },
+    {
+        type: 'order-words',
+        questionText: "Coloca las palabras en orden:",
+        words: ["Tenemos", "que", "estudiar", "para", "el", "examen", "que", "tenemos", "el", "próximo", "lunes"],
+        correctAnswer: "Tenemos que estudiar para el examen que tenemos el próximo lunes",
+        explanation: "Tenemos que + infinitivo.",
+        level: 'A2'
+    },
+    {
+        type: 'order-words',
+        questionText: "Coloca las palabras en orden:",
+        words: ["Tienes", "que", "descansar", "un", "poco", "porque", "estás", "muy", "cansado"],
+        correctAnswer: "Tienes que descansar un poco porque estás muy cansado",
+        explanation: "Tienes que + infinitivo.",
+        level: 'A2'
+    }
 ];

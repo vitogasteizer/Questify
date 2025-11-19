@@ -1,3 +1,4 @@
+
 // State
 let username = '';
 export const getUsername = () => username;
@@ -135,6 +136,37 @@ export const setLastQuizConfig = (config) => { lastQuizConfig = config; };
 let stagedLanguage = 'es';
 export const getStagedLanguage = () => stagedLanguage;
 export const setStagedLanguage = (lang) => { stagedLanguage = lang; };
+
+
+// --- NEW ASSESSMENT STATE ---
+let isAssessmentMode = false;
+export const getIsAssessmentMode = () => isAssessmentMode;
+export const setIsAssessmentMode = (isMode) => { isAssessmentMode = isMode; };
+
+let currentAssessmentLevel = 'A1';
+export const getCurrentAssessmentLevel = () => currentAssessmentLevel;
+export const setCurrentAssessmentLevel = (level) => { currentAssessmentLevel = level; };
+
+let assessmentStats = {
+    startTime: 0,
+    endTime: 0,
+    totalQuestionsAnswered: 0,
+    totalCorrect: 0,
+    levelScores: {}, // { 'A1': { correct: 0, total: 0 }, ... }
+    mistakes: []
+};
+export const getAssessmentStats = () => assessmentStats;
+export const setAssessmentStats = (stats) => { assessmentStats = stats; };
+export const resetAssessmentStats = () => {
+    assessmentStats = {
+        startTime: 0,
+        endTime: 0,
+        totalQuestionsAnswered: 0,
+        totalCorrect: 0,
+        levelScores: {},
+        mistakes: []
+    };
+};
 
 
 export const USERNAME_STORAGE_KEY = 'logisticsQuizUsername';

@@ -1,91 +1,221 @@
+
 export const questions = [
     // Parte 1: Elige la palabra adecuada
     {
-        questionText: "______ reloj es muy caro.",
-        options: ["Esto", "Este", "Esta"],
-        correctAnswerIndex: 1,
-        explanation: "'Este' es un adjetivo demostrativo masculino singular y concuerda con 'reloj'."
+        type: 'multiple-choice',
+        questionText: "_______ reloj es muy caro.",
+        options: ["Este", "Esto", "Esta"],
+        correctAnswerIndex: 0,
+        explanation: "Reloj არის მამრობითი, მხოლობითი -> Este.",
+        level: 'A1'
     },
     {
-        questionText: "¿De quién es ______ bufanda?",
+        type: 'multiple-choice',
+        questionText: "¿De quién es _______ bufanda?",
         options: ["Esta", "Este", "Esto"],
         correctAnswerIndex: 0,
-        explanation: "'Esta' es un adjetivo demostrativo femenino singular y concuerda con 'bufanda'."
+        explanation: "Bufanda არის მდედრობითი, მხოლობითი -> Esta.",
+        level: 'A1'
     },
     {
-        questionText: "______ son mis llaves, las dejé en la mesa.",
-        options: ["Estos", "Estas", "Esto"],
-        correctAnswerIndex: 1,
-        explanation: "'Estas' es un pronombre demostrativo femenino plural y concuerda con 'llaves'."
+        type: 'multiple-choice',
+        questionText: "_______ son mis llaves, las dejé en la mesa.",
+        options: ["Estas", "Estos", "Esto"],
+        correctAnswerIndex: 0,
+        explanation: "Llaves არის მდედრობითი, მრავლობითი -> Estas.",
+        level: 'A1'
     },
     {
-        questionText: "No me gusta ______. Tiene mal sabor.",
+        type: 'multiple-choice',
+        questionText: "No me gusta _______ . Tiene mal sabor.",
         options: ["Esto", "Esta", "Este"],
         correctAnswerIndex: 0,
-        explanation: "'Esto' es un pronombre demostrativo neutro que se refiere a algo abstracto o no identificado."
+        explanation: "აბსტრაქტული ან უცნობი ნივთისთვის ვიყენებთ ნეიტრალურ ფორმას -> Esto.",
+        level: 'A1'
     },
     {
-        questionText: "______ chicos no vinieron ayer a clase.",
-        options: ["Este", "Estos", "Esto"],
-        correctAnswerIndex: 1,
-        explanation: "'Estos' es un adjetivo demostrativo masculino plural y concuerda con 'chicos'."
+        type: 'multiple-choice',
+        questionText: "_______ chicos no vinieron ayer a clase.",
+        options: ["Estos", "Este", "Esto"],
+        correctAnswerIndex: 0,
+        explanation: "Chicos არის მამრობითი, მრავლობითი -> Estos.",
+        level: 'A1'
     },
     {
-        questionText: "¿Dónde compraste ______ zapatos tan bonitos?",
-        options: ["Estas", "Estos", "Esto"],
-        correctAnswerIndex: 1,
-        explanation: "'Estos' es un adjetivo demostrativo masculino plural y concuerda con 'zapatos'."
+        type: 'multiple-choice',
+        questionText: "¿Dónde compraste _______ zapatos tan bonitos?",
+        options: ["Estos", "Estas", "Esto"],
+        correctAnswerIndex: 0,
+        explanation: "Zapatos არის მამრობითი, მრავლობითი -> Estos.",
+        level: 'A1'
     },
     {
-        questionText: "Me encanta ______ lugar. Es muy tranquilo.",
+        type: 'multiple-choice',
+        questionText: "Me encanta _______ lugar. Es muy tranquilo.",
         options: ["Este", "Esto", "Esta"],
         correctAnswerIndex: 0,
-        explanation: "'Este' es un adjetivo demostrativo masculino singular y concuerda con 'lugar'."
+        explanation: "Lugar არის მამრობითი, მხოლობითი -> Este.",
+        level: 'A1'
     },
     {
-        questionText: "______ mujer trabaja en el hospital.",
+        type: 'multiple-choice',
+        questionText: "_______ mujer trabaja en el hospital.",
         options: ["Esta", "Esto", "Este"],
         correctAnswerIndex: 0,
-        explanation: "'Esta' es un adjetivo demostrativo femenino singular y concuerda con 'mujer'."
+        explanation: "Mujer არის მდედრობითი, მხოლობითი -> Esta.",
+        level: 'A1'
     },
     {
-        questionText: "¿Te gusta ______ canción o prefieres otra?",
+        type: 'multiple-choice',
+        questionText: "¿Te gusta _______ canción o prefieres otra?",
         options: ["Esta", "Esto", "Este"],
         correctAnswerIndex: 0,
-        explanation: "'Esta' es un adjetivo demostrativo femenino singular y concuerda con 'canción'."
+        explanation: "Canción არის მდედრობითი, მხოლობითი -> Esta.",
+        level: 'A1'
     },
     {
-        questionText: "No entiendo ______. ¿Puedes repetirlo?",
-        options: ["Este", "Esto", "Esta"],
-        correctAnswerIndex: 1,
-        explanation: "'Esto' es un pronombre demostrativo neutro que se refiere a una idea o situación no entendida."
+        type: 'multiple-choice',
+        questionText: "No entiendo _______. ¿Puedes repetirlo?",
+        options: ["Esto", "Este", "Esta"],
+        correctAnswerIndex: 0,
+        explanation: "აბსტრაქტული სიტუაცია -> Esto.",
+        level: 'A1'
     },
     {
-        questionText: "______ problemas son difíciles de resolver.",
+        type: 'multiple-choice',
+        questionText: "_______ problemas son difíciles de resolver.",
         options: ["Estos", "Esto", "Esta"],
         correctAnswerIndex: 0,
-        explanation: "'Estos' es un adjetivo demostrativo masculino plural y concuerda con 'problemas'."
+        explanation: "Problemas არის მამრობითი (გამონაკლისი), მრავლობითი -> Estos.",
+        level: 'A1'
     },
     {
-        questionText: "______ mesa está rota, debemos cambiarla.",
-        options: ["Este", "Esta", "Estos"],
-        correctAnswerIndex: 1,
-        explanation: "'Esta' es un adjetivo demostrativo femenino singular y concuerda con 'mesa'."
+        type: 'multiple-choice',
+        questionText: "_______ mesa está rota, debemos cambiarla.",
+        options: ["Esta", "Este", "Estos"],
+        correctAnswerIndex: 0,
+        explanation: "Mesa არის მდედრობითი, მხოლობითი -> Esta.",
+        level: 'A1'
     },
-    // Parte 2: Corrige el error (convertido a fill-in-the-blank)
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ flores son para ti.", correctAnswer: "Estas", explanation: "Flores es femenino plural, por lo tanto se usa 'Estas'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ chicas son muy amables.", correctAnswer: "Estas", explanation: "Chicas es femenino plural, por lo tanto se usa 'Estas'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ¿Puedes pasarme ______ cuchillo?", correctAnswer: "este", explanation: "Cuchillo es masculino singular, por lo tanto se usa 'este'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ coche es nuevo.", correctAnswer: "Este", explanation: "Coche es masculino singular, por lo tanto se usa 'Este'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: No entiendo ______. (Refiriéndose a una situación)", correctAnswer: "esto", explanation: "Para referirse a una situación o idea abstracta, se usa el pronombre neutro 'esto'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ pantalones no me quedan bien.", correctAnswer: "Estos", explanation: "Pantalones es masculino plural, por lo tanto se usa 'Estos'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ chico vive cerca de aquí.", correctAnswer: "Este", explanation: "Chico es masculino singular, por lo tanto se usa 'Este'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ llaves están sobre la mesa.", correctAnswer: "Estas", explanation: "Llaves es femenino plural, por lo tanto se usa 'Estas'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ¿Te gusta ______ película?", correctAnswer: "esta", explanation: "Película es femenino singular, por lo tanto se usa 'esta'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ problema es complicado.", correctAnswer: "Este", explanation: "Problema es masculino singular, por lo tanto se usa 'Este'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ personas trabajan en la oficina.", correctAnswer: "Estas", explanation: "Personas es femenino plural, por lo tanto se usa 'Estas'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ flores huelen muy bien.", correctAnswer: "Estas", explanation: "Flores es femenino plural, por lo tanto se usa 'Estas'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ libro es de mi hermano.", correctAnswer: "Este", explanation: "Libro es masculino singular, por lo tanto se usa 'Este'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ mesa está sucia.", correctAnswer: "Esta", explanation: "Mesa es femenino singular, por lo tanto se usa 'Esta'." },
-    { type: 'fill-in-the-blank', questionText: "Completa la frase con el demostrativo correcto: ______ chicas son mis compañeras de clase.", correctAnswer: "Estas", explanation: "Chicas es femenino plural, por lo tanto se usa 'Estas'." }
+    // Parte 2: Corregir errores (Converted to correct option selection)
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Esto flores son para ti.",
+        options: ["Estas flores", "Este flores", "Estos flores"],
+        correctAnswerIndex: 0,
+        explanation: "Flores (მდედ. მრავლ.) -> Estas.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Este chicas son muy amables.",
+        options: ["Estas chicas", "Estos chicas", "Esto chicas"],
+        correctAnswerIndex: 0,
+        explanation: "Chicas (მდედ. მრავლ.) -> Estas.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿Puedes pasarme esto cuchillo?",
+        options: ["este cuchillo", "esta cuchillo", "estos cuchillo"],
+        correctAnswerIndex: 0,
+        explanation: "Cuchillo (მამრ. მხოლ.) -> este.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Estas coche es nuevo.",
+        options: ["Este coche", "Esta coche", "Estos coche"],
+        correctAnswerIndex: 0,
+        explanation: "Coche (მამრ. მხოლ.) -> Este.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: No entiendo esta. (Refiriéndose a una situación)",
+        options: ["esto", "este", "estas"],
+        correctAnswerIndex: 0,
+        explanation: "სიტუაცია (ნეიტრალური) -> esto.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Esto pantalones no me quedan bien.",
+        options: ["Estos pantalones", "Este pantalones", "Estas pantalones"],
+        correctAnswerIndex: 0,
+        explanation: "Pantalones (მამრ. მრავლ.) -> Estos.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Estas chico vive cerca de aquí.",
+        options: ["Este chico", "Esta chico", "Estos chico"],
+        correctAnswerIndex: 0,
+        explanation: "Chico (მამრ. მხოლ.) -> Este.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Este llaves están sobre la mesa.",
+        options: ["Estas llaves", "Estos llaves", "Esto llaves"],
+        correctAnswerIndex: 0,
+        explanation: "Llaves (მდედ. მრავლ.) -> Estas.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿Te gusta estos película?",
+        options: ["esta película", "este película", "esto película"],
+        correctAnswerIndex: 0,
+        explanation: "Película (მდედ. მხოლ.) -> esta.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Esta problema es complicado.",
+        options: ["Este problema", "Esto problema", "Estas problema"],
+        correctAnswerIndex: 0,
+        explanation: "Problema (მამრ. მხოლ. გამონაკლისი) -> Este.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Esto personas trabajan en la oficina.",
+        options: ["Estas personas", "Estos personas", "Este personas"],
+        correctAnswerIndex: 0,
+        explanation: "Personas (მდედ. მრავლ.) -> Estas.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Este flores huelen muy bien.",
+        options: ["Estas flores", "Estos flores", "Esto flores"],
+        correctAnswerIndex: 0,
+        explanation: "Flores (მდედ. მრავლ.) -> Estas.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Estas libro es de mi hermano.",
+        options: ["Este libro", "Esta libro", "Estos libro"],
+        correctAnswerIndex: 0,
+        explanation: "Libro (მამრ. მხოლ.) -> Este.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Esto mesa está sucia.",
+        options: ["Esta mesa", "Este mesa", "Estos mesa"],
+        correctAnswerIndex: 0,
+        explanation: "Mesa (მდედ. მხოლ.) -> Esta.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: Estos chica son mis compañeras de clase.",
+        options: ["Estas chicas", "Estos chicas", "Esta chicas"],
+        correctAnswerIndex: 0,
+        explanation: "Chicas (მდედ. მრავლ.) -> Estas.",
+        level: 'A1'
+    }
 ];

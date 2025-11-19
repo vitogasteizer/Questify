@@ -1,17 +1,99 @@
+
 export const questions = [
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: En la mesa ______ muchos libros y carpetas.", correctAnswer: "Hay", explanation: "Se usa 'Hay' (del verbo haber) para indicar la existencia de algo." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: ¡______! Me he hecho daño en la pierna.", correctAnswer: "Ay", explanation: "Se usa '¡Ay!' como una interjección para expresar dolor o sorpresa." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: Coloca las llaves y el abrigo ______.", correctAnswer: "ahí", explanation: "Se usa 'ahí' como un adverbio de lugar para indicar una ubicación." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: No ______ pan ni leche en casa.", correctAnswer: "hay", explanation: "Se usa 'hay' para indicar la existencia (o en este caso, la no existencia) de algo." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: ¡______! Qué día tan largo llevo.", correctAnswer: "Ay", explanation: "Se usa '¡Ay!' como una interjección para expresar un sentimiento, como el cansancio o la queja." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: Deja el móvil encima del sofá, ______.", correctAnswer: "ahí", explanation: "Se usa 'ahí' para indicar el lugar donde se debe dejar el móvil." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: ¿Cuántos estudiantes ______ hoy en clase?", correctAnswer: "hay", explanation: "Se usa 'hay' para preguntar por la existencia o cantidad de algo." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: ______ una tienda nueva en la esquina.", correctAnswer: "Hay", explanation: "Se usa 'Hay' para indicar la existencia de la tienda." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: ¡______! ¡Se me ha roto el vaso!", correctAnswer: "Ay", explanation: "Se usa '¡Ay!' como una interjección para expresar sorpresa o disgusto." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: Pon los platos y los vasos ______.", correctAnswer: "ahí", explanation: "Se usa 'ahí' para indicar el lugar donde se deben poner los platos y vasos." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: No ______ tiempo para terminar el trabajo.", correctAnswer: "hay", explanation: "Se usa 'hay' para indicar la no existencia de tiempo." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: ¡______! ¡Me he quemado con el café!", correctAnswer: "Ay", explanation: "Se usa '¡Ay!' como una interjección para expresar dolor." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: ______ un concierto este fin de semana.", correctAnswer: "Hay", explanation: "Se usa 'Hay' para indicar la existencia de un evento." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: El cargador está ______, al lado de la cama.", correctAnswer: "ahí", explanation: "Se usa 'ahí' para indicar la ubicación del cargador." },
-    { type: 'fill-in-the-blank', questionText: "Completa las siguientes frases utilizando Hay, ahí y ay: ¡______, qué dolor de cabeza!", correctAnswer: "Ay", explanation: "Se usa '¡Ay!' como una interjección para expresar dolor." }
+    {
+        type: 'multiple-choice',
+        questionText: "En la mesa _______ muchos libros y carpetas.",
+        options: ["Hay", "ahí", "Ay"],
+        correctAnswerIndex: 0,
+        explanation: "Hay - აღნიშნავს არსებობას (არის/დევს).",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "_______ Me he hecho daño en la pierna.",
+        options: ["¡Ay!", "Hay", "Ahí"],
+        correctAnswerIndex: 0,
+        explanation: "¡Ay! - ტკივილის ან ემოციის გამომხატველი შორისდებული.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Coloca las llaves y el abrigo _______.",
+        options: ["ahí", "hay", "ay"],
+        correctAnswerIndex: 0,
+        explanation: "ahí - მიუთითებს ადგილმდებარეობაზე (მანდ/იქ).",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "No _______ pan ni leche en casa.",
+        options: ["hay", "ahí", "ay"],
+        correctAnswerIndex: 0,
+        explanation: "hay - აღნიშნავს არარსებობას (არ არის).",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "_______ Qué día tan largo llevo.",
+        options: ["¡Ay!", "Hay", "Ahí"],
+        correctAnswerIndex: 0,
+        explanation: "¡Ay! - ემოციის (დაღლილობის) გამოხატვა.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Deja el móvil encima del sofá _______.",
+        options: ["ahí", "hay", "ay"],
+        correctAnswerIndex: 0,
+        explanation: "ahí - ადგილის მითითება.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿Cuántos estudiantes _______ hoy en clase?",
+        options: ["hay", "ahí", "ay"],
+        correctAnswerIndex: 0,
+        explanation: "hay - რაოდენობის/არსებობის კითხვა.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "_______ una tienda nueva en la esquina.",
+        options: ["Hay", "Ahí", "Ay"],
+        correctAnswerIndex: 0,
+        explanation: "Hay - არსებობის აღნიშვნა.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "_______ ¡Se me ha roto el vaso!",
+        options: ["¡Ay!", "Hay", "Ahí"],
+        correctAnswerIndex: 0,
+        explanation: "¡Ay! - შეცბუნება/ემოცია.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Pon los platos y los vasos _______.",
+        options: ["ahí", "hay", "ay"],
+        correctAnswerIndex: 0,
+        explanation: "ahí - ადგილის მითითება.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "No _______ tiempo para terminar el trabajo.",
+        options: ["hay", "ahí", "ay"],
+        correctAnswerIndex: 0,
+        explanation: "hay - დროის არსებობა/არარსებობა.",
+        level: 'A2'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "_______ ¡Me he quemado con el café!",
+        options: ["¡Ay!", "Hay", "Ahí"],
+        correctAnswerIndex: 0,
+        explanation: "¡Ay! - ტკივილის გამოხატვა.",
+        level: 'A1'
+    }
 ];

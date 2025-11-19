@@ -1,3 +1,4 @@
+
 import * as state from './state.js';
 import * as ui from './ui-manager.js';
 import * as settings from './settings.js';
@@ -457,6 +458,14 @@ const loadQuestion = () => {
 
     const question = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
     const lang = settings.getSettings().language;
+
+    // Render Reading Text if available (Common logic)
+    if (question.readingText) {
+        const readingBox = document.createElement('div');
+        readingBox.className = 'reading-text-box';
+        readingBox.textContent = question.readingText;
+        ui.questionImageContainer.appendChild(readingBox);
+    }
 
     // Split instruction from question text to style them differently
     const parts = question.questionText.split(':');

@@ -1,3 +1,4 @@
+
 import { allTopics, categories } from './topics-data.js';
 import * as state from './modules/state.js';
 import * as ui from './modules/ui-manager.js';
@@ -7,6 +8,7 @@ import * as quiz from './modules/quiz-handler.js';
 import * as flashcard from './modules/flashcard-handler.js';
 import * as learning from './modules/learning-module.js';
 import * as statistics from './modules/statistics-handler.js';
+import * as assessment from './modules/assessment-handler.js';
 
 const learningModules = {
     'operador-carretilla': learning.operadorCarretillaLearning
@@ -163,6 +165,18 @@ const init = () => {
         ui.showScreen(ui.startScreen);
         ui.openSideMenu();
     });
+
+    // Assessment Flow Listeners
+    ui.startAssessmentFlowBtn.addEventListener('click', assessment.showAssessmentStartScreen);
+    ui.startSpanishAssessmentBtn.addEventListener('click', assessment.startAssessment);
+    ui.backFromAssessmentStartBtn.addEventListener('click', ui.goHome);
+    ui.assessmentHomeBtn.addEventListener('click', ui.goHome);
+    ui.assessmentRetryBtn.addEventListener('click', assessment.startAssessment);
+    
+    // Assessment Review Modal
+    ui.assessmentReviewBtn.addEventListener('click', () => ui.assessmentReviewModal.classList.remove('hidden'));
+    ui.closeAssessmentReviewBtn.addEventListener('click', () => ui.assessmentReviewModal.classList.add('hidden'));
+    ui.closeAssessmentReviewBtn2.addEventListener('click', () => ui.assessmentReviewModal.classList.add('hidden'));
 
     // Side Menu
     ui.menuBtn.addEventListener('click', ui.openSideMenu);

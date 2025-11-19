@@ -1,116 +1,182 @@
+
 export const questions = [
+    // Parte 1: Completa las frases
     {
-        questionText: "¿______ es tu nombre? (რა არის შენი სახელი?)",
+        type: 'multiple-choice',
+        questionText: "¿_______ hora es?",
+        options: ["Qué", "Cuál", "Cómo"],
+        correctAnswerIndex: 0,
+        explanation: "დროსთან დაკავშირებით ვიყენებთ Qué-ს (Qué hora es).",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿_______ te gusta hacer los fines de semana?",
+        options: ["Qué", "Cuál", "Quién"],
+        correctAnswerIndex: 0,
+        explanation: "ზოგადი ქმედების შესახებ კითხვისას ვიყენებთ Qué-ს.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿_______ es tu número de teléfono?",
+        options: ["Qué", "Cuál", "Cómo"],
+        correctAnswerIndex: 1,
+        explanation: "როდესაც ინფორმაცია კონკრეტულია (როგორიცაა ნომერი, სახელი), ვიყენებთ Cuál-ს.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿_______ cuestan las manzanas?",
+        options: ["Cuánto", "Cuántos", "Qué"],
+        correctAnswerIndex: 0,
+        explanation: "ფასის ან რაოდენობის საკითხავად ვიყენებთ Cuánto-ს.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿_______ vas al médico?",
+        options: ["Cuándo", "Dónde", "Qué"],
+        correctAnswerIndex: 0,
+        explanation: "დროის საკითხავად ვიყენებთ Cuándo-ს.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿_______ años tienes?",
+        options: ["Cuántos", "Cuánto", "Qué"],
+        correctAnswerIndex: 0,
+        explanation: "ასაკის საკითხავად, რადგან 'años' მრავლობითია, ვიყენებთ Cuántos-ს.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿_______ prefieres, café o té?",
+        options: ["Qué", "Cuál", "Quién"],
+        correctAnswerIndex: 0,
+        explanation: "უპირატესობის საკითხავად ზოგადად ვიყენებთ Qué-ს.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿_______ vives tú?",
+        options: ["Dónde", "Adónde", "De dónde"],
+        correctAnswerIndex: 0,
+        explanation: "ადგილმდებარეობის (სტატიკური) საკითხავად ვიყენებთ Dónde-ს.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿_______ libros hay en la estantería?",
+        options: ["Cuántos", "Cuánto", "Qué"],
+        correctAnswerIndex: 0,
+        explanation: "რაოდენობის საკითხავად (მამრობითი, მრავლობითი) ვიყენებთ Cuántos-ს.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿_______ son tus zapatos, los negros o los marrones?",
+        options: ["Cuáles", "Qué", "Quiénes"],
+        correctAnswerIndex: 0,
+        explanation: "არჩევანის გაკეთებისას კონკრეტულ საგნებს შორის ვიყენებთ Cuáles-ს.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿_______ estás tan cansado hoy?",
+        options: ["Por qué", "Porque", "Para qué"],
+        correctAnswerIndex: 0,
+        explanation: "მიზეზის საკითხავად ვიყენებთ Por qué-ს.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "¿_______ es tu cantante favorito?",
         options: ["Quién", "Qué", "Cuál"],
-        correctAnswerIndex: 1,
-        explanation: "გამოიყენება იდენტობის/ობიექტის გასარკვევად."
-    },
-    {
-        questionText: "¿______ es tu profesora favorita? (ვინ არის შენი საყვარელი მასწავლებელი?)",
-        options: ["Quién", "Qué", "Cuál"],
         correctAnswerIndex: 0,
-        explanation: "გამოიყენება პიროვნების გასარკვევად."
+        explanation: "პიროვნების შესახებ კითხვისას ვიყენებთ Quién-ს.",
+        level: 'A1'
     },
+
+    // Parte 2: Corrige el error (Converted to multiple choice selection)
     {
-        questionText: "Tengo dos coches. ¿______ prefieres? (ორი მანქანა მაქვს. რომელი გირჩევნია?)",
-        options: ["Qué", "Quién", "Cuál"],
-        correctAnswerIndex: 2,
-        explanation: "გამოიყენება არჩევანის გასაკეთებლად შეზღუდულ ვარიანტებს შორის."
-    },
-    {
-        questionText: "¿______ vives? (სად ცხოვრობ?)",
-        options: ["Cuándo", "Dónde", "Cómo"],
-        correctAnswerIndex: 1,
-        explanation: "გამოიყენება ადგილმდებარეობის საკითხავად."
-    },
-    {
-        questionText: "¿______ es la reunión? (როდის არის შეხვედრა?)",
-        options: ["Cuándo", "Cómo", "Cuánto"],
-        correctAnswerIndex: 0,
-        explanation: "გამოიყენება დროის საკითხავად."
-    },
-    {
-        questionText: "¿______ estás tan feliz hoy? (რატომ ხარ დღეს ასეთი ბედნიერი?)",
-        options: ["Dónde", "Por qué", "Cómo"],
-        correctAnswerIndex: 1,
-        explanation: "გამოიყენება მიზეზის საკითხავად. '¿Por qué?' ეკითხება მიზეზს."
-    },
-    {
-        questionText: "¿______ hermanos tienes? (რამდენი და-ძმა გაქვს?)",
-        options: ["Cuántos", "Cuánto", "Cuántas"],
-        correctAnswerIndex: 0,
-        explanation: "გამოიყენება რაოდენობის საკითხავად. 'Cuántos' ეთანხმება მამრობითი სქესის, მრავლობით რიცხვში არსებულ სახელს (hermanos)."
-    },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ hora es?", correctAnswer: ["Qué", "Que"], explanation: "'¿Qué hora es?' es la forma estándar de preguntar la hora." },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ te gusta hacer los fines de semana?", correctAnswer: ["Qué", "Que"], explanation: "Se pregunta por actividades en general." },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ es tu número de teléfono?", correctAnswer: "Cuál", explanation: "Se usa 'cuál' para pedir una información específica dentro de un conjunto (números de teléfono)." },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ cuestan las manzanas?", correctAnswer: "Cuánto", explanation: "Se pregunta por una cantidad (dinero)." },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ vas al médico?", correctAnswer: "Cuándo", explanation: "Se pregunta por el tiempo." },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ años tienes?", correctAnswer: "Cuántos", explanation: "Se pregunta por una cantidad (años)." },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ prefieres, café o té?", correctAnswer: ["Qué", "Que"], explanation: "Se pregunta por una preferencia general." },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ vives tú?", correctAnswer: "Dónde", explanation: "Se pregunta por un lugar." },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ libros hay en la estantería?", correctAnswer: "Cuántos", explanation: "Se pregunta por una cantidad (libros)." },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ son tus zapatos, los negros o los marrones?", correctAnswer: "Cuáles", explanation: "Se pregunta para elegir entre opciones específicas." },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ estás tan cansado hoy?", correctAnswer: ["Por qué", "Porque"], explanation: "Se pregunta por la razón o causa." },
-    { type: 'fill-in-the-blank', questionText: "Completa la pregunta con la palabra interrogativa correcta: ¿______ es tu cantante favorito?", correctAnswer: "Quién", explanation: "Se pregunta por una persona." },
-    {
-        questionText: "Elige la palabra correcta: ¿______ es tu color favorito?",
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿_______ es tu color favorito?",
         options: ["Cuál", "Cuánto", "Qué"],
         correctAnswerIndex: 0,
-        explanation: "Se usa 'Cuál' para preguntar por una elección dentro de un grupo (colores)."
+        explanation: "უნდა იყოს Cuál, რადგან ვარჩევთ კონკრეტულს.",
+        level: 'A1'
     },
     {
-        questionText: "Elige la palabra correcta: ¿______ libros de estos te gusta más?",
-        options: ["Cuáles", "Qué", "Cuántos"],
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿_______ libros de estos te gusta más?",
+        options: ["Cuáles", "Qué", "Quién"],
         correctAnswerIndex: 0,
-        explanation: "Se usa 'Cuáles' para elegir entre varios elementos específicos (estos libros)."
+        explanation: "უნდა იყოს Cuáles (რომლები), რადგან არჩევანია წიგნებს შორის.",
+        level: 'A1'
     },
     {
-        questionText: "Elige la palabra correcta: ¿______ años tienes?",
-        options: ["Cuándo", "Cuántos", "Qué"],
-        correctAnswerIndex: 1,
-        explanation: "'Cuántos' se usa para preguntar por la cantidad de años."
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿_______ años tienes?",
+        options: ["Cuántos", "Cuándo", "Qué"],
+        correctAnswerIndex: 0,
+        explanation: "ასაკისთვის: Cuántos.",
+        level: 'A1'
     },
     {
-        questionText: "Elige la palabra correcta: ¿______ hora es?",
-        options: ["Dónde", "Cuál", "Qué"],
-        correctAnswerIndex: 2,
-        explanation: "La expresión fija para preguntar la hora es '¿Qué hora es?'."
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿_______ hora es?",
+        options: ["Qué", "Dónde", "Cuál"],
+        correctAnswerIndex: 0,
+        explanation: "საათის საკითხავად: Qué.",
+        level: 'A1'
     },
     {
-        questionText: "Elige la palabra correcta: ¿______ cuesta el abrigo?",
-        options: ["Cuál", "Cuánto", "Qué"],
-        correctAnswerIndex: 1,
-        explanation: "'Cuánto' se usa para preguntar por el precio."
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿_______ cuesta el abrigo?",
+        options: ["Cuánto", "Cuál", "Qué"],
+        correctAnswerIndex: 0,
+        explanation: "ფასის საკითხავად: Cuánto.",
+        level: 'A1'
     },
     {
-        questionText: "Elige la palabra correcta: ¿______ personas hay en la clase?",
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿_______ personas hay en la clase?",
         options: ["Cuántas", "Cuánto", "Qué"],
         correctAnswerIndex: 0,
-        explanation: "'Cuántas' concuerda en género y número con 'personas' (femenino, plural)."
+        explanation: "რაოდენობა (მდედრობითი, მრავლობითი): Cuántas.",
+        level: 'A1'
     },
     {
-        questionText: "Elige la palabra correcta: ¿______ te llamas tú?",
-        options: ["Qué", "Cómo", "Cuál"],
-        correctAnswerIndex: 1,
-        explanation: "La expresión fija para preguntar el nombre es '¿Cómo te llamas?'."
-    },
-    {
-        questionText: "Elige la palabra correcta: ¿______ es el día de tu cumpleaños?",
-        options: ["Cómo", "Cuándo", "Qué"],
-        correctAnswerIndex: 1,
-        explanation: "'Cuándo' se usa para preguntar por una fecha."
-    },
-    {
-        questionText: "Elige la palabra correcta: ¿______ prefieres, el azul o el rojo?",
-        options: ["Cuál", "Qué", "Quién"],
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿_______ te llamas tú?",
+        options: ["Cómo", "Qué", "Quién"],
         correctAnswerIndex: 0,
-        explanation: "'Cuál' se usa para elegir entre opciones específicas."
+        explanation: "სახელის საკითხავად: Cómo.",
+        level: 'A1'
     },
     {
-        questionText: "Elige la palabra correcta: ¿______ no viniste ayer?",
-        options: ["Por qué", "Qué", "Para qué"],
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿_______ es el día de tu cumpleaños?",
+        options: ["Cuándo", "Cómo", "Dónde"],
         correctAnswerIndex: 0,
-        explanation: "'Por qué' se usa para preguntar por la razón o causa."
+        explanation: "დროის საკითხავად: Cuándo.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿_______ prefieres, el azul o el rojo?",
+        options: ["Cuál", "Cuáles", "Qué"],
+        correctAnswerIndex: 0,
+        explanation: "არჩევანი ორ კონკრეტულს შორის: Cuál.",
+        level: 'A1'
+    },
+    {
+        type: 'multiple-choice',
+        questionText: "Corrección: ¿_______ tú no viniste ayer?",
+        options: ["Por qué", "Para qué", "Qué"],
+        correctAnswerIndex: 0,
+        explanation: "მიზეზის საკითხავად: Por qué.",
+        level: 'A1'
     }
 ];

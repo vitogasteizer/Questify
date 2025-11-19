@@ -1,5 +1,6 @@
 
 
+
 import { questions as logisticaQuestions } from './temas/tema1/test.js';
 import { questions as preparacionPedidosQuestions } from './temas/tema2/test.js';
 import { questions as preparacionPedidos2Questions } from './temas/tema3/test.js';
@@ -23,6 +24,7 @@ import { topicImageUrls } from './temas/image-links.js';
 export const categories = [
     { id: 'logistica', nameKey: 'category_logistica', colorClass: 'bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200 hover:border-blue-400', activeColorClass: 'bg-blue-600 text-white border-blue-700' },
     { id: 'espanol', nameKey: 'category_espanol', colorClass: 'bg-red-100 text-red-800 border-red-200 hover:bg-red-200 hover:border-red-400', activeColorClass: 'bg-red-600 text-white border-red-700' },
+    { id: 'ingles', nameKey: 'category_all', colorClass: 'bg-indigo-100 text-indigo-800 border-indigo-200 hover:bg-indigo-200 hover:border-indigo-400', activeColorClass: 'bg-indigo-600 text-white border-indigo-700' },
     { id: 'matematicas', nameKey: 'category_matematicas', colorClass: 'bg-green-100 text-green-800 border-green-200 hover:bg-green-200 hover:border-green-400', activeColorClass: 'bg-green-600 text-white border-green-700' },
     { id: 'historia', nameKey: 'category_historia', colorClass: 'bg-amber-100 text-amber-800 border-amber-200 hover:bg-amber-200 hover:border-amber-400', activeColorClass: 'bg-amber-500 text-white border-amber-600' },
     { id: 'georgian', nameKey: 'category_georgian', colorClass: 'bg-purple-100 text-purple-800 border-purple-200 hover:bg-purple-200 hover:border-purple-400', activeColorClass: 'bg-purple-600 text-white border-purple-700' },
@@ -67,6 +69,7 @@ const individualTopics = [
     {
       id: 'por-vs-para',
       categoryId: 'espanol',
+      level: 'B1',
       name: 'Uso de "Por" y "Para"',
       description: `Aprende la diferencia entre "por" y "para" con ejercicios prácticos. (${porParaQuestions.length} preguntas)`,
       questions: porParaQuestions,
@@ -75,6 +78,7 @@ const individualTopics = [
     {
       id: 'ser-vs-estar',
       categoryId: 'espanol',
+      level: 'A1',
       name: 'Uso de "Ser" y "Estar"',
       description: `Aprende cuándo usar "ser" y "estar" con ejercicios prácticos. (${serEstarQuestions.length} preguntas)`,
       questions: serEstarQuestions,
@@ -83,6 +87,7 @@ const individualTopics = [
     {
       id: 'muy-vs-mucho',
       categoryId: 'espanol',
+      level: 'A2',
       name: 'Uso de "Muy" y "Mucho"',
       description: `Aprende la diferencia entre "muy" y "mucho" con ejercicios prácticos. (${muyMuchoQuestions.length} preguntas, ${muyMuchoFlashcards.length} flashcards)`,
       questions: muyMuchoQuestions,
@@ -92,6 +97,7 @@ const individualTopics = [
     {
       id: 'que-vs-quien',
       categoryId: 'espanol',
+      level: 'A2',
       name: 'Interrogativos "¿Qué?" y "¿Quién?"',
       description: `Practica la formulación de preguntas con "¿qué?" y "¿quién?". (${queQuienQuestions.length} preguntas)`,
       questions: queQuienQuestions,
@@ -100,6 +106,7 @@ const individualTopics = [
     {
       id: 'interrogativos-espanoles',
       categoryId: 'espanol',
+      level: 'A1',
       name: 'Palabras Interrogativas',
       description: `Aprende y practica las palabras para hacer preguntas en español. (${interrogativosQuestions.length} preguntas, ${interrogativosFlashcards.length} flashcards)`,
       questions: interrogativosQuestions,
@@ -109,6 +116,7 @@ const individualTopics = [
     {
       id: 'hay-ahi-ay',
       categoryId: 'espanol',
+      level: 'A1',
       name: 'Uso de "Hay", "Ahí" y "Ay"',
       description: `Domina la diferencia entre estas tres palabras homófonas. (${hayAhiAyQuestions.length} preguntas)`,
       questions: hayAhiAyQuestions,
@@ -117,6 +125,7 @@ const individualTopics = [
     {
       id: 'comparativos',
       categoryId: 'espanol',
+      level: 'A2',
       name: 'Comparativos',
       description: `Practica las estructuras comparativas como "más que" y "tan como". (${comparativosQuestions.length} preguntas)`,
       questions: comparativosQuestions,
@@ -125,6 +134,7 @@ const individualTopics = [
     {
       id: 'cuantificadores',
       categoryId: 'espanol',
+      level: 'B1',
       name: 'Cuantificadores',
       description: `Aprende a usar cuantificadores como "mucho", "poco", "demasiado" y "nada". (${cuantificadoresQuestions.length} preguntas)`,
       questions: cuantificadoresQuestions,
@@ -133,6 +143,7 @@ const individualTopics = [
     {
       id: 'demostrativos',
       categoryId: 'espanol',
+      level: 'A1',
       name: 'Demostrativos',
       description: `Ejercicios para usar correctamente "este", "ese", "aquel" y sus variantes. (${demostrativosQuestions.length} preguntas)`,
       questions: demostrativosQuestions,
@@ -141,6 +152,7 @@ const individualTopics = [
     {
       id: 'tener-que',
       categoryId: 'espanol',
+      level: 'A2',
       name: 'Tener que + Infinitivo',
       description: `Practica la expresión de obligación con la estructura "tener que". (${tenerQueQuestions.length} preguntas)`,
       questions: tenerQueQuestions,
@@ -152,7 +164,8 @@ const finalTopics = [];
 
 const categoryImageMap = {
     logistica: topicImageUrls.logistica,
-    espanol: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    espanol: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png',
+    ingles: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png' // Placeholder
 };
 
 categories.forEach(category => {
@@ -168,6 +181,8 @@ categories.forEach(category => {
             const combinedTopic = {
                 id: `${category.id}-combinado`,
                 categoryId: category.id,
+                // Assign 'Mix' level for Spanish or English combined tests
+                level: (category.id === 'espanol' || category.id === 'ingles') ? 'Mix' : undefined,
                 name: `Test Combinado de ${capitalizedCategoryName}`,
                 description: `Preguntas aleatorias de todos los temas de ${capitalizedCategoryName}. (${combinedQuestions.length} preguntas)`,
                 questions: combinedQuestions,

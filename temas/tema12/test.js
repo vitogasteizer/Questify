@@ -1,68 +1,51 @@
+
 export const questions = [
     {
-        questionText: "En esta clase hay ______ estudiantes.",
-        options: ["demasiados", "algo", "poco"],
+        type: 'multiple-choice',
+        questionText: "En esta clase hay _______ estudiantes.",
+        options: ["demasiados", "nada", "mucho"],
         correctAnswerIndex: 0,
-        explanation: "'Demasiados' concuerda con el sustantivo masculino plural 'estudiantes' e indica una cantidad excesiva."
+        explanation: "'Estudiantes' არის მრავლობითი, ამიტომ 'demasiados'.",
+        level: 'B1'
     },
     {
-        questionText: "Hoy tengo ______ trabajo.",
-        options: ["mucho", "nada", "pocos"],
+        type: 'multiple-choice',
+        questionText: "Hoy tengo _______ trabajo.",
+        options: ["mucho", "demasiados", "pocos"],
         correctAnswerIndex: 0,
-        explanation: "'Mucho' concuerda con el sustantivo masculino singular 'trabajo' e indica una gran cantidad."
+        explanation: "'Trabajo' არის მხოლობითი, ამიტომ 'mucho'.",
+        level: 'B1'
     },
     {
-        questionText: "No tengo ______ hambre.",
-        options: ["bastante", "algo", "nada"],
-        correctAnswerIndex: 2,
-        explanation: "'Nada' se usa en oraciones negativas para indicar la ausencia total de algo."
+        type: 'multiple-choice',
+        questionText: "No tengo _______ hambre.",
+        options: ["nada", "algo", "bastante"],
+        correctAnswerIndex: 0,
+        explanation: "უარყოფით წინადადებაში ვიყენებთ 'nada' (საერთოდ არ მაქვს).",
+        level: 'B1'
     },
     {
-        questionText: "He comido ______ dulces.",
-        options: ["mucho", "bastantes", "poco"],
+        type: 'multiple-choice',
+        questionText: "He comido _______ dulces.",
+        options: ["bastante", "bastantes", "mucho"],
         correctAnswerIndex: 1,
-        explanation: "'Bastantes' es una forma de 'bastante' que concuerda con el sustantivo plural 'dulces', indicando una cantidad suficiente o considerable."
+        explanation: "'Dulces' არის მრავლობითი, ამიტომ 'bastantes'.",
+        level: 'B1'
     },
     {
-        questionText: "En la calle hay ______ ruido.",
-        options: ["poco", "pocos", "poca"],
+        type: 'multiple-choice',
+        questionText: "En la calle hay _______ ruido.",
+        options: ["poco", "pocos", "muchos"],
         correctAnswerIndex: 0,
-        explanation: "'Poco' concuerda con el sustantivo masculino singular 'ruido' para indicar una cantidad pequeña."
+        explanation: "'Ruido' არის მხოლობითი, ამიტომ 'poco'.",
+        level: 'B1'
     },
     {
-        questionText: "Hay ______ interesante en la televisión.",
-        options: ["algo", "nada", "mucho"],
+        type: 'multiple-choice',
+        questionText: "Hay _______ interesante en la televisión.",
+        options: ["algo", "nada", "pocos"],
         correctAnswerIndex: 0,
-        explanation: "'Algo' se usa para referirse a una cosa o cantidad indefinida."
-    },
-    {
-        questionText: "No tengo ______ amigas en esta ciudad.",
-        options: ["muchas", "muy", "algo"],
-        correctAnswerIndex: 0,
-        explanation: "'Muchas' concuerda con el sustantivo femenino plural 'amigas'."
-    },
-    {
-        questionText: "Hay ______ comida en la nevera.",
-        options: ["poca", "pocos", "muy"],
-        correctAnswerIndex: 0,
-        explanation: "'Poca' concuerda con el sustantivo femenino singular 'comida'."
-    },
-    {
-        questionText: "He dormido ______ esta noche. No estoy cansado.",
-        options: ["bastante", "pocos", "nada"],
-        correctAnswerIndex: 0,
-        explanation: "'Bastante' actúa como adverbio para indicar una cantidad suficiente."
-    },
-    {
-        questionText: "Necesitamos ______ sillas para los invitados.",
-        options: ["más", "mucho", "algo"],
-        correctAnswerIndex: 0,
-        explanation: "'Más' es un cuantificador que indica una cantidad adicional."
-    },
-    {
-        questionText: "En invierno, nieva ______ en las montañas.",
-        options: ["muy", "mucho", "pocos"],
-        correctAnswerIndex: 1,
-        explanation: "'Mucho' actúa como adverbio modificando al verbo 'nieva'."
+        explanation: "დადებით წინადადებაში გაურკვეველი ნივთისთვის ვიყენებთ 'algo'.",
+        level: 'B1'
     }
 ];
