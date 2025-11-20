@@ -1,8 +1,3 @@
-
-
-
-
-
 import { allTopics, categories } from './topics-data.js';
 import * as state from './modules/state.js';
 import * as ui from './modules/ui-manager.js';
@@ -97,31 +92,6 @@ const handleTopicAction = (e) => {
     }
 };
 
-const handleSaveSettings = () => {
-    const originalLang = settings.getSettings().language;
-    const newLang = state.getStagedLanguage();
-    
-    settings.setLanguage(newLang);
-    settings.saveSettings();
-    
-    if (originalLang !== newLang) {
-        ui.applyTranslations(newLang);
-        // If we are on the start screen, reset to category view and re-render
-        if (!ui.startScreen.classList.contains('hidden')) {
-            ui.showCategoryView();
-            ui.renderCategories();
-        }
-         // Update title
-         const currentUsername = state.getUsername();
-         if (currentUsername) {
-            document.title = `${currentUsername} - ${settings.translations[newLang].main_app_title}`;
-            ui.welcomeMessage.textContent = settings.translations[newLang].welcome_user_message.replace('{{username}}', currentUsername);
-        }
-    }
-    
-    ui.closeSideMenu();
-};
-
 const init = () => {
     // Reset session-specific state on each new load
     state.resetSessionSeenQuestions();
@@ -192,23 +162,46 @@ const init = () => {
     // Side Menu
     ui.menuBtn.addEventListener('click', ui.openSideMenu);
     ui.closeSettingsBtn.addEventListener('click', ui.closeSideMenu);
-    ui.cancelSettingsBtn.addEventListener('click', ui.closeSideMenu);
     ui.menuBackdrop.addEventListener('click', ui.closeSideMenu);
-    ui.saveSettingsBtn.addEventListener('click', handleSaveSettings);
     
-    // Language Switcher
+    // Language Switcher - Immediate Action
     ui.languageSwitcher.addEventListener('click', (e) => {
         const button = e.target.closest('.lang-btn');
         if (!button) return;
 
         const newLang = button.dataset.lang;
-        state.setStagedLanguage(newLang);
+        const currentLang = settings.getSettings().language;
 
-        // Update UI
+        if (newLang === currentLang) return;
+
+        // Apply and Save
+        settings.setLanguage(newLang);
+        settings.saveSettings();
+        
+        ui.applyTranslations(newLang);
+        
+        // Update UI Active State
         ui.languageSwitcher.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.classList.remove('active');
+            btn.classList.toggle('active', btn.dataset.lang === newLang);
         });
-        button.classList.add('active');
+
+        // Update Dynamic Titles
+        const currentUsername = state.getUsername();
+        if (currentUsername) {
+            document.title = `${currentUsername} - ${settings.translations[newLang].main_app_title}`;
+            ui.welcomeMessage.textContent = settings.translations[newLang].welcome_user_message.replace('{{username}}', currentUsername);
+            ui.settingsGreeting.textContent = settings.translations[newLang].settings_greeting.replace('{{username}}', currentUsername);
+        }
+        
+        // Refresh categories if visible to update labels
+        if (!ui.startScreen.classList.contains('hidden')) {
+             if (!ui.categoryCardsContainer.classList.contains('hidden')) {
+                ui.renderCategories();
+             }
+        }
+
+        // Close menu immediately
+        ui.closeSideMenu();
     });
 
     // Quiz Options

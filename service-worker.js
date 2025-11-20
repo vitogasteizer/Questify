@@ -1,5 +1,4 @@
-
-const CACHE_NAME = 'logistica-quiz-cache-v23';
+const CACHE_NAME = 'logistica-quiz-cache-v24';
 const urlsToCache = [
   './',
   './index.html',
@@ -35,8 +34,9 @@ const urlsToCache = [
   './temas/tema14/test.js',
   './manifest.json',
   'https://cdn.tailwindcss.com',
-  'https://i.postimg.cc/3r2y2H07/Questify_Logo_Web.png',
-  'https://i.postimg.cc/XqyYDC4f/Quistify_App_Icon.png',
+  'https://i.postimg.cc/rwsLkpQP/Questify_Logo_Web.png',
+  'https://i.postimg.cc/NMHsw0G3/App_icon_Questify.png',
+  'https://i.postimg.cc/zGv1rf0x/Questify_Favicon.png',
   'https://i.postimg.cc/k4x134dZ/logistics-concept.png',
   'https://i.postimg.cc/Y0z4Q2Y7/order-picking.png',
   'https://i.postimg.cc/8cMvrK5B/inventory-management.png',

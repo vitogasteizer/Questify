@@ -1,3 +1,5 @@
+
+
 import { allTopics, categories } from '../topics-data.js';
 import * as state from './state.js';
 import { translations, isSoundEnabled, soundOnIconSVG, soundOffIconSVG, getSettings, playNavigationSound } from './settings.js';
@@ -24,6 +26,7 @@ export const questionTextEl = document.getElementById('question-text');
 export const chooseAnswerSubtitle = document.getElementById('choose-answer-subtitle');
 export const optionsContainer = document.getElementById('options-container');
 export const explanationContainer = document.getElementById('explanation-container');
+export const quizFooter = document.getElementById('quiz-footer');
 export const nextButtonContainer = document.getElementById('next-button-container');
 export const resultsTitle = document.getElementById('results-title');
 export const resultsMessage = document.getElementById('results-message');
@@ -53,8 +56,6 @@ export const sideMenu = document.getElementById('side-menu');
 export const menuBackdrop = document.getElementById('menu-backdrop');
 export const settingsGreeting = document.getElementById('settings-greeting');
 export const closeSettingsBtn = document.getElementById('close-settings-btn');
-export const cancelSettingsBtn = document.getElementById('cancel-settings-btn');
-export const saveSettingsBtn = document.getElementById('save-settings-btn');
 export const languageSwitcher = document.getElementById('language-switcher');
 export const quizOptionsScreen = document.getElementById('quiz-options-screen');
 export const quizTopicTitle = document.getElementById('quiz-topic-title');
@@ -116,6 +117,7 @@ export const backFromStatisticsBtn = document.getElementById('back-from-statisti
 export const flashcardFooter = document.getElementById('flashcard-footer');
 export const learningFooter = document.getElementById('learning-footer');
 export const summaryNextBtnContainer = document.getElementById('summary-next-btn-container');
+export const mainFooter = document.getElementById('main-footer');
 
 // Reading Elements
 export const readingListScreen = document.getElementById('reading-list-screen');
@@ -157,7 +159,7 @@ export const openSideMenu = () => {
     menuBackdrop.classList.add('is-open');
     
     const currentLang = getSettings().language;
-    state.setStagedLanguage(currentLang);
+    // We don't use staged language anymore, just highlight current
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === currentLang);
     });
@@ -258,7 +260,7 @@ export function showScreen(screen) {
     readingSessionScreen.classList.add('hidden');
 
     // Also hide footers by default
-    nextButtonContainer.classList.add('hidden');
+    if(quizFooter) quizFooter.classList.add('hidden');
     flashcardFooter.classList.add('hidden');
     learningFooter.classList.add('hidden');
     if (summaryNextBtnContainer) summaryNextBtnContainer.classList.add('hidden');
@@ -291,7 +293,7 @@ export function showScreen(screen) {
 
     // Show specific footers if needed
     if (screen === quizScreen) {
-        nextButtonContainer.classList.remove('hidden');
+        if(quizFooter) quizFooter.classList.remove('hidden');
     } else if (screen === flashcardScreen) {
         flashcardFooter.classList.remove('hidden');
     } else if (screen === learningScreen) {
