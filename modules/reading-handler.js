@@ -1,6 +1,4 @@
 
-
-
 import * as ui from './ui-manager.js';
 import * as state from './state.js';
 import * as settings from './settings.js';
@@ -59,6 +57,8 @@ const startReadingSession = (story) => {
 
     // Populate Header & Audio
     ui.rsStoryTitle.textContent = story.title;
+    
+    // Set audio source directly
     if (story.audioUrl) {
         ui.rsAudioPlayer.src = story.audioUrl;
         ui.rsAudioPlayer.parentElement.classList.remove('hidden');
@@ -111,9 +111,6 @@ const renderQuestions = (questions) => {
 
         const optionsContainer = document.createElement('div');
         optionsContainer.className = 'space-y-2';
-        
-        // Shuffle options logic if needed, but usually reading questions follow order. 
-        // Assuming options are fixed or we just render them. Let's stick to indices.
         
         q.options.forEach((opt, optIndex) => {
             const btn = document.createElement('button');
@@ -191,13 +188,10 @@ const finishReadingSession = () => {
     // Prepare results data
     const timeTaken = Math.floor((Date.now() - currentSessionState.startTime) / 1000);
     
-    // We can reuse the standard Results Screen but populate it manually
-    // or create a specific one. Reusing is efficient.
-    
     // Update Stats
     statistics.addTestResult({
         correct: correctCount,
-        incorrect: totalQuestions - correctCount, // Count unanswered as incorrect effectively for stats
+        incorrect: totalQuestions - correctCount,
         time: timeTaken,
         questionCount: totalQuestions
     });
