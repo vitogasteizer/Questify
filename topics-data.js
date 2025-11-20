@@ -1,6 +1,8 @@
 
 
 
+
+
 import { questions as logisticaQuestions } from './temas/tema1/test.js';
 import { questions as preparacionPedidosQuestions } from './temas/tema2/test.js';
 import { questions as preparacionPedidos2Questions } from './temas/tema3/test.js';
@@ -19,6 +21,7 @@ import { questions as comparativosQuestions } from './temas/tema11/test.js';
 import { questions as cuantificadoresQuestions } from './temas/tema12/test.js';
 import { questions as demostrativosQuestions } from './temas/tema13/test.js';
 import { questions as tenerQueQuestions } from './temas/tema14/test.js';
+import { getAllReadingQuestions, stories } from './temas/reading/reading-data.js';
 import { topicImageUrls } from './temas/image-links.js';
 
 export const categories = [
@@ -65,6 +68,17 @@ const individualTopics = [
       flashcards: operadorCarretillaFlashcards,
       imageUrl: topicImageUrls['operador-carretilla'],
       hasLearning: true
+    },
+    {
+        id: 'lectura-espanol',
+        categoryId: 'espanol',
+        level: 'Mix',
+        name: 'Comprensión de Lectura',
+        description: `Lee textos, escucha los audios y responde a las preguntas. (${stories.length} historias)`,
+        questions: getAllReadingQuestions(),
+        stories: stories,
+        type: 'reading',
+        imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
     },
     {
       id: 'por-vs-para',
@@ -181,7 +195,6 @@ categories.forEach(category => {
             const combinedTopic = {
                 id: `${category.id}-combinado`,
                 categoryId: category.id,
-                // Assign 'Mix' level for Spanish or English combined tests
                 level: (category.id === 'espanol' || category.id === 'ingles') ? 'Mix' : undefined,
                 name: `Test Combinado de ${capitalizedCategoryName}`,
                 description: `Preguntas aleatorias de todos los temas de ${capitalizedCategoryName}. (${combinedQuestions.length} preguntas)`,

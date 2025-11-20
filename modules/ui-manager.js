@@ -1,6 +1,3 @@
-
-
-
 import { allTopics, categories } from '../topics-data.js';
 import * as state from './state.js';
 import { translations, isSoundEnabled, soundOnIconSVG, soundOffIconSVG, getSettings, playNavigationSound } from './settings.js';
@@ -120,6 +117,26 @@ export const flashcardFooter = document.getElementById('flashcard-footer');
 export const learningFooter = document.getElementById('learning-footer');
 export const summaryNextBtnContainer = document.getElementById('summary-next-btn-container');
 
+// Reading Elements
+export const readingListScreen = document.getElementById('reading-list-screen');
+export const readingListContainer = document.getElementById('reading-list-container');
+export const backFromReadingListBtn = document.getElementById('back-from-reading-list-btn');
+export const readingContentContainer = document.getElementById('reading-content-container');
+export const readingAudioPlayer = document.getElementById('reading-audio-player');
+export const readingTextDisplay = document.getElementById('reading-text-display');
+
+// NEW Reading Session Elements
+export const readingSessionScreen = document.getElementById('reading-session-screen');
+export const rsAudioPlayer = document.getElementById('rs-audio-player');
+export const rsSoundToggleBtn = document.getElementById('rs-sound-toggle-btn');
+export const rsStoryTitle = document.getElementById('rs-story-title');
+export const rsTextContent = document.getElementById('rs-text-content');
+export const rsToggleTextBtn = document.getElementById('rs-toggle-text-btn');
+export const rsTextChevron = document.getElementById('rs-text-chevron');
+export const rsQuestionsList = document.getElementById('rs-questions-list');
+export const rsFinishBtn = document.getElementById('rs-finish-btn');
+
+
 // Assessment Elements
 export const startAssessmentFlowBtn = document.getElementById('start-assessment-flow-btn');
 export const assessmentStartScreen = document.getElementById('assessment-start-screen');
@@ -161,7 +178,9 @@ export function updateHeaderBackground() {
         'saved-screen',
         'results-screen',
         'learning-screen',
-        'assessment-results-screen'
+        'assessment-results-screen',
+        'reading-list-screen',
+        'reading-session-screen'
     ];
 
     const currentVisibleScreen = document.querySelector('#app > div:not(.hidden)');
@@ -235,6 +254,8 @@ export function showScreen(screen) {
     statisticsScreen.classList.add('hidden');
     assessmentStartScreen.classList.add('hidden');
     assessmentResultsScreen.classList.add('hidden');
+    readingListScreen.classList.add('hidden');
+    readingSessionScreen.classList.add('hidden');
 
     // Also hide footers by default
     nextButtonContainer.classList.add('hidden');
@@ -289,6 +310,16 @@ export function showScreen(screen) {
 export function goHome() {
     clearInterval(state.getTimerInterval());
     state.setIsAssessmentMode(false);
+    // Stop reading audio if playing
+    if (readingAudioPlayer) {
+        readingAudioPlayer.pause();
+        readingAudioPlayer.currentTime = 0;
+    }
+    if (rsAudioPlayer) {
+        rsAudioPlayer.pause();
+        rsAudioPlayer.currentTime = 0;
+    }
+
     showScreen(startScreen);
     if (state.getWakeLock()) {
         state.getWakeLock().release();
@@ -333,7 +364,7 @@ export const applyTranslations = (lang) => {
 
 export const updateSoundToggleUI = () => {
     const lang = getSettings().language;
-    const buttons = [soundToggleBtn, flashcardSoundToggleBtn];
+    const buttons = [soundToggleBtn, flashcardSoundToggleBtn, rsSoundToggleBtn];
     buttons.forEach(btn => {
         if (btn) {
             if (isSoundEnabled()) {
@@ -441,8 +472,18 @@ export const renderTopicsOnStartScreen = (container) => {
             topicContent.classList.add('bg-gray-50', 'border-gray-200');
         }
 
-        topicContent.innerHTML = `
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+        let buttonsHTML = '';
+
+        // Reading Comprehension Topic (special case)
+        if (topic.type === 'reading') {
+            buttonsHTML = `
+                <button class="topic-action-btn reading-btn w-full sm:w-auto px-6 py-3 text-md font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-transform transform hover:scale-105 shadow-md" data-topic-id="${topic.id}" data-action="reading">
+                    Ver Historias
+                </button>
+            `;
+        } else {
+            // Standard Topic Buttons
+            buttonsHTML = `
                 <button class="topic-action-btn learn-btn w-full sm:w-auto px-6 py-3 text-md font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md ${!topic.hasLearning ? 'hidden' : ''}" data-i18n-key="learn_topic" data-topic-id="${topic.id}" data-action="learn">
                     ${translations[lang].learn_topic}
                 </button>
@@ -452,8 +493,10 @@ export const renderTopicsOnStartScreen = (container) => {
                 <button class="topic-action-btn test-btn w-full sm:w-auto px-6 py-3 text-md font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md" data-topic-id="${topic.id}" data-action="test">
                     ${translations[lang].testing}
                 </button>
-            </div>
-        `;
+            `;
+        }
+
+        topicContent.innerHTML = `<div class="flex flex-col sm:flex-row justify-center items-center gap-4">${buttonsHTML}</div>`;
         
         topicWrapper.appendChild(topicHeader);
         topicWrapper.appendChild(topicContent);

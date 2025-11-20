@@ -1,4 +1,6 @@
 
+
+
 import * as state from './state.js';
 import * as ui from './ui-manager.js';
 import * as settings from './settings.js';
@@ -285,12 +287,26 @@ const startQuiz = (isTimerEnabled, durationInSeconds) => {
     requestWakeLock();
 };
 
+// EXPORTED HELPER FOR READING HANDLER
+export const startQuizWithQuestions = (questions, isTimerEnabled = false) => {
+    state.setCurrentQuestions(questions);
+    startQuiz(isTimerEnabled, 0);
+};
+
+
 const restartQuiz = () => {
     const config = state.getLastQuizConfig();
     if (!config) {
         // Fallback to go home if no config is saved
         ui.goHome();
         return;
+    }
+    
+    // Check if it's a reading session reuse
+    if (config.topicId === 'reading-session') {
+         state.setCurrentQuestions(config.questionPool);
+         startQuiz(false, 0);
+         return;
     }
     
     const selectedQuestions = selectQuestionsForQuiz(
@@ -459,12 +475,43 @@ const loadQuestion = () => {
     const question = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
     const lang = settings.getSettings().language;
 
-    // Render Reading Text if available (Common logic)
-    if (question.readingText) {
-        const readingBox = document.createElement('div');
-        readingBox.className = 'reading-text-box';
-        readingBox.textContent = question.readingText;
-        ui.questionImageContainer.appendChild(readingBox);
+    // --- READING MODE LOGIC ---
+    // Check if we are in a reading topic (either by explicit flag or if text container is visible)
+    // But more robustly: Check if the question belongs to a "reading-session" topic
+    const currentTopic = state.getCurrentTopicForQuiz();
+    
+    // We should hide the reading content container by default
+    ui.readingContentContainer.classList.add('hidden');
+
+    // If the question doesn't have readingText attached directly (like in simple assessment mode), 
+    // but we are in a reading session, the text is static in the UI.
+    // HOWEVER, if we are in Assessment Mode, the `readingText` is attached to the question object.
+    
+    // Scenario 1: Assessment Mode (handled by assessment-handler usually, but if using quiz-handler for practice?)
+    // quiz-handler handles "Reading Text" via `reading-text-box` style inside image container.
+    
+    if (question.readingText && !state.getIsAssessmentMode()) { 
+        // If we are in a reading session (not assessment), we might want to use the Persistent Container
+        // Check if the UI element for persistent reading exists and we are in reading mode
+        // For simplicity, let's use the persistent container if we are in 'reading-session' topic
+        
+        if (state.getLastQuizConfig()?.topicId === 'reading-session') {
+             ui.readingContentContainer.classList.remove('hidden');
+             // Ensure text is set (it is set in startReadingSession, but safe to set here too if it changes per question, though it doesn't for now)
+             // ui.readingTextDisplay.textContent = question.readingText; // Not needed if one story per session
+        } else {
+            // Standard Quiz with a reading passage (like in generic tests)
+            const readingBox = document.createElement('div');
+            readingBox.className = 'reading-text-box';
+            readingBox.textContent = question.readingText;
+            ui.questionImageContainer.appendChild(readingBox);
+        }
+    } else if (question.readingText) {
+         // Assessment mode usually falls here or standard quizzes with text
+         const readingBox = document.createElement('div');
+         readingBox.className = 'reading-text-box';
+         readingBox.textContent = question.readingText;
+         ui.questionImageContainer.appendChild(readingBox);
     }
 
     // Split instruction from question text to style them differently
@@ -673,6 +720,9 @@ const finishQuiz = () => {
     
     renderResultsButtons();
     renderReviewSection();
+
+    // Hide Reading UI elements if they were shown
+    ui.readingContentContainer.classList.add('hidden');
 
     ui.showScreen(ui.resultsScreen);
     releaseWakeLock();

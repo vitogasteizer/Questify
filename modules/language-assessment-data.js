@@ -1,4 +1,6 @@
 
+
+
 import { questions as porParaQuestions } from '../temas/tema5/test.js';
 import { questions as serEstarQuestions } from '../temas/tema6/test.js';
 import { questions as muyMuchoQuestions } from '../temas/tema7/test.js';
@@ -10,6 +12,7 @@ import { questions as cuantificadoresQuestions } from '../temas/tema12/test.js';
 import { questions as demostrativosQuestions } from '../temas/tema13/test.js';
 import { questions as tenerQueQuestions } from '../temas/tema14/test.js';
 import { questions as generalAssessmentQuestions } from '../temas/general/spanish-assessment.js';
+import { getAllReadingQuestions } from '../temas/reading/reading-data.js';
 
 // Combine all questions strictly from the Spanish Language category
 const allSpanishQuestions = [
@@ -23,7 +26,8 @@ const allSpanishQuestions = [
     ...cuantificadoresQuestions,
     ...demostrativosQuestions,
     ...tenerQueQuestions,
-    ...generalAssessmentQuestions // Include the new general assessment questions
+    ...generalAssessmentQuestions,
+    ...getAllReadingQuestions() // Includes reading comprehension questions (A1, etc.)
 ];
 
 // Create Assessment Pools dynamically by filtering the 'level' property

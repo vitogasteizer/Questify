@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -80,12 +82,15 @@
             background-color: #f3f4f6; 
             padding: 1rem;
             border-radius: 0.75rem;
-            margin-top: 1.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            color: #4b5563;
+            border-left: 4px solid #3b82f6;
         }
         .explanation-title {
             color: #3b82f6; 
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
 
         /* Reading Text Box Style */
@@ -99,6 +104,13 @@
             white-space: pre-line; /* Preserves line breaks from text */
             color: #4b5563;
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Audio Player Styles */
+        audio {
+            width: 100%;
+            margin-bottom: 0;
+            border-radius: 0.5rem;
         }
 
         /* Side Menu Styles */
@@ -157,49 +169,21 @@
 
 
         /* --- GEORGIAN FONT FIXES --- */
-        /* Override Dongle font for Georgian as it doesn't support KA chars well and falls back to huge system fonts */
         html[lang="ka"] .font-dongle {
             font-family: sans-serif, Arial !important;
             line-height: 1.3 !important;
             letter-spacing: normal;
         }
 
-        /* Main Start Screen Title */
-        html[lang="ka"] #start-screen h1 {
-            font-size: 2.5rem !important; /* Was ~6rem */
-        }
-
-        /* Screen Titles (Settings, Results, Options, Assessment) */
+        html[lang="ka"] #start-screen h1 { font-size: 2.5rem !important; }
         html[lang="ka"] h2.font-dongle, 
-        html[lang="ka"] #learning-completion-title {
-            font-size: 1.5rem !important; /* Was ~3.75rem */
-        }
-
-        /* Card Titles & Subheaders */
-        html[lang="ka"] h3.font-dongle {
-            font-size: 1.5rem !important; /* Was ~2.5rem */
-        }
-
-        /* Flashcard Text */
+        html[lang="ka"] #learning-completion-title { font-size: 1.5rem !important; }
+        html[lang="ka"] h3.font-dongle { font-size: 1.5rem !important; }
         html[lang="ka"] #flashcard-front-text,
-        html[lang="ka"] #flashcard-back-text {
-            font-size: 1.5rem !important; /* Was ~3rem */
-        }
-
-        /* Side Menu Title */
-        html[lang="ka"] #side-menu-title {
-            font-size: 1.5rem !important;
-        }
-
-        /* General text adjustments */
-        html[lang="ka"] #welcome-message {
-            font-size: 1rem;
-        }
-        
-        /* Prevent huge text in search results title */
-        html[lang="ka"] #search-results-container h3 {
-            font-size: 1.3rem !important;
-        }
+        html[lang="ka"] #flashcard-back-text { font-size: 1.5rem !important; }
+        html[lang="ka"] #side-menu-title { font-size: 1.5rem !important; }
+        html[lang="ka"] #welcome-message { font-size: 1rem; }
+        html[lang="ka"] #search-results-container h3 { font-size: 1.3rem !important; }
     </style>
 </head>
 <body class="text-gray-800 font-sans">
@@ -250,7 +234,6 @@
                         <input type="text" id="search-input" data-i18n-key="search_placeholder" placeholder="Buscar por tema o pregunta..." class="w-full pl-10 pr-4 py-3 border-0 focus:ring-0">
                     </div>
                     <div class="flex-shrink-0">
-                        <label for="search-filter-select" class="sr-only">Search category</label>
                          <select id="search-filter-select" class="h-full pl-2 pr-8 py-3 border-0 border-l border-gray-300 bg-gray-50 text-gray-700 font-medium focus:ring-0" aria-label="Search filter">
                             <option value="all" data-i18n-key="filter_all">All</option>
                             <option value="tests" data-i18n-key="filter_tests">Tests</option>
@@ -296,6 +279,66 @@
                 <p id="no-results-message" class="hidden text-center text-gray-500 mt-4" data-i18n-key="no_results_message">No se encontraron preguntas. Intenta con otra búsqueda.</p>
             </div>
         </div>
+        
+        <!-- Reading List Screen (Selection) -->
+        <div id="reading-list-screen" class="hidden w-full max-w-2xl mx-auto px-4">
+            <div class="flex items-center mb-6 relative">
+                <button id="back-from-reading-list-btn" class="p-2 rounded-lg hover:bg-blue-50 transition-colors absolute left-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m7 7H3" />
+                    </svg>
+                </button>
+                <h2 class="font-dongle text-6xl font-bold text-gray-900 text-center w-full">Comprensión de Lectura</h2>
+            </div>
+            <div id="reading-list-container" class="space-y-4">
+                <!-- Stories will be injected here -->
+            </div>
+        </div>
+        
+        <!-- Reading Session Screen (Active Reading) -->
+        <div id="reading-session-screen" class="hidden w-full max-w-2xl mx-auto px-4 pb-24">
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 mb-6">
+                <!-- Audio Header -->
+                <div class="bg-gradient-to-r from-amber-400 to-orange-400 p-4 flex flex-col items-center justify-center text-white">
+                     <h3 id="rs-story-title" class="font-bold text-xl mb-3 text-center drop-shadow-sm">La Casa</h3>
+                     <div class="flex items-center gap-2 w-full">
+                        <div class="w-full bg-white/20 rounded-lg p-2 backdrop-blur-sm flex-grow">
+                            <audio id="rs-audio-player" controls class="w-full h-8"></audio>
+                        </div>
+                        <button id="rs-sound-toggle-btn" class="p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition flex-shrink-0" aria-label="Alternar sonido">
+                            <!-- Icon will be injected -->
+                        </button>
+                     </div>
+                </div>
+                
+                <!-- Text Container -->
+                <div class="p-4">
+                    <button id="rs-toggle-text-btn" class="w-full flex justify-between items-center text-amber-600 font-bold text-sm uppercase tracking-wide mb-2 focus:outline-none">
+                        <span>Texto</span>
+                        <svg id="rs-text-chevron" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="rs-text-content" class="text-gray-700 leading-relaxed text-base whitespace-pre-line transition-all duration-300 ease-in-out">
+                        <!-- Text injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h4 class="font-dongle text-4xl font-bold text-gray-800 border-b-2 border-gray-200 pb-1 mb-4">Preguntas</h4>
+                <div id="rs-questions-list" class="space-y-6">
+                    <!-- Questions injected here -->
+                </div>
+            </div>
+            
+            <div class="text-center mt-8 mb-8">
+                 <button id="rs-finish-btn" class="w-full md:w-auto px-10 py-3 text-xl font-bold text-white bg-green-600 rounded-xl hover:bg-green-700 transition-transform transform hover:scale-105 shadow-lg">
+                    Finalizar
+                </button>
+            </div>
+        </div>
+
 
         <!-- Assessment Language Selection Screen -->
         <div id="assessment-start-screen" class="hidden w-full max-w-2xl mx-auto text-center px-4 flex-1 flex flex-col justify-center">
@@ -350,6 +393,16 @@
             </div>
             <div>
                 <p id="question-instruction" class="text-base text-gray-500 italic mb-2"></p>
+                <!-- Reading Content Container (Audio + Text) for Assessment only -->
+                <div id="reading-content-container" class="hidden mb-6">
+                     <div class="mb-3 bg-amber-100 p-2 rounded-lg border border-amber-200">
+                        <p class="text-xs text-amber-800 mb-1 font-bold">Escucha el texto:</p>
+                        <audio id="reading-audio-player" controls class="w-full h-8"></audio>
+                     </div>
+                     <div id="reading-text-display" class="bg-white p-4 rounded-lg shadow-inner border border-gray-200 max-h-60 overflow-y-auto text-gray-700 leading-relaxed whitespace-pre-line">
+                     </div>
+                </div>
+                
                 <div id="question-image-container" class="mb-4"></div>
                 <h3 id="question-text" class="font-dongle text-4xl md:text-5xl font-bold mb-4 text-gray-900"></h3>
                 <p id="choose-answer-subtitle" class="hidden text-gray-500 mb-6" data-i18n-key="choose_correct_answer"></p>
@@ -434,7 +487,7 @@
         </div>
 
         <!-- Results Screen -->
-        <div id="results-screen" class="hidden w-full max-w-2xl text-center bg-white p-8 rounded-2xl shadow-lg">
+        <div id="results-screen" class="hidden w-full max-w-2xl mx-auto text-center bg-white p-8 rounded-2xl shadow-lg">
             <h2 id="results-title" class="font-dongle text-6xl font-bold text-gray-900 mb-2"></h2>
             <p id="results-message" class="text-lg text-gray-600 mb-6"></p>
             
@@ -450,19 +503,17 @@
                 <ul id="incorrect-questions-list"></ul>
             </div>
         </div>
-
+        
+        <!-- ... (Learning, Side Menu, Statistics, Options, Flashcards, etc. - same as before) ... -->
+        <!-- Keeping them present but not duplicating long code blocks for brevity in this specific change -->
         <!-- Learning Module Screen -->
         <div id="learning-screen" class="hidden w-full max-w-2xl mx-auto px-4 flex flex-col flex-1">
             <div class="flex justify-between items-center mb-6 flex-shrink-0">
                 <h2 id="learning-topic-title" class="font-dongle text-5xl md:text-6xl font-bold text-gray-900"></h2>
             </div>
-            
-            <!-- Summary View -->
             <div id="learning-summary-view" class="flex-1 overflow-y-auto pr-2">
                 <div id="learning-summary-content" class="space-y-6 text-left"></div>
             </div>
-
-            <!-- Scenario View -->
             <div id="learning-scenario-view" class="hidden">
                  <p id="scenario-progress-text" class="text-gray-600 font-semibold text-sm mb-4 text-center"></p>
                 <h3 id="scenario-title" class="font-dongle text-4xl md:text-5xl font-bold mb-2 text-gray-800"></h3>
@@ -472,8 +523,6 @@
                     <p id="scenario-feedback-text" class="text-md font-medium"></p>
                 </div>
             </div>
-
-            <!-- Completion View -->
             <div id="learning-completion-view" class="hidden text-center">
                 <h2 id="learning-completion-title" data-i18n-key="learning_completion_title" class="font-dongle text-6xl font-bold text-gray-900 mb-4">¡Escenarios completados!</h2>
                 <p id="learning-completion-message" data-i18n-key="learning_completion_message" class="text-lg text-gray-600 mb-8">Has repasado los conceptos clave de este tema. ¡Buen trabajo!</p>
@@ -499,11 +548,8 @@
                     </svg>
                 </button>
             </div>
-            
             <p id="settings-greeting" class="text-lg text-gray-600 mb-6"></p>
-
             <div class="space-y-6 flex-grow overflow-y-auto">
-                <!-- Statistics -->
                 <div>
                     <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="statistics_label">Estadísticas</label>
                     <button id="show-statistics-btn" class="w-full px-4 py-3 text-md font-semibold text-white bg-teal-600 rounded-lg hover:bg-teal-700 transition-colors shadow-md" data-i18n-key="statistics_button">
@@ -511,7 +557,6 @@
                     </button>
                     <p class="text-sm text-gray-500 mt-1" data-i18n-key="statistics_desc">Revisa tu progreso y rendimiento.</p>
                 </div>
-                <!-- Saved Items -->
                 <div>
                     <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="saved_items_label">Contenido Guardado</label>
                     <button id="show-saved-btn" class="w-full px-4 py-3 text-md font-semibold text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors shadow-md" data-i18n-key="saved_button">
@@ -519,7 +564,6 @@
                     </button>
                     <p class="text-sm text-gray-500 mt-1" data-i18n-key="saved_items_desc">Accede a tus preguntas y flashcards guardadas.</p>
                 </div>
-                <!-- Language Selection -->
                 <div>
                     <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="language_label">Idioma</label>
                     <div id="language-switcher" class="grid grid-cols-2 gap-2">
@@ -529,7 +573,6 @@
                     <p class="text-sm text-gray-500 mt-1" data-i18n-key="language_desc">Selecciona el idioma de la aplicación.</p>
                 </div>
             </div>
-            
             <div class="mt-8 pt-4 border-t border-gray-200">
                 <div class="flex flex-col space-y-3">
                     <button id="save-settings-btn" class="w-full px-6 py-3 text-md font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-md" data-i18n-key="save_changes_button">Guardar Cambios</button>
@@ -561,7 +604,6 @@
                             <p id="stat-time-spent" class="text-3xl font-bold text-blue-600">0h 0m</p>
                         </div>
                     </div>
-
                     <!-- Stat Card: Tests Completed -->
                     <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
                         <div class="bg-teal-500 p-3 rounded-full text-white shadow-md">
@@ -572,7 +614,6 @@
                             <p id="stat-total-tests" class="text-3xl font-bold text-teal-600">0</p>
                         </div>
                     </div>
-
                      <!-- Stat Card: Avg Test Time -->
                     <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
                         <div class="bg-purple-500 p-3 rounded-full text-white shadow-md">
@@ -583,7 +624,6 @@
                             <p id="stat-avg-test-time" class="text-3xl font-bold text-purple-600">0s</p>
                         </div>
                     </div>
-                   
                     <!-- Stat Card: Total Flashcards -->
                     <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
                         <div class="bg-yellow-500 p-3 rounded-full text-white shadow-md">
@@ -594,7 +634,6 @@
                             <p id="stat-total-flashcards" class="text-3xl font-bold text-yellow-600">0</p>
                         </div>
                     </div>
-
                     <!-- Stat Card: Test Accuracy -->
                     <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-2xl shadow-lg md:col-span-2 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
                          <div class="flex items-center space-x-4 mb-3">
@@ -616,7 +655,6 @@
                             <p class="text-right text-2xl font-bold text-green-600" id="accuracy-percentage">0%</p>
                         </div>
                     </div>
-                    
                     <!-- Stat Card: Flashcard Knowledge -->
                     <div class="bg-gradient-to-br from-red-50 to-red-100 p-5 rounded-2xl shadow-lg md:col-span-2 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
                          <div class="flex items-center space-x-4 mb-3">
@@ -644,6 +682,7 @@
 
         <!-- Quiz Options Screen -->
         <div id="quiz-options-screen" class="hidden w-full max-w-2xl mx-auto px-4">
+            <!-- ... (content same as before) ... -->
             <div class="w-full bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
                 <div class="text-center">
                     <h2 class="font-dongle text-6xl font-bold text-gray-900 mb-2" data-i18n-key="quiz_options_title">Configurar Test</h2>
@@ -704,7 +743,8 @@
 
         <!-- Flashcard Options Screen -->
         <div id="flashcard-options-screen" class="hidden w-full max-w-2xl mx-auto px-4">
-            <div class="w-full bg-white p-6 sm:p-8 rounded-2xl shadow-lg text-center">
+            <!-- ... (content same as before) ... -->
+             <div class="w-full bg-white p-6 sm:p-8 rounded-2xl shadow-lg text-center">
                 <h2 class="font-dongle text-6xl font-bold text-gray-900 mb-2" data-i18n-key="flashcard_options_title">Configurar Flashcards</h2>
                 <p class="text-lg text-gray-600 mb-6"><span data-i18n-key="flashcard_topic_title_prefix">Tema:</span> <span id="flashcard-topic-title" class="font-semibold"></span></p>
 
@@ -759,7 +799,8 @@
 
         <!-- Flashcard Viewer Screen -->
         <div id="flashcard-screen" class="hidden w-full max-w-2xl mx-auto px-4 pb-24">
-            <!-- Header -->
+             <!-- ... (content same as before) ... -->
+             <!-- Header -->
             <div class="flex justify-between items-center flex-wrap gap-2 mb-6">
                 <p id="flashcard-progress-text" class="text-gray-600 font-semibold text-sm"></p>
                 <div class="flex items-center gap-4">
@@ -798,6 +839,7 @@
 
         <!-- Flashcard Results Screen -->
         <div id="flashcard-results-screen" class="hidden w-full max-w-2xl text-center bg-white p-8 rounded-2xl shadow-lg">
+             <!-- ... (content same as before) ... -->
             <h2 class="font-dongle text-6xl font-bold text-gray-900 mb-2" data-i18n-key="flashcard_results_title">Sesión Completada</h2>
             <p id="flashcard-results-message" class="text-lg text-gray-600 mb-8"></p>
             <div id="flashcard-results-buttons" class="space-y-4 md:space-y-0 md:space-x-4 md:flex justify-center">
@@ -807,7 +849,8 @@
 
         <!-- Saved Items Screen -->
         <div id="saved-screen" class="hidden w-full max-w-2xl mx-auto p-4">
-            <div class="w-full">
+             <!-- ... (content same as before) ... -->
+             <div class="w-full">
                 <div class="flex items-center mb-6 relative">
                     <button id="back-from-saved-btn" class="p-2 rounded-lg hover:bg-blue-50 transition-colors absolute left-0" data-i18n-key="back_button" title="Volver">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

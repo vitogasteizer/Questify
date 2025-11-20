@@ -1,4 +1,8 @@
 
+
+
+
+
 import { allTopics, categories } from './topics-data.js';
 import * as state from './modules/state.js';
 import * as ui from './modules/ui-manager.js';
@@ -9,6 +13,7 @@ import * as flashcard from './modules/flashcard-handler.js';
 import * as learning from './modules/learning-module.js';
 import * as statistics from './modules/statistics-handler.js';
 import * as assessment from './modules/assessment-handler.js';
+import * as reading from './modules/reading-handler.js';
 
 const learningModules = {
     'operador-carretilla': learning.operadorCarretillaLearning
@@ -17,13 +22,15 @@ const learningModules = {
 // Initial data processing
 let questionCounter = 0;
 allTopics.forEach(topic => {
-    topic.questions.forEach(q => {
-        state.allQuestionsWithIndex.push({
-            ...q,
-            originalIndex: questionCounter++,
-            topicId: topic.id
+    if (topic.questions) {
+        topic.questions.forEach(q => {
+            state.allQuestionsWithIndex.push({
+                ...q,
+                originalIndex: questionCounter++,
+                topicId: topic.id
+            });
         });
-    });
+    }
 });
 
 let flashcardCounter = 0;
@@ -83,6 +90,9 @@ const handleTopicAction = (e) => {
             } else {
                 alert(`'Flashcards' functionality for "${topic.name}" is coming soon!`);
             }
+            break;
+        case 'reading':
+            reading.showReadingOptions(topic);
             break;
     }
 };
@@ -152,6 +162,7 @@ const init = () => {
     });
     // This listener is now on a dynamically created container, so we delegate it to a static parent.
     document.getElementById('topics-view-container').addEventListener('click', handleTopicAction);
+    ui.backFromReadingListBtn.addEventListener('click', ui.goHome);
     
     // Saved Screen
     ui.showSavedBtn.addEventListener('click', ui.showSavedScreen);
@@ -229,6 +240,11 @@ const init = () => {
     ui.flashcardKnownBtn.addEventListener('click', () => flashcard.handleFlashcardAssessment(true));
     ui.flashcardUnknownBtn.addEventListener('click', () => flashcard.handleFlashcardAssessment(false));
     flashcard.initFlashcardGestures();
+    
+    // Reading Session Actions
+    if (ui.rsSoundToggleBtn) {
+        ui.rsSoundToggleBtn.addEventListener('click', settings.toggleSound);
+    }
 
     // Search and Filtering
     ui.searchInput.addEventListener('input', (e) => search.search(e.target.value));
