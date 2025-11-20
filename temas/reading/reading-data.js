@@ -4,7 +4,7 @@ export const stories = [
         id: 'casa-abuelos',
         title: 'La casa de mis abuelos',
         level: 'A1',
-        audioUrl: './assets/audio/la-casa-de-mis-abuelos.mp3', // Local file path
+        audioUrl: './assets/audio/es-la-casa-de-mis-abuelos-77.mp3', // Local file path
         text: `Mi casa es muy pequeña, pero la de mis abuelos es enorme, parece una mansión. Su casa está situada en lo alto de una montaña. Tiene seis habitaciones, tres baños y un comedor muy grande. También tiene una gran sala con un sofá, una televisión de grandes dimensiones y una chimenea, perfecta para disfrutar los días más fríos del año.
 
 Cada dormitorio tiene grandes ventanales con vistas a la montaña. La cocina tiene una despensa donde almacenar toda la comida. Además, mis abuelos tienen una biblioteca de gran tamaño, llena de libros y mesas para estudiar y leer.
