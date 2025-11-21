@@ -1,12 +1,16 @@
 
 
+
+
+
 import * as state from './state.js';
 import * as ui from './ui-manager.js';
 import * as settings from './settings.js';
-import { assessmentPools, levelsOrder } from './language-assessment-data.js';
+import { assessmentPools, readingStoriesByLevel, levelsOrder } from './language-assessment-data.js';
 
-const QUESTIONS_PER_LEVEL = 10;
-const PASS_THRESHOLD_PERCENT = 70; // 70%
+const STANDARD_QUESTIONS_PER_LEVEL = 10;
+const STANDARD_PASS_PERCENT = 70; // 70% for standard questions
+const STORY_PASS_PERCENT = 51;    // 51% for story questions
 
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -32,24 +36,50 @@ export const startAssessment = () => {
 
 const loadLevel = (level) => {
     state.setCurrentAssessmentLevel(level);
-    const pool = assessmentPools[level];
     
-    if (!pool || pool.length === 0) {
-        // Fallback or error handling
+    const standardPool = assessmentPools[level] || [];
+    const storiesPool = readingStoriesByLevel[level] || [];
+    
+    let selectedStandardQuestions = [];
+    let selectedStoryQuestions = [];
+
+    // 1. Get 10 Standard Questions
+    if (standardPool.length > 0) {
+        selectedStandardQuestions = shuffleArray([...standardPool]).slice(0, STANDARD_QUESTIONS_PER_LEVEL);
+    }
+
+    // 2. Get 1 Random Story
+    if (storiesPool.length > 0) {
+        const randomStoryIndex = Math.floor(Math.random() * storiesPool.length);
+        const story = storiesPool[randomStoryIndex];
+        
+        // Add all questions from that story, marking them as Story questions
+        selectedStoryQuestions = story.questions.map(q => ({
+            ...q,
+            readingText: story.text,
+            audioUrl: story.audioUrl,
+            storyTitle: story.title,
+            isStoryQuestion: true 
+        }));
+    }
+
+    // Combine: Standard first, then Story
+    const finalQuestions = [...selectedStandardQuestions, ...selectedStoryQuestions];
+
+    if (finalQuestions.length === 0) {
         console.error(`No questions found for level ${level}`);
         finishAssessment();
         return;
     }
 
-    // Select 10 random questions for this level
-    const shuffled = shuffleArray([...pool]);
-    const questionsForLevel = shuffled.slice(0, QUESTIONS_PER_LEVEL);
-    
-    state.setCurrentQuestions(questionsForLevel);
+    state.setCurrentQuestions(finalQuestions);
     state.setCurrentQuestionIndex(0);
     
-    // Initialize level tracking
-    state.getAssessmentStats().levelScores[level] = { correct: 0, total: questionsForLevel.length };
+    // Initialize granular level tracking
+    state.getAssessmentStats().levelScores[level] = { 
+        standard: { correct: 0, total: selectedStandardQuestions.length },
+        story: { correct: 0, total: selectedStoryQuestions.length }
+    };
     
     // UI Setup
     ui.showScreen(ui.quizScreen);
@@ -58,8 +88,6 @@ const loadLevel = (level) => {
     // Start Timer (Global Stopwatch)
     clearInterval(state.getTimerInterval());
     ui.timerContainer.classList.remove('hidden');
-    // Use the global stopwatch logic but we track total time differently in stats
-    // Display cumulative time on screen
     state.setStopwatchSeconds(Math.floor((Date.now() - state.getAssessmentStats().startTime) / 1000));
     state.setTimerInterval(setInterval(() => {
         const elapsed = Math.floor((Date.now() - state.getAssessmentStats().startTime) / 1000);
@@ -87,9 +115,6 @@ const formatTime = (totalSeconds) => {
 };
 
 const loadQuestion = () => {
-    // Reusing basic quiz UI rendering but adapting interactions
-    // This mirrors quiz-handler's loadQuestion but calls handleAssessmentAnswer
-    
     ui.optionsContainer.innerHTML = '';
     ui.questionImageContainer.innerHTML = '';
     ui.explanationContainer.innerHTML = '';
@@ -106,9 +131,8 @@ const loadQuestion = () => {
     }
 
     const question = currentQuestions[currentIndex];
-    const lang = settings.getSettings().language;
     
-    // Update progress text: Level Question X / 10
+    // Update progress text: Level Question X / Total
     ui.progressText.textContent = `Nivel ${currentLevel} - ${currentIndex + 1} / ${currentQuestions.length}`;
     
     // Progress bar (local to level)
@@ -119,8 +143,17 @@ const loadQuestion = () => {
     if (question.readingText) {
         const readingBox = document.createElement('div');
         readingBox.className = 'reading-text-box';
-        readingBox.textContent = question.readingText;
+        readingBox.innerHTML = question.readingText; 
         ui.questionImageContainer.appendChild(readingBox);
+        
+        // If audio is present, add a small player
+        if (question.audioUrl) {
+             const audioDiv = document.createElement('div');
+             audioDiv.className = 'mb-4 bg-amber-50 p-2 rounded border border-amber-200';
+             audioDiv.innerHTML = `<audio controls class="w-full h-8" src="${question.audioUrl}"></audio>`;
+             // Insert audio before text
+             ui.questionImageContainer.insertBefore(audioDiv, readingBox);
+        }
     }
 
     // Render Text
@@ -146,9 +179,6 @@ const loadQuestion = () => {
 
     // Render Options
     if (question.type === 'fill-in-the-blank') {
-        // ... logic for fill-in-the-blank (similar to quiz-handler)
-        // For simplicity in assessment, we mostly use multiple choice in data, 
-        // but need to support this if data has it.
         renderFillInBlank(question);
     } else if (question.type === 'order-words') {
         renderOrderWords(question);
@@ -202,7 +232,6 @@ const renderFillInBlank = (question) => {
 };
 
 const renderOrderWords = (question) => {
-    // Simplified for assessment logic
     const container = document.createElement('div');
     container.className = 'col-span-1 md:col-span-2 flex flex-col items-center gap-4';
     const answerArea = document.createElement('div');
@@ -272,11 +301,20 @@ const handleAssessmentAnswer = (button, question) => {
 const recordAnswer = (isCorrect, question, userAnswer) => {
     const stats = state.getAssessmentStats();
     const level = state.getCurrentAssessmentLevel();
+    const levelStats = stats.levelScores[level];
     
     stats.totalQuestionsAnswered++;
+    if (isCorrect) stats.totalCorrect++;
+
+    // Granular tracking based on question type
+    if (question.isStoryQuestion) {
+        if (isCorrect) levelStats.story.correct++;
+        // Total was already set during loadLevel, but good to be safe or for dynamic counting
+    } else {
+        if (isCorrect) levelStats.standard.correct++;
+    }
+
     if (isCorrect) {
-        stats.totalCorrect++;
-        stats.levelScores[level].correct++;
         settings.playCorrectSound();
     } else {
         settings.playIncorrectSound();
@@ -306,11 +344,19 @@ const showNextButton = () => {
 const evaluateLevelProgress = () => {
     const level = state.getCurrentAssessmentLevel();
     const stats = state.getAssessmentStats();
-    const score = stats.levelScores[level].correct;
-    const total = stats.levelScores[level].total;
-    const percentage = (score / total) * 100;
+    const levelStats = stats.levelScores[level];
 
-    if (percentage >= PASS_THRESHOLD_PERCENT) {
+    // Calculate percentages for each section
+    const standardPercent = levelStats.standard.total > 0 
+        ? (levelStats.standard.correct / levelStats.standard.total) * 100 
+        : 100; // If no questions, assume pass (e.g. just story)
+        
+    const storyPercent = levelStats.story.total > 0 
+        ? (levelStats.story.correct / levelStats.story.total) * 100 
+        : 100; // If no story, assume pass (e.g. just grammar)
+
+    // Strict logic: MUST pass both thresholds
+    if (standardPercent >= STANDARD_PASS_PERCENT && storyPercent >= STORY_PASS_PERCENT) {
         // Passed level
         const currentLevelIndex = levelsOrder.indexOf(level);
         if (currentLevelIndex < levelsOrder.length - 1) {
@@ -333,20 +379,18 @@ const finishAssessment = (completedAll = false) => {
     
     const stats = state.getAssessmentStats();
     const lastLevel = state.getCurrentAssessmentLevel();
-    const lastLevelScore = stats.levelScores[lastLevel].correct / stats.levelScores[lastLevel].total;
+    
+    // Just basic logic for final label based on where they stopped
+    // (Detailed scoring logic used during evaluateLevelProgress determined if they PASSED this level)
     
     let finalLevelLabel = '';
     let levelDescription = '';
     
-    if (completedAll && lastLevelScore >= 0.7) {
+    if (completedAll) {
         finalLevelLabel = 'C2';
         levelDescription = 'Proficient / Maestría';
-    } else if (lastLevelScore >= 0.7) {
-        // Passed the last level attempted (unlikely path unless forced stop)
-        finalLevelLabel = lastLevel;
-        levelDescription = getLevelDescription(lastLevel);
     } else {
-        // Failed the current level. Determine result based on previous levels.
+        // Failed the current level. Result is the previous level.
         const currentLevelIndex = levelsOrder.indexOf(lastLevel);
         if (currentLevelIndex === 0) {
             finalLevelLabel = 'Below A1';
@@ -393,7 +437,6 @@ const renderAssessmentResults = (levelLabel, description) => {
     const improvementsList = document.getElementById('assessment-improvements-list');
     improvementsList.innerHTML = '';
     
-    // Group mistakes by level or grammar point if possible, for now just list top 3
     if (stats.mistakes.length > 0) {
         stats.mistakes.slice(0, 3).forEach(mistake => {
             const item = document.createElement('div');
