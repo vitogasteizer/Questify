@@ -67,11 +67,11 @@ const startReadingSession = (story) => {
         ui.rsAudioPlayer.parentElement.classList.add('hidden');
     }
 
-    // Populate Text (Visible by default)
-    ui.rsTextContent.textContent = story.text;
-    ui.rsTextContent.classList.remove('hidden');
+    // Populate Text (Hidden by default now) - Changed to innerHTML to support HTML tags
+    ui.rsTextContent.innerHTML = story.text;
+    ui.rsTextContent.classList.add('hidden');
     
-    // Reset Toggle Icon
+    // Reset Toggle Icon (ensure it is not rotated, indicating collapsed state)
     const chevron = ui.rsToggleTextBtn.querySelector('svg');
     if (chevron) chevron.classList.remove('rotate-180');
 
