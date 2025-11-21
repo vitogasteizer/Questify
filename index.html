@@ -34,9 +34,12 @@
     <link rel="icon" type="image/png" href="https://i.postimg.cc/zGv1rf0x/Questify_Favicon.png">
     <style>
         /* Updated Background Color and Overflow Fix */
-        body { 
+        html, body { 
             background-color: #f7f7ff; 
             overflow-x: hidden; /* Removes side shadow/scroll */
+            width: 100%;
+            margin: 0;
+            padding: 0;
         }
         body.white-bg { background-color: #FFFFFF; }
         .font-dongle { font-family: 'Dongle', sans-serif; line-height: 0.9; }
@@ -135,8 +138,14 @@
         }
 
         /* Side Menu Styles */
+        #side-menu {
+            /* Remove shadow when closed to prevent bleeding on the right edge */
+            box-shadow: none;
+        }
         #side-menu.is-open {
             transform: translateX(0);
+            /* Apply shadow only when open */
+            box-shadow: -5px 0 25px -5px rgba(0, 0, 0, 0.25);
         }
         #menu-backdrop.is-open {
             display: block;
@@ -525,8 +534,6 @@
             </div>
         </div>
         
-        <!-- ... (Learning, Side Menu, Statistics, Options, Flashcards, etc. - same as before) ... -->
-        <!-- Keeping them present but not duplicating long code blocks for brevity in this specific change -->
         <!-- Learning Module Screen -->
         <div id="learning-screen" class="hidden w-full max-w-2xl mx-auto px-4 flex flex-col flex-1">
             <div class="flex justify-between items-center mb-6 flex-shrink-0">
@@ -560,7 +567,7 @@
 
         <!-- Side Menu -->
         <div id="menu-backdrop" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out"></div>
-        <div id="side-menu" class="fixed top-0 right-0 h-full bg-white shadow-2xl z-50 w-11/12 max-w-sm p-6 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col" role="dialog" aria-modal="true" aria-labelledby="side-menu-title">
+        <div id="side-menu" class="fixed top-0 right-0 h-full bg-white z-50 w-11/12 max-w-sm p-6 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col" role="dialog" aria-modal="true" aria-labelledby="side-menu-title">
             <div class="flex justify-between items-center mb-6">
                 <h2 id="side-menu-title" class="font-dongle text-6xl font-bold text-gray-900" data-i18n-key="settings_modal_title">Menú</h2>
                 <button id="close-settings-btn" class="p-2 rounded-full hover:bg-gray-200 transition text-gray-500 hover:text-gray-800" data-i18n-key="close_settings_aria" aria-label="Cerrar menú">
