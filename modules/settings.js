@@ -1,4 +1,3 @@
-
 // Settings State
 const SETTINGS_STORAGE_KEY = 'logisticsQuizSettings';
 let settings = {
@@ -119,12 +118,12 @@ export const translations = {
         saved_items_label: "Contenido Guardado",
         saved_items_desc: "Accede a tus preguntas y flashcards guardadas.",
         settings_greeting: "¡Hola, {{username}}!",
-        category_all: "Todos",
         category_logistica: "Logística",
         category_espanol: "Español",
         category_matematicas: "Matemáticas",
         category_historia: "Historia",
         category_georgian: "Georgiano",
+        category_iq: "Tests de CI",
         no_topics_in_category: "No hay temas en esta categoría todavía.",
         app_creator_credit: "Aplicación creada por <strong>Avtandil Machitadze</strong>.",
         start_scenarios_button: "Continuar al Escenario Práctico",
@@ -303,12 +302,12 @@ export const translations = {
         saved_items_label: "შენახული მასალა",
         saved_items_desc: "შენახულ კითხვებსა და ფლეშბარათებზე წვდომა.",
         settings_greeting: "გამარჯობა, {{username}}!",
-        category_all: "ყველა",
         category_logistica: "ლოგისტიკა",
         category_espanol: "ესპანური",
         category_matematicas: "მათემატიკა",
         category_historia: "ისტორია",
         category_georgian: "ქართული",
+        category_iq: "IQ ტესტები",
         no_topics_in_category: "ამ კატეგორიაში თემები ჯერ არ არის.",
         app_creator_credit: "აპლიკაცია შექმნილია <strong>ავთანდილ მაჩიტაძის</strong> მიერ.",
         start_scenarios_button: "პრაქტიკულ სცენარზე გადასვლა",

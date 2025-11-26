@@ -1,4 +1,5 @@
 
+
 import { questions as logisticaQuestions } from './temas/tema1/test.js';
 import { questions as preparacionPedidosQuestions } from './temas/tema2/test.js';
 import { questions as preparacionPedidos2Questions } from './temas/tema3/test.js';
@@ -19,23 +20,25 @@ import { questions as demostrativosQuestions } from './temas/tema13/test.js';
 import { questions as tenerQueQuestions } from './temas/tema14/test.js';
 import { questions as verbosIrregularesQuestions } from './temas/tema15/test.js';
 import { questions as posesivosQuestions } from './temas/tema16/test.js';
+import { questions as iqKidsQuestions } from './temas/iq-tests/kids-test.js';
+import { questions as iqAdultsQuestions } from './temas/iq-tests/adults-test.js';
 import { getAllReadingQuestions, stories } from './temas/reading/reading-data.js';
 import { topicImageUrls } from './temas/image-links.js';
 
 export const categories = [
     { id: 'logistica', nameKey: 'category_logistica', colorClass: 'bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200 hover:border-blue-400', activeColorClass: 'bg-blue-600 text-white border-blue-700' },
     { id: 'espanol', nameKey: 'category_espanol', colorClass: 'bg-red-100 text-red-800 border-red-200 hover:bg-red-200 hover:border-red-400', activeColorClass: 'bg-red-600 text-white border-red-700' },
-    { id: 'ingles', nameKey: 'category_all', colorClass: 'bg-indigo-100 text-indigo-800 border-indigo-200 hover:bg-indigo-200 hover:border-indigo-400', activeColorClass: 'bg-indigo-600 text-white border-indigo-700' },
     { id: 'matematicas', nameKey: 'category_matematicas', colorClass: 'bg-green-100 text-green-800 border-green-200 hover:bg-green-200 hover:border-green-400', activeColorClass: 'bg-green-600 text-white border-green-700' },
     { id: 'historia', nameKey: 'category_historia', colorClass: 'bg-amber-100 text-amber-800 border-amber-200 hover:bg-amber-200 hover:border-amber-400', activeColorClass: 'bg-amber-500 text-white border-amber-600' },
     { id: 'georgian', nameKey: 'category_georgian', colorClass: 'bg-purple-100 text-purple-800 border-purple-200 hover:bg-purple-200 hover:border-purple-400', activeColorClass: 'bg-purple-600 text-white border-purple-700' },
+    { id: 'iq', nameKey: 'category_iq', colorClass: 'bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200 hover:border-gray-400', activeColorClass: 'bg-gray-600 text-white border-gray-700' },
 ];
 
 // --- IMAGES CONFIGURATION ---
 // Change these URLs to update images. 
 // TIP: Use Square images (1:1 ratio, e.g., 500x500px) with the subject centered for best results on both mobile and desktop.
-const spanishDefaultImage = 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'; 
-const englishDefaultImage = 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'; 
+const spanishDefaultImage = 'https://i.postimg.cc/BvNM6TL0/Questify_Cover.png'; 
+const englishDefaultImage = 'https://i.postimg.cc/BvNM6TL0/Questify_Cover.png'; 
 
 const individualTopics = [
     {
@@ -193,6 +196,22 @@ const individualTopics = [
       description: `Aprende a usar los adjetivos y pronombres posesivos (mi, tu, su, mío, tuyo...). (${posesivosQuestions.length} preguntas)`,
       questions: posesivosQuestions,
       imageUrl: spanishDefaultImage
+    },
+    {
+      id: 'iq-kids',
+      categoryId: 'iq',
+      name: 'Tests de CI para Niños (5-7 años)',
+      description: `Preguntas de lógica y razonamiento para los más pequeños. (${iqKidsQuestions.length} preguntas)`,
+      questions: iqKidsQuestions,
+      imageUrl: spanishDefaultImage
+    },
+    {
+      id: 'iq-adults',
+      categoryId: 'iq',
+      name: 'Tests de CI para Adultos',
+      description: `Desafía tu mente con preguntas de lógica y razonamiento. (${iqAdultsQuestions.length} preguntas)`,
+      questions: iqAdultsQuestions,
+      imageUrl: spanishDefaultImage
     }
 ];
 
@@ -201,7 +220,8 @@ const finalTopics = [];
 const categoryImageMap = {
     logistica: topicImageUrls.logistica,
     espanol: spanishDefaultImage,
-    ingles: englishDefaultImage
+    ingles: englishDefaultImage,
+    iq: spanishDefaultImage
 };
 
 categories.forEach(category => {

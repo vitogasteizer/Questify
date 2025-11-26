@@ -32,6 +32,8 @@ const urlsToCache = [
   './temas/tema12/test.js',
   './temas/tema13/test.js',
   './temas/tema14/test.js',
+  './temas/iq-tests/kids-test.js',
+  './temas/iq-tests/adults-test.js',
   './manifest.json',
   'https://cdn.tailwindcss.com',
   'https://i.postimg.cc/rwsLkpQP/Questify_Logo_Web.png',
