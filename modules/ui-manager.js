@@ -1,5 +1,6 @@
 
 
+
 import { allTopics, categories } from '../topics-data.js';
 import * as state from './state.js';
 import { translations, isSoundEnabled, soundOnIconSVG, soundOffIconSVG, getSettings, playNavigationSound } from './settings.js';
@@ -153,6 +154,14 @@ export const assessmentReviewModal = document.getElementById('assessment-review-
 export const closeAssessmentReviewBtn = document.getElementById('close-assessment-review-btn');
 export const closeAssessmentReviewBtn2 = document.getElementById('close-assessment-review-btn-2');
 
+// Info Screens Elements
+export const menuAboutLink = document.getElementById('menu-about-link');
+export const menuStyleLink = document.getElementById('menu-style-link');
+export const aboutScreen = document.getElementById('about-screen');
+export const styleGuideScreen = document.getElementById('style-guide-screen');
+export const backFromAboutBtn = document.getElementById('back-from-about-btn');
+export const backFromStyleBtn = document.getElementById('back-from-style-btn');
+
 
 export const openSideMenu = () => {
     sideMenu.classList.add('is-open');
@@ -182,7 +191,9 @@ export function updateHeaderBackground() {
         'learning-screen',
         'assessment-results-screen',
         'reading-list-screen',
-        'reading-session-screen'
+        'reading-session-screen',
+        'about-screen',
+        'style-guide-screen'
     ];
 
     const currentVisibleScreen = document.querySelector('#app > div:not(.hidden)');
@@ -258,6 +269,8 @@ export function showScreen(screen) {
     assessmentResultsScreen.classList.add('hidden');
     readingListScreen.classList.add('hidden');
     readingSessionScreen.classList.add('hidden');
+    aboutScreen.classList.add('hidden');
+    styleGuideScreen.classList.add('hidden');
 
     // Also hide footers by default
     if(quizFooter) quizFooter.classList.add('hidden');
@@ -327,6 +340,16 @@ export function goHome() {
         state.getWakeLock().release();
         state.setWakeLock(null);
     }
+};
+
+export const showAboutScreen = () => {
+    closeSideMenu();
+    showScreen(aboutScreen);
+};
+
+export const showStyleGuideScreen = () => {
+    closeSideMenu();
+    showScreen(styleGuideScreen);
 };
 
 const updateSearchPlaceholder = () => {
@@ -440,7 +463,7 @@ export const renderTopicsOnStartScreen = (container) => {
             topicHeader.innerHTML = `
                 <div class="w-full h-32 md:w-24 md:h-24 mb-4 md:mb-0 md:mr-6 flex-shrink-0 bg-white/20 rounded-lg overflow-hidden flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                 </div>
                 <div class="flex-grow">

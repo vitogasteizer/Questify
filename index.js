@@ -1,3 +1,4 @@
+
 import { allTopics, categories } from './topics-data.js';
 import * as state from './modules/state.js';
 import * as ui from './modules/ui-manager.js';
@@ -146,6 +147,32 @@ const init = () => {
         ui.showScreen(ui.startScreen);
         ui.openSideMenu();
     });
+
+    // Info Links
+    if(ui.menuAboutLink) {
+        ui.menuAboutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            ui.showAboutScreen();
+        });
+    }
+    if(ui.menuStyleLink) {
+        ui.menuStyleLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            ui.showStyleGuideScreen();
+        });
+    }
+    if(ui.backFromAboutBtn) {
+        ui.backFromAboutBtn.addEventListener('click', () => {
+            ui.showScreen(ui.startScreen);
+            ui.openSideMenu();
+        });
+    }
+    if(ui.backFromStyleBtn) {
+        ui.backFromStyleBtn.addEventListener('click', () => {
+            ui.showScreen(ui.startScreen);
+            ui.openSideMenu();
+        });
+    }
 
     // Assessment Flow Listeners
     ui.startAssessmentFlowBtn.addEventListener('click', assessment.showAssessmentStartScreen);

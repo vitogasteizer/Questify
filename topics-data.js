@@ -1,8 +1,4 @@
 
-
-
-
-
 import { questions as logisticaQuestions } from './temas/tema1/test.js';
 import { questions as preparacionPedidosQuestions } from './temas/tema2/test.js';
 import { questions as preparacionPedidos2Questions } from './temas/tema3/test.js';
@@ -21,6 +17,8 @@ import { questions as comparativosQuestions } from './temas/tema11/test.js';
 import { questions as cuantificadoresQuestions } from './temas/tema12/test.js';
 import { questions as demostrativosQuestions } from './temas/tema13/test.js';
 import { questions as tenerQueQuestions } from './temas/tema14/test.js';
+import { questions as verbosIrregularesQuestions } from './temas/tema15/test.js';
+import { questions as posesivosQuestions } from './temas/tema16/test.js';
 import { getAllReadingQuestions, stories } from './temas/reading/reading-data.js';
 import { topicImageUrls } from './temas/image-links.js';
 
@@ -170,6 +168,24 @@ const individualTopics = [
       name: 'Tener que + Infinitivo',
       description: `Practica la expresión de obligación con la estructura "tener que". (${tenerQueQuestions.length} preguntas)`,
       questions: tenerQueQuestions,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    },
+    {
+      id: 'verbos-irregulares',
+      categoryId: 'espanol',
+      level: 'A2',
+      name: 'Verbos Irregulares',
+      description: `Domina los verbos irregulares, cambios de raíz y formas especiales en presente y futuro. (${verbosIrregularesQuestions.length} preguntas)`,
+      questions: verbosIrregularesQuestions,
+      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+    },
+    {
+      id: 'posesivos',
+      categoryId: 'espanol',
+      level: 'A1',
+      name: 'Los Posesivos',
+      description: `Aprende a usar los adjetivos y pronombres posesivos (mi, tu, su, mío, tuyo...). (${posesivosQuestions.length} preguntas)`,
+      questions: posesivosQuestions,
       imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
     }
 ];

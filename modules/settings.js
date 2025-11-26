@@ -168,7 +168,38 @@ export const translations = {
         assessment_review_mistakes: "Repasar Errores",
         assessment_take_again: "Realizar Test de Nuevo",
         review_mistakes_title: "Repasar Errores",
-        close_button: "Cerrar"
+        close_button: "Cerrar",
+        
+        // New Menu Links
+        menu_about_app: "Sobre la App",
+        menu_style_guide: "Guía de Estilo",
+        
+        // About Screen
+        about_title: "Sobre la App",
+        about_desc: "Questify es tu compañero de aprendizaje interactivo. Aquí tienes todo lo que necesitas saber.",
+        about_section_what: "¿Qué es Questify?",
+        about_text_what: "Questify es una aplicación diseñada para reforzar conocimientos a través de tests adaptativos, flashcards y módulos de aprendizaje. Cubre temas desde logística hasta idiomas.",
+        about_section_why: "¿Por qué usarla?",
+        about_text_why: "Ideal para autoevaluación rápida, repaso antes de exámenes o simplemente para aprender algo nuevo de forma dinámica.",
+        about_section_types: "Tipos de Preguntas",
+        about_text_types: "Encontrarás preguntas de opción múltiple, rellenar espacios, ordenar palabras y comprensión lectora con audio.",
+        
+        // Style Guide Screen
+        style_title: "Guía de Estilo",
+        style_desc: "Sistema de diseño y marca de Questify.",
+        style_section_brand: "Significado de la Marca",
+        style_brand_quest: "Quest",
+        style_brand_quest_def: "Búsqueda, aventura, desafío. Una tarea difícil que requiere alcanzar una meta.",
+        style_brand_ify: "-ify",
+        style_brand_ify_def: "Sufijo que crea verbos, significa 'convertir en' o 'hacer' (ej. simplificar, clarificar).",
+        style_brand_meaning: "Por lo tanto, 'Questify' significa convertir el proceso de responder preguntas en una aventura divertida o un desafío de conocimiento.",
+        style_section_colors: "Paleta de Colores",
+        style_color_primary: "Primario (Azul)",
+        style_color_secondary: "Secundario (Amarillo)",
+        style_color_bg: "Fondo",
+        style_section_font: "Tipografía",
+        style_font_dongle: "Dongle (Títulos)",
+        style_font_sans: "Sans-Serif (Cuerpo)"
     },
     ka: {
         welcome_title: "კეთილი იყოს თქვენი მობრძანება!",
@@ -321,7 +352,38 @@ export const translations = {
         assessment_review_mistakes: "შეცდომების გადახედვა",
         assessment_take_again: "ტესტის თავიდან გავლა",
         review_mistakes_title: "შეცდომების გადახედვა",
-        close_button: "დახურვა"
+        close_button: "დახურვა",
+
+        // New Menu Links
+        menu_about_app: "აპლიკაციის შესახებ",
+        menu_style_guide: "სტილის სახელმძღვანელო",
+
+        // About Screen
+        about_title: "აპლიკაციის შესახებ",
+        about_desc: "Questify არის თქვენი სასწავლო კომპანიონი. აქ ნახავთ ყველაფერს, რაც უნდა იცოდეთ.",
+        about_section_what: "რა არის Questify?",
+        about_text_what: "Questify არის აპლიკაცია, რომელიც შექმნილია ცოდნის გასაღრმავებლად ადაპტური ტესტების, ფლეშბარათებისა და სასწავლო მოდულების საშუალებით.",
+        about_section_why: "რატომ გამოვიყენოთ?",
+        about_text_why: "იდეალურია სწრაფი თვითშეფასებისთვის, გამოცდების წინ გადასამეორებლად ან უბრალოდ ახლის სასწავლად სახალისო გზით.",
+        about_section_types: "კითხვების ტიპები",
+        about_text_types: "შეგხვდებათ არჩევითი პასუხები, ჩასასმელი სიტყვები, სიტყვების დალაგება და ტექსტის გააზრება აუდიო მასალით.",
+
+        // Style Guide Screen
+        style_title: "სტილის სახელმძღვანელო",
+        style_desc: "Questify-ს დიზაინის სისტემა და ბრენდი.",
+        style_section_brand: "ბრენდის მნიშვნელობა",
+        style_brand_quest: "Quest (ქვესთ)",
+        style_brand_quest_def: "ნიშნავს ძიებას, თავგადასავალს, გამოწვევას, ანუ რთულ დავალებას, რომელიც მოითხოვს მიზნის მიღწევას.",
+        style_brand_ify: "-ify (აიფაი)",
+        style_brand_ify_def: "ეს არის სუფიქსი, რომელიც ზმნებს ქმნის და ნიშნავს 'გახდას', 'გადაქცევას' (მაგ. simplify - გამარტივება).",
+        style_brand_meaning: "ამიტომ, 'Questify' ნიშნავს კითხვებზე პასუხის გაცემის პროცესის სახალისო თავგადასავლად ან ცოდნის 'ქვესთად' გადაქცევას.",
+        style_section_colors: "ფერების პალიტრა",
+        style_color_primary: "ძირითადი (ლურჯი)",
+        style_color_secondary: "მეორადი (ყვითელი)",
+        style_color_bg: "ფონი",
+        style_section_font: "ტიპოგრაფია",
+        style_font_dongle: "Dongle (სათაურები)",
+        style_font_sans: "Sans-Serif (ტექსტი)"
     }
 };
 

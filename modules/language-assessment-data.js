@@ -1,7 +1,4 @@
 
-
-
-
 import { questions as porParaQuestions } from '../temas/tema5/test.js';
 import { questions as serEstarQuestions } from '../temas/tema6/test.js';
 import { questions as muyMuchoQuestions } from '../temas/tema7/test.js';
@@ -12,6 +9,8 @@ import { questions as comparativosQuestions } from '../temas/tema11/test.js';
 import { questions as cuantificadoresQuestions } from '../temas/tema12/test.js';
 import { questions as demostrativosQuestions } from '../temas/tema13/test.js';
 import { questions as tenerQueQuestions } from '../temas/tema14/test.js';
+import { questions as verbosIrregularesQuestions } from '../temas/tema15/test.js';
+import { questions as posesivosQuestions } from '../temas/tema16/test.js';
 import { questions as generalAssessmentQuestions } from '../temas/general/spanish-assessment.js';
 import { stories } from '../temas/reading/reading-data.js';
 
@@ -28,6 +27,8 @@ const allSpanishStandardQuestions = [
     ...cuantificadoresQuestions,
     ...demostrativosQuestions,
     ...tenerQueQuestions,
+    ...verbosIrregularesQuestions,
+    ...posesivosQuestions,
     ...generalAssessmentQuestions
 ];
 
