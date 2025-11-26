@@ -109,9 +109,8 @@ export const savedScreen = document.getElementById('saved-screen');
 export const showSavedBtn = document.getElementById('show-saved-btn');
 export const backFromSavedBtn = document.getElementById('back-from-saved-btn');
 export const savedScreenHeaderTitle = document.getElementById('saved-screen-header-title');
-export const savedCategorySelection = document.getElementById('saved-category-selection');
-export const showSavedQuestionsBtn = document.getElementById('show-saved-questions-btn');
-export const showSavedFlashcardsBtn = document.getElementById('show-saved-flashcards-btn');
+export const savedQuestionsTab = document.getElementById('saved-questions-tab');
+export const savedFlashcardsTab = document.getElementById('saved-flashcards-tab');
 export const statisticsScreen = document.getElementById('statistics-screen');
 export const showStatisticsBtn = document.getElementById('show-statistics-btn');
 export const backFromStatisticsBtn = document.getElementById('back-from-statistics-btn');
@@ -534,39 +533,6 @@ export const renderTopicsOnStartScreen = (container) => {
             topicHeader.querySelector('svg').classList.toggle('rotate-180');
         });
     });
-};
-
-export const showSavedScreen = () => {
-    closeSideMenu();
-    state.setSavedScreenState('categories');
-    
-    savedCategorySelection.classList.remove('hidden');
-    bookmarksContainer.classList.add('hidden');
-    flashcardBookmarksContainer.classList.add('hidden');
-
-    const lang = getSettings().language;
-    savedScreenHeaderTitle.textContent = translations[lang].saved_screen_title;
-    backFromSavedBtn.setAttribute('aria-label', translations[lang].back_to_home_title);
-    backFromSavedBtn.setAttribute('title', translations[lang].back_to_home_title);
-
-    showScreen(savedScreen);
-};
-
-export const handleBackFromSaved = () => {
-    if (state.getSavedScreenState() === 'questions' || state.getSavedScreenState() === 'flashcards') {
-        state.setSavedScreenState('categories');
-        bookmarksContainer.classList.add('hidden');
-        flashcardBookmarksContainer.classList.add('hidden');
-        savedCategorySelection.classList.remove('hidden');
-        
-        const lang = getSettings().language;
-        savedScreenHeaderTitle.textContent = translations[lang].saved_screen_title;
-        backFromSavedBtn.setAttribute('aria-label', translations[lang].back_button);
-        backFromSavedBtn.setAttribute('title', translations[lang].back_button);
-
-    } else { // state is 'categories'
-        goHome();
-    }
 };
 
 export const showStatisticsScreen = () => {

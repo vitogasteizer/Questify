@@ -1,4 +1,5 @@
 
+
 import { allTopics, categories } from './topics-data.js';
 import * as state from './modules/state.js';
 import * as ui from './modules/ui-manager.js';
@@ -93,6 +94,32 @@ const handleTopicAction = (e) => {
     }
 };
 
+// --- NEW --- Saved Content Tab Switching
+const showSavedContent = (type) => {
+    if (type === 'questions') {
+        ui.savedQuestionsTab.classList.add('border-blue-600', 'text-blue-600');
+        ui.savedQuestionsTab.classList.remove('border-transparent', 'text-gray-500');
+        ui.savedFlashcardsTab.classList.remove('border-blue-600', 'text-blue-600');
+        ui.savedFlashcardsTab.classList.add('border-transparent', 'text-gray-500');
+
+        ui.bookmarksContainer.classList.remove('hidden');
+        ui.flashcardBookmarksContainer.classList.add('hidden');
+        
+        quiz.renderBookmarksSection();
+    } else { // flashcards
+        ui.savedQuestionsTab.classList.remove('border-blue-600', 'text-blue-600');
+        ui.savedQuestionsTab.classList.add('border-transparent', 'text-gray-500');
+        ui.savedFlashcardsTab.classList.add('border-blue-600', 'text-blue-600');
+        ui.savedFlashcardsTab.classList.remove('border-transparent', 'text-gray-500');
+
+        ui.bookmarksContainer.classList.add('hidden');
+        ui.flashcardBookmarksContainer.classList.remove('hidden');
+        
+        flashcard.renderBookmarkedFlashcardsSection();
+    }
+};
+
+
 const init = () => {
     // Reset session-specific state on each new load
     state.resetSessionSeenQuestions();
@@ -136,13 +163,24 @@ const init = () => {
     ui.backFromReadingListBtn.addEventListener('click', ui.goHome);
     
     // Saved Screen
-    ui.showSavedBtn.addEventListener('click', ui.showSavedScreen);
-    ui.showSavedQuestionsBtn.addEventListener('click', quiz.showSavedQuestions);
-    ui.showSavedFlashcardsBtn.addEventListener('click', flashcard.showSavedFlashcards);
-    ui.backFromSavedBtn.addEventListener('click', ui.handleBackFromSaved);
+    ui.showSavedBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        ui.closeSideMenu();
+        ui.showScreen(ui.savedScreen);
+        showSavedContent('questions'); // Default to questions tab
+    });
+    ui.savedQuestionsTab.addEventListener('click', () => showSavedContent('questions'));
+    ui.savedFlashcardsTab.addEventListener('click', () => showSavedContent('flashcards'));
+    ui.backFromSavedBtn.addEventListener('click', () => {
+        ui.showScreen(ui.startScreen);
+        ui.openSideMenu();
+    });
 
     // Statistics Screen
-    ui.showStatisticsBtn.addEventListener('click', ui.showStatisticsScreen);
+    ui.showStatisticsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        ui.showStatisticsScreen();
+    });
     ui.backFromStatisticsBtn.addEventListener('click', () => {
         ui.showScreen(ui.startScreen);
         ui.openSideMenu();

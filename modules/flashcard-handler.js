@@ -230,8 +230,8 @@ export const renderBookmarkedFlashcardsSection = () => {
 
         flashcardsToRender.forEach(f => {
             const li = document.createElement('li');
-            li.className = 'p-3 bg-gray-100 rounded-md flex justify-between items-center';
-            li.innerHTML = `<p class="text-gray-800 text-sm mr-2">${f.front}</p>`;
+            li.className = 'p-4 flex items-center justify-between hover:bg-gray-50 transition-colors';
+            li.innerHTML = `<p class="text-gray-800 text-sm mr-2 flex-grow">${f.front}</p>`;
             
             const removeButton = document.createElement('button');
             removeButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 hover:text-red-700" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>`;
@@ -255,23 +255,8 @@ export const renderBookmarkedFlashcardsSection = () => {
             ui.flashcardBookmarkQuizButtonContainer.appendChild(startBtn);
         }
     } else {
-        ui.flashcardBookmarksList.innerHTML = `<p class="text-center text-gray-500">${settings.translations[lang].no_saved_flashcards_message}</p>`;
+        ui.flashcardBookmarksList.innerHTML = `<p class="text-center text-gray-500 p-6">${settings.translations[lang].no_saved_flashcards_message}</p>`;
     }
-};
-
-export const showSavedFlashcards = () => {
-    state.setSavedScreenState('flashcards');
-
-    ui.savedCategorySelection.classList.add('hidden');
-    ui.bookmarksContainer.classList.add('hidden');
-    ui.flashcardBookmarksContainer.classList.remove('hidden');
-
-    const lang = settings.getSettings().language;
-    ui.savedScreenHeaderTitle.textContent = settings.translations[lang].flashcard_bookmarks_title;
-    ui.backFromSavedBtn.setAttribute('aria-label', settings.translations[lang].back_button);
-    ui.backFromSavedBtn.setAttribute('title', settings.translations[lang].back_button);
-
-    renderBookmarkedFlashcardsSection();
 };
 
 export const initFlashcardOptionsListeners = () => {

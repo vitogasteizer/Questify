@@ -31,6 +31,12 @@ export const categories = [
     { id: 'georgian', nameKey: 'category_georgian', colorClass: 'bg-purple-100 text-purple-800 border-purple-200 hover:bg-purple-200 hover:border-purple-400', activeColorClass: 'bg-purple-600 text-white border-purple-700' },
 ];
 
+// --- IMAGES CONFIGURATION ---
+// Change these URLs to update images. 
+// TIP: Use Square images (1:1 ratio, e.g., 500x500px) with the subject centered for best results on both mobile and desktop.
+const spanishDefaultImage = 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'; 
+const englishDefaultImage = 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'; 
+
 const individualTopics = [
     {
       id: 'logistica',
@@ -76,7 +82,7 @@ const individualTopics = [
         questions: getAllReadingQuestions(),
         stories: stories,
         type: 'reading',
-        imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+        imageUrl: spanishDefaultImage
     },
     {
       id: 'por-vs-para',
@@ -85,7 +91,7 @@ const individualTopics = [
       name: 'Uso de "Por" y "Para"',
       description: `Aprende la diferencia entre "por" y "para" con ejercicios prácticos. (${porParaQuestions.length} preguntas)`,
       questions: porParaQuestions,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     },
     {
       id: 'ser-vs-estar',
@@ -94,7 +100,7 @@ const individualTopics = [
       name: 'Uso de "Ser" y "Estar"',
       description: `Aprende cuándo usar "ser" y "estar" con ejercicios prácticos. (${serEstarQuestions.length} preguntas)`,
       questions: serEstarQuestions,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     },
     {
       id: 'muy-vs-mucho',
@@ -104,7 +110,7 @@ const individualTopics = [
       description: `Aprende la diferencia entre "muy" y "mucho" con ejercicios prácticos. (${muyMuchoQuestions.length} preguntas, ${muyMuchoFlashcards.length} flashcards)`,
       questions: muyMuchoQuestions,
       flashcards: muyMuchoFlashcards,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     },
     {
       id: 'que-vs-quien',
@@ -113,7 +119,7 @@ const individualTopics = [
       name: 'Interrogativos "¿Qué?" y "¿Quién?"',
       description: `Practica la formulación de preguntas con "¿qué?" y "¿quién?". (${queQuienQuestions.length} preguntas)`,
       questions: queQuienQuestions,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     },
     {
       id: 'interrogativos-espanoles',
@@ -123,7 +129,7 @@ const individualTopics = [
       description: `Aprende y practica las palabras para hacer preguntas en español. (${interrogativosQuestions.length} preguntas, ${interrogativosFlashcards.length} flashcards)`,
       questions: interrogativosQuestions,
       flashcards: interrogativosFlashcards,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     },
     {
       id: 'hay-ahi-ay',
@@ -132,7 +138,7 @@ const individualTopics = [
       name: 'Uso de "Hay", "Ahí" y "Ay"',
       description: `Domina la diferencia entre estas tres palabras homófonas. (${hayAhiAyQuestions.length} preguntas)`,
       questions: hayAhiAyQuestions,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     },
     {
       id: 'comparativos',
@@ -141,7 +147,7 @@ const individualTopics = [
       name: 'Comparativos',
       description: `Practica las estructuras comparativas como "más que" y "tan como". (${comparativosQuestions.length} preguntas)`,
       questions: comparativosQuestions,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     },
     {
       id: 'cuantificadores',
@@ -150,7 +156,7 @@ const individualTopics = [
       name: 'Cuantificadores',
       description: `Aprende a usar cuantificadores como "mucho", "poco", "demasiado" y "nada". (${cuantificadoresQuestions.length} preguntas)`,
       questions: cuantificadoresQuestions,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     },
     {
       id: 'demostrativos',
@@ -159,7 +165,7 @@ const individualTopics = [
       name: 'Demostrativos',
       description: `Ejercicios para usar correctamente "este", "ese", "aquel" y sus variantes. (${demostrativosQuestions.length} preguntas)`,
       questions: demostrativosQuestions,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     },
     {
       id: 'tener-que',
@@ -168,7 +174,7 @@ const individualTopics = [
       name: 'Tener que + Infinitivo',
       description: `Practica la expresión de obligación con la estructura "tener que". (${tenerQueQuestions.length} preguntas)`,
       questions: tenerQueQuestions,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     },
     {
       id: 'verbos-irregulares',
@@ -177,7 +183,7 @@ const individualTopics = [
       name: 'Verbos Irregulares',
       description: `Domina los verbos irregulares, cambios de raíz y formas especiales en presente y futuro. (${verbosIrregularesQuestions.length} preguntas)`,
       questions: verbosIrregularesQuestions,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     },
     {
       id: 'posesivos',
@@ -186,7 +192,7 @@ const individualTopics = [
       name: 'Los Posesivos',
       description: `Aprende a usar los adjetivos y pronombres posesivos (mi, tu, su, mío, tuyo...). (${posesivosQuestions.length} preguntas)`,
       questions: posesivosQuestions,
-      imageUrl: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png'
+      imageUrl: spanishDefaultImage
     }
 ];
 
@@ -194,8 +200,8 @@ const finalTopics = [];
 
 const categoryImageMap = {
     logistica: topicImageUrls.logistica,
-    espanol: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png',
-    ingles: 'https://i.postimg.cc/k4x134dZ/logistics-concept.png' // Placeholder
+    espanol: spanishDefaultImage,
+    ingles: englishDefaultImage
 };
 
 categories.forEach(category => {

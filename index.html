@@ -572,56 +572,57 @@
         <!-- Side Menu -->
         <div id="menu-backdrop" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out"></div>
         <div id="side-menu" class="fixed top-0 right-0 h-full bg-white z-50 w-11/12 max-w-sm p-6 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col" role="dialog" aria-modal="true" aria-labelledby="side-menu-title">
-            <div class="flex justify-between items-center mb-6">
-                <h2 id="side-menu-title" class="font-dongle text-6xl font-bold text-gray-900" data-i18n-key="settings_modal_title">Menú</h2>
+            <div class="flex justify-between items-center mb-6 flex-shrink-0">
+                <h2 id="side-menu-title" class="font-dongle text-5xl font-bold text-gray-900" data-i18n-key="settings_modal_title">Menú</h2>
                 <button id="close-settings-btn" class="p-2 rounded-full hover:bg-gray-200 transition text-gray-500 hover:text-gray-800" data-i18n-key="close_settings_aria" aria-label="Cerrar menú">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
-            <p id="settings-greeting" class="text-lg text-gray-600 mb-6"></p>
-            <div class="space-y-6 flex-grow overflow-y-auto">
+            <p id="settings-greeting" class="text-lg text-gray-600 mb-4 flex-shrink-0"></p>
+        
+            <!-- Scrollable content area -->
+            <div class="flex-grow overflow-y-auto -mr-6 pr-6 space-y-4">
+                <nav class="space-y-1">
+                    <a href="#" id="show-statistics-btn" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400 group-hover:text-blue-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                        <div>
+                            <span class="font-semibold text-gray-800" data-i18n-key="statistics_label">Estadísticas</span>
+                            <p class="text-sm text-gray-500" data-i18n-key="statistics_desc">Revisa tu progreso y rendimiento.</p>
+                        </div>
+                    </a>
+                    <a href="#" id="show-saved-btn" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400 group-hover:text-blue-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
+                        <div>
+                            <span class="font-semibold text-gray-800" data-i18n-key="saved_items_label">Contenido Guardado</span>
+                            <p class="text-sm text-gray-500" data-i18n-key="saved_items_desc">Accede a tus preguntas y flashcards guardadas.</p>
+                        </div>
+                    </a>
+                </nav>
+        
                 <div>
-                    <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="statistics_label">Estadísticas</label>
-                    <button id="show-statistics-btn" class="w-full px-4 py-3 text-md font-semibold text-white bg-teal-600 rounded-lg hover:bg-teal-700 transition-colors shadow-md" data-i18n-key="statistics_button">
-                        Ver Estadísticas
-                    </button>
-                    <p class="text-sm text-gray-500 mt-1" data-i18n-key="statistics_desc">Revisa tu progreso y rendimiento.</p>
-                </div>
-                <div>
-                    <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="saved_items_label">Contenido Guardado</label>
-                    <button id="show-saved-btn" class="w-full px-4 py-3 text-md font-semibold text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors shadow-md" data-i18n-key="saved_button">
-                        Ver Guardados
-                    </button>
-                    <p class="text-sm text-gray-500 mt-1" data-i18n-key="saved_items_desc">Accede a tus preguntas y flashcards guardadas.</p>
-                </div>
-                <div>
-                    <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="language_label">Idioma</label>
+                    <label class="block text-sm font-semibold text-gray-500 mb-2 px-3 uppercase tracking-wider" data-i18n-key="language_label">Idioma</label>
                     <div id="language-switcher" class="grid grid-cols-2 gap-2">
-                        <button data-lang="es" class="lang-btn w-full px-4 py-3 text-md font-semibold rounded-lg transition-colors shadow-sm">Español</button>
-                        <button data-lang="ka" class="lang-btn w-full px-4 py-3 text-md font-semibold rounded-lg transition-colors shadow-sm">ქართული</button>
+                        <button data-lang="es" class="lang-btn w-full px-4 py-2 text-sm font-semibold rounded-lg transition-colors shadow-sm">Español</button>
+                        <button data-lang="ka" class="lang-btn w-full px-4 py-2 text-sm font-semibold rounded-lg transition-colors shadow-sm">ქართული</button>
                     </div>
-                    <p class="text-sm text-gray-500 mt-1" data-i18n-key="language_desc">Selecciona el idioma de la aplicación.</p>
                 </div>
-                <!-- New Information Links -->
-                <div class="pt-4 border-t border-gray-200 space-y-3">
-                    <a href="#" id="menu-about-link" class="flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-400 group-hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+        
+                <nav class="space-y-1 pt-2 border-t border-gray-200">
+                    <a href="#" id="menu-about-link" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-gray-100 font-medium transition-colors group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-400 group-hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         <span data-i18n-key="menu_about_app">Sobre la App</span>
                     </a>
-                    <a href="#" id="menu-style-link" class="flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-400 group-hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                        </svg>
+                    <a href="#" id="menu-style-link" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-gray-100 font-medium transition-colors group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-400 group-hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
                         <span data-i18n-key="menu_style_guide">Guía de Estilo</span>
                     </a>
+                </nav>
+                
+                <div class="pt-4">
+                    <p data-i18n-key="app_creator_credit" class="text-center text-xs text-gray-500"></p>
                 </div>
-            </div>
-            <div class="mt-8 pt-4 border-t border-gray-200">
-                <p data-i18n-key="app_creator_credit" class="text-center text-sm text-gray-500 mt-6"></p>
             </div>
         </div>
         
@@ -719,9 +720,9 @@
         </div>
         
         <!-- Statistics Screen -->
-        <div id="statistics-screen" class="hidden w-full max-w-4xl mx-auto p-4">
+        <div id="statistics-screen" class="hidden w-full max-w-2xl mx-auto p-4">
             <div class="w-full">
-                 <div class="flex items-center mb-6 relative">
+                <div class="flex items-center mb-6 relative">
                     <button id="back-from-statistics-btn" class="p-2 rounded-lg hover:bg-blue-50 transition-colors absolute left-0" data-i18n-key="back_button" title="Volver">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m7 7H3" />
@@ -729,89 +730,100 @@
                     </button>
                     <h2 class="font-dongle text-6xl font-bold text-gray-900 text-center w-full" data-i18n-key="statistics_title">Estadísticas</h2>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-2">
-                    <!-- Stat Card: Time Spent -->
-                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
-                        <div class="bg-blue-600 p-3 rounded-full text-white shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-blue-800" data-i18n-key="stat_time_spent_title">Tiempo en la App</h3>
-                            <p id="stat-time-spent" class="text-3xl font-bold text-blue-600">0h 0m</p>
-                        </div>
-                    </div>
-                    <!-- Stat Card: Tests Completed -->
-                    <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
-                        <div class="bg-teal-500 p-3 rounded-full text-white shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-teal-800" data-i18n-key="stat_total_tests_title">Tests Completados</h3>
-                            <p id="stat-total-tests" class="text-3xl font-bold text-teal-600">0</p>
-                        </div>
-                    </div>
-                     <!-- Stat Card: Avg Test Time -->
-                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
-                        <div class="bg-purple-500 p-3 rounded-full text-white shadow-md">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-purple-800" data-i18n-key="stat_avg_test_time_title">Tiempo Promedio (10 Q)</h3>
-                            <p id="stat-avg-test-time" class="text-3xl font-bold text-purple-600">0s</p>
-                        </div>
-                    </div>
-                    <!-- Stat Card: Total Flashcards -->
-                    <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-5 rounded-2xl shadow-lg flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
-                        <div class="bg-yellow-500 p-3 rounded-full text-white shadow-md">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2H5a2 2 0 00-2 2v2m14 0h-2" /></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-yellow-800" data-i18n-key="stat_total_flashcards_title">Flashcards Vistos</h3>
-                            <p id="stat-total-flashcards" class="text-3xl font-bold text-yellow-600">0</p>
-                        </div>
-                    </div>
-                    <!-- Stat Card: Test Accuracy -->
-                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-2xl shadow-lg md:col-span-2 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
-                         <div class="flex items-center space-x-4 mb-3">
-                            <div class="bg-green-500 p-3 rounded-full text-white shadow-md">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                    <ul class="divide-y divide-gray-200">
+                        <!-- Time Spent -->
+                        <li class="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-blue-100 rounded-full text-blue-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="font-semibold text-gray-800" data-i18n-key="stat_time_spent_title">Tiempo en la App</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="font-semibold text-lg text-green-800" data-i18n-key="stat_test_accuracy_title">Precisión en Tests</h3>
+                            <p id="stat-time-spent" class="text-lg font-bold text-gray-700">0h 0m</p>
+                        </li>
+                        <!-- Tests Completed -->
+                        <li class="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-teal-100 rounded-full text-teal-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="font-semibold text-gray-800" data-i18n-key="stat_total_tests_title">Tests Completados</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="space-y-2">
-                             <div class="flex justify-between items-center text-sm">
-                                <p class="font-medium text-green-700"><span data-i18n-key="stat_correct">Correctas</span>: <span id="stat-correct-answers" class="font-bold">0</span></p>
-                                <p class="font-medium text-red-700"><span data-i18n-key="stat_incorrect">Incorrectas</span>: <span id="stat-incorrect-answers" class="font-bold">0</span></p>
+                            <p id="stat-total-tests" class="text-lg font-bold text-gray-700">0</p>
+                        </li>
+                        <!-- Avg Test Time -->
+                         <li class="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-purple-100 rounded-full text-purple-600">
+                                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="font-semibold text-gray-800" data-i18n-key="stat_avg_test_time_title">Tiempo Promedio (10 Q)</p>
+                                </div>
                             </div>
-                            <div class="w-full bg-green-200 rounded-full h-2.5">
-                                <div id="accuracy-bar" class="bg-green-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            <p id="stat-avg-test-time" class="text-lg font-bold text-gray-700">0s</p>
+                        </li>
+                        <!-- Total Flashcards -->
+                        <li class="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-yellow-100 rounded-full text-yellow-600">
+                                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2H5a2 2 0 00-2 2v2m14 0h-2" /></svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="font-semibold text-gray-800" data-i18n-key="stat_total_flashcards_title">Flashcards Vistos</p>
+                                </div>
                             </div>
-                            <p class="text-right text-2xl font-bold text-green-600" id="accuracy-percentage">0%</p>
-                        </div>
-                    </div>
-                    <!-- Stat Card: Flashcard Knowledge -->
-                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-5 rounded-2xl shadow-lg md:col-span-2 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
-                         <div class="flex items-center space-x-4 mb-3">
-                            <div class="bg-red-500 p-3 rounded-full text-white shadow-md">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                            <p id="stat-total-flashcards" class="text-lg font-bold text-gray-700">0</p>
+                        </li>
+                        <!-- Test Accuracy -->
+                        <li class="p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-green-100 rounded-full text-green-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    </div>
+                                    <p class="ml-4 font-semibold text-gray-800" data-i18n-key="stat_test_accuracy_title">Precisión en Tests</p>
+                                </div>
+                                <p id="accuracy-percentage" class="text-xl font-bold text-green-600">0%</p>
                             </div>
-                            <div>
-                                <h3 class="font-semibold text-lg text-red-800" data-i18n-key="stat_flashcard_knowledge_title">Conocimiento (Flashcards)</h3>
+                            <div class="mt-3 space-y-1">
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div id="accuracy-bar" class="bg-green-500 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                                <div class="flex justify-between items-center text-sm">
+                                    <p class="font-medium text-gray-500"><span data-i18n-key="stat_correct">Correctas</span>: <span id="stat-correct-answers" class="font-bold text-gray-700">0</span></p>
+                                    <p class="font-medium text-gray-500"><span data-i18n-key="stat_incorrect">Incorrectas</span>: <span id="stat-incorrect-answers" class="font-bold text-gray-700">0</span></p>
+                                </div>
                             </div>
-                        </div>
-                         <div class="space-y-2">
-                             <div class="flex justify-between items-center text-sm">
-                                <p class="font-medium text-green-700"><span data-i18n-key="stat_known">Sabidas</span>: <span id="stat-known-flashcards" class="font-bold">0</span></p>
-                                <p class="font-medium text-red-700"><span data-i18n-key="stat_unknown">No Sabidas</span>: <span id="stat-unknown-flashcards" class="font-bold">0</span></p>
+                        </li>
+                        <!-- Flashcard Knowledge -->
+                        <li class="p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-red-100 rounded-full text-red-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                                    </div>
+                                    <p class="ml-4 font-semibold text-gray-800" data-i18n-key="stat_flashcard_knowledge_title">Conocimiento (Flashcards)</p>
+                                </div>
+                                <p id="knowledge-percentage" class="text-xl font-bold text-red-600">0%</p>
                             </div>
-                            <div class="w-full bg-red-200 rounded-full h-2.5">
-                                <div id="knowledge-bar" class="bg-red-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            <div class="mt-3 space-y-1">
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div id="knowledge-bar" class="bg-red-500 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                                <div class="flex justify-between items-center text-sm">
+                                    <p class="font-medium text-gray-500"><span data-i18n-key="stat_known">Sabidas</span>: <span id="stat-known-flashcards" class="font-bold text-gray-700">0</span></p>
+                                    <p class="font-medium text-gray-500"><span data-i18n-key="stat_unknown">No Sabidas</span>: <span id="stat-unknown-flashcards" class="font-bold text-gray-700">0</span></p>
+                                </div>
                             </div>
-                            <p class="text-right text-2xl font-bold text-red-600" id="knowledge-percentage">0%</p>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -985,8 +997,7 @@
 
         <!-- Saved Items Screen -->
         <div id="saved-screen" class="hidden w-full max-w-2xl mx-auto p-4">
-             <!-- ... (content same as before) ... -->
-             <div class="w-full">
+            <div class="w-full">
                 <div class="flex items-center mb-6 relative">
                     <button id="back-from-saved-btn" class="p-2 rounded-lg hover:bg-blue-50 transition-colors absolute left-0" data-i18n-key="back_button" title="Volver">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -996,26 +1007,30 @@
                     <h2 id="saved-screen-header-title" class="font-dongle text-6xl font-bold text-gray-900 text-center w-full" data-i18n-key="saved_screen_title">Guardados</h2>
                 </div>
                 
-                <!-- Category Selection -->
-                <div id="saved-category-selection" class="flex flex-col items-center justify-center space-y-4 mt-8">
-                    <button id="show-saved-questions-btn" class="w-full max-w-md px-8 py-4 text-xl font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="saved_questions_category_button">
-                        Preguntas Guardadas
-                    </button>
-                    <button id="show-saved-flashcards-btn" class="w-full max-w-md px-8 py-4 text-xl font-bold text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="saved_flashcards_category_button">
-                        Flashcards Guardados
-                    </button>
-                </div>
-                
-                <!-- Bookmarks Section -->
-                <div id="bookmarks-container" class="hidden mt-8 text-left max-w-2xl mx-auto">
-                    <div id="bookmarks-list" class="space-y-3 p-4 bg-gray-50 border border-gray-200 rounded-lg"></div>
-                    <div id="bookmark-quiz-button-container" class="mt-4 text-center"></div>
+                <!-- Tab Navigation -->
+                <div class="mb-4 border-b border-gray-200">
+                    <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                        <button id="saved-questions-tab" class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-i18n-key="filter_tests">
+                            Preguntas
+                        </button>
+                        <button id="saved-flashcards-tab" class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-i18n-key="filter_flashcards">
+                            Flashcards
+                        </button>
+                    </nav>
                 </div>
         
-                <!-- Bookmarked Flashcards Section -->
-                <div id="flashcard-bookmarks-container" class="hidden mt-8 text-left max-w-2xl mx-auto">
-                    <div id="flashcard-bookmarks-list" class="space-y-3 p-4 bg-gray-50 border border-gray-200 rounded-lg"></div>
-                    <div id="flashcard-bookmark-quiz-button-container" class="mt-4 text-center"></div>
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                    <!-- Bookmarks Section -->
+                    <div id="bookmarks-container" class="hidden">
+                        <ul id="bookmarks-list" class="divide-y divide-gray-200"></ul>
+                        <div id="bookmark-quiz-button-container" class="p-4 text-center bg-gray-50 border-t border-gray-200"></div>
+                    </div>
+            
+                    <!-- Bookmarked Flashcards Section -->
+                    <div id="flashcard-bookmarks-container" class="hidden">
+                        <ul id="flashcard-bookmarks-list" class="divide-y divide-gray-200"></ul>
+                        <div id="flashcard-bookmark-quiz-button-container" class="p-4 text-center bg-gray-50 border-t border-gray-200"></div>
+                    </div>
                 </div>
             </div>
         </div>
