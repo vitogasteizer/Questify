@@ -1,7 +1,4 @@
 
-
-
-
 import * as state from './state.js';
 import * as ui from './ui-manager.js';
 import * as settings from './settings.js';
@@ -310,12 +307,23 @@ const restartQuiz = () => {
          return;
     }
     
-    const selectedQuestions = selectQuestionsForQuiz(
+    let selectedQuestions = selectQuestionsForQuiz(
         config.topicId,
         config.questionPool,
         config.numQuestions,
         config.questionOrder
     );
+
+    const topic = state.allTopics.find(t => t.id === config.topicId);
+    if (topic?.categoryId === 'iq') {
+        const difficultyOrder = { 'easy': 1, 'medium': 2, 'hard': 3 };
+        selectedQuestions.sort((a, b) => {
+            const diffA = difficultyOrder[a.difficulty] || 99;
+            const diffB = difficultyOrder[b.difficulty] || 99;
+            return diffA - diffB;
+        });
+    }
+
     state.setCurrentQuestions(selectedQuestions);
 
 
@@ -363,6 +371,7 @@ const handleFillInBlankSubmit = () => {
     const input = document.getElementById('fill-in-blank-input');
     if (!input) return;
 
+    const isIQTest = state.getCurrentTopicForQuiz()?.categoryId === 'iq';
     const userAnswer = input.value.trim().toLowerCase();
     const question = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
     
@@ -387,14 +396,18 @@ const handleFillInBlankSubmit = () => {
     const submitBtn = ui.optionsContainer.querySelector('button');
     if(submitBtn) submitBtn.disabled = true;
     
-    // Visual feedback
-    input.classList.add(isCorrect ? 'correct' : 'incorrect');
-
     if (isCorrect) {
         state.incrementScore();
-        settings.playCorrectSound();
-    } else {
-        settings.playIncorrectSound();
+    }
+    
+    // Visual and audio feedback (conditional)
+    if (!isIQTest) {
+        input.classList.add(isCorrect ? 'correct' : 'incorrect');
+        if (isCorrect) {
+            settings.playCorrectSound();
+        } else {
+            settings.playIncorrectSound();
+        }
     }
 
     state.addSelectedAnswer({
@@ -426,6 +439,7 @@ const moveWordTile = (tile) => {
 const handleOrderWordsSubmit = () => {
     const answerArea = document.getElementById('order-words-answer-area');
     const question = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
+    const isIQTest = state.getCurrentTopicForQuiz()?.categoryId === 'iq';
 
     const userAnswer = Array.from(answerArea.children)
         .map(tile => tile.dataset.word)
@@ -439,15 +453,19 @@ const handleOrderWordsSubmit = () => {
     const submitBtn = ui.optionsContainer.querySelector('button');
     if(submitBtn) submitBtn.disabled = true;
 
-    // Visual feedback
-    answerArea.classList.add(isCorrect ? 'correct' : 'incorrect');
-    answerArea.style.borderStyle = 'solid';
-
     if (isCorrect) {
         state.incrementScore();
-        settings.playCorrectSound();
-    } else {
-        settings.playIncorrectSound();
+    }
+
+    // Visual and audio feedback (conditional)
+    if (!isIQTest) {
+        answerArea.classList.add(isCorrect ? 'correct' : 'incorrect');
+        answerArea.style.borderStyle = 'solid';
+        if (isCorrect) {
+            settings.playCorrectSound();
+        } else {
+            settings.playIncorrectSound();
+        }
     }
 
     state.addSelectedAnswer({
@@ -476,61 +494,27 @@ const loadQuestion = () => {
     const question = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
     const lang = settings.getSettings().language;
 
-    // --- READING MODE LOGIC ---
-    // Check if we are in a reading topic (either by explicit flag or if text container is visible)
-    // But more robustly: Check if the question belongs to a "reading-session" topic
-    const currentTopic = state.getCurrentTopicForQuiz();
-    
-    // We should hide the reading content container by default
+    ui.questionInstruction.textContent = '';
+    ui.questionInstruction.classList.add('hidden');
+    // Reset options container to default single-column layout
+    ui.optionsContainer.className = 'grid grid-cols-1 gap-4';
+
     ui.readingContentContainer.classList.add('hidden');
 
-    // If the question doesn't have readingText attached directly (like in simple assessment mode), 
-    // but we are in a reading session, the text is static in the UI.
-    // HOWEVER, if we are in Assessment Mode, the `readingText` is attached to the question object.
-    
-    // Scenario 1: Assessment Mode (handled by assessment-handler usually, but if using quiz-handler for practice?)
-    // quiz-handler handles "Reading Text" via `reading-text-box` style inside image container.
-    
     if (question.readingText && !state.getIsAssessmentMode()) { 
-        // If we are in a reading session (not assessment), we might want to use the Persistent Container
-        // Check if the UI element for persistent reading exists and we are in reading mode
-        // For simplicity, let's use the persistent container if we are in 'reading-session' topic
-        
         if (state.getLastQuizConfig()?.topicId === 'reading-session') {
              ui.readingContentContainer.classList.remove('hidden');
-             // Ensure text is set (it is set in startReadingSession, but safe to set here too if it changes per question, though it doesn't for now)
-             // ui.readingTextDisplay.textContent = question.readingText; // Not needed if one story per session
         } else {
-            // Standard Quiz with a reading passage (like in generic tests)
             const readingBox = document.createElement('div');
             readingBox.className = 'reading-text-box';
             readingBox.textContent = question.readingText;
             ui.questionImageContainer.appendChild(readingBox);
         }
     } else if (question.readingText) {
-         // Assessment mode usually falls here or standard quizzes with text
          const readingBox = document.createElement('div');
          readingBox.className = 'reading-text-box';
          readingBox.textContent = question.readingText;
          ui.questionImageContainer.appendChild(readingBox);
-    }
-
-    // Split instruction from question text to style them differently
-    const parts = question.questionText.split(':');
-    const hasInstruction = parts.length > 1 && parts[1].trim() !== '';
-
-    if (hasInstruction) {
-        const instruction = parts[0].trim();
-        const mainQuestion = parts.slice(1).join(':').trim();
-
-        ui.questionInstruction.textContent = instruction + ':';
-        ui.questionInstruction.classList.remove('hidden');
-        ui.questionTextEl.innerHTML = mainQuestion;
-    } else {
-        // No separable instruction found, display the whole text as the main question.
-        ui.questionInstruction.textContent = '';
-        ui.questionInstruction.classList.add('hidden');
-        ui.questionTextEl.innerHTML = question.questionText;
     }
 
     if (question.imageUrl) {
@@ -557,9 +541,45 @@ const loadQuestion = () => {
         ui.bookmarkBtn.setAttribute('aria-label', settings.translations[lang].bookmark_question_aria);
     }
 
-    if (question.type === 'fill-in-the-blank') {
+    if (question.type === 'image-choice') {
+        // Apply responsive grid for image choices: 1 column on mobile, 2 on desktop
+        ui.optionsContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
+        ui.chooseAnswerSubtitle.classList.add('hidden');
+
+        ui.questionTextEl.innerHTML = `
+            <div id="question-title-container">
+                ${question.questionText}
+            </div>
+        `;
+
+        if (question.questionImageUrl) {
+            const img = document.createElement('img');
+            img.src = question.questionImageUrl;
+            img.alt = `Question Image`;
+            img.id = 'question-main-image';
+            ui.questionImageContainer.prepend(img);
+        }
+        
+        question.options.forEach((optionUrl, index) => {
+            const button = document.createElement('button');
+            button.className = 'image-option-btn';
+            button.dataset.index = index;
+            button.onclick = () => selectAnswer(button); 
+
+            const img = document.createElement('img');
+            img.src = optionUrl;
+            img.alt = `Option ${index + 1}`;
+            button.appendChild(img);
+            
+            ui.optionsContainer.appendChild(button);
+        });
+
+    } else if (question.type === 'fill-in-the-blank') {
+        const parts = question.questionText.split('______');
+        ui.questionTextEl.innerHTML = parts.join('<span class="font-bold text-blue-600"> ______ </span>');
+        
         const inputContainer = document.createElement('div');
-        inputContainer.className = 'col-span-1 md:col-span-2 flex flex-col items-center';
+        inputContainer.className = 'flex flex-col items-center';
         
         const input = document.createElement('input');
         input.type = 'text';
@@ -584,8 +604,9 @@ const loadQuestion = () => {
         input.focus();
 
     } else if (question.type === 'order-words') {
+        ui.questionTextEl.innerHTML = question.questionText;
         const orderWordsContainer = document.createElement('div');
-        orderWordsContainer.className = 'col-span-1 md:col-span-2 flex flex-col items-center gap-4';
+        orderWordsContainer.className = 'flex flex-col items-center gap-4';
 
         const answerArea = document.createElement('div');
         answerArea.id = 'order-words-answer-area';
@@ -618,6 +639,17 @@ const loadQuestion = () => {
         ui.optionsContainer.appendChild(orderWordsContainer);
 
     } else { // 'multiple-choice' or legacy
+        const parts = question.questionText.split(':');
+        const hasInstruction = parts.length > 1 && parts[1].trim() !== '';
+
+        if (hasInstruction) {
+            ui.questionInstruction.textContent = parts[0].trim() + ':';
+            ui.questionInstruction.classList.remove('hidden');
+            ui.questionTextEl.innerHTML = parts.slice(1).join(':').trim();
+        } else {
+            ui.questionTextEl.innerHTML = question.questionText;
+        }
+
         ui.chooseAnswerSubtitle.classList.remove('hidden');
         const shuffledOptions = shuffleArray([...question.options.keys()]);
         shuffledOptions.forEach(optionIndex => {
@@ -646,31 +678,51 @@ const selectAnswer = (button) => {
     const selectedIndex = parseInt(button.dataset.index);
     const question = state.getCurrentQuestions()[state.getCurrentQuestionIndex()];
     const isCorrect = selectedIndex === question.correctAnswerIndex;
+    const isIQTest = state.getCurrentTopicForQuiz()?.categoryId === 'iq';
 
     Array.from(ui.optionsContainer.children).forEach(btn => {
         btn.disabled = true;
         btn.classList.add('disabled');
-        const btnIndex = parseInt(btn.dataset.index);
-        const iconContainer = btn.querySelector('.answer-icon-container');
+        
+        if (!isIQTest) {
+            const btnIndex = parseInt(btn.dataset.index);
+            const isImageChoice = btn.classList.contains('image-option-btn');
+            const iconContainer = btn.querySelector('.answer-icon-container');
 
-        if (btnIndex === question.correctAnswerIndex) {
-            btn.classList.add('correct');
-            if (iconContainer) {
-                iconContainer.innerHTML = `<span class="answer-icon icon-correct">✓</span>`;
-            }
-        } else if (btnIndex === selectedIndex && !isCorrect) {
-            btn.classList.add('incorrect');
-            if (iconContainer) {
-                iconContainer.innerHTML = `<span class="answer-icon icon-incorrect">✗</span>`;
+            if (btnIndex === question.correctAnswerIndex) {
+                btn.classList.add('correct');
+                if (iconContainer) { // Text-based
+                    iconContainer.innerHTML = `<span class="answer-icon icon-correct">✓</span>`;
+                } else if (isImageChoice) { // Image-based, add checkmark overlay
+                    const check = document.createElement('span');
+                    check.className = 'answer-icon icon-correct';
+                    check.innerHTML = '✓';
+                    btn.appendChild(check);
+                }
+            } else if (btnIndex === selectedIndex && !isCorrect) {
+                btn.classList.add('incorrect');
+                if (iconContainer) { // Text-based
+                    iconContainer.innerHTML = `<span class="answer-icon icon-incorrect">✗</span>`;
+                } else if (isImageChoice) { // Image-based, add cross overlay
+                    const cross = document.createElement('span');
+                    cross.className = 'answer-icon icon-incorrect';
+                    cross.innerHTML = '✗';
+                    btn.appendChild(cross);
+                }
             }
         }
     });
 
     if (isCorrect) {
         state.incrementScore();
-        settings.playCorrectSound();
-    } else {
-        settings.playIncorrectSound();
+    }
+    
+    if (!isIQTest) {
+        if (isCorrect) {
+            settings.playCorrectSound();
+        } else {
+            settings.playIncorrectSound();
+        }
     }
 
     state.addSelectedAnswer({
@@ -823,7 +875,8 @@ export const initQuizOptionsListeners = () => {
         const isTimerEnabled = document.getElementById('quiz-timer-on-radio').checked;
         const timerDuration = parseInt(document.getElementById('quiz-timer-duration-input').value, 10);
         const questionOrder = document.querySelector('input[name="quiz-question-order"]:checked').value;
-        const topicId = state.getCurrentTopicForQuiz()?.id;
+        const topic = state.getCurrentTopicForQuiz();
+        const topicId = topic?.id;
         
         state.setLastQuizConfig({
             topicId: topicId,
@@ -834,12 +887,23 @@ export const initQuizOptionsListeners = () => {
             questionPool: state.getCurrentQuestionPool()
         });
 
-        const selectedQuestions = selectQuestionsForQuiz(
+        let selectedQuestions = selectQuestionsForQuiz(
             topicId,
             state.getCurrentQuestionPool(),
             numQuestions,
             questionOrder
         );
+
+        // If it's an IQ test, sort the final question list by difficulty.
+        if (topic?.categoryId === 'iq') {
+            const difficultyOrder = { 'easy': 1, 'medium': 2, 'hard': 3 };
+            selectedQuestions.sort((a, b) => {
+                const diffA = difficultyOrder[a.difficulty] || 99; // Assign high value to undefined difficulty
+                const diffB = difficultyOrder[b.difficulty] || 99;
+                return diffA - diffB;
+            });
+        }
+        
         state.setCurrentQuestions(selectedQuestions);
         
         startQuiz(isTimerEnabled, timerDuration * 60);

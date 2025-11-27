@@ -28,7 +28,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#1c0ee3"/>
     <link rel="apple-touch-icon" href="https://i.postimg.cc/zGv1rf0x/Questify_Favicon.png">
@@ -43,7 +43,7 @@
             padding: 0;
         }
         body.white-bg { background-color: #FFFFFF; }
-        .font-dongle { font-family: 'Dongle', sans-serif; line-height: 0.9; }
+        .font-title { font-family: 'M PLUS Rounded 1c', sans-serif; }
         .hidden { display: none; }
         .disabled { cursor: not-allowed; opacity: 0.7; }
         .rotate-180 { transform: rotate(180deg); }
@@ -52,6 +52,50 @@
         .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
         #flashcard-container.is-flipped { transform: rotateY(180deg); }
+
+        /* --- TYPOGRAPHY SYSTEM --- */
+        /* All font sizes are managed here. Use 'rem' units (1rem ≈ 16px). */
+        
+        /* H1: Main screen title ("Tests Interactivos") */
+        .text-h1 { font-size: 2.1rem; /* 60px */ line-height: 1.5; }
+        
+        /* H2: Main page titles (e.g., "Menú", "Estadísticas", "Configurar Test") */
+        .text-h2 { font-size: 3rem; /* 48px */ line-height: 1; }
+        
+        /* H3: Sub-page titles, larger section headers */
+        .text-h3 { font-size: 2.25rem; /* 36px */ line-height: 2.5rem; }
+        
+        /* H4: Smaller section headers, question text */
+        .text-h4 { font-size: 1.875rem; /* 30px */ line-height: 2.25rem; }
+        
+        /* H5: Card titles, smaller headers */
+        .text-h5 { font-size: 1.875rem; /* 30px */ line-height: 2.25rem; }
+        
+        /* Score Display: Large numbers on results screen */
+        .text-score { font-size: 3.75rem; /* 60px */ line-height: 1; }
+        
+        /* Body Large: Subtitles, important messages */
+        .text-body-lg { font-size: 1.125rem; /* 18px */ line-height: 1.75rem; }
+
+        /* Body Base: Default text size for paragraphs, options, etc. */
+        .text-body-base { font-size: 1rem; /* 16px */ line-height: 1.5rem; }
+
+        /* Small: Helper text, progress indicators, labels */
+        .text-small { font-size: 0.875rem; /* 14px */ line-height: 1.25rem; }
+        
+        /* Button Large: Main action buttons */
+        .button-text-lg { font-size: 1.25rem; /* 20px */ line-height: 1.75rem; }
+
+        /* Button Small: Language switchers, secondary buttons */
+        .button-text-sm { font-size: 0.875rem; /* 14px */ line-height: 1.25rem; }
+
+        /* --- Responsive Overrides (for screens 768px and wider) --- */
+        @media (min-width: 768px) {
+            .text-h1 { font-size: 4.5rem; /* 72px */ }
+            .text-h4 { font-size: 2.25rem; /* 36px */ }
+        }
+        /* --- END TYPOGRAPHY SYSTEM --- */
+
         /* New styles for order-words questions */
         .word-bank, .answer-area { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; border-radius: 8px; min-height: 50px; }
         .word-bank { background-color: #f3f4f6; border: 1px solid #e5e7eb; }
@@ -108,7 +152,7 @@
             padding: 1rem;
             border-radius: 0.75rem;
             margin-top: 0.5rem;
-            font-size: 0.95rem;
+            font-size: 0.95rem; /* Specific size, can be moved to typography system if needed */
             color: #4b5563;
             border-left: 4px solid #1c0ee3;
         }
@@ -182,7 +226,7 @@
         
         /* Language Levels Badges */
         .level-badge-common { 
-            font-size: 0.75rem; 
+            font-size: 0.75rem; /* Specific size */
             padding: 0.1rem 0.5rem; 
             border-radius: 0.3rem; 
             margin-left: 0.5rem; 
@@ -201,26 +245,53 @@
         .level-C2 { background-color: #7c3aed; }
         .level-Mix { background-color: #6b7280; } /* Gray for mixed/combined */
 
-
-        /* --- GEORGIAN FONT FIXES --- */
-        html[lang="ka"] .font-dongle {
-            font-family: sans-serif, Arial !important;
-            line-height: 1.3 !important;
-            letter-spacing: normal;
+        /* --- NEW STYLES FOR IMAGE QUIZ --- */
+        .image-option-btn {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 140px;
+            padding: 0.5rem;
+            border: 2px solid #e5e7eb;
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            overflow: hidden;
         }
-
-        html[lang="ka"] #start-screen h1 { font-size: 2.5rem !important; }
-        html[lang="ka"] h2.font-dongle, 
-        html[lang="ka"] #learning-completion-title { font-size: 1.5rem !important; }
-        html[lang="ka"] h3.font-dongle { font-size: 1.5rem !important; }
-        html[lang="ka"] #flashcard-front-text,
-        html[lang="ka"] #flashcard-back-text { font-size: 1.5rem !important; }
-        html[lang="ka"] #side-menu-title { font-size: 1.5rem !important; }
-        html[lang="ka"] #welcome-message { font-size: 1rem; }
-        html[lang="ka"] #search-results-container h3 { font-size: 1.3rem !important; }
+        .image-option-btn img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .image-option-btn:not(:disabled):hover {
+            border-color: #93c5fd;
+            background-color: #eff6ff;
+        }
+        #question-title-container {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        #question-main-image {
+            max-width: 80%;
+            max-height: 200px;
+            margin: 0 auto 1.5rem auto;
+            display: block;
+            border-radius: 0.5rem;
+        }
+        .image-option-btn .answer-icon {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            width: 28px;
+            height: 28px;
+            font-size: 1.25rem;
+        }
     </style>
 </head>
-<body class="text-gray-800 font-sans">
+<body class="text-gray-800 font-sans text-body-base">
     <header id="app-header" class="hidden fixed top-0 left-0 right-0 w-full z-20 transition-all duration-300 ease-in-out">
         <div class="w-full max-w-2xl mx-auto px-4 py-2 flex justify-between items-center">
             <a href="#" id="home-link-header" class="transition-transform transform hover:scale-105" data-i18n-key="back_to_home_title" title="Volver al Inicio">
@@ -238,11 +309,11 @@
         
         <!-- Name Input Screen -->
         <div id="name-screen" class="w-full max-w-md mx-auto text-center flex-1 flex flex-col justify-center px-4">
-            <h1 class="font-dongle text-6xl font-bold text-gray-900 mb-4" data-i18n-key="welcome_title">¡Bienvenido!</h1>
+            <h1 class="font-title text-h2 font-bold text-gray-900 mb-4" data-i18n-key="welcome_title">¡Bienvenido!</h1>
             <p class="text-gray-600 mb-6" data-i18n-key="welcome_subtitle">Por favor, introduce tu nombre para empezar.</p>
             <div class="space-y-4">
                 <input type="text" id="name-input" data-i18n-key="name_placeholder" placeholder="Escribe tu nombre aquí..." class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                <button id="submit-name-btn" data-i18n-key="continue_button" class="w-full px-8 py-3 text-xl font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md">
+                <button id="submit-name-btn" data-i18n-key="continue_button" class="w-full px-8 py-3 button-text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md">
                     Continuar
                 </button>
             </div>
@@ -250,7 +321,7 @@
 
         <!-- Start Screen -->
         <div id="start-screen" class="hidden w-full max-w-2xl mx-auto text-center px-4">
-            <h1 class="font-dongle text-7xl md:text-8xl font-bold text-gray-900 mb-4">
+            <h1 class="font-title text-h1 font-bold text-gray-900 mb-4">
                 <span data-i18n-key="main_title" class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-400">Tests Interactivos</span>
             </h1>
             <p id="welcome-message" class="text-gray-600 mt-2" data-i18n-key="main_subtitle_prefix">Pon a prueba tus conocimientos</p>
@@ -284,8 +355,8 @@
                 <div class="mt-6 w-full">
                     <button id="start-assessment-flow-btn" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-6 rounded-2xl shadow-lg transform transition-all hover:scale-[1.02] hover:shadow-xl flex items-center justify-between">
                         <div class="text-left">
-                            <h3 class="font-dongle text-4xl font-bold leading-none mb-1" data-i18n-key="assessment_card_title">Nivel de Idioma</h3>
-                            <p class="text-indigo-100 text-sm" data-i18n-key="assessment_card_desc">Descubre tu nivel real (A1-C2) con nuestro test adaptativo.</p>
+                            <h3 class="font-title text-h5 font-bold leading-tight mb-1" data-i18n-key="assessment_card_title">Nivel de Idioma</h3>
+                            <p class="text-indigo-100 text-small" data-i18n-key="assessment_card_desc">Descubre tu nivel real (A1-C2) con nuestro test adaptativo.</p>
                         </div>
                         <div class="bg-white/20 p-3 rounded-full">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -307,7 +378,7 @@
 
              <!-- Search Results -->
             <div id="search-results-container" class="hidden mt-8 text-left">
-                <h3 class="font-dongle text-5xl font-bold text-gray-800 mb-4" data-i18n-key="search_results_title">Resultados de la Búsqueda</h3>
+                <h3 class="font-title text-h3 font-bold text-gray-800 mb-4" data-i18n-key="search_results_title">Resultados de la Búsqueda</h3>
                 <div id="search-results-list" class="space-y-3 max-h-80 overflow-y-auto p-4 bg-white border border-gray-200 rounded-lg"></div>
                 <div id="topic-quiz-button-container" class="mt-4 text-center"></div>
                 <p id="no-results-message" class="hidden text-center text-gray-500 mt-4" data-i18n-key="no_results_message">No se encontraron preguntas. Intenta con otra búsqueda.</p>
@@ -322,7 +393,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m7 7H3" />
                     </svg>
                 </button>
-                <h2 class="font-dongle text-6xl font-bold text-gray-900 text-center w-full">Comprensión de Lectura</h2>
+                <h2 class="font-title text-h2 font-bold text-gray-900 text-center w-full">Comprensión de Lectura</h2>
             </div>
             <div id="reading-list-container" class="space-y-4">
                 <!-- Stories will be injected here -->
@@ -347,7 +418,7 @@
                 
                 <!-- Text Container -->
                 <div class="p-4">
-                    <button id="rs-toggle-text-btn" class="w-full flex justify-between items-center text-amber-600 font-bold text-sm uppercase tracking-wide mb-2 focus:outline-none">
+                    <button id="rs-toggle-text-btn" class="w-full flex justify-between items-center text-amber-600 font-bold text-small uppercase tracking-wide mb-2 focus:outline-none">
                         <span>Texto</span>
                         <svg id="rs-text-chevron" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -360,14 +431,14 @@
             </div>
 
             <div class="mb-4">
-                <h4 class="font-dongle text-4xl font-bold text-gray-800 border-b-2 border-gray-200 pb-1 mb-4">Preguntas</h4>
+                <h4 class="font-title text-h3 font-bold text-gray-800 border-b-2 border-gray-200 pb-1 mb-4">Preguntas</h4>
                 <div id="rs-questions-list" class="space-y-6">
                     <!-- Questions injected here -->
                 </div>
             </div>
             
             <div class="text-center mt-8 mb-8">
-                 <button id="rs-finish-btn" class="w-full md:w-auto px-10 py-3 text-xl font-bold text-white bg-green-600 rounded-xl hover:bg-green-700 transition-transform transform hover:scale-105 shadow-lg">
+                 <button id="rs-finish-btn" class="w-full md:w-auto px-10 py-3 button-text-lg font-bold text-white bg-green-600 rounded-xl hover:bg-green-700 transition-transform transform hover:scale-105 shadow-lg">
                     Finalizar
                 </button>
             </div>
@@ -376,20 +447,20 @@
 
         <!-- Assessment Language Selection Screen -->
         <div id="assessment-start-screen" class="hidden w-full max-w-2xl mx-auto text-center px-4 flex-1 flex flex-col justify-center">
-            <h1 class="font-dongle text-6xl font-bold text-gray-900 mb-2" data-i18n-key="assessment_title">LinguaFlow</h1>
+            <h1 class="font-title text-h2 font-bold text-gray-900 mb-2" data-i18n-key="assessment_title">LinguaFlow</h1>
             <p class="text-gray-600 mb-8" data-i18n-key="assessment_subtitle">Descubre tu verdadero nivel con nuestro test adaptativo. Elige un idioma para empezar.</p>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <button class="bg-white border border-gray-200 p-8 rounded-2xl shadow-md hover:shadow-xl hover:border-blue-300 transition-all group disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                     <div class="text-4xl mb-2">GB</div>
                     <h3 class="font-bold text-xl text-gray-800 mb-2">Test English</h3>
-                    <span class="inline-block bg-gray-100 text-gray-500 px-4 py-1 rounded-full text-sm font-medium group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">Coming Soon</span>
+                    <span class="inline-block bg-gray-100 text-gray-500 px-4 py-1 rounded-full text-small font-medium group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">Coming Soon</span>
                 </button>
 
                 <button id="start-spanish-assessment-btn" class="bg-white border border-gray-200 p-8 rounded-2xl shadow-md hover:shadow-xl hover:border-blue-300 transition-all group">
                     <div class="text-4xl mb-2">ES</div>
                     <h3 class="font-bold text-xl text-gray-800 mb-2">Test Español</h3>
-                    <span class="inline-block bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-sm font-medium group-hover:bg-blue-600 group-hover:text-white transition-colors" data-i18n-key="start_assessment_btn">Empezar Test &rarr;</span>
+                    <span class="inline-block bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-small font-medium group-hover:bg-blue-600 group-hover:text-white transition-colors" data-i18n-key="start_assessment_btn">Empezar Test &rarr;</span>
                 </button>
             </div>
             
@@ -400,10 +471,10 @@
         <div id="quiz-screen" class="hidden w-full max-w-2xl mx-auto px-4 pb-24">
             <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
                 <!-- Assessment Badge -->
-                <div id="assessment-level-badge" class="hidden bg-indigo-100 text-indigo-800 text-sm font-bold px-3 py-1 rounded-full border border-indigo-200">
+                <div id="assessment-level-badge" class="hidden bg-indigo-100 text-indigo-800 text-small font-bold px-3 py-1 rounded-full border border-indigo-200">
                     Level A1
                 </div>
-                <p id="progress-text" class="text-gray-600 font-semibold text-sm">Pregunta 1 / 20</p>
+                <p id="progress-text" class="text-gray-600 font-semibold text-small">Pregunta 1 / 20</p>
                 
                 <div class="flex items-center gap-4">
                     <button id="sound-toggle-btn" class="p-2 rounded-full hover:bg-gray-200 transition" aria-label="Activar/desactivar sonidos">
@@ -417,7 +488,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <p id="timer" class="text-lg font-bold text-blue-600">00:00</p>
+                        <p id="timer" class="text-body-lg font-bold text-blue-600">00:00</p>
                     </div>
                 </div>
             </div>
@@ -438,7 +509,7 @@
                 </div>
                 
                 <div id="question-image-container" class="mb-4"></div>
-                <h3 id="question-text" class="font-dongle text-4xl md:text-5xl font-bold mb-4 text-gray-900"></h3>
+                <h3 id="question-text" class="font-title text-h4 font-bold mb-4 text-gray-900"></h3>
                 <p id="choose-answer-subtitle" class="hidden text-gray-500 mb-6" data-i18n-key="choose_correct_answer"></p>
                 <div id="options-container" class="grid grid-cols-1 gap-4"></div>
                 <div id="explanation-container" class="mt-4"></div>
@@ -450,7 +521,7 @@
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
                 <!-- Header -->
                 <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-center text-white">
-                    <p class="text-indigo-200 font-medium uppercase tracking-wider text-sm mb-2" data-i18n-key="assessment_result_label">Tu Nivel de Competencia</p>
+                    <p class="text-indigo-200 font-medium uppercase tracking-wider text-small mb-2" data-i18n-key="assessment_result_label">Tu Nivel de Competencia</p>
                     <h2 id="assessment-final-level" class="text-6xl font-bold mb-1">B1</h2>
                     <p id="assessment-level-desc" class="text-xl text-indigo-100 font-medium">Intermediate</p>
                 </div>
@@ -493,7 +564,7 @@
                     </div>
                     
                     <div class="mt-6 text-center">
-                        <button id="assessment-home-btn" class="text-gray-500 hover:text-gray-800 font-medium text-sm transition-colors" data-i18n-key="back_to_home_short">Volver al Inicio</button>
+                        <button id="assessment-home-btn" class="text-gray-500 hover:text-gray-800 font-medium text-small transition-colors" data-i18n-key="back_to_home_short">Volver al Inicio</button>
                     </div>
                 </div>
             </div>
@@ -522,18 +593,18 @@
 
         <!-- Results Screen -->
         <div id="results-screen" class="hidden w-full max-w-2xl mx-auto text-center bg-white p-8 rounded-2xl shadow-lg">
-            <h2 id="results-title" class="font-dongle text-6xl font-bold text-gray-900 mb-2"></h2>
-            <p id="results-message" class="text-lg text-gray-600 mb-6"></p>
+            <h2 id="results-title" class="font-title text-h2 font-bold text-gray-900 mb-2"></h2>
+            <p id="results-message" class="text-body-lg text-gray-600 mb-6"></p>
             
-            <p id="final-time" class="text-lg text-gray-500 mb-2"></p>
+            <p id="final-time" class="text-body-lg text-gray-500 mb-2"></p>
 
-            <div id="score-display" class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-400 mb-2"></div>
+            <div id="score-display" class="text-score font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-400 mb-2"></div>
             <p id="score-percentage" class="text-2xl font-semibold text-gray-500 mb-8"></p>
 
             <div id="results-buttons" class="space-y-4 md:space-y-0 md:space-x-4 md:flex justify-center"></div>
 
             <div id="review-section" class="hidden mt-8 text-left max-h-60 overflow-y-auto p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                <h4 id="review-section-title" class="font-dongle text-4xl font-bold mb-2 text-gray-700" data-i18n-key="review_section_title">Preguntas para repasar:</h4>
+                <h4 id="review-section-title" class="font-title text-h5 font-bold mb-2 text-gray-700" data-i18n-key="review_section_title">Preguntas para repasar:</h4>
                 <ul id="incorrect-questions-list"></ul>
             </div>
         </div>
@@ -541,28 +612,28 @@
         <!-- Learning Module Screen -->
         <div id="learning-screen" class="hidden w-full max-w-2xl mx-auto px-4 flex flex-col flex-1">
             <div class="flex justify-between items-center mb-6 flex-shrink-0">
-                <h2 id="learning-topic-title" class="font-dongle text-5xl md:text-6xl font-bold text-gray-900"></h2>
+                <h2 id="learning-topic-title" class="font-title text-h2 font-bold text-gray-900"></h2>
             </div>
             <div id="learning-summary-view" class="flex-1 overflow-y-auto pr-2">
                 <div id="learning-summary-content" class="space-y-6 text-left"></div>
             </div>
             <div id="learning-scenario-view" class="hidden">
-                 <p id="scenario-progress-text" class="text-gray-600 font-semibold text-sm mb-4 text-center"></p>
-                <h3 id="scenario-title" class="font-dongle text-4xl md:text-5xl font-bold mb-2 text-gray-800"></h3>
-                <p id="scenario-situation" class="text-lg text-gray-700 mb-6"></p>
+                 <p id="scenario-progress-text" class="text-gray-600 font-semibold text-small mb-4 text-center"></p>
+                <h3 id="scenario-title" class="font-title text-h4 font-bold mb-2 text-gray-800"></h3>
+                <p id="scenario-situation" class="text-body-lg text-gray-700 mb-6"></p>
                 <div id="scenario-choices-container" class="grid grid-cols-1 gap-4"></div>
                 <div id="scenario-feedback-container" class="hidden mt-6 p-4 rounded-lg">
                     <p id="scenario-feedback-text" class="text-md font-medium"></p>
                 </div>
             </div>
             <div id="learning-completion-view" class="hidden text-center">
-                <h2 id="learning-completion-title" data-i18n-key="learning_completion_title" class="font-dongle text-6xl font-bold text-gray-900 mb-4">¡Escenarios completados!</h2>
-                <p id="learning-completion-message" data-i18n-key="learning_completion_message" class="text-lg text-gray-600 mb-8">Has repasado los conceptos clave de este tema. ¡Buen trabajo!</p>
+                <h2 id="learning-completion-title" data-i18n-key="learning_completion_title" class="font-title text-h2 font-bold text-gray-900 mb-4">¡Escenarios completados!</h2>
+                <p id="learning-completion-message" data-i18n-key="learning_completion_message" class="text-body-lg text-gray-600 mb-8">Has repasado los conceptos clave de este tema. ¡Buen trabajo!</p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                     <button id="retry-scenarios-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors" data-i18n-key="retry_scenarios_button">
+                     <button id="retry-scenarios-btn" class="w-full sm:w-auto px-6 py-3 text-body-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors" data-i18n-key="retry_scenarios_button">
                         Repetir Escenarios
                     </button>
-                    <button id="learning-home-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_to_home_short">
+                    <button id="learning-home-btn" class="w-full sm:w-auto px-6 py-3 text-body-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_to_home_short">
                         Volver al Inicio
                     </button>
                 </div>
@@ -573,14 +644,14 @@
         <div id="menu-backdrop" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out"></div>
         <div id="side-menu" class="fixed top-0 right-0 h-full bg-white z-50 w-11/12 max-w-sm p-6 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col" role="dialog" aria-modal="true" aria-labelledby="side-menu-title">
             <div class="flex justify-between items-center mb-6 flex-shrink-0">
-                <h2 id="side-menu-title" class="font-dongle text-5xl font-bold text-gray-900" data-i18n-key="settings_modal_title">Menú</h2>
+                <h2 id="side-menu-title" class="font-title text-h3 font-bold text-gray-900" data-i18n-key="settings_modal_title">Menú</h2>
                 <button id="close-settings-btn" class="p-2 rounded-full hover:bg-gray-200 transition text-gray-500 hover:text-gray-800" data-i18n-key="close_settings_aria" aria-label="Cerrar menú">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
-            <p id="settings-greeting" class="text-lg text-gray-600 mb-4 flex-shrink-0"></p>
+            <p id="settings-greeting" class="text-body-lg text-gray-600 mb-4 flex-shrink-0"></p>
         
             <!-- Scrollable content area -->
             <div class="flex-grow overflow-y-auto -mr-6 pr-6 space-y-4">
@@ -589,23 +660,23 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400 group-hover:text-blue-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                         <div>
                             <span class="font-semibold text-gray-800" data-i18n-key="statistics_label">Estadísticas</span>
-                            <p class="text-sm text-gray-500" data-i18n-key="statistics_desc">Revisa tu progreso y rendimiento.</p>
+                            <p class="text-small text-gray-500" data-i18n-key="statistics_desc">Revisa tu progreso y rendimiento.</p>
                         </div>
                     </a>
                     <a href="#" id="show-saved-btn" class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400 group-hover:text-blue-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
                         <div>
                             <span class="font-semibold text-gray-800" data-i18n-key="saved_items_label">Contenido Guardado</span>
-                            <p class="text-sm text-gray-500" data-i18n-key="saved_items_desc">Accede a tus preguntas y flashcards guardadas.</p>
+                            <p class="text-small text-gray-500" data-i18n-key="saved_items_desc">Accede a tus preguntas y flashcards guardadas.</p>
                         </div>
                     </a>
                 </nav>
         
                 <div>
-                    <label class="block text-sm font-semibold text-gray-500 mb-2 px-3 uppercase tracking-wider" data-i18n-key="language_label">Idioma</label>
+                    <label class="block text-small font-semibold text-gray-500 mb-2 px-3 uppercase tracking-wider" data-i18n-key="language_label">Idioma</label>
                     <div id="language-switcher" class="grid grid-cols-2 gap-2">
-                        <button data-lang="es" class="lang-btn w-full px-4 py-2 text-sm font-semibold rounded-lg transition-colors shadow-sm">Español</button>
-                        <button data-lang="ka" class="lang-btn w-full px-4 py-2 text-sm font-semibold rounded-lg transition-colors shadow-sm">ქართული</button>
+                        <button data-lang="es" class="lang-btn w-full px-4 py-2 button-text-sm font-semibold rounded-lg transition-colors shadow-sm">Español</button>
+                        <button data-lang="ka" class="lang-btn w-full px-4 py-2 button-text-sm font-semibold rounded-lg transition-colors shadow-sm">ქართული</button>
                     </div>
                 </div>
         
@@ -634,10 +705,10 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m7 7H3" />
                     </svg>
                 </button>
-                <h2 class="font-dongle text-6xl font-bold text-gray-900 text-center w-full" data-i18n-key="about_title">Sobre la App</h2>
+                <h2 class="font-title text-h2 font-bold text-gray-900 text-center w-full" data-i18n-key="about_title">Sobre la App</h2>
             </div>
             <div class="bg-white rounded-2xl shadow-sm p-6 space-y-6 border border-gray-100">
-                <p class="text-gray-600 text-lg" data-i18n-key="about_desc"></p>
+                <p class="text-gray-600 text-body-lg" data-i18n-key="about_desc"></p>
                 <div>
                     <h3 class="font-bold text-xl text-gray-800 mb-2" data-i18n-key="about_section_what"></h3>
                     <p class="text-gray-600" data-i18n-key="about_text_what"></p>
@@ -661,7 +732,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m7 7H3" />
                     </svg>
                 </button>
-                <h2 class="font-dongle text-6xl font-bold text-gray-900 text-center w-full" data-i18n-key="style_title">Guía de Estilo</h2>
+                <h2 class="font-title text-h2 font-bold text-gray-900 text-center w-full" data-i18n-key="style_title">Guía de Estilo</h2>
             </div>
             <div class="space-y-6">
                 <!-- Brand Section -->
@@ -669,11 +740,11 @@
                     <h3 class="font-bold text-2xl text-gray-800 mb-4 border-b pb-2" data-i18n-key="style_section_brand">Significado de la Marca</h3>
                     <div class="space-y-4">
                         <div class="bg-blue-50 p-4 rounded-lg">
-                            <span class="text-blue-800 font-bold text-lg block" data-i18n-key="style_brand_quest">Quest</span>
+                            <span class="text-blue-800 font-bold text-body-lg block" data-i18n-key="style_brand_quest">Quest</span>
                             <p class="text-blue-700" data-i18n-key="style_brand_quest_def"></p>
                         </div>
                         <div class="bg-yellow-50 p-4 rounded-lg">
-                            <span class="text-yellow-800 font-bold text-lg block" data-i18n-key="style_brand_ify">-ify</span>
+                            <span class="text-yellow-800 font-bold text-body-lg block" data-i18n-key="style_brand_ify">-ify</span>
                             <p class="text-yellow-700" data-i18n-key="style_brand_ify_def"></p>
                         </div>
                         <p class="text-gray-700 italic font-medium mt-2" data-i18n-key="style_brand_meaning"></p>
@@ -687,17 +758,17 @@
                         <div class="flex flex-col items-center">
                             <div class="w-20 h-20 rounded-full bg-[#1c0ee3] shadow-md mb-2"></div>
                             <span class="font-bold text-gray-800">#1c0ee3</span>
-                            <span class="text-sm text-gray-500" data-i18n-key="style_color_primary">Primario</span>
+                            <span class="text-small text-gray-500" data-i18n-key="style_color_primary">Primario</span>
                         </div>
                         <div class="flex flex-col items-center">
                             <div class="w-20 h-20 rounded-full bg-[#ffd900] shadow-md mb-2"></div>
                             <span class="font-bold text-gray-800">#ffd900</span>
-                            <span class="text-sm text-gray-500" data-i18n-key="style_color_secondary">Secundario</span>
+                            <span class="text-small text-gray-500" data-i18n-key="style_color_secondary">Secundario</span>
                         </div>
                         <div class="flex flex-col items-center">
                             <div class="w-20 h-20 rounded-full bg-[#f7f7ff] border border-gray-200 shadow-sm mb-2"></div>
                             <span class="font-bold text-gray-800">#f7f7ff</span>
-                            <span class="text-sm text-gray-500" data-i18n-key="style_color_bg">Fondo</span>
+                            <span class="text-small text-gray-500" data-i18n-key="style_color_bg">Fondo</span>
                         </div>
                     </div>
                 </div>
@@ -707,11 +778,11 @@
                     <h3 class="font-bold text-2xl text-gray-800 mb-4 border-b pb-2" data-i18n-key="style_section_font">Tipografía</h3>
                     <div class="space-y-4">
                         <div>
-                            <p class="font-dongle text-5xl text-gray-800">Questify Title</p>
-                            <span class="text-xs text-gray-400 uppercase tracking-wider" data-i18n-key="style_font_dongle">Dongle</span>
+                            <p class="font-title text-h2 text-gray-800">Questify Title</p>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider" data-i18n-key="style_font_title">M PLUS Rounded 1c</span>
                         </div>
                         <div>
-                            <p class="font-sans text-lg text-gray-700">Esto es un ejemplo de texto de cuerpo para leer cómodamente.</p>
+                            <p class="font-sans text-body-lg text-gray-700">Esto es un ejemplo de texto de cuerpo para leer cómodamente.</p>
                             <span class="text-xs text-gray-400 uppercase tracking-wider" data-i18n-key="style_font_sans">Sans-Serif</span>
                         </div>
                     </div>
@@ -728,7 +799,7 @@
                           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m7 7H3" />
                         </svg>
                     </button>
-                    <h2 class="font-dongle text-6xl font-bold text-gray-900 text-center w-full" data-i18n-key="statistics_title">Estadísticas</h2>
+                    <h2 class="font-title text-h2 font-bold text-gray-900 text-center w-full" data-i18n-key="statistics_title">Estadísticas</h2>
                 </div>
                 
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
@@ -743,7 +814,7 @@
                                     <p class="font-semibold text-gray-800" data-i18n-key="stat_time_spent_title">Tiempo en la App</p>
                                 </div>
                             </div>
-                            <p id="stat-time-spent" class="text-lg font-bold text-gray-700">0h 0m</p>
+                            <p id="stat-time-spent" class="text-body-lg font-bold text-gray-700">0h 0m</p>
                         </li>
                         <!-- Tests Completed -->
                         <li class="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
@@ -755,7 +826,7 @@
                                     <p class="font-semibold text-gray-800" data-i18n-key="stat_total_tests_title">Tests Completados</p>
                                 </div>
                             </div>
-                            <p id="stat-total-tests" class="text-lg font-bold text-gray-700">0</p>
+                            <p id="stat-total-tests" class="text-body-lg font-bold text-gray-700">0</p>
                         </li>
                         <!-- Avg Test Time -->
                          <li class="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
@@ -767,7 +838,7 @@
                                     <p class="font-semibold text-gray-800" data-i18n-key="stat_avg_test_time_title">Tiempo Promedio (10 Q)</p>
                                 </div>
                             </div>
-                            <p id="stat-avg-test-time" class="text-lg font-bold text-gray-700">0s</p>
+                            <p id="stat-avg-test-time" class="text-body-lg font-bold text-gray-700">0s</p>
                         </li>
                         <!-- Total Flashcards -->
                         <li class="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
@@ -779,7 +850,7 @@
                                     <p class="font-semibold text-gray-800" data-i18n-key="stat_total_flashcards_title">Flashcards Vistos</p>
                                 </div>
                             </div>
-                            <p id="stat-total-flashcards" class="text-lg font-bold text-gray-700">0</p>
+                            <p id="stat-total-flashcards" class="text-body-lg font-bold text-gray-700">0</p>
                         </li>
                         <!-- Test Accuracy -->
                         <li class="p-4 hover:bg-gray-50 transition-colors">
@@ -796,7 +867,7 @@
                                 <div class="w-full bg-gray-200 rounded-full h-2">
                                     <div id="accuracy-bar" class="bg-green-500 h-2 rounded-full" style="width: 0%"></div>
                                 </div>
-                                <div class="flex justify-between items-center text-sm">
+                                <div class="flex justify-between items-center text-small">
                                     <p class="font-medium text-gray-500"><span data-i18n-key="stat_correct">Correctas</span>: <span id="stat-correct-answers" class="font-bold text-gray-700">0</span></p>
                                     <p class="font-medium text-gray-500"><span data-i18n-key="stat_incorrect">Incorrectas</span>: <span id="stat-incorrect-answers" class="font-bold text-gray-700">0</span></p>
                                 </div>
@@ -817,7 +888,7 @@
                                 <div class="w-full bg-gray-200 rounded-full h-2">
                                     <div id="knowledge-bar" class="bg-red-500 h-2 rounded-full" style="width: 0%"></div>
                                 </div>
-                                <div class="flex justify-between items-center text-sm">
+                                <div class="flex justify-between items-center text-small">
                                     <p class="font-medium text-gray-500"><span data-i18n-key="stat_known">Sabidas</span>: <span id="stat-known-flashcards" class="font-bold text-gray-700">0</span></p>
                                     <p class="font-medium text-gray-500"><span data-i18n-key="stat_unknown">No Sabidas</span>: <span id="stat-unknown-flashcards" class="font-bold text-gray-700">0</span></p>
                                 </div>
@@ -833,20 +904,20 @@
             <!-- ... (content same as before) ... -->
             <div class="w-full bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
                 <div class="text-center">
-                    <h2 class="font-dongle text-6xl font-bold text-gray-900 mb-2" data-i18n-key="quiz_options_title">Configurar Test</h2>
-                    <p class="text-lg text-gray-600"><span data-i18n-key="quiz_topic_title_prefix">Tema:</span> <span id="quiz-topic-title" class="font-semibold"></span></p>
+                    <h2 class="font-title text-h2 font-bold text-gray-900 mb-2" data-i18n-key="quiz_options_title">Configurar Test</h2>
+                    <p class="text-body-lg text-gray-600"><span data-i18n-key="quiz_topic_title_prefix">Tema:</span> <span id="quiz-topic-title" class="font-semibold"></span></p>
                 </div>
 
                 <div class="mt-8 space-y-6 text-left">
                     <!-- Number of Questions -->
                     <div>
-                        <label for="quiz-questions-count-slider" class="block text-lg font-semibold text-gray-700 mb-2"><span data-i18n-key="questions_count_label">Número de preguntas:</span> <span id="quiz-questions-count-value" class="font-bold text-blue-600"></span></label>
+                        <label for="quiz-questions-count-slider" class="block text-body-lg font-semibold text-gray-700 mb-2"><span data-i18n-key="questions_count_label">Número de preguntas:</span> <span id="quiz-questions-count-value" class="font-bold text-blue-600"></span></label>
                         <input type="range" id="quiz-questions-count-slider" min="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                     </div>
                     
                     <!-- Timer Settings -->
                     <div>
-                        <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="timer_label">Temporizador</label>
+                        <label class="block text-body-lg font-semibold text-gray-700 mb-2" data-i18n-key="timer_label">Temporizador</label>
                         <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg flex-wrap gap-2">
                             <div class="flex items-center">
                                 <input id="quiz-timer-on-radio" name="quiz-timer-toggle" type="radio" checked class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
@@ -865,7 +936,7 @@
                     
                     <!-- Question Order -->
                     <div>
-                        <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="question_order_label">Orden de las preguntas</label>
+                        <label class="block text-body-lg font-semibold text-gray-700 mb-2" data-i18n-key="question_order_label">Orden de las preguntas</label>
                         <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg">
                              <div class="flex items-center">
                                 <input id="quiz-order-random-radio" name="quiz-question-order" type="radio" checked value="random" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
@@ -879,10 +950,10 @@
                     </div>
                 </div>
                  <div class="mt-8 flex flex-col sm:flex-row-reverse justify-center items-center gap-4">
-                     <button id="start-quiz-from-options-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="start_quiz_button">
+                     <button id="start-quiz-from-options-btn" class="w-full sm:w-auto px-6 py-3 text-body-lg font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="start_quiz_button">
                         Iniciar Test
                     </button>
-                    <button id="back-to-start-from-quiz-options-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_button">
+                    <button id="back-to-start-from-quiz-options-btn" class="w-full sm:w-auto px-6 py-3 text-body-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_button">
                         Volver
                     </button>
                 </div>
@@ -893,19 +964,19 @@
         <div id="flashcard-options-screen" class="hidden w-full max-w-2xl mx-auto px-4">
             <!-- ... (content same as before) ... -->
              <div class="w-full bg-white p-6 sm:p-8 rounded-2xl shadow-lg text-center">
-                <h2 class="font-dongle text-6xl font-bold text-gray-900 mb-2" data-i18n-key="flashcard_options_title">Configurar Flashcards</h2>
-                <p class="text-lg text-gray-600 mb-6"><span data-i18n-key="flashcard_topic_title_prefix">Tema:</span> <span id="flashcard-topic-title" class="font-semibold"></span></p>
+                <h2 class="font-title text-h2 font-bold text-gray-900 mb-2" data-i18n-key="flashcard_options_title">Configurar Flashcards</h2>
+                <p class="text-body-lg text-gray-600 mb-6"><span data-i18n-key="flashcard_topic_title_prefix">Tema:</span> <span id="flashcard-topic-title" class="font-semibold"></span></p>
 
                 <div class="mt-8 space-y-6 text-left">
                     <!-- Number of Flashcards -->
                     <div>
-                        <label for="flashcards-count-slider" class="block text-lg font-semibold text-gray-700 mb-2"><span data-i18n-key="flashcards_count_label">Número de flashcards:</span> <span id="flashcards-count-value" class="font-bold text-blue-600"></span></label>
+                        <label for="flashcards-count-slider" class="block text-body-lg font-semibold text-gray-700 mb-2"><span data-i18n-key="flashcards_count_label">Número de flashcards:</span> <span id="flashcards-count-value" class="font-bold text-blue-600"></span></label>
                         <input type="range" id="flashcards-count-slider" min="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                     </div>
                     
                     <!-- Flashcard Order -->
                     <div>
-                        <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="flashcard_order_label">Orden de las flashcards</label>
+                        <label class="block text-body-lg font-semibold text-gray-700 mb-2" data-i18n-key="flashcard_order_label">Orden de las flashcards</label>
                         <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg">
                              <div class="flex items-center">
                                 <input id="flashcard-order-random-radio" name="flashcard-order" type="radio" value="random" checked class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
@@ -920,7 +991,7 @@
 
                     <!-- Starting Side -->
                      <div>
-                        <label class="block text-lg font-semibold text-gray-700 mb-2" data-i18n-key="flashcard_start_side_label">Empezar por</label>
+                        <label class="block text-body-lg font-semibold text-gray-700 mb-2" data-i18n-key="flashcard_start_side_label">Empezar por</label>
                         <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg">
                              <div class="flex items-center">
                                 <input id="flashcard-start-front-radio" name="flashcard-start-side" type="radio" value="front" checked class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
@@ -935,10 +1006,10 @@
                 </div>
 
                 <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <button id="back-to-start-from-flashcards-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_button">
+                    <button id="back-to-start-from-flashcards-btn" class="w-full sm:w-auto px-6 py-3 text-body-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors" data-i18n-key="back_button">
                         Volver
                     </button>
-                    <button id="start-flashcards-btn" class="w-full sm:w-auto px-6 py-3 text-lg font-bold text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="start_flashcards_button">
+                    <button id="start-flashcards-btn" class="w-full sm:w-auto px-6 py-3 text-body-lg font-bold text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="start_flashcards_button">
                         Iniciar Flashcards
                     </button>
                 </div>
@@ -950,7 +1021,7 @@
              <!-- ... (content same as before) ... -->
              <!-- Header -->
             <div class="flex justify-between items-center flex-wrap gap-2 mb-6">
-                <p id="flashcard-progress-text" class="text-gray-600 font-semibold text-sm"></p>
+                <p id="flashcard-progress-text" class="text-gray-600 font-semibold text-small"></p>
                 <div class="flex items-center gap-4">
                     <button id="flashcard-sound-toggle-btn" class="p-2 rounded-full hover:bg-gray-200 transition" aria-label="Activar/desactivar sonidos"></button>
                     <button id="flashcard-bookmark-btn" class="p-2 rounded-full hover:bg-yellow-100 transition" aria-label="Guardar flashcard"></button>
@@ -961,10 +1032,10 @@
             <div class="relative w-full h-96 perspective-1000">
                 <div id="flashcard-container" class="relative w-full h-full transform-style-preserve-3d transition-transform duration-500 cursor-pointer">
                     <div id="flashcard-front" class="absolute w-full h-full backface-hidden flex items-center justify-center p-8 text-center bg-gray-50 border border-gray-200 rounded-2xl shadow-sm">
-                        <p id="flashcard-front-text" class="font-dongle text-5xl font-bold text-gray-800"></p>
+                        <p id="flashcard-front-text" class="font-title text-h3 font-bold text-gray-800"></p>
                     </div>
                     <div id="flashcard-back" class="absolute w-full h-full backface-hidden bg-blue-50 flex items-start justify-start p-8 text-left rotate-y-180 border border-blue-200 rounded-2xl shadow-sm overflow-y-auto">
-                        <p id="flashcard-back-text" class="font-dongle text-4xl text-gray-700"></p>
+                        <p id="flashcard-back-text" class="font-title text-h4 text-gray-700"></p>
                     </div>
                     
                     <!-- Prev Button Overlay -->
@@ -988,8 +1059,8 @@
         <!-- Flashcard Results Screen -->
         <div id="flashcard-results-screen" class="hidden w-full max-w-2xl text-center bg-white p-8 rounded-2xl shadow-lg">
              <!-- ... (content same as before) ... -->
-            <h2 class="font-dongle text-6xl font-bold text-gray-900 mb-2" data-i18n-key="flashcard_results_title">Sesión Completada</h2>
-            <p id="flashcard-results-message" class="text-lg text-gray-600 mb-8"></p>
+            <h2 class="font-title text-h2 font-bold text-gray-900 mb-2" data-i18n-key="flashcard_results_title">Sesión Completada</h2>
+            <p id="flashcard-results-message" class="text-body-lg text-gray-600 mb-8"></p>
             <div id="flashcard-results-buttons" class="space-y-4 md:space-y-0 md:space-x-4 md:flex justify-center">
                 <!-- Buttons will be inserted here by JS -->
             </div>
@@ -1004,16 +1075,16 @@
                           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m7 7H3" />
                         </svg>
                     </button>
-                    <h2 id="saved-screen-header-title" class="font-dongle text-6xl font-bold text-gray-900 text-center w-full" data-i18n-key="saved_screen_title">Guardados</h2>
+                    <h2 id="saved-screen-header-title" class="font-title text-h2 font-bold text-gray-900 text-center w-full" data-i18n-key="saved_screen_title">Guardados</h2>
                 </div>
                 
                 <!-- Tab Navigation -->
                 <div class="mb-4 border-b border-gray-200">
                     <nav class="-mb-px flex space-x-6" aria-label="Tabs">
-                        <button id="saved-questions-tab" class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-i18n-key="filter_tests">
+                        <button id="saved-questions-tab" class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-small" data-i18n-key="filter_tests">
                             Preguntas
                         </button>
-                        <button id="saved-flashcards-tab" class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-i18n-key="filter_flashcards">
+                        <button id="saved-flashcards-tab" class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-small" data-i18n-key="filter_flashcards">
                             Flashcards
                         </button>
                     </nav>
@@ -1049,16 +1120,16 @@
     <div id="flashcard-footer" class="hidden fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-sm border-t border-gray-200 z-10">
         <div class="max-w-3xl mx-auto">
             <div id="flashcard-assessment-container" class="hidden flex justify-center items-center gap-4">
-                <button id="flashcard-unknown-btn" class="px-6 py-3 text-lg font-bold text-white bg-red-500 rounded-lg hover:bg-red-600 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="flashcard_unknown_btn">No lo sé</button>
-                <button id="flashcard-known-btn" class="px-6 py-3 text-lg font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="flashcard_known_btn">Lo sé</button>
+                <button id="flashcard-unknown-btn" class="px-6 py-3 text-body-lg font-bold text-white bg-red-500 rounded-lg hover:bg-red-600 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="flashcard_unknown_btn">No lo sé</button>
+                <button id="flashcard-known-btn" class="px-6 py-3 text-body-lg font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md" data-i18n-key="flashcard_known_btn">Lo sé</button>
             </div>
-            <p id="flashcard-flip-hint" class="text-gray-500 text-sm text-center" data-i18n-key="flashcard_click_to_flip">Haz clic en el centro o desliza arriba para girar. Usa las flechas laterales para navegar.</p>
+            <p id="flashcard-flip-hint" class="text-gray-500 text-small text-center" data-i18n-key="flashcard_click_to_flip">Haz clic en el centro o desliza arriba para girar. Usa las flechas laterales para navegar.</p>
         </div>
     </div>
     
     <div id="learning-footer" class="hidden fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-sm border-t border-gray-200 z-10">
         <div id="summary-next-btn-container" class="max-w-3xl mx-auto text-center">
-            <button id="start-scenarios-btn" data-i18n-key="start_scenarios_button" class="px-8 py-3 text-xl font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md">
+            <button id="start-scenarios-btn" data-i18n-key="start_scenarios_button" class="px-8 py-3 button-text-lg font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md">
                 Continuar al Escenario Práctico
             </button>
         </div>

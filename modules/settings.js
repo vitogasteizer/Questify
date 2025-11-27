@@ -1,7 +1,7 @@
 // Settings State
 const SETTINGS_STORAGE_KEY = 'logisticsQuizSettings';
 let settings = {
-    language: 'es'
+    language: 'ka'
 };
 export const getSettings = () => settings;
 
@@ -197,7 +197,7 @@ export const translations = {
         style_color_secondary: "Secundario (Amarillo)",
         style_color_bg: "Fondo",
         style_section_font: "Tipografía",
-        style_font_dongle: "Dongle (Títulos)",
+        style_font_title: "M PLUS Rounded 1c (Títulos)",
         style_font_sans: "Sans-Serif (Cuerpo)"
     },
     ka: {
@@ -381,7 +381,7 @@ export const translations = {
         style_color_secondary: "მეორადი (ყვითელი)",
         style_color_bg: "ფონი",
         style_section_font: "ტიპოგრაფია",
-        style_font_dongle: "Dongle (სათაურები)",
+        style_font_title: "M PLUS Rounded 1c (სათაურები)",
         style_font_sans: "Sans-Serif (ტექსტი)"
     }
 };
