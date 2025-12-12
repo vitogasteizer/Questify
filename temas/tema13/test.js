@@ -1,7 +1,7 @@
-
 export const questions = [
     // Parte 1: Elige la palabra adecuada
     {
+        id: 't13-1',
         type: 'multiple-choice',
         questionText: "_______ reloj es muy caro.",
         options: ["Este", "Esto", "Esta"],
@@ -10,6 +10,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-2',
         type: 'multiple-choice',
         questionText: "¿De quién es _______ bufanda?",
         options: ["Esta", "Este", "Esto"],
@@ -18,6 +19,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-3',
         type: 'multiple-choice',
         questionText: "_______ son mis llaves, las dejé en la mesa.",
         options: ["Estas", "Estos", "Esto"],
@@ -26,6 +28,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-4',
         type: 'multiple-choice',
         questionText: "No me gusta _______ . Tiene mal sabor.",
         options: ["Esto", "Esta", "Este"],
@@ -34,6 +37,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-5',
         type: 'multiple-choice',
         questionText: "_______ chicos no vinieron ayer a clase.",
         options: ["Estos", "Este", "Esto"],
@@ -42,6 +46,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-6',
         type: 'multiple-choice',
         questionText: "¿Dónde compraste _______ zapatos tan bonitos?",
         options: ["Estos", "Estas", "Esto"],
@@ -50,6 +55,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-7',
         type: 'multiple-choice',
         questionText: "Me encanta _______ lugar. Es muy tranquilo.",
         options: ["Este", "Esto", "Esta"],
@@ -58,6 +64,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-8',
         type: 'multiple-choice',
         questionText: "_______ mujer trabaja en el hospital.",
         options: ["Esta", "Esto", "Este"],
@@ -66,6 +73,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-9',
         type: 'multiple-choice',
         questionText: "¿Te gusta _______ canción o prefieres otra?",
         options: ["Esta", "Esto", "Este"],
@@ -74,6 +82,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-10',
         type: 'multiple-choice',
         questionText: "No entiendo _______. ¿Puedes repetirlo?",
         options: ["Esto", "Este", "Esta"],
@@ -82,6 +91,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-11',
         type: 'multiple-choice',
         questionText: "_______ problemas son difíciles de resolver.",
         options: ["Estos", "Esto", "Esta"],
@@ -90,6 +100,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-12',
         type: 'multiple-choice',
         questionText: "_______ mesa está rota, debemos cambiarla.",
         options: ["Esta", "Este", "Estos"],
@@ -99,6 +110,7 @@ export const questions = [
     },
     // Parte 2: Corregir errores (Converted to correct option selection)
     {
+        id: 't13-13',
         type: 'multiple-choice',
         questionText: "Corrección: Esto flores son para ti.",
         options: ["Estas flores", "Este flores", "Estos flores"],
@@ -107,6 +119,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-14',
         type: 'multiple-choice',
         questionText: "Corrección: Este chicas son muy amables.",
         options: ["Estas chicas", "Estos chicas", "Esto chicas"],
@@ -115,6 +128,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-15',
         type: 'multiple-choice',
         questionText: "Corrección: ¿Puedes pasarme esto cuchillo?",
         options: ["este cuchillo", "esta cuchillo", "estos cuchillo"],
@@ -123,6 +137,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-16',
         type: 'multiple-choice',
         questionText: "Corrección: Estas coche es nuevo.",
         options: ["Este coche", "Esta coche", "Estos coche"],
@@ -131,6 +146,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-17',
         type: 'multiple-choice',
         questionText: "Corrección: No entiendo esta. (Refiriéndose a una situación)",
         options: ["esto", "este", "estas"],
@@ -139,6 +155,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-18',
         type: 'multiple-choice',
         questionText: "Corrección: Esto pantalones no me quedan bien.",
         options: ["Estos pantalones", "Este pantalones", "Estas pantalones"],
@@ -147,6 +164,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-19',
         type: 'multiple-choice',
         questionText: "Corrección: Estas chico vive cerca de aquí.",
         options: ["Este chico", "Esta chico", "Estos chico"],
@@ -155,6 +173,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-20',
         type: 'multiple-choice',
         questionText: "Corrección: Este llaves están sobre la mesa.",
         options: ["Estas llaves", "Estos llaves", "Esto llaves"],
@@ -163,6 +182,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-21',
         type: 'multiple-choice',
         questionText: "Corrección: ¿Te gusta estos película?",
         options: ["esta película", "este película", "esto película"],
@@ -171,6 +191,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-22',
         type: 'multiple-choice',
         questionText: "Corrección: Esta problema es complicado.",
         options: ["Este problema", "Esto problema", "Estas problema"],
@@ -179,6 +200,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-23',
         type: 'multiple-choice',
         questionText: "Corrección: Esto personas trabajan en la oficina.",
         options: ["Estas personas", "Estos personas", "Este personas"],
@@ -187,6 +209,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-24',
         type: 'multiple-choice',
         questionText: "Corrección: Este flores huelen muy bien.",
         options: ["Estas flores", "Estos flores", "Esto flores"],
@@ -195,6 +218,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-25',
         type: 'multiple-choice',
         questionText: "Corrección: Estas libro es de mi hermano.",
         options: ["Este libro", "Esta libro", "Estos libro"],
@@ -203,6 +227,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-26',
         type: 'multiple-choice',
         questionText: "Corrección: Esto mesa está sucia.",
         options: ["Esta mesa", "Este mesa", "Estos mesa"],
@@ -211,6 +236,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't13-27',
         type: 'multiple-choice',
         questionText: "Corrección: Estos chica son mis compañeras de clase.",
         options: ["Estas chicas", "Estos chicas", "Esta chicas"],

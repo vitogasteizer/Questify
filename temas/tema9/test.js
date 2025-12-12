@@ -1,7 +1,7 @@
-
 export const questions = [
     // Parte 1: Completa las frases
     {
+        id: 't9-1',
         type: 'multiple-choice',
         questionText: "¿_______ hora es?",
         options: ["Qué", "Cuál", "Cómo"],
@@ -10,6 +10,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-2',
         type: 'multiple-choice',
         questionText: "¿_______ te gusta hacer los fines de semana?",
         options: ["Qué", "Cuál", "Quién"],
@@ -18,6 +19,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-3',
         type: 'multiple-choice',
         questionText: "¿_______ es tu número de teléfono?",
         options: ["Qué", "Cuál", "Cómo"],
@@ -26,6 +28,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-4',
         type: 'multiple-choice',
         questionText: "¿_______ cuestan las manzanas?",
         options: ["Cuánto", "Cuántos", "Qué"],
@@ -34,6 +37,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-5',
         type: 'multiple-choice',
         questionText: "¿_______ vas al médico?",
         options: ["Cuándo", "Dónde", "Qué"],
@@ -42,6 +46,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-6',
         type: 'multiple-choice',
         questionText: "¿_______ años tienes?",
         options: ["Cuántos", "Cuánto", "Qué"],
@@ -50,6 +55,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-7',
         type: 'multiple-choice',
         questionText: "¿_______ prefieres, café o té?",
         options: ["Qué", "Cuál", "Quién"],
@@ -58,6 +64,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-8',
         type: 'multiple-choice',
         questionText: "¿_______ vives tú?",
         options: ["Dónde", "Adónde", "De dónde"],
@@ -66,6 +73,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-9',
         type: 'multiple-choice',
         questionText: "¿_______ libros hay en la estantería?",
         options: ["Cuántos", "Cuánto", "Qué"],
@@ -74,6 +82,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-10',
         type: 'multiple-choice',
         questionText: "¿_______ son tus zapatos, los negros o los marrones?",
         options: ["Cuáles", "Qué", "Quiénes"],
@@ -82,6 +91,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-11',
         type: 'multiple-choice',
         questionText: "¿_______ estás tan cansado hoy?",
         options: ["Por qué", "Porque", "Para qué"],
@@ -90,6 +100,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-12',
         type: 'multiple-choice',
         questionText: "¿_______ es tu cantante favorito?",
         options: ["Quién", "Qué", "Cuál"],
@@ -100,6 +111,7 @@ export const questions = [
 
     // Parte 2: Corrige el error (Converted to multiple choice selection)
     {
+        id: 't9-13',
         type: 'multiple-choice',
         questionText: "Corrección: ¿_______ es tu color favorito?",
         options: ["Cuál", "Cuánto", "Qué"],
@@ -108,6 +120,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-14',
         type: 'multiple-choice',
         questionText: "Corrección: ¿_______ libros de estos te gusta más?",
         options: ["Cuáles", "Qué", "Quién"],
@@ -116,6 +129,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-15',
         type: 'multiple-choice',
         questionText: "Corrección: ¿_______ años tienes?",
         options: ["Cuántos", "Cuándo", "Qué"],
@@ -124,6 +138,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-16',
         type: 'multiple-choice',
         questionText: "Corrección: ¿_______ hora es?",
         options: ["Qué", "Dónde", "Cuál"],
@@ -132,6 +147,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-17',
         type: 'multiple-choice',
         questionText: "Corrección: ¿_______ cuesta el abrigo?",
         options: ["Cuánto", "Cuál", "Qué"],
@@ -140,6 +156,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-18',
         type: 'multiple-choice',
         questionText: "Corrección: ¿_______ personas hay en la clase?",
         options: ["Cuántas", "Cuánto", "Qué"],
@@ -148,6 +165,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-19',
         type: 'multiple-choice',
         questionText: "Corrección: ¿_______ te llamas tú?",
         options: ["Cómo", "Qué", "Quién"],
@@ -156,6 +174,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-20',
         type: 'multiple-choice',
         questionText: "Corrección: ¿_______ es el día de tu cumpleaños?",
         options: ["Cuándo", "Cómo", "Dónde"],
@@ -164,6 +183,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-21',
         type: 'multiple-choice',
         questionText: "Corrección: ¿_______ prefieres, el azul o el rojo?",
         options: ["Cuál", "Cuáles", "Qué"],
@@ -172,6 +192,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't9-22',
         type: 'multiple-choice',
         questionText: "Corrección: ¿_______ tú no viniste ayer?",
         options: ["Por qué", "Para qué", "Qué"],

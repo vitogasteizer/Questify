@@ -1,4 +1,3 @@
-
 import * as state from './state.js';
 import * as ui from './ui-manager.js';
 import * as settings from './settings.js';
@@ -84,7 +83,8 @@ const requestWakeLock = async () => {
             state.setWakeLock(await navigator.wakeLock.request('screen'));
             state.getWakeLock().addEventListener('release', () => {});
         } catch (err) {
-            console.error('Screen Wake Lock request failed:', err);
+            // Silently fail or log warning if permission is denied, common in iframes/previews
+            console.warn('Screen Wake Lock not available (non-critical):', err.message);
         }
     }
 };
@@ -95,7 +95,7 @@ const releaseWakeLock = async () => {
             await state.getWakeLock().release();
             state.setWakeLock(null);
         } catch (err) {
-            console.error('Screen Wake Lock release failed:', err);
+            console.warn('Screen Wake Lock release failed (non-critical):', err);
         }
     }
 };
@@ -671,6 +671,13 @@ const loadQuestion = () => {
     
             ui.optionsContainer.appendChild(button);
         });
+    }
+
+    if (question.id) {
+        const idDiv = document.createElement('div');
+        idDiv.className = 'text-xs text-gray-300 font-mono mt-1 font-normal';
+        idDiv.textContent = `ID: ${question.id}`;
+        ui.questionTextEl.appendChild(idDiv);
     }
 };
 

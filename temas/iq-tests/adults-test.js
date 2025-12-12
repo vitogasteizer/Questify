@@ -1,5 +1,6 @@
 export const questions = [
     {
+        id: 'iq-a-1',
         type: 'multiple-choice',
         questionText: "¿Qué número sigue en la serie: 2, 4, 8, 16, ...?",
         options: ["24", "32", "64"],
@@ -7,6 +8,7 @@ export const questions = [
         explanation: "Cada número se obtiene multiplicando el anterior por 2."
     },
     {
+        id: 'iq-a-2',
         type: 'multiple-choice',
         questionText: "Un coche recorre 180 km en 3 horas. ¿Cuál es su velocidad media?",
         options: ["60 km/h", "90 km/h", "50 km/h"],
@@ -14,6 +16,7 @@ export const questions = [
         explanation: "Velocidad = Distancia / Tiempo. 180 km / 3 horas = 60 km/h."
     },
     {
+        id: 'iq-a-3',
         type: 'multiple-choice',
         questionText: "Si todos los Zips son Zaps y algunos Zaps son Zops, ¿qué afirmación es necesariamente cierta?",
         options: ["Todos los Zips son Zops", "Algunos Zips son Zops", "Ninguna conclusión es segura"],
@@ -21,6 +24,7 @@ export const questions = [
         explanation: "No hay una conexión directa garantizada entre Zips y Zops. Es posible que ningún Zip sea un Zop."
     },
     {
+        id: 'iq-a-4',
         type: 'multiple-choice',
         questionText: "ENCENDER es a APAGAR como ABRIR es a...",
         options: ["CERRAR", "ENTRAR", "SALIR"],
@@ -28,6 +32,7 @@ export const questions = [
         explanation: "La relación es de antónimos (opuestos). Lo opuesto a ABRIR es CERRAR."
     },
     {
+        id: 'iq-a-5',
         type: 'multiple-choice',
         questionText: "María es mayor que Juan. Juan es mayor que Pedro. ¿Quién es el menor de los tres?",
         options: ["María", "Juan", "Pedro"],
@@ -35,6 +40,7 @@ export const questions = [
         explanation: "La relación es María > Juan > Pedro. Por lo tanto, Pedro es el menor."
     },
     {
+        id: 'iq-a-6',
         type: 'multiple-choice',
         questionText: "Elija la palabra que mejor complete la analogía: LIBRO es a BIBLIOTECA como ÁRBOL es a...",
         options: ["HOJA", "BOSQUE", "FRUTA"],
@@ -42,6 +48,7 @@ export const questions = [
         explanation: "Un libro es parte de una biblioteca, así como un árbol es parte de un bosque."
     },
     {
+        id: 'iq-a-7',
         type: 'image-choice',
         difficulty: 'medium',
         points: 2,
@@ -56,6 +63,7 @@ export const questions = [
         explanation: "თერმომეტრი ზომავს ტემპერატურას, დანარჩენი სამი კი დროს."
     },
     {
+        id: 'iq-a-8',
         type: 'image-choice',
         difficulty: 'hard',
         points: 3,
@@ -70,6 +78,7 @@ export const questions = [
         explanation: "თითოეულ რიგსა და სვეტში უნდა იყოს თითოეული ფიგურა (წრე, რომბი, სამკუთხედი) მხოლოდ ერთხელ. ბოლო რიგს აკლია წრე."
     },
     {
+        id: 'iq-a-9',
         type: 'image-choice',
         difficulty: 'hard',
         points: 3,

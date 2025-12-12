@@ -1,7 +1,7 @@
-
 export const questions = [
     // Parte 1: Completa con la forma correcta
     {
+        id: 't14-1',
         type: 'multiple-choice',
         questionText: "Yo _______ (hacer) la compra hoy.",
         options: ["tengo que hacer", "tiene que hacer", "tenemos que hacer"],
@@ -10,6 +10,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-2',
         type: 'multiple-choice',
         questionText: "Nosotros _______ (estudiar) para el examen de español.",
         options: ["tenemos que estudiar", "tienen que estudiar", "tenéis que estudiar"],
@@ -18,6 +19,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-3',
         type: 'multiple-choice',
         questionText: "¿Tú _______ (ir) al médico esta tarde?",
         options: ["tienes que ir", "tengo que ir", "tiene que ir"],
@@ -26,6 +28,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-4',
         type: 'multiple-choice',
         questionText: "Mi hermano _______ (trabajar) el fin de semana.",
         options: ["tiene que trabajar", "tienen que trabajar", "tienes que trabajar"],
@@ -34,6 +37,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-5',
         type: 'multiple-choice',
         questionText: "Vosotros _______ (limpiar) la casa mañana.",
         options: ["tenéis que limpiar", "tenemos que limpiar", "tienen que limpiar"],
@@ -42,6 +46,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-6',
         type: 'multiple-choice',
         questionText: "Ellos _______ (preparar) la cena.",
         options: ["tienen que preparar", "tenemos que preparar", "tiene que preparar"],
@@ -50,6 +55,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-7',
         type: 'multiple-choice',
         questionText: "Ana _______ (salir) temprano de casa.",
         options: ["tiene que salir", "tienes que salir", "tengo que salir"],
@@ -58,6 +64,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-8',
         type: 'multiple-choice',
         questionText: "Nosotros no _______ (pagar) hoy, lo hacemos mañana.",
         options: ["tenemos que pagar", "tienen que pagar", "tenéis que pagar"],
@@ -66,6 +73,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-9',
         type: 'multiple-choice',
         questionText: "Yo _______ (llamar) a mi madre todos los días.",
         options: ["tengo que llamar", "tiene que llamar", "tienes que llamar"],
@@ -74,6 +82,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-10',
         type: 'multiple-choice',
         questionText: "¿Usted _______ (venir) a clase mañana?",
         options: ["tiene que venir", "tienes que venir", "tienen que venir"],
@@ -84,6 +93,7 @@ export const questions = [
 
     // Parte 2: Ordenar palabras
     {
+        id: 't14-11',
         type: 'order-words',
         questionText: "Coloca las palabras en orden:",
         words: ["Tengo", "que", "levantarme", "temprano", "mañana", "porque", "debo", "trabajar"],
@@ -92,6 +102,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-12',
         type: 'order-words',
         questionText: "Coloca las palabras en orden:",
         words: ["Tienes", "que", "estudiar", "un", "examen", "importante", "esta", "noche"],
@@ -100,6 +111,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-13',
         type: 'order-words',
         questionText: "Coloca las palabras en orden:",
         words: ["Tenemos", "que", "limpiar", "la", "casa", "porque", "viene", "una", "visita"],
@@ -108,6 +120,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-14',
         type: 'order-words',
         questionText: "Coloca las palabras en orden:",
         words: ["Ellos", "tienen", "que", "preparar", "la", "cena", "porque", "son", "los", "invitados"],
@@ -116,6 +129,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-15',
         type: 'order-words',
         questionText: "Coloca las palabras en orden:",
         words: ["Laura", "tiene", "que", "salir", "pronto", "porque", "el", "autobús", "pasa"],
@@ -124,6 +138,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-16',
         type: 'order-words',
         questionText: "Coloca las palabras en orden:",
         words: ["Tenemos", "que", "ir", "al", "médico", "porque", "no", "estamos", "bien"],
@@ -132,6 +147,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-17',
         type: 'order-words',
         questionText: "Coloca las palabras en orden:",
         words: ["Tienes", "que", "comprar", "algo", "para", "hacer", "la", "comida", "del", "domingo"],
@@ -140,6 +156,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-18',
         type: 'order-words',
         questionText: "Coloca las palabras en orden:",
         words: ["Tengo", "que", "trabajar", "el", "día", "entero", "hoy", "porque", "hay", "mucho", "trabajo"],
@@ -148,6 +165,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-19',
         type: 'order-words',
         questionText: "Coloca las palabras en orden:",
         words: ["Tenemos", "que", "estudiar", "para", "el", "examen", "que", "tenemos", "el", "próximo", "lunes"],
@@ -156,6 +174,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't14-20',
         type: 'order-words',
         questionText: "Coloca las palabras en orden:",
         words: ["Tienes", "que", "descansar", "un", "poco", "porque", "estás", "muy", "cansado"],

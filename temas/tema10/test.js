@@ -1,6 +1,6 @@
-
 export const questions = [
     {
+        id: 't10-1',
         type: 'multiple-choice',
         questionText: "En la mesa _______ muchos libros y carpetas.",
         options: ["Hay", "ahí", "Ay"],
@@ -9,6 +9,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't10-2',
         type: 'multiple-choice',
         questionText: "_______ Me he hecho daño en la pierna.",
         options: ["¡Ay!", "Hay", "Ahí"],
@@ -17,6 +18,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't10-3',
         type: 'multiple-choice',
         questionText: "Coloca las llaves y el abrigo _______.",
         options: ["ahí", "hay", "ay"],
@@ -25,6 +27,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't10-4',
         type: 'multiple-choice',
         questionText: "No _______ pan ni leche en casa.",
         options: ["hay", "ahí", "ay"],
@@ -33,6 +36,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't10-5',
         type: 'multiple-choice',
         questionText: "_______ Qué día tan largo llevo.",
         options: ["¡Ay!", "Hay", "Ahí"],
@@ -41,6 +45,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't10-6',
         type: 'multiple-choice',
         questionText: "Deja el móvil encima del sofá _______.",
         options: ["ahí", "hay", "ay"],
@@ -49,6 +54,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't10-7',
         type: 'multiple-choice',
         questionText: "¿Cuántos estudiantes _______ hoy en clase?",
         options: ["hay", "ahí", "ay"],
@@ -57,6 +63,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't10-8',
         type: 'multiple-choice',
         questionText: "_______ una tienda nueva en la esquina.",
         options: ["Hay", "Ahí", "Ay"],
@@ -65,6 +72,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't10-9',
         type: 'multiple-choice',
         questionText: "_______ ¡Se me ha roto el vaso!",
         options: ["¡Ay!", "Hay", "Ahí"],
@@ -73,6 +81,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't10-10',
         type: 'multiple-choice',
         questionText: "Pon los platos y los vasos _______.",
         options: ["ahí", "hay", "ay"],
@@ -81,6 +90,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't10-11',
         type: 'multiple-choice',
         questionText: "No _______ tiempo para terminar el trabajo.",
         options: ["hay", "ahí", "ay"],
@@ -89,6 +99,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't10-12',
         type: 'multiple-choice',
         questionText: "_______ ¡Me he quemado con el café!",
         options: ["¡Ay!", "Hay", "Ahí"],

@@ -1,7 +1,7 @@
-
 export const questions = [
     // Parte 1: Completa con el posesivo correspondiente
     {
+        id: 't16-1',
         type: 'multiple-choice',
         questionText: "¿Dónde están _______ llaves? – Me parece que las dejé aquí.",
         options: ["mis", "mi", "sus", "tus"],
@@ -10,6 +10,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't16-2',
         type: 'multiple-choice',
         questionText: "Carlos, ¿el señor de la foto es _______ papá?",
         options: ["tu", "tus", "su", "mi"],
@@ -18,6 +19,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-3',
         type: 'multiple-choice',
         questionText: "Marta olvidó _______ teléfono en el parque.",
         options: ["su", "sus", "tu", "mis"],
@@ -26,6 +28,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-4',
         type: 'multiple-choice',
         questionText: "Andrés encontró a _______ amigo en la tienda.",
         options: ["su", "sus", "nuestro", "tus"],
@@ -34,6 +37,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-5',
         type: 'multiple-choice',
         questionText: "_______ proyecto de plástica ganó el primer puesto. Somos un gran equipo.",
         options: ["Nuestro", "Mi", "Su", "Vuestra"],
@@ -42,6 +46,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't16-6',
         type: 'multiple-choice',
         questionText: "¿Acaso habéis olvidado _______ libros en casa de nuevo?",
         options: ["vuestros", "vuestras", "sus", "tus"],
@@ -50,6 +55,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't16-7',
         type: 'multiple-choice',
         questionText: "Quería preguntarte si me puedes dar _______ número de teléfono.",
         options: ["tu", "tus", "su", "mi"],
@@ -58,6 +64,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-8',
         type: 'multiple-choice',
         questionText: "Los niños se divierten mucho jugando con _______ amigos.",
         options: ["sus", "su", "mis", "vuestros"],
@@ -66,6 +73,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-9',
         type: 'multiple-choice',
         questionText: "¿Tú crees que tus padres te dejarán venir a _______ casa a dormir?",
         options: ["mi", "mis", "tu", "sus"],
@@ -74,6 +82,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't16-10',
         type: 'multiple-choice',
         questionText: "_______ tradiciones son algo que nos definen como país.",
         options: ["Nuestras", "Nuestro", "Mis", "Su"],
@@ -84,6 +93,7 @@ export const questions = [
 
     // Parte 2: Completa con un determinante posesivo
     {
+        id: 't16-11',
         type: 'multiple-choice',
         questionText: "Mis padres tienen cuatro hijos. Son _______ hijos.",
         options: ["sus", "su", "mis", "nuestros"],
@@ -92,6 +102,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-12',
         type: 'multiple-choice',
         questionText: "Tienes un perro. Es _______ perro.",
         options: ["tu", "tus", "su", "mi"],
@@ -100,6 +111,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-13',
         type: 'multiple-choice',
         questionText: "Tengo lápices de colores. Son _______ lápices.",
         options: ["mis", "mi", "sus", "tus"],
@@ -108,6 +120,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-14',
         type: 'multiple-choice',
         questionText: "Tenéis unas amigas. Son _______ amigas.",
         options: ["vuestras", "vuestros", "sus", "tus"],
@@ -116,6 +129,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't16-15',
         type: 'multiple-choice',
         questionText: "Tiene una galleta. Es _______ galleta.",
         options: ["su", "sus", "tu", "la"],
@@ -124,6 +138,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-16',
         type: 'multiple-choice',
         questionText: "Tenemos un libro rojo. Es _______ libro.",
         options: ["nuestro", "nuestra", "vuestro", "mis"],
@@ -132,6 +147,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-17',
         type: 'multiple-choice',
         questionText: "Tengo una moto, es _______ moto.",
         options: ["mi", "mis", "tu", "su"],
@@ -140,6 +156,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-18',
         type: 'multiple-choice',
         questionText: "Felipe habla con _______ madre.",
         options: ["su", "sus", "tu", "mi"],
@@ -148,6 +165,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-19',
         type: 'multiple-choice',
         questionText: "Hacemos _______ tareas.",
         options: ["nuestras", "nuestros", "vuestras", "mis"],
@@ -156,6 +174,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-20',
         type: 'multiple-choice',
         questionText: "Mis amigos tienen tres hijos, son _______ hijos.",
         options: ["sus", "su", "vuestros", "nuestros"],
@@ -166,6 +185,7 @@ export const questions = [
 
     // Parte 3: Forma plural
     {
+        id: 't16-21',
         type: 'multiple-choice',
         questionText: "Elige la forma plural correcta de: 'Mi mejor amigo'.",
         options: ["Mis mejores amigos", "Mis mejor amigos", "Mi mejores amigos", "Sus mejores amigos"],
@@ -174,6 +194,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't16-22',
         type: 'multiple-choice',
         questionText: "Elige la forma plural correcta de: 'Tu mochila nueva'.",
         options: ["Tus mochilas nuevas", "Tu mochilas nuevas", "Tus mochila nuevas", "Vuestras mochilas nuevas"],
@@ -182,6 +203,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't16-23',
         type: 'multiple-choice',
         questionText: "Elige la forma plural correcta de: 'Su cuento favorito'.",
         options: ["Sus cuentos favoritos", "Sus cuento favoritos", "Su cuentos favoritos", "Tus cuentos favoritos"],
@@ -192,6 +214,7 @@ export const questions = [
 
     // Parte 4: Según el sujeto
     {
+        id: 't16-24',
         type: 'multiple-choice',
         questionText: "(Yo) _______ casa no tiene jardín.",
         options: ["Mi", "Mis", "Tu", "Su"],
@@ -200,6 +223,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-25',
         type: 'multiple-choice',
         questionText: "(Él) _______ ojos son azules.",
         options: ["Sus", "Su", "Tus", "Mis"],
@@ -208,6 +232,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-26',
         type: 'multiple-choice',
         questionText: "(Nosotras) _______ pelota es nueva.",
         options: ["Nuestra", "Nuestro", "Vuestra", "Sus"],
@@ -216,6 +241,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-27',
         type: 'multiple-choice',
         questionText: "(Ellas) _______ novios son agradables.",
         options: ["Sus", "Su", "Vuestros", "Mis"],
@@ -224,6 +250,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-28',
         type: 'multiple-choice',
         questionText: "(Tú) _______ zapatos están limpios.",
         options: ["Tus", "Tu", "Su", "Sus"],
@@ -232,6 +259,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-29',
         type: 'multiple-choice',
         questionText: "(Ella) _______ pueblo no tiene parque.",
         options: ["Su", "Sus", "Tu", "Nuestro"],
@@ -240,6 +268,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-30',
         type: 'multiple-choice',
         questionText: "(Vosotras) _______ coche no funciona.",
         options: ["Vuestro", "Vuestra", "Su", "Tu"],
@@ -248,6 +277,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-31',
         type: 'multiple-choice',
         questionText: "(Yo) _______ hermano vive en Lugo.",
         options: ["Mi", "Mis", "Tu", "Su"],
@@ -256,6 +286,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-32',
         type: 'multiple-choice',
         questionText: "(Nosotros) _______ madres no vienen.",
         options: ["Nuestras", "Nuestro", "Vuestras", "Sus"],
@@ -264,6 +295,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-33',
         type: 'multiple-choice',
         questionText: "(Ellos) _______ pueblo está muy lejos.",
         options: ["Su", "Sus", "Vuestro", "Tu"],
@@ -272,6 +304,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-34',
         type: 'multiple-choice',
         questionText: "(Ella) _______ respuestas son correctas.",
         options: ["Sus", "Su", "Tus", "Mis"],
@@ -280,6 +313,7 @@ export const questions = [
         level: 'A1'
     },
     {
+        id: 't16-35',
         type: 'multiple-choice',
         questionText: "(Vosotros) _______ tías no llegaron.",
         options: ["Vuestras", "Vuestros", "Sus", "Tus"],

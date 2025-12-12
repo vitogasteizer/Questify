@@ -10,6 +10,9 @@
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans Georgian"', 'sans-serif'],
+                    },
                     colors: {
                         blue: {
                             500: '#4d42ff', // Lighter gradient
@@ -28,7 +31,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#1c0ee3"/>
     <link rel="apple-touch-icon" href="https://i.postimg.cc/zGv1rf0x/Questify_Favicon.png">
@@ -43,7 +46,7 @@
             padding: 0;
         }
         body.white-bg { background-color: #FFFFFF; }
-        .font-title { font-family: 'M PLUS Rounded 1c', sans-serif; }
+        .font-title { font-family: 'Noto Sans Georgian', sans-serif; }
         .hidden { display: none; }
         .disabled { cursor: not-allowed; opacity: 0.7; }
         .rotate-180 { transform: rotate(180deg); }
@@ -53,48 +56,67 @@
         .rotate-y-180 { transform: rotateY(180deg); }
         #flashcard-container.is-flipped { transform: rotateY(180deg); }
 
-        /* --- TYPOGRAPHY SYSTEM --- */
-        /* All font sizes are managed here. Use 'rem' units (1rem ≈ 16px). */
-        
-        /* H1: Main screen title ("Tests Interactivos") */
-        .text-h1 { font-size: 2.1rem; /* 60px */ line-height: 1.5; }
-        
-        /* H2: Main page titles (e.g., "Menú", "Estadísticas", "Configurar Test") */
-        .text-h2 { font-size: 3rem; /* 48px */ line-height: 1; }
-        
-        /* H3: Sub-page titles, larger section headers */
-        .text-h3 { font-size: 2.25rem; /* 36px */ line-height: 2.5rem; }
-        
-        /* H4: Smaller section headers, question text */
-        .text-h4 { font-size: 1.875rem; /* 30px */ line-height: 2.25rem; }
-        
-        /* H5: Card titles, smaller headers */
-        .text-h5 { font-size: 1.875rem; /* 30px */ line-height: 2.25rem; }
-        
-        /* Score Display: Large numbers on results screen */
-        .text-score { font-size: 3.75rem; /* 60px */ line-height: 1; }
-        
-        /* Body Large: Subtitles, important messages */
-        .text-body-lg { font-size: 1.125rem; /* 18px */ line-height: 1.75rem; }
+        /* --- ფონტის ზომის კონტროლის ცენტრი --- */
+        /* შეცვალეთ ფონტის ზომები მობილურისა და დესკტოპისთვის აქ. */
+        :root {
+            /* Mobile Sizes */
+            --h1-size-mobile: 2.0rem;      /* მთავარი სათაური (მთავარ ეკრანზე) */
+            --h2-size-mobile: 1.5rem;      /* ეკრანის სათაურები */
+            --h3-size-mobile: 1.5rem;     /* ფლეშბარათის სათაური, მენიუს სათაური */
+            --h4-size-mobile: 1.5rem;    /* ტესტის კითხვები, ფლეშბარათის უკანა მხარე */
+            --h5-size-mobile: 1.875rem;    /* შეფასების ბარათის სათაური, შედეგების სექციის სათაური */
+            --score-size-mobile: 3.75rem;  /* საბოლოო ქულის ჩვენება */
+            --body-lg-size-mobile: 1.125rem; /* შედეგების ტექსტი, პარამეტრების ტექსტი */
+            --body-base-size-mobile: 1rem; /* ძირითადი ტექსტი (ნაგულისხმევი) */
+            --small-size-mobile: 0.875rem; /* დამხმარე ტექსტი, პროგრესი, დონეები */
+            --btn-lg-size-mobile: 1.25rem;   /* დიდი ღილაკების ტექსტი */
+            --btn-sm-size-mobile: 0.875rem;  /* პატარა ღილაკების ტექსტი */
+            
+            /* Desktop Sizes (768px and wider) */
+            --h1-size-desktop: 3.0rem;     /* მთავარი სათაური (მთავარ ეკრანზე) */
+            --h2-size-desktop: 1.5rem;       /* ეკრანის სათაურები */
+            --h3-size-desktop: 1.5rem;    /* ფლეშბარათის სათაური, მენიუს სათაური */
+            --h4-size-desktop: 1.5rem;    /* ტესტის კითხვები, ფლეშბარათის უკანა მხარე */
+            --h5-size-desktop: 1.875rem;   /* შეფასების ბარათის სათაური, შედეგების სექციის სათაური */
+            --score-size-desktop: 3.75rem; /* საბოლოო ქულის ჩვენება */
+            --body-lg-size-desktop: 1.125rem; /* შედეგების ტექსტი, პარამეტრების ტექსტი */
+            --body-base-size-desktop: 1rem; /* ძირითადი ტექსტი (ნაგულისხმევი) */
+            --small-size-desktop: 0.875rem; /* დამხმარე ტექსტი, პროგრესი, დონეები */
+            --btn-lg-size-desktop: 1.25rem;  /* დიდი ღილაკების ტექსტი */
+            --btn-sm-size-desktop: 0.875rem; /* პატარა ღილაკების ტექსტი */
+        }
+        /* --- ფონტის ზომის კონტროლის ცენტრის დასასრული --- */
 
-        /* Body Base: Default text size for paragraphs, options, etc. */
-        .text-body-base { font-size: 1rem; /* 16px */ line-height: 1.5rem; }
-
-        /* Small: Helper text, progress indicators, labels */
-        .text-small { font-size: 0.875rem; /* 14px */ line-height: 1.25rem; }
+        /* --- ტიპოგრაფიის სისტემა --- */
+        /* ქვემოთ მოცემული კლასები იყენებენ კონტროლის ცენტრის ცვლადებს. */
         
-        /* Button Large: Main action buttons */
-        .button-text-lg { font-size: 1.25rem; /* 20px */ line-height: 1.75rem; }
-
-        /* Button Small: Language switchers, secondary buttons */
-        .button-text-sm { font-size: 0.875rem; /* 14px */ line-height: 1.25rem; }
+        .text-h1 { font-size: var(--h1-size-mobile); line-height: 1.5; }
+        .text-h2 { font-size: var(--h2-size-mobile); line-height: 1; }
+        .text-h3 { font-size: var(--h3-size-mobile); line-height: 2.5rem; }
+        .text-h4 { font-size: var(--h4-size-mobile); line-height: 2.25rem; }
+        .text-h5 { font-size: var(--h5-size-mobile); line-height: 2.25rem; }
+        .text-score { font-size: var(--score-size-mobile); line-height: 1; }
+        .text-body-lg { font-size: var(--body-lg-size-mobile); line-height: 1.75rem; }
+        .text-body-base { font-size: var(--body-base-size-mobile); line-height: 1.5rem; }
+        .text-small { font-size: var(--small-size-mobile); line-height: 1.25rem; }
+        .button-text-lg { font-size: var(--btn-lg-size-mobile); line-height: 1.75rem; }
+        .button-text-sm { font-size: var(--btn-sm-size-mobile); line-height: 1.25rem; }
 
         /* --- Responsive Overrides (for screens 768px and wider) --- */
         @media (min-width: 768px) {
-            .text-h1 { font-size: 4.5rem; /* 72px */ }
-            .text-h4 { font-size: 2.25rem; /* 36px */ }
+            .text-h1 { font-size: var(--h1-size-desktop); }
+            .text-h2 { font-size: var(--h2-size-desktop); }
+            .text-h3 { font-size: var(--h3-size-desktop); }
+            .text-h4 { font-size: var(--h4-size-desktop); }
+            .text-h5 { font-size: var(--h5-size-desktop); }
+            .text-score { font-size: var(--score-size-desktop); }
+            .text-body-lg { font-size: var(--body-lg-size-desktop); }
+            .text-body-base { font-size: var(--body-base-size-desktop); }
+            .text-small { font-size: var(--small-size-desktop); }
+            .button-text-lg { font-size: var(--btn-lg-size-desktop); }
+            .button-text-sm { font-size: var(--btn-sm-size-desktop); }
         }
-        /* --- END TYPOGRAPHY SYSTEM --- */
+        /* --- ტიპოგრაფიის სისტემის დასასრული --- */
 
         /* New styles for order-words questions */
         .word-bank, .answer-area { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; border-radius: 8px; min-height: 50px; }
@@ -778,12 +800,9 @@
                     <h3 class="font-bold text-2xl text-gray-800 mb-4 border-b pb-2" data-i18n-key="style_section_font">Tipografía</h3>
                     <div class="space-y-4">
                         <div>
-                            <p class="font-title text-h2 text-gray-800">Questify Title</p>
-                            <span class="text-xs text-gray-400 uppercase tracking-wider" data-i18n-key="style_font_title">M PLUS Rounded 1c</span>
-                        </div>
-                        <div>
-                            <p class="font-sans text-body-lg text-gray-700">Esto es un ejemplo de texto de cuerpo para leer cómodamente.</p>
-                            <span class="text-xs text-gray-400 uppercase tracking-wider" data-i18n-key="style_font_sans">Sans-Serif</span>
+                            <p class="text-h2 text-gray-800">Questify Title</p>
+                            <p class="text-body-lg text-gray-700 mt-2">Esto es un ejemplo de texto de cuerpo para leer cómodamente.</p>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider mt-2 block" data-i18n-key="style_font_title"></span>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
-
 export const questions = [
     {
+        id: 't12-1',
         type: 'multiple-choice',
         questionText: "En esta clase hay _______ estudiantes.",
         options: ["demasiados", "nada", "mucho"],
@@ -9,6 +9,7 @@ export const questions = [
         level: 'B1'
     },
     {
+        id: 't12-2',
         type: 'multiple-choice',
         questionText: "Hoy tengo _______ trabajo.",
         options: ["mucho", "demasiados", "pocos"],
@@ -17,6 +18,7 @@ export const questions = [
         level: 'B1'
     },
     {
+        id: 't12-3',
         type: 'multiple-choice',
         questionText: "No tengo _______ hambre.",
         options: ["nada", "algo", "bastante"],
@@ -25,6 +27,7 @@ export const questions = [
         level: 'B1'
     },
     {
+        id: 't12-4',
         type: 'multiple-choice',
         questionText: "He comido _______ dulces.",
         options: ["bastante", "bastantes", "mucho"],
@@ -33,6 +36,7 @@ export const questions = [
         level: 'B1'
     },
     {
+        id: 't12-5',
         type: 'multiple-choice',
         questionText: "En la calle hay _______ ruido.",
         options: ["poco", "pocos", "muchos"],
@@ -41,6 +45,7 @@ export const questions = [
         level: 'B1'
     },
     {
+        id: 't12-6',
         type: 'multiple-choice',
         questionText: "Hay _______ interesante en la televisión.",
         options: ["algo", "nada", "pocos"],

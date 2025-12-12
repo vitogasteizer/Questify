@@ -1,5 +1,6 @@
 export const questions = [
     {
+        id: 'iq-k-1',
         type: 'multiple-choice',
         questionText: "¿Qué animal no pertenece al grupo?",
         options: ["Perro", "Gato", "Pez", "Pájaro"],
@@ -7,6 +8,7 @@ export const questions = [
         explanation: "El pez vive en el agua, mientras que los otros viven en la tierra o vuelan."
     },
     {
+        id: 'iq-k-2',
         type: 'multiple-choice',
         questionText: "¿Qué sigue en la serie? Círculo, Cuadrado, Círculo, Cuadrado, ...",
         options: ["Triángulo", "Círculo", "Rectángulo"],
@@ -14,6 +16,7 @@ export const questions = [
         explanation: "La serie alterna entre un círculo y un cuadrado."
     },
     {
+        id: 'iq-k-3',
         type: 'multiple-choice',
         questionText: "Si tienes 3 manzanas y te dan 2 más, ¿cuántas manzanas tienes en total?",
         options: ["4", "5", "6"],
@@ -21,6 +24,7 @@ export const questions = [
         explanation: "3 más 2 es igual a 5."
     },
     {
+        id: 'iq-k-4',
         type: 'multiple-choice',
         questionText: "¿Cuál de estos objetos es más pesado?",
         options: ["Una pluma", "Una hoja de papel", "Una piedra"],
@@ -28,6 +32,7 @@ export const questions = [
         explanation: "Una piedra es generalmente mucho más pesada que una pluma o una hoja de papel."
     },
     {
+        id: 'iq-k-5',
         type: 'multiple-choice',
         questionText: "¿Qué objeto se usa para cortar papel?",
         options: ["Un lápiz", "Unas tijeras", "Un libro"],
@@ -35,6 +40,7 @@ export const questions = [
         explanation: "Las tijeras están diseñadas para cortar."
     },
     {
+        id: 'iq-k-6',
         type: 'image-choice',
         difficulty: 'easy',
         points: 1,
@@ -48,7 +54,8 @@ export const questions = [
         correctAnswerIndex: 2,
         explanation: "სტაფილო ბოსტნეულია, დანარჩენი კი ხილია."
     },
-        {
+    {
+        id: 'iq-k-7',
         type: 'image-choice',
         difficulty: 'hard',
         points: 3,
@@ -63,8 +70,8 @@ export const questions = [
         correctAnswerIndex: 1,
         explanation: "რათქმაუნდა ბურთი არის ზედმეტი, სხვაყველა დანარჩენი არის ხილი და თან საჭმელი, ბურთი კი არა.",
     },
-        
     {
+        id: 'iq-k-8',
         type: 'image-choice',
         difficulty: 'easy',
         points: 1,
@@ -79,6 +86,7 @@ export const questions = [
         explanation: "წიგნი სასწავლო ნივთია, დანარჩენი კი სპორტული ბურთებია."
     },
     {
+        id: 'iq-k-9',
         type: 'image-choice',
         difficulty: 'medium',
         points: 2,

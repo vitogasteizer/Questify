@@ -1,6 +1,6 @@
-
 export const questions = [
     {
+        id: 't11-1',
         type: 'multiple-choice',
         questionText: "Mi casa es _______ grande _______ la tuya.",
         options: ["más... que", "menos... que", "tan... como", "tanto... como"],
@@ -9,6 +9,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't11-2',
         type: 'multiple-choice',
         questionText: "Este libro es _______ interesante _______ el otro.",
         options: ["tan... como", "más... que", "menos... que", "tanto... como"],
@@ -17,6 +18,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't11-3',
         type: 'multiple-choice',
         questionText: "Hoy hace _______ frío _______ ayer.",
         options: ["más... que", "tan... como", "menos... que", "tanto... como"],
@@ -25,6 +27,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't11-4',
         type: 'multiple-choice',
         questionText: "Pedro es _______ simpático _______ su hermano.",
         options: ["menos... que", "más... que", "tan... como", "tanto... como"],
@@ -33,6 +36,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't11-5',
         type: 'multiple-choice',
         questionText: "Tengo _______ dinero _______ tú.",
         options: ["tanto... como", "tan... como", "más... que", "menos... que"],
@@ -41,6 +45,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't11-6',
         type: 'multiple-choice',
         questionText: "Este coche es _______ rápido _______ aquel.",
         options: ["más... que", "menos... que", "tan... como", "tanto... como"],
@@ -49,6 +54,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't11-7',
         type: 'multiple-choice',
         questionText: "Ana es _______ alta _______ Marta.",
         options: ["tan... como", "más... que", "menos... que", "tanto... como"],
@@ -57,6 +63,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't11-8',
         type: 'multiple-choice',
         questionText: "Este ejercicio es _______ difícil _______ el anterior.",
         options: ["más... que", "menos... que", "tan... como", "tanto... como"],
@@ -65,6 +72,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't11-9',
         type: 'multiple-choice',
         questionText: "Tu mochila es _______ pesada _______ la mía.",
         options: ["menos... que", "más... que", "tan... como", "tanto... como"],
@@ -73,6 +81,7 @@ export const questions = [
         level: 'A2'
     },
     {
+        id: 't11-10',
         type: 'multiple-choice',
         questionText: "Trabajo _______ horas _______ mi compañero.",
         options: ["tantas... como", "tanto... como", "más... que", "menos... que"],

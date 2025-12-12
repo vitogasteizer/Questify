@@ -1,12 +1,9 @@
-
-
-
-import { allTopics, categories } from '../topics-data.js';
 import * as state from './state.js';
 import { translations, isSoundEnabled, soundOnIconSVG, soundOffIconSVG, getSettings, playNavigationSound } from './settings.js';
 import { renderBookmarksSection } from './quiz-handler.js';
 import { renderBookmarkedFlashcardsSection } from './flashcard-handler.js';
 import { getStatistics } from './statistics-handler.js';
+import { allTopics, categories } from '../topics-data.js';
 
 // DOM Elements
 export const nameScreen = document.getElementById('name-screen');
